@@ -1,5 +1,5 @@
 # Broken Sword
-## Another kind of Text Adventure
+Another kind of Text Adventure
 
 
 ## Demo

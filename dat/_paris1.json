@@ -1,0 +1,983 @@
+{
+    "id": "paris1",
+    "name": "par1",
+    "res": [],
+    "start": "oubier1",
+    "hero": {
+        "id": "george",
+        "name": "charGeorgeName",
+        "states": [
+            {
+                "id": 1,
+                "info": "statTiedToAChair",
+                "back": "37,56,71",
+                "moveable": false
+            },
+            {
+                "id": 2,
+                "info": "",
+                "moveable": true
+            }
+        ]
+    },
+    "clear": true,
+    "items": [
+        {
+            "id": "iWor",
+            "name": "invWor01",
+            "states": [
+                {
+                    "id": 1,
+                    "left": [
+                        {"act": ["SELF USE"]}
+                    ],
+                    "right": [
+                        {"text": "invWor02"}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "iPot",
+            "name": "invPot01",
+            "states": [
+                {
+                    "id": 1,
+                    "left": [
+                        {"act": ["SELF USE"]}
+                    ],
+                    "right": [
+                        {"text": "invPot02", "act": ["HERO TAKE iKey"]},
+                        {"text": "invPot03+invPot04"},
+                        {"text": "invPot03"}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "iKey",
+            "name": "invKey01",
+            "states": [
+                {
+                    "id": 1,
+                    "left": [
+                        {"act": ["SELF USE"]}
+                    ],
+                    "right": [
+                        {"text": "invKey02"}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "iDar",
+            "name": "invDar01",
+            "states": [
+                {
+                    "id": 1,
+                    "left": [
+                        {"act": ["SELF USE"]}
+                    ],
+                    "right": [
+                        {"text": "invDar02+invDar03"},
+                        {"text": "invDar02"}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "iPan",
+            "name": "invPan01",
+            "states": [
+                {
+                    "id": 1,
+                    "left": [
+                        {"act": ["SELF USE"]}
+                    ],
+                    "right": [
+                        {"text": "invPan02"}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "iNot",
+            "name": "invNot01",
+            "states": [
+                {
+                    "id": 1,
+                    "left": [
+                        {"act": ["SELF USE"]}
+                    ],
+                    "right": [
+                        {"text": "invNot02", "act": ["eTel STATE 2"]},
+                        {"text": "invNot03"}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "iLip",
+            "name": "invLip01",
+            "states": [
+                {
+                    "id": 1,
+                    "left": [
+                        {"act": ["SELF USE"]}
+                    ],
+                    "right": [
+                        {"text": "invLip02+invLip03"},
+                        {"text": "invLip02"}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "iCyl",
+            "name": "invCyl01",
+            "states": [
+                {
+                    "id": 1,
+                    "left": [
+                        {"act": ["SELF USE"]}
+                    ],
+                    "right": [
+                        {"text": "invCyl02"}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "iNew",
+            "name": "invNew01",
+            "states": [
+                {
+                    "id": 1,
+                    "left": [
+                        {"act": ["SELF USE"]}
+                    ],
+                    "right": [
+                        {"text": "invNew02", "act": ["HERO TAKE iBan"]}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "iBan",
+            "name": "invBan01",
+            "states": [
+                {
+                    "id": 1,
+                    "left": [
+                        {"act": ["SELF USE"]}
+                    ],
+                    "right": [
+                        {"text": "invBan02"}
+                    ]
+                }
+            ]
+        }
+    ],
+    "scenes": [
+        {
+            "id": "oubier1",
+            "name": "par1Sce01",
+            "back": "#ffffff",
+            "elems": [
+                {
+                    "id": "eSpi",
+                    "name": "par1Spi01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Use",
+                            "back": "186,61,41",
+                            "left": [
+                                {"text": "par1Spi02", "act": ["SELF INFO statFurious1"]},
+                                {"text": "par1Spi02", "act": ["SELF INFO statFurious2"]},
+                                {"text": "par1Spi02", "act": ["SELF INFO statFurious3"]},
+                                {"text": "par1Spi07", "act": ["LOST"]}
+                            ],
+                            "right": [
+                                {"text": "par1Spi03"},
+                                {"text": "par1Spi04"}
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "back": "67,19,11",
+                            "info": "statSquashed",
+                            "left": [
+                                {"text": "par1Spi06"}
+                            ],
+                            "right": [
+                                {"text": "par1Spi05"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eBoo",
+                    "name": "par1Boo01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Use",
+                            "back": "93,48,26",
+                            "left": [
+                                {"text": "par1Boo02", "act": ["eBlo SHOW"], "dupe": true},
+                                {"text": "par1Boo03"}
+                            ],
+                            "right": [
+                                {"text": "par1Boo02", "act": ["eBlo SHOW"], "dupe": true},
+                                {"text": "par1Boo04"},
+                                {"text": "par1Boo05"},
+                                {"text": "par1Boo06"}
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "info": "statFallen",
+                            "left": [
+                                {"text": "par1Boo07"}
+                            ],
+                            "right": [
+                                {"text": "par1Boo07"}
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "left": [
+                                {"text": "par1Boo09"},
+                                {"text": "par1Boo10"}
+                            ],
+                            "right": [
+                                {"text": "par1Boo08"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eBlo",
+                    "name": "par1Blo01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Use",
+                            "vis": false,
+                            "back": "93,48,26",
+                            "left": [
+                                {"text": "par1Blo03", "act": ["SELF REMOVE", "eMet SHOW", "eBoo STATE 2", "eSpi STATE 2"]}
+                            ],
+                            "right": [
+                                {"text": "par1Blo02"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eMet",
+                    "name": "par1Met01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Use",
+                            "vis": false,
+                            "back": "119,134,133",
+                            "left": [
+                                {"text": "par1Met04", "act": ["SELF STATE 2", "eBoo STATE 3", "HERO STATE 2", "eCha SHOW", "eRop SHOW", "ePho SHOW", "eCan SHOW", "eBur SHOW", "eDra SHOW", "eWin SHOW", "eWin2 SHOW", "eBag SHOW", "eDar SHOW", "eBox SHOW", "eSyp SHOW", "eCab SHOW", "eFla SHOW", "eDoo SHOW"]}
+                            ],
+                            "right": [
+                                {"text": "par1Met02"},
+                                {"text": "par1Met03"}
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "left": [
+                                {"text": "par1Met06"}
+                            ],
+                            "right": [
+                                {"text": "par1Met05"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eCha",
+                    "name": "par1Cha01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Use",
+                            "vis": false,
+                            "back": "49,25,10",
+                            "left": [
+                                {"text": "par1Cha02"}
+                            ],
+                            "right": [
+                                {"text": "par1Cha03"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eRop",
+                    "name": "par1Rop01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Take",
+                            "vis": false,
+                            "back": "84,46,23",
+                            "left": [
+                                {"text": "par1Rop02", "act": ["SELF INFO statShredded"], "dupe": true},
+                                {"text": "par1Rop02"}
+                            ],
+                            "right": [
+                                {"text": "par1Rop02", "act": ["SELF INFO statShredded"], "dupe": true},
+                                {"text": "par1Rop02"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "ePho",
+                    "name": "par1Pho01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Use",
+                            "vis": false,
+                            "back": "38,83,83",
+                            "left": [
+                                {"text": "par1Pho02"},
+                                {"text": "par1Pho03"}
+                            ],
+                            "right": [
+                                {"text": "par1Pho02"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eBur",
+                    "name": "par1Bur01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Use",
+                            "info": "statClosed",
+                            "vis": false,
+                            "back": "152,80,52",
+                            "left": [
+                                {"text": "par1Bur03", "act": ["SELF STATE 2", "eTeq SHOW"]}
+                            ],
+                            "right": [
+                                {"text": "par1Bur02"}
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "info": "statOpen",
+                            "left": [
+                                {"text": "par1Bur05", "act": ["SELF STATE 3", "eTeq HIDE"]}
+                            ],
+                            "right": [
+                                {"text": "par1Bur04"}
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "info": "statClosed",
+                            "left": [
+                                {"text": "par1Bur03", "act": ["SELF STATE 2", "eTeq SHOW"]}
+                            ],
+                            "right": [
+                                {"text": "par1Bur02"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eCan",
+                    "name": "par1Can01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Take",
+                            "vis": false,
+                            "back": "64,93,97",
+                            "left": [
+                                {"text": "par1Can03"}
+                            ],
+                            "right": [
+                                {"text": "par1Can02"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eTeq",
+                    "name": "par1Teq01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Take",
+                            "vis": false,
+                            "back": "",
+                            "left": [
+                                {"text": "par1Teq04", "act": ["SELF STATE 2", "eWor SHOW"]}
+                            ],
+                            "right": [
+                                {"text": "par1Teq02"},
+                                {"text": "par1Teq03"}
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "left": [
+                                {"text": "par1Teq05"}
+                            ],
+                            "right": [
+                                {"text": "par1Teq03"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eWor",
+                    "name": "par1Wor01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Take",
+                            "vis": false,
+                            "back": "",
+                            "left": [
+                                {"text": "par1Wor04", "act": ["HERO TAKE iWor", "SELF REMOVE"]}
+                            ],
+                            "right": [
+                                {"text": "par1Wor02", "act": ["SELF STATE 2"]}
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "left": [
+                                {"text": "par1Wor03", "act": ["HERO TAKE iWor", "SELF REMOVE"]}
+                            ],
+                            "right": [
+                                {"text": "par1Wor02"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eDra",
+                    "name": "par1Dra01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Use",
+                            "vis": false,
+                            "back": "152,80,52",
+                            "left": [
+                                {"text": "par1Dra03", "act": ["SELF STATE 2", "HERO TAKE iPot"]}
+                            ],
+                            "right": [
+                                {"text": "par1Dra02"}
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "left": [
+                                {"text": "par1Dra04"}
+                            ],
+                            "right": [
+                                {"text": "par1Dra02"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eWin",
+                    "name": "par1Win01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Use",
+                            "vis": false,
+                            "back": "149,202,255",
+                            "left": [
+                                {"text": "par1Win05"}
+                            ],
+                            "right": [
+                                {"text": "par1Win02", "act": ["SELF STATE 2", "eWin2 STATE 3"]}
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "left": [
+                                {"text": "par1Win05"}
+                            ],
+                            "right": [
+                                {"text": "par1Win03"}
+                            ]
+                        },
+                        {
+                            "id": 3, "left": [
+                                {"text": "par1Win05"}
+                            ], "right": [
+                                {"text": "par1Win04", "act": ["SELF STATE 4", "eWin2 STATE 4"]}
+                            ]
+                        },
+                        {
+                            "id": 4, "left": [
+                                {"text": "par1Win05"}
+                            ], "right": [
+                                {"text": "par1Win06"},
+                                {"text": "par1Win07"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eWin2",
+                    "name": "par1Win01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Use",
+                            "vis": false,
+                            "back": "149,202,255",
+                            "left": [
+                                {"text": "par1Win05"}
+                            ],
+                            "right": [
+                                {"text": "par1Win02", "act": ["SELF STATE 2", "eWin STATE 3"]}
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "left": [
+                                {"text": "par1Win05"}
+                            ],
+                            "right": [
+                                {"text": "par1Win03"}
+                            ]
+                        },
+                        {
+                            "id": 3, "left": [
+                                {"text": "par1Win05"}
+                            ], "right": [
+                                {"text": "par1Win04", "act": ["SELF STATE 4", "eWin STATE 4"]}
+                            ]
+                        },
+                        {
+                            "id": 4, "left": [
+                                {"text": "par1Win05"}
+                            ], "right": [
+                                {"text": "par1Win06"},
+                                {"text": "par1Win07"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eBag",
+                    "name": "par1Bag01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Take",
+                            "vis": false,
+                            "back": "146,0,0",
+                            "left": [
+                                {"text": "par1Bag03", "act": ["SELF STATE 2", "HERO TAKE iLip", "HERO TAKE iNot", "HERO TAKE iPan"]}
+                            ],
+                            "right": [
+                                {"text": "par1Bag02"}
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "left": [
+                                {"text": "par1Bag04"}
+                            ],
+                            "right": [
+                                {"text": "par1Bag02"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eDar",
+                    "name": "par1Dar01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Take",
+                            "vis": false,
+                            "back": "",
+                            "left": [
+                                {"text": "par1Dar03", "act": ["HERO TAKE iDar", "SELF REMOVE"]}
+                            ],
+                            "right": [
+                                {"text": "par1Dar02"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eBox",
+                    "name": "par1Box01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Take",
+                            "vis": false,
+                            "back": "201,98,27",
+                            "left": [
+                                {"text": "par1Box03"}
+                            ],
+                            "right": [
+                                {"text": "par1Box02"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eCab",
+                    "name": "par1Cab01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Use",
+                            "vis": false,
+                            "back": "82,43,28",
+                            "left": [
+                                {"text": "par1Cab03", "act": ["SELF INFO statLocked"]},
+                                {"text": "par1Cab03"}
+                            ],
+                            "right": [
+                                {"text": "par1Cab02"}
+                            ],
+                            "comb": [
+                                {"id": "iKey", "text": "par1Cab07"},
+                                {"id": "iDar", "text": "invDar04", "act": ["eCab STATE 2", "eCyl SHOW", "eCyl2 SHOW"], "iter": 1}
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "info": "statOpen",
+                            "left": [
+                                {"text": "par1Cab04"}
+                            ], "right": [
+                                {"text": "par1Cab05"}
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "left": [
+                                {"text": "par1Cab04"}
+                            ],
+                            "right": [
+                                {"text": "par1Cab06"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eSyp",
+                    "name": "par1Syp01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Take",
+                            "vis": false,
+                            "back": "210,210,210",
+                            "left": [
+                                {"text": "par1Syp03"}
+                            ],
+                            "right": [
+                                {"text": "par1Syp02"}
+                            ],
+                            "comb": [
+                                {"id": "iCyl", "text": "par1Syp04", "act": ["iCyl REMOVE", "eSyp STATE 2", "eSyp USE"], "iter": 1}
+                            ]
+                        },
+                        {
+                            "id": 2, "left": [
+                                {"act": ["SELF USE"]}
+                            ], "right": [
+                                {"text": "par1Syp02"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eCyl",
+                    "name": "par1Cyl01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Take",
+                            "vis": false,
+                            "back": "88,145,32",
+                            "left": [
+                                {"text": "par1Cyl03"}
+                            ],
+                            "right": [
+                                {"text": "par1Cyl02"}
+                            ],
+                            "comb": [
+                                {"id": "iPan", "text": "par1Cyl04", "act": ["eCyl REMOVE", "HERO TAKE iCyl", "eCab STATE 3"], "iter": 1}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eCyl2",
+                    "name": "par1Cyl05",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Take",
+                            "vis": false,
+                            "back": "79,82,79",
+                            "left": [
+                                {"text": "par1Cyl06"}
+                            ],
+                            "right": [
+                                {"text": "par1Cyl07"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eFla",
+                    "name": "par1Fla01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Use",
+                            "vis": false,
+                            "back": "255,100,0",
+                            "left": [
+                                {"text": "par1Fla03"},
+                                {"text": "par1Fla04"}
+                            ],
+                            "right": [
+                                {"text": "par1Fla02"}
+                            ],
+                            "comb": [
+                                {"id": "eSyp", "text": "par1Fla05", "act": ["eFla REMOVE", "eDoo STATE 2"], "iter": 1}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eDoo",
+                    "name": "par1Doo01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Use",
+                            "vis": false,
+                            "back": "107,43,23",
+                            "left": [
+                                {"text": "par1Doo03"},
+                                {"text": "par1Doo07"},
+                                {"text": "par1Doo03"}
+                            ],
+                            "right": [
+                                {"text": "par1Doo02"}
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "left": [
+                                {"text": "par1Doo04", "act": ["SELF STATE 3"]}
+                            ],
+                            "right": [
+                                {"text": "par1Doo02"}
+                            ],
+                            "comb": [
+                                {"id": "iKey", "text": "par1Doo06"}
+                            ]
+                        }, {
+                            "id": 3,
+                            "type": "Exit",
+                            "left": [
+                                {"act": ["HERO ENTER eSta"], "pos": {"x": 590, "y": 535}}
+                            ], "right": [
+                                {"text": "par1Doo05"}
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "oubier2",
+            "name": "par1Sce02",
+            "back": "#ffffff",
+            "elems": [
+                {
+                    "id": "eDoo2",
+                    "name": "par1Doo13",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Use",
+                            "back": "144,65,5",
+                            "left": [
+                                {"text": "par1Doo09+par1Doo12", "act": ["SELF INFO statLocked"]},
+                                {"text": "par1Doo09"}
+                            ],
+                            "right": [
+                                {"text": "par1Doo08"}
+                            ],
+                            "comb": [
+                                {"id": "iDar", "text": "par1Doo15"},
+                                {"id": "iKey", "text": "par1Doo17", "act": ["eDoo2 STATE 2"]}
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "info": "statOpen",
+                            "left": [
+                                {"text": "par1Doo19"},
+                                {"text": "par1Doo20"}
+                            ],
+                            "right": [
+                                {"text": "par1Doo08"}
+                            ],
+                            "comb": [
+                                {"id": "iDar", "text": "par1Doo15"},
+                                {"id": "iKey", "text": "par1Doo17", "act": ["eDoo2 STATE 1", "eDoo2 INFO statLocked"]}
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "info": "statOpen",
+                            "left": [
+                                {"text": "par1Doo21"}
+                            ],
+                            "right": [
+                                {"text": "par1Doo08"}
+                            ],
+                            "comb": [
+                                {"id": "iDar", "text": "par1Doo15"},
+                                {"id": "iKey", "text": "par1Doo17", "act": ["eDoo2 STATE 1", "eDoo2 INFO statLocked"]}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eDoo3",
+                    "name": "par1Doo01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Use",
+                            "back": "62,18,7",
+                            "left": [
+                                {"text": "par1Doo11", "act": ["SELF INFO statLocked", "SELF STATE 2"]}
+                            ],
+                            "right": [
+                                {"text": "par1Doo10"}
+                            ],
+                            "comb": [
+                                {"id": "iDar", "text": "par1Doo15"},
+                                {"id": "iKey", "text": "par1Doo16"}
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "left": [
+                                {"text": "par1Doo11"}
+                            ], "right": [
+                                {"text": "par1Doo14"}
+                            ],
+                            "comb": [
+                                {"id": "iDar", "text": "par1Doo15"},
+                                {"id": "iKey", "text": "par1Doo16"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eSta",
+                    "name": "par1Sta01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Exit",
+                            "back": "144,18,15",
+                            "left": [
+                                {"act": ["HERO ENTER eDoo"], "pos": {"x": 190, "y": 415}}
+                            ],
+                            "right": [
+                                {"text": "par1Sta02"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eTel",
+                    "name": "par1Tel01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Take",
+                            "back": "187,34,23",
+                            "left": [
+                                {"text": "par1Tel02+par1Tel03"},
+                                {"text": "par1Tel02"}
+                            ],
+                            "right": [
+                                {"text": "par1Tel04"}
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "left": [
+                                {"text": "par1Tel05", "act": []}
+                            ],
+                            "right": [
+                                {"text": "par1Tel04"}
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "left": [
+                                {"text": "par1Tel06"}
+                            ],
+                            "right": [
+                                {"text": "par1Tel04"}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "eNew",
+                    "name": "par1New01",
+                    "states": [
+                        {
+                            "id": 1,
+                            "type": "Take",
+                            "back": "171,171,171",
+                            "left": [
+                                {"text": "par1New03", "act": ["HERO TAKE iNew", "SELF REMOVE"]}
+                            ],
+                            "right": [
+                                {"text": "par1New02"}
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

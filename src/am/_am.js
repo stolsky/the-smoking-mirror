@@ -2,7 +2,7 @@
 
 import {connect, getData, getItem, setData, setItem} from "./cache.js";
 import {Element, Hero, Item, Scene} from "./am_classes.js";
-import {hasProperty, isFunction, isString} from "../lib/js_tools.js";
+import {hasProperty, isFunction, isString} from "../../lib/js_tools.js";
 
 
 const GAME_DATA_ID = "SmokingMirror";

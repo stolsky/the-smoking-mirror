@@ -1,5 +1,5 @@
 
-@import url(../lib/gui.css);
+@import url(../lib/JST/dom/gui.css);
 
 :root {
     --APPWIDTH: 1000px;

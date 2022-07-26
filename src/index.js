@@ -201,8 +201,8 @@ const startScript = (scriptName, newGame = false) => {
     if (isString(scriptName)) {
 
         JSONLoader(
-            `dat/${scriptName}.json`,
-            `dat/lang/${scriptName}_${Lang.getCurrentLanguage()}.json`
+            `dat/scenes/${scriptName}.json`,
+            `dat/locale/${scriptName}_${Lang.getCurrentLanguage()}.json`
         ).then((data) => {
 
             const script = data[0];
@@ -263,7 +263,7 @@ const loadSavesIndex = () => {
 
 (() => {
 
-    JSONLoader("dat/lang/base_en.json")
+    JSONLoader("dat/locale/base_en.json")
         .then((data) => {
 
             Lang.setCurrentLanguage(Lang.Language.en);

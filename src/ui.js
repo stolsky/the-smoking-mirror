@@ -1,7 +1,10 @@
 
-import {Container, Fx, TextButton, TextComponent} from "../lib/dom_connectors.js";
-import {EventType, hasProperty, isFunction, isString} from "../lib/js_tools.js";
-import {Application} from "../lib/gui.js";
+import { EventType, hasProperty, isFunction, isString } from "../lib/JST/native/type_check.js";
+import Container from "../lib/JST/dom/container.js";
+import TextButton from "../lib/JST/dom/text_button.js";
+import TextComponent from "../lib/JST/dom/text_component.js";
+//import Fx from "../lib/JST/dom/fx.js";
+import Application from "../lib/JST/dom/application.js";
 
 
 /** @type {Application} */
@@ -9,17 +12,17 @@ let app = null;
 
 const HIGHLIGHT = "Highlight";
 
-export const Log = (function () {
+export const Log = (() => {
 
     let container = null;
 
     const core = {};
 
-    core.init = function () {
+    core.init = () => {
         container = new Container("Log");
     };
 
-    core.add = function (text, narrator = null) {
+    core.add = (text, narrator = null) => {
         if (isString(text)) {
             const message = new Container("Message");
 
@@ -30,11 +33,12 @@ export const Log = (function () {
             message.addComponent(new TextComponent(text, "Text"));
 
             container.addComponent(message, 0);
-            Fx.scrollTop(container, 0);
+            // TODO rewrite scroll up method
+            //Fx.scrollTop(container, 0);
         }
     };
 
-    core.clear = function () {
+    core.clear = () => {
         if (container instanceof Container) {
             container.clear();
         }
@@ -45,7 +49,7 @@ export const Log = (function () {
     return Object.freeze(core);
 })();
 
-export const Inventory = (function () {
+export const Inventory = (() => {
 
     let items = {};
 
@@ -56,11 +60,11 @@ export const Inventory = (function () {
 
     const core = {};
 
-    core.init = function () {
+    core.init = () => {
         container = new Container("Inventory");
     };
 
-    core.clear = function () {
+    core.clear = () => {
 
         items = {};
 
@@ -79,7 +83,7 @@ export const Inventory = (function () {
      * @param {string} background
      * @param {Function} action
      */
-    core.render = function (id, visible, type, name, info, foreground, background, action) {
+    core.render = (id, visible, type, name, info, foreground, background, action) => {
         if (isString(id)) {
 
             const elem = new Container("Item");
@@ -119,24 +123,22 @@ export const Inventory = (function () {
         }
     };
 
-    core.highlight = function (id) {
+    core.highlight = (id) => {
         if (hasItem(id)) {
             items[id].addClass("Highlight");
         }
     };
 
-    core.removeHighlights = function () {
-        Object.values(items).forEach(
-            /** @param {Container} item */
-            item => {
-                if (item.hasClass(HIGHLIGHT)) {
-                    item.removeClass(HIGHLIGHT);
-                }
+    core.removeHighlights = () => Object.values(items).forEach(
+        /** @param {Container} item */
+        (item) => {
+            if (item.hasClass(HIGHLIGHT)) {
+                item.removeClass(HIGHLIGHT);
             }
-        );
-    };
+        }
+    );
 
-    core.remove = function (id) {
+    core.remove = (id) => {
         if (hasItem(id)) {
             items[id].remove();
             delete items[id];
@@ -148,7 +150,7 @@ export const Inventory = (function () {
     return Object.freeze(core);
 })();
 
-export const Scene = (function () {
+export const Scene = (() => {
 
     let elements = {};
 
@@ -163,7 +165,7 @@ export const Scene = (function () {
 
     const core = {};
 
-    core.init = function () {
+    core.init = () => {
         title = new Container("Title");
         titleText = new TextComponent();
         title.addComponent(titleText);
@@ -171,11 +173,11 @@ export const Scene = (function () {
     };
 
     /** @param {string} val */
-    core.setTitle = function (val) {
+    core.setTitle = (val) => {
         titleText.text = val;
     };
 
-    core.clear = function () {
+    core.clear = () => {
 
         elements = {};
 
@@ -197,7 +199,7 @@ export const Scene = (function () {
      * @param {string} background
      * @param {Function} action
      */
-    core.render = function (id, visible, type, name, info, foreground, background, action) {
+    core.render = (id, visible, type, name, info, foreground, background, action) => {
         if (isString(id)) {
 
             const elem = new Container("Element");
@@ -244,15 +246,15 @@ export const Scene = (function () {
         }
     };
 
-    core.highlight = function (id) {
+    core.highlight = (id) => {
         if (hasElement(id)) {
             elements[id].addClass(HIGHLIGHT);
         }
     };
 
-    core.removeHighlights = () => Object.values(elements).forEach(elem => elem.removeClass(HIGHLIGHT));
+    core.removeHighlights = () => Object.values(elements).forEach((elem) => elem.removeClass(HIGHLIGHT));
 
-    core.remove = function (id) {
+    core.remove = (id) => {
         if (hasElement(id)) {
             elements[id].remove();
             delete elements[id];
@@ -265,7 +267,7 @@ export const Scene = (function () {
     return Object.freeze(core);
 })();
 
-export const Dialogue = (function () {
+export const Dialogue = (() => {
 
     /** @type {Container} */
     let container = null;
@@ -276,7 +278,7 @@ export const Dialogue = (function () {
 
     const core = {};
 
-    core.init = function () {
+    core.init = () => {
 
         container = new Container("Dialogue");
         dialogue = new Container("Box");
@@ -296,17 +298,17 @@ export const Dialogue = (function () {
         THOUGHT: 2
     });
 
-    core.addMessage = function (name, text, type) {
+    core.addMessage = (name, text, type) => {
 
     };
 
-    core.show = function () {
+    core.show = () => {
         if (container instanceof Container) {
             container.show();
         }
     };
 
-    core.hide = function () {
+    core.hide = () => {
         if (container instanceof Container) {
             container.hide();
         }
@@ -314,7 +316,7 @@ export const Dialogue = (function () {
 
     core.getContainer = () => container;
 
-    core.clear = function () {
+    core.clear = () => {
 
         if (dialogue instanceof Container) {
             dialogue.clear();
@@ -327,7 +329,7 @@ export const Dialogue = (function () {
     return Object.freeze(core);
 })();
 
-export const Overlay = (function () {
+export const Overlay = (() => {
 
     /** @type {Container} */
     let container = null;
@@ -340,7 +342,7 @@ export const Overlay = (function () {
 
     const core = {};
 
-    core.init = function () {
+    core.init = () => {
 
         container = new Container("Overlay");
         container.addEventListener(EventType.mouseup, () => {
@@ -362,33 +364,33 @@ export const Overlay = (function () {
     };
 
     /** @param {string} val */
-    core.setTitle = function (val) {
+    core.setTitle = (val) => {
         if (title instanceof TextComponent) {
             title.text = val;
         }
     };
 
     /** @param {string} val */
-    core.setText = function (val) {
+    core.setText = (val) => {
         if (text instanceof TextComponent) {
             text.text = val;
         }
     };
 
     /** @param {string} val */
-    core.setHint = function (val) {
+    core.setHint = (val) => {
         if (hint instanceof TextComponent) {
             hint.text = val;
         }
     };
 
-    core.show = function () {
+    core.show = () => {
         if (container instanceof Container) {
             container.show();
         }
     };
 
-    core.hide = function () {
+    core.hide = () => {
         if (container instanceof Container) {
             container.hide();
         }
@@ -396,7 +398,7 @@ export const Overlay = (function () {
 
     core.getContainer = () => container;
 
-    core.clear = function () {
+    core.clear = () => {
 
         if (title instanceof TextComponent) {
             title.text = "";
@@ -417,7 +419,7 @@ export const Overlay = (function () {
     return Object.freeze(core);
 })();
 
-export const Menu = (function () {
+export const Menu = (() => {
 
     let container = null;
 
@@ -430,7 +432,7 @@ export const Menu = (function () {
 
     const core = {};
 
-    core.init = function () {
+    core.init = () => {
 
         container = new Container("Menu");
         container.addClass("Center");
@@ -449,43 +451,43 @@ export const Menu = (function () {
 
     };
 
-    core.setTitle = function (val) {
+    core.setTitle = (val) => {
         if (title instanceof TextComponent) {
             title.text = val;
         }
     };
 
-    core.setSubTitle = function (val) {
+    core.setSubTitle = (val) => {
         if (subtitle instanceof TextComponent) {
             subtitle.text = val;
         }
     };
 
-    core.addButton = function (text, action) {
+    core.addButton = (text, action) => {
         if (buttons instanceof Container) {
             buttons.addComponent(new TextButton(text, action));
         }
     };
 
-    core.clearButtons = function () {
+    core.clearButtons = () => {
         if (buttons instanceof Container) {
             buttons.clear();
         }
     };
 
-    core.setDisclaimer = function (val) {
+    core.setDisclaimer = (val) => {
         if (disclaimer instanceof TextComponent) {
             disclaimer.text = val;
         }
     };
 
-    core.show = function () {
+    core.show = () => {
         if (container instanceof Container) {
             container.show();
         }
     };
 
-    core.hide = function () {
+    core.hide = () => {
         if (container instanceof Container) {
             container.hide();
         }
@@ -496,19 +498,19 @@ export const Menu = (function () {
     return Object.freeze(core);
 })();
 
-export const setup = function (title) {
+export const setup = (title) => {
 
     app = new Application(title);
     app.addClass("Center");
-    app.setTitle(title);
-    app.setContextMenuEnabled(false);
+    Application.setTitle(title);
+    Application.setContextMenuEnabled(false);
 
     Menu.init();
     Menu.hide();
     app.getRootPane().addComponent(Menu.getContainer());
 };
 
-export const initGameUI = function (listener) {
+export const initGameUI = (listener) => {
 
     Overlay.init();
     Scene.init();
@@ -533,7 +535,7 @@ export const initGameUI = function (listener) {
     }
 };
 
-export const clear = function () {
+export const clear = () => {
     app.getRootPane().clear();
     Overlay.clear();
     Scene.clear();

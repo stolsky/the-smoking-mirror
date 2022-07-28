@@ -1,34 +1,39 @@
 
-import * as Lang from "../lib/lang.js";
-import {clear as clearUI, initGameUI, Inventory, Log, Menu, Overlay, Scene, setup as setupUI} from "./ui.js";
-import {COMBINATION, create as createAct, Heroes, Interaction, Scenes, TYPE} from "./am.js";
-import {Element, Hero, Item} from "./am_classes.js";
-import {hasProperty, isString, JSONLoader} from "../lib/js_tools.js";
+import { hasProperty, isString } from "../lib/JST/native/type_check.js";
+import { JSONLoader } from "../lib/JST/resource/loaders.js";
+import * as Lang from "../lib/JST/resource/lang.js";
+
+import { clear as clearUI, initGameUI, Inventory, Log, Menu, Overlay, Scene, setup as setupUI } from "./ui.js";
+import { COMBINATION, create as createAct, Heroes, Interaction, Scenes, TYPE } from "./am/am.js";
+
+import Element from "./am/element.js";
+import Hero from "./am/hero.js";
+import Item from "./am/item.js";
 
 
 let currentScript = null;
 
-let interact = null,
-    loadScene = null;
+let interact = null;
+let loadScene = null;
 
 /**
  * @param {string} id
  *
  * @returns {string}
  */
-const getWord = function (id) {
+const getWord = (id) => {
     if (isString(id)) {
         let pack = null;
         if (id.startsWith(currentScript)) {
             pack = currentScript;
         }
-        return Lang.get(id, pack);
+        return Lang.getWord(id, pack);
     }
     return null;
 };
-const createMessage = (id) => id.split("+").reduce((acc, part) => acc + " " + getWord(part), "");
+const createMessage = (id) => id.split("+").reduce((acc, part) => `${acc} ${getWord(part)}`, "");
 /** @param {Object} message */
-const addMessage = function (message) {
+const addMessage = (message) => {
     if (message && hasProperty(message, "text") && isString(message.text)) {
 
         const text = createMessage(message.text);
@@ -49,7 +54,7 @@ const isHero = (object) => object instanceof Hero;
 
 
 // TODO refactor ??
-const renderObject = function (target, object) {
+const renderObject = (target, object) => {
     target.render(
         object.getId(),
         object.visible || false, // dont exists at Item
@@ -61,7 +66,7 @@ const renderObject = function (target, object) {
         (event) => { interact(event, object); }
     );
 };
-const renderElement = function (element) {
+const renderElement = (element) => {
     if (Scenes.getCurrent().hasElement(element.getId())) {
 
         if (element.currentState) {
@@ -72,7 +77,7 @@ const renderElement = function (element) {
 
     }
 };
-const renderItem = function (item) {
+const renderItem = (item) => {
 
     if (item.currentState) {
         renderObject(Inventory, item);
@@ -81,14 +86,14 @@ const renderItem = function (item) {
         Inventory.remove(item.getId());
     }
 };
-const renderHero = function (hero) {
+const renderHero = (hero) => {
     if (hero.currentState) {
         renderObject(Scene, hero);
     } else {
         Scene.remove(hero.getId());
     }
 };
-const changeObject = function (object) {
+const changeObject = (object) => {
     if (isElement(object)) {
         renderElement(object);
     } else if (isItem(object)) {
@@ -97,7 +102,7 @@ const changeObject = function (object) {
         renderHero(object);
     }
 };
-const highlightObject = function (object) {
+const highlightObject = (object) => {
     if (isElement(object)) {
         Scene.highlight(object.getId());
     } else if (isItem(object)) {
@@ -106,12 +111,12 @@ const highlightObject = function (object) {
         Scene.highlight(object.getId());
     }
 };
-const clearCombination = function () {
+const clearCombination = () => {
     Interaction.clearCombination();
     Scene.removeHighlights();
     Inventory.removeHighlights();
 };
-const renderDeath = function (id) {
+const renderDeath = (id) => {
     Overlay.setTitle(createMessage("deathTitle"));
     Overlay.setText(createMessage(id));
     // Overlay.setCallback();
@@ -119,10 +124,10 @@ const renderDeath = function (id) {
 };
 
 /** @param {Array<Object>} updates */
-const handleUpdates = function (updates) {
+const handleUpdates = (updates) => {
 
     // console.log(updates);
-    updates.forEach(update => {
+    updates.forEach((update) => {
 
         if (update.type === TYPE.CHANGE) {
             changeObject(update.object);
@@ -139,14 +144,14 @@ const handleUpdates = function (updates) {
     });
 };
 
-const processClick = function (mouseButton, targetObject) {
+const processClick = (mouseButton, targetObject) => {
     if (mouseButton === 0) {
         if (Interaction.hasActiveCombination()) {
             const result = Interaction.combine(targetObject);
             if (result === COMBINATION.SUCCESS) {
                 clearCombination();
             } else if (result === COMBINATION.FAILURE) {
-                console.log("COMBINATION FAILURE");
+                // console.log("COMBINATION FAILURE");
                 clearCombination();
             }
         } else {
@@ -161,7 +166,7 @@ const processClick = function (mouseButton, targetObject) {
     }
 };
 
-interact = function (event, target) {
+interact = (event, target) => {
     event.stopPropagation();
 
     Interaction.clear();
@@ -176,7 +181,7 @@ interact = function (event, target) {
 
 };
 
-loadScene = function (id) {
+loadScene = (id) => {
 
     Scenes.setCurrent(id);
     const scene = Scenes.getCurrent();
@@ -187,18 +192,18 @@ loadScene = function (id) {
 
     renderObject(Scene, hero);
 
-    Scenes.getCurrentElements().forEach(elem => renderElement(elem));
-    Heroes.getCurrentInventory().forEach(item => renderObject(Inventory, item));
+    Scenes.getCurrentElements().forEach((elem) => renderElement(elem));
+    Heroes.getCurrentInventory().forEach((item) => renderObject(Inventory, item));
 
 };
 
-const startScript = function (scriptName, newGame = false) {
+const startScript = (scriptName, newGame = false) => {
     if (isString(scriptName)) {
 
-        JSONLoader([
-            `dat/${scriptName}.json`,
-            `dat/lang/${scriptName}_${Lang.getCurrentLanguage()}.json`
-        ]).then(data => {
+        JSONLoader(
+            `dat/scenes/${scriptName}.json`,
+            `dat/locale/${scriptName}_${Lang.getCurrentLanguage()}.json`
+        ).then((data) => {
 
             const script = data[0];
             currentScript = script.id;
@@ -231,7 +236,7 @@ I had a bad feeling about this...
     }
 };
 
-const start = function (scriptName, newGame = false) {
+const start = (scriptName, newGame = false) => {
 
     Menu.hide();
 
@@ -248,7 +253,7 @@ const start = function (scriptName, newGame = false) {
     startScript(scriptName, newGame);
 };
 
-const loadSavesIndex = function () {
+const loadSavesIndex = () => {
     Menu.clearButtons();
     // get saves index
     Menu.addButton(getWord("menuNewGame"), () => {
@@ -256,10 +261,10 @@ const loadSavesIndex = function () {
     });
 };
 
-(function () {
+(() => {
 
-    JSONLoader("dat/lang/base_en.json")
-        .then(data => {
+    JSONLoader("dat/locale/base_en.json")
+        .then((data) => {
 
             Lang.setCurrentLanguage(Lang.Language.en);
             Lang.addLanguagePack(data);

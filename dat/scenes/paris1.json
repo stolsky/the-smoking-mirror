@@ -939,7 +939,7 @@
                         {
                             "id": 2,
                             "left": [
-                                {"text": "par1Tel05", "stmt": ["HERO DIALOG loub01", "SELF 3", "CafeKnown true", "eDoo2 2:eCaf1 SHOW"]}
+                                {"text": "par1Tel05", "stmt": ["HERO DIALOG loub01", "SELF 3", "CafeKnown true"]}
                             ],
                             "right": [
                                 {"text": "par1Tel04"}
@@ -1029,7 +1029,10 @@
         {
             "id": "loub01",
             "states": [
-
+                {
+                    "id": 1,
+                    "conv": "par1GA101,par1GA102,par1GA103,par1GA104,par1GA105,par1GA106,par1GA107,par1GA108,par1GA109,par1GA110,par1GA111,par1GA112,par1GA113,par1GA114,par1GA115,par1GA116"
+                }
             ]
         }
     ]

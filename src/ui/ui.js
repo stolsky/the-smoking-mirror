@@ -1,10 +1,10 @@
 
-import { EventType, hasProperty, isFunction, isString } from "../lib/JST/native/type_check.js";
-import Container from "../lib/JST/dom/container.js";
-import TextButton from "../lib/JST/dom/text_button.js";
-import TextComponent from "../lib/JST/dom/text_component.js";
+import { EventType, hasProperty, isFunction, isString } from "../../lib/JST/native/type_check.js";
+import Container from "../../lib/JST/dom/container.js";
+import TextButton from "../../lib/JST/dom/text_button.js";
+import TextComponent from "../../lib/JST/dom/text_component.js";
 //import Fx from "../lib/JST/dom/fx.js";
-import Application from "../lib/JST/dom/application.js";
+import Application from "../../lib/JST/dom/application.js";
 
 
 /** @type {Application} */
@@ -174,7 +174,7 @@ export const Scene = (() => {
 
     /** @param {string} val */
     core.setTitle = (val) => {
-        titleText.text = val;
+        titleText.setText(val);
     };
 
     core.clear = () => {

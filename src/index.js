@@ -3,7 +3,7 @@ import { hasProperty, isString } from "../lib/JST/native/type_check.js";
 import { JSONLoader } from "../lib/JST/resource/loaders.js";
 import * as Lang from "../lib/JST/resource/lang.js";
 
-import { clear as clearUI, initGameUI, Inventory, Log, Menu, Overlay, Scene, setup as setupUI } from "./ui.js";
+import { clear as clearUI, initGameUI, Inventory, Log, Menu, Overlay, Scene, setup as setupUI } from "./ui/ui.js";
 import { COMBINATION, create as createAct, Heroes, Interaction, Scenes, TYPE } from "./am/am.js";
 
 import Element from "./am/element.js";

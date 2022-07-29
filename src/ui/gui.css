@@ -1,5 +1,5 @@
 
-@import url(../lib/JST/dom/gui.css);
+@import url(../../lib/JST/dom/gui.css);
 
 :root {
     --APPWIDTH: 1000px;
@@ -21,16 +21,16 @@
 }
 
 @keyframes exit {
-    0%{cursor: url(../res/cursor/exit0.png) 51 26, default;}
-    11%{cursor: url(../res/cursor/exit1.png) 51 26, default;}
-    22%{cursor: url(../res/cursor/exit2.png) 51 26, default;}
-    33%{cursor: url(../res/cursor/exit3.png) 51 26, default;}
-    44%{cursor: url(../res/cursor/exit4.png) 51 26, default;}
-    55%{cursor: url(../res/cursor/exit5.png) 51 26, default;}
-    66%{cursor: url(../res/cursor/exit6.png) 51 26, default;}
-    77%{cursor: url(../res/cursor/exit7.png) 51 26, default;}
-    88%{cursor: url(../res/cursor/exit8.png) 51 26, default;}
-    100%{cursor: url(../res/cursor/exit0.png) 51 26, default;}
+    0%{cursor: url(../../res/cursor/exit0.png) 51 26, default;}
+    11%{cursor: url(../../res/cursor/exit1.png) 51 26, default;}
+    22%{cursor: url(../../res/cursor/exit2.png) 51 26, default;}
+    33%{cursor: url(../../res/cursor/exit3.png) 51 26, default;}
+    44%{cursor: url(../../res/cursor/exit4.png) 51 26, default;}
+    55%{cursor: url(../../res/cursor/exit5.png) 51 26, default;}
+    66%{cursor: url(../../res/cursor/exit6.png) 51 26, default;}
+    77%{cursor: url(../../res/cursor/exit7.png) 51 26, default;}
+    88%{cursor: url(../../res/cursor/exit8.png) 51 26, default;}
+    100%{cursor: url(../../res/cursor/exit0.png) 51 26, default;}
 }
 /*
 @keyframes left {
@@ -61,27 +61,27 @@
 }
 */
 @keyframes take {
-    0%{cursor: url(../res/cursor/take1.png) 28 48, default;}
-    13%{cursor: url(../res/cursor/take2.png) 28 48, default;}
-    26%{cursor: url(../res/cursor/take2.png) 28 48, default;}
-    40%{cursor: url(../res/cursor/take4.png) 28 48, default;}
-    52%{cursor: url(../res/cursor/take5.png) 28 48, default;}
-    64%{cursor: url(../res/cursor/take6.png) 28 48, default;}
-    76%{cursor: url(../res/cursor/take7.png) 28 48, default;}
-    88%{cursor: url(../res/cursor/take8.png) 28 48, default;}
-    100%{cursor: url(../res/cursor/take9.png) 28 48, default;}
+    0%{cursor: url(../../res/cursor/take1.png) 28 48, default;}
+    13%{cursor: url(../../res/cursor/take2.png) 28 48, default;}
+    26%{cursor: url(../../res/cursor/take2.png) 28 48, default;}
+    40%{cursor: url(../../res/cursor/take4.png) 28 48, default;}
+    52%{cursor: url(../../res/cursor/take5.png) 28 48, default;}
+    64%{cursor: url(../../res/cursor/take6.png) 28 48, default;}
+    76%{cursor: url(../../res/cursor/take7.png) 28 48, default;}
+    88%{cursor: url(../../res/cursor/take8.png) 28 48, default;}
+    100%{cursor: url(../../res/cursor/take9.png) 28 48, default;}
 }
 @keyframes use {
-    0%{cursor: url(../res/cursor/use0.png) 23 28, default;}
-    11%{cursor: url(../res/cursor/use1.png) 23 28, default;}
-    22%{cursor: url(../res/cursor/use2.png) 23 28, default;}
-    33%{cursor: url(../res/cursor/use3.png) 23 28, default;}
-    44%{cursor: url(../res/cursor/use4.png) 23 28, default;}
-    55%{cursor: url(../res/cursor/use5.png) 23 28, default;}
-    66%{cursor: url(../res/cursor/use6.png) 23 28, default;}
-    77%{cursor: url(../res/cursor/use7.png) 23 28, default;}
-    88%{cursor: url(../res/cursor/use8.png) 23 28, default;}
-    100%{cursor: url(../res/cursor/use9.png) 23 28, default;}
+    0%{cursor: url(../../res/cursor/use0.png) 23 28, default;}
+    11%{cursor: url(../../res/cursor/use1.png) 23 28, default;}
+    22%{cursor: url(../../res/cursor/use2.png) 23 28, default;}
+    33%{cursor: url(../../res/cursor/use3.png) 23 28, default;}
+    44%{cursor: url(../../res/cursor/use4.png) 23 28, default;}
+    55%{cursor: url(../../res/cursor/use5.png) 23 28, default;}
+    66%{cursor: url(../../res/cursor/use6.png) 23 28, default;}
+    77%{cursor: url(../../res/cursor/use7.png) 23 28, default;}
+    88%{cursor: url(../../res/cursor/use8.png) 23 28, default;}
+    100%{cursor: url(../../res/cursor/use9.png) 23 28, default;}
 }
 
 html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat center center fixed; background-size: cover;}
@@ -170,13 +170,13 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
     animation: exit 0.8s infinite;
 }
 .Application .GameUI > .Scene .Element.Look {
-    cursor: url(../res/cursor/look.png) 12 12, default;
+    cursor: url(../../res/cursor/look.png) 12 12, default;
 }
 .Application .GameUI > .Scene .Element.Take {
     animation: take 0.8s infinite;
 }
 .Application .GameUI > .Scene .Element.Talk {
-    cursor: url(../res/cursor/talk.png) 14 13, default;
+    cursor: url(../../res/cursor/talk.png) 14 13, default;
 }
 .Application .GameUI > .Scene .Element.Use {
     animation: use 0.5s infinite;

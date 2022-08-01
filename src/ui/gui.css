@@ -1,0 +1,362 @@
+
+@import url(../../lib/JST/dom/gui.css);
+
+:root {
+    --APPWIDTH: 1000px;
+    --APPHEIGHT: 700px;
+
+    --INTRO_BLUR: 100px;
+
+    /* COLORS */
+    --HIGHLIGHT: rgba(255, 0, 0, 0.5);
+}
+
+@keyframes IntroSimple1 {
+    0% {filter: blur(var(--INTRO_BLUR));}
+    100% {filter: blur(0px);}
+}
+@keyframes IntroSimple2 {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@keyframes exit {
+    0%{cursor: url(../../res/cursor/exit0.png) 51 26, default;}
+    11%{cursor: url(../../res/cursor/exit1.png) 51 26, default;}
+    22%{cursor: url(../../res/cursor/exit2.png) 51 26, default;}
+    33%{cursor: url(../../res/cursor/exit3.png) 51 26, default;}
+    44%{cursor: url(../../res/cursor/exit4.png) 51 26, default;}
+    55%{cursor: url(../../res/cursor/exit5.png) 51 26, default;}
+    66%{cursor: url(../../res/cursor/exit6.png) 51 26, default;}
+    77%{cursor: url(../../res/cursor/exit7.png) 51 26, default;}
+    88%{cursor: url(../../res/cursor/exit8.png) 51 26, default;}
+    100%{cursor: url(../../res/cursor/exit0.png) 51 26, default;}
+}
+/*
+@keyframes left {
+    0%{cursor: url(../res/cursor/left0.png) 1 19, default;}
+    10%{cursor: url(../res/cursor/left1.png) 1 19, default;}
+    20%{cursor: url(../res/cursor/left2.png) 1 19, default;}
+    30%{cursor: url(../res/cursor/left3.png) 1 19, default;}
+    40%{cursor: url(../res/cursor/left4.png) 1 19, default;}
+    50%{cursor: url(../res/cursor/left5.png) 1 19, default;}
+    60%{cursor: url(../res/cursor/left6.png) 1 19, default;}
+    70%{cursor: url(../res/cursor/left7.png) 1 19, default;}
+    80%{cursor: url(../res/cursor/left8.png) 1 19, default;}
+    90%{cursor: url(../res/cursor/left9.png) 1 19, default;}
+    100%{cursor: url(../res/cursor/left0.png) 1 19, default;}
+}
+@keyframes right {
+    0%{cursor: url(../res/cursor/right0.png) 34 19, default;}
+    10%{cursor: url(../res/cursor/right1.png) 34 19, default;}
+    20%{cursor: url(../res/cursor/right2.png) 34 19, default;}
+    30%{cursor: url(../res/cursor/right3.png) 34 19, default;}
+    40%{cursor: url(../res/cursor/right4.png) 34 19, default;}
+    50%{cursor: url(../res/cursor/right5.png) 34 19, default;}
+    60%{cursor: url(../res/cursor/right6.png) 34 19, default;}
+    70%{cursor: url(../res/cursor/right7.png) 34 19, default;}
+    80%{cursor: url(../res/cursor/right8.png) 34 19, default;}
+    90%{cursor: url(../res/cursor/right9.png) 34 19, default;}
+    100%{cursor: url(../res/cursor/right0.png) 34 19, default;}
+}
+*/
+@keyframes take {
+    0%{cursor: url(../../res/cursor/take1.png) 28 48, default;}
+    13%{cursor: url(../../res/cursor/take2.png) 28 48, default;}
+    26%{cursor: url(../../res/cursor/take2.png) 28 48, default;}
+    40%{cursor: url(../../res/cursor/take4.png) 28 48, default;}
+    52%{cursor: url(../../res/cursor/take5.png) 28 48, default;}
+    64%{cursor: url(../../res/cursor/take6.png) 28 48, default;}
+    76%{cursor: url(../../res/cursor/take7.png) 28 48, default;}
+    88%{cursor: url(../../res/cursor/take8.png) 28 48, default;}
+    100%{cursor: url(../../res/cursor/take9.png) 28 48, default;}
+}
+@keyframes use {
+    0%{cursor: url(../../res/cursor/use0.png) 23 28, default;}
+    11%{cursor: url(../../res/cursor/use1.png) 23 28, default;}
+    22%{cursor: url(../../res/cursor/use2.png) 23 28, default;}
+    33%{cursor: url(../../res/cursor/use3.png) 23 28, default;}
+    44%{cursor: url(../../res/cursor/use4.png) 23 28, default;}
+    55%{cursor: url(../../res/cursor/use5.png) 23 28, default;}
+    66%{cursor: url(../../res/cursor/use6.png) 23 28, default;}
+    77%{cursor: url(../../res/cursor/use7.png) 23 28, default;}
+    88%{cursor: url(../../res/cursor/use8.png) 23 28, default;}
+    100%{cursor: url(../../res/cursor/use9.png) 23 28, default;}
+}
+
+html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat center center fixed; background-size: cover;}
+
+.Application {
+
+    width: var(--APPWIDTH);
+    height: var(--APPHEIGHT);
+
+    cursor: url(../res/cursor/default.png) 4 4, default;
+    font-family: sans-serif;
+    background: #ffffff;
+    border-radius: 10px;
+
+}
+
+.Application .GameUI {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: calc(5% - 5px) 1fr calc(10% - 5px);
+    padding: 5px;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+}
+
+.Application .GameUI > .Overlay {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    background-color: #000;
+    color: #ffffff;
+}
+.Application .GameUI > .Overlay .Title {
+    font-size: 2em;
+    margin-bottom: 5%;
+}
+.Application .GameUI > .Overlay .Text {
+}
+.Application .GameUI > .Overlay .Hint {
+    position: absolute;
+    bottom: 1%;
+    font-size: 0.8em;
+}
+
+.Application .GameUI > .Title {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #000000;
+    font-weight: bold;
+    margin-bottom: 5px; /* to create the border gap*/
+}
+
+.Application .GameUI > .Scene {
+    grid-column-start: 1;
+    grid-row-start: 2;
+    border-right: 1px solid #000000;
+    padding: 5px;
+
+    display: flex;
+    flex-flow: column wrap;
+    overflow: hidden;
+    gap: 10px;
+    
+}
+.Application .GameUI > .Scene .Element {
+    display: block;
+    width: 45%;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    font-size: 0.9em;
+    padding-left: 5px;
+}
+.Application .GameUI > .Scene .Element.Exit {
+    animation: exit 0.8s infinite;
+}
+.Application .GameUI > .Scene .Element.Look {
+    cursor: url(../../res/cursor/look.png) 12 12, default;
+}
+.Application .GameUI > .Scene .Element.Take {
+    animation: take 0.8s infinite;
+}
+.Application .GameUI > .Scene .Element.Talk {
+    cursor: url(../../res/cursor/talk.png) 14 13, default;
+}
+.Application .GameUI > .Scene .Element.Use {
+    animation: use 0.5s infinite;
+}
+.Application .GameUI > .Scene .Element .Name {
+    display: block;
+    font-weight: bold;
+}
+.Application .GameUI > .Scene .Element .Info {
+    display: block;
+    font-style: italic;
+    margin-top: -2px;
+}
+
+.Application .GameUI > .Log {
+    grid-column-start: 2;
+    grid-row-start: 2;
+    border-left: 1px solid #000000;
+    padding: 5px;
+
+    overflow: auto;
+    scrollbar-color: #888 #fff;
+    scrollbar-width: thin;
+}
+.Application .GameUI > .Log .Message {
+    margin-bottom: 10px;
+    font-size: 0.8em;
+    color: #888888;
+}
+.Application .GameUI > .Log .Message:hover {
+    color: #000000;
+}
+.Application .GameUI > .Log .Message:first-child {
+    color: #000000;
+    font-size: 0.9em;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #000000;
+}
+.Application .GameUI > .Log .Message .Narrator {
+    font-weight: bold;
+}
+.Application .GameUI > .Log .Message .Narrator::after {
+    content: ":";
+    margin-right: 10px;    
+}
+.Application .GameUI > .Log .Message .Text {
+    font-family: sans-serif;    
+}
+
+.Application .GameUI > .Inventory {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    border-top: 2px solid #000000;
+    margin-top: 5px; /* to create the border gap*/
+    padding: 5px;
+
+    display: flex;
+    flex-flow: row wrap;
+    overflow: hidden;
+    gap: 10px;
+    align-content: flex-start;
+
+}
+.Application .GameUI > .Inventory .Item {
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    font-size: 0.8em;
+    padding: 2px 4px;
+    font-weight: bold;
+}
+
+.Application .GameUI > .Scene .Element:hover,
+.Application .GameUI > .Inventory .Item:hover {
+    outline: 3px solid var(--HIGHLIGHT);
+    box-shadow: none;
+}
+.Application .GameUI > .Scene .Element.Highlight,
+.Application .GameUI > .Inventory .Item.Highlight {
+    outline: 3px solid #ff0000;
+    box-shadow: none;
+}
+
+.Application .GameUI > .Dialogue {
+
+    grid-column-start: 1;
+    grid-row-start: 2;
+    grid-column-end: 3;
+
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/*
+
+.Application>.Title {position: relative; text-align: center; color: #ffffff; background: #000000; line-height: var(--TITLEHEIGHT); font-size: 1em;}
+
+.Application>.Scene, .Application .TextBox {
+    position: relative;
+    width: calc(var(--APPWIDTH) * 0.5 - var(--GAP) * 2);
+    padding: var(--GAP);
+    overflow: hidden;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--GAP) * 0.5);
+}
+
+.Application>.Scene {height: calc(var(--APPHEIGHT) - var(--TITLEHEIGHT) - var(--INVENTORYHEIGHT) - var(--GAP) * 2);}
+.Application>.Scene>.Element {padding: 2px 5px; font-size: 0.8em;}
+.Application>.Scene>.Element>.Name {font-weight: bold; margin-right: 5px;}
+.Application>.Scene>.Element>.Info {font-style: italic;}
+.Application>.Scene>.Element.Explored {color: #666666;}
+
+
+
+.Application>.TextBox>.Message {font-size: 0.9em; color: #666666;}
+.Application>.TextBox>.Message:first-child {color: #000000;}
+.Application>.TextBox .Name {font-weight: bold;}
+.Application>.TextBox .Name::after {content: ":";}
+.Application>.TextBox .Text {text-align: justify;}
+
+.Application .Highlight {text-shadow: -1px 0 #ff0000, 0 1px #ff0000, 1px 0 #ff0000, 0 -1px #ff0000;}
+
+.Application>.Inventory {
+    position: relative;
+    display: flex;
+    width: calc(var(--APPWIDTH) - 20px); height: var(--INVENTORYHEIGHT);
+    align-items: center;
+    color: #ffffff;
+    background: #000000;
+    padding: 0px 10px;
+}
+.Application>.Inventory>.Item {}
+
+*/
+
+
+/* DISCLAIMER */
+.Application .Menu {
+    width: 70%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+.Application .Menu .TitleBox {
+    padding: 10px 0;
+    text-align: center;
+    color: #ffffff;
+    background: #000000;
+    width: 80%;
+    border-radius: 10px;
+    filter: blur(var(--INTRO_BLUR));
+    animation: IntroSimple1 2s ease-in-out 0s forwards;
+}
+.Application .Menu .TitleBox .Title {
+    font-size: 3em;
+    display: block;
+}
+.Application .Menu .TitleBox .SubTitle {
+
+}
+.Application .Menu .ButtonBox {
+    width: 80%;
+    margin: 10%;
+    text-align: center;
+    opacity: 0;
+    animation: IntroSimple2 0.5s ease-in-out 2s forwards;
+}
+.Application .Menu .ButtonBox button {
+    font-size: 1.5em;
+    border: none;
+    background: none;
+}
+.Application .Menu .ButtonBox button:hover {
+    color: #ff0000;
+    cursor: inherit;
+}
+.Application .Menu .Disclaimer {
+    font-size: 0.8em;
+    display: block;
+    opacity: 0;
+    animation: IntroSimple2 0.5s ease-in-out 2s forwards;
+    width: 80%;
+}

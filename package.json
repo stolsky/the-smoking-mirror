@@ -1,0 +1,28 @@
+{
+  "name": "smoking-mirror",
+  "version": "1.0.0",
+  "description": "Another kind of Text Adventure",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/w0lf3n/broken-sword.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/w0lf3n/broken-sword/issues"
+  },
+  "homepage": "https://github.com/w0lf3n/broken-sword#readme",
+  "devDependencies": {
+    "eslint": "^8.20.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-security": "^1.5.0"
+  }
+}

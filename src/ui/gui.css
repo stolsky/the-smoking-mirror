@@ -98,7 +98,7 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
 
 }
 
-/* .Application .GameUI {
+.Application .InGameUI {
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-rows: calc(5% - 5px) 1fr calc(10% - 5px);
@@ -106,10 +106,8 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
     width: calc(100% - 10px);
     height: calc(100% - 10px);
 }
-*/
 
-/*
-.Application .GameUI > .Overlay {
+.Application .InGameUI > .Overlay {
 
     display: flex;
     align-items: center;
@@ -125,20 +123,19 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
     background-color: #000;
     color: #ffffff;
 }
-.Application .GameUI > .Overlay .Title {
+.Application .InGameUI > .Overlay .Title {
     font-size: 2em;
     margin-bottom: 5%;
 }
-.Application .GameUI > .Overlay .Text {
+.Application .InGameUI > .Overlay .Text {
 }
-.Application .GameUI > .Overlay .Hint {
+.Application .InGameUI > .Overlay .Hint {
     position: absolute;
     bottom: 1%;
     font-size: 0.8em;
 }
-*/
 
-.Application .GameUI > .Title {
+.Application .InGameUI > .Title {
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 1;
@@ -150,7 +147,7 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
     margin-bottom: 5px;
 }
 
-.Application .GameUI > .Scene {
+.Application .InGameUI > .Scene {
     grid-column-start: 1;
     grid-row-start: 2;
     border-right: 1px solid #000000;
@@ -162,39 +159,39 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
     gap: 10px;
     
 }
-.Application .GameUI > .Scene .Element {
+.Application .InGameUI > .Scene .Element {
     display: block;
     width: 45%;
     box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
     font-size: 0.9em;
     padding-left: 5px;
 }
-.Application .GameUI > .Scene .Element.Exit {
+.Application .InGameUI > .Scene .Element.Exit {
     animation: exit 0.8s infinite;
 }
-.Application .GameUI > .Scene .Element.Look {
+.Application .InGameUI > .Scene .Element.Look {
     cursor: url(../../res/cursor/look.png) 12 12, default;
 }
-.Application .GameUI > .Scene .Element.Take {
+.Application .InGameUI > .Scene .Element.Take {
     animation: take 0.8s infinite;
 }
-.Application .GameUI > .Scene .Element.Talk {
+.Application .InGameUI > .Scene .Element.Talk {
     cursor: url(../../res/cursor/talk.png) 14 13, default;
 }
-.Application .GameUI > .Scene .Element.Use {
+.Application .InGameUI > .Scene .Element.Use {
     animation: use 0.5s infinite;
 }
-.Application .GameUI > .Scene .Element .Name {
+.Application .InGameUI > .Scene .Element .Name {
     display: block;
     font-weight: bold;
 }
-.Application .GameUI > .Scene .Element .Info {
+.Application .InGameUI > .Scene .Element .Info {
     display: block;
     font-style: italic;
     margin-top: -2px;
 }
 
-.Application .GameUI > .Log {
+.Application .InGameUI > .Log {
     grid-column-start: 2;
     grid-row-start: 2;
     border-left: 1px solid #000000;
@@ -204,32 +201,32 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
     scrollbar-color: #888 #fff;
     scrollbar-width: thin;
 }
-.Application .GameUI > .Log .Message {
+.Application .InGameUI > .Log .Message {
     margin-bottom: 10px;
     font-size: 0.8em;
     color: #888888;
 }
-.Application .GameUI > .Log .Message:hover {
+.Application .InGameUI > .Log .Message:hover {
     color: #000000;
 }
-.Application .GameUI > .Log .Message:first-child {
+.Application .InGameUI > .Log .Message:first-child {
     color: #000000;
     font-size: 0.9em;
     padding-bottom: 5px;
     border-bottom: 1px solid #000000;
 }
-.Application .GameUI > .Log .Message .Narrator {
+.Application .InGameUI > .Log .Message .Narrator {
     font-weight: bold;
 }
-.Application .GameUI > .Log .Message .Narrator::after {
+.Application .InGameUI > .Log .Message .Narrator::after {
     content: ":";
     margin-right: 10px;    
 }
-.Application .GameUI > .Log .Message .Text {
+.Application .InGameUI > .Log .Message .Text {
     font-family: sans-serif;    
 }
 
-.Application .GameUI > .Inventory {
+.Application .InGameUI > .Inventory {
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 3;
@@ -244,32 +241,32 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
     align-content: flex-start;
 
 }
-.Application .GameUI > .Inventory .Item {
+.Application .InGameUI > .Inventory .Item {
     box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
     font-size: 0.8em;
     padding: 2px 4px;
     font-weight: bold;
 }
 
-.Application .GameUI > .Scene .Element:hover,
-.Application .GameUI > .Inventory .Item:hover {
+.Application .InGameUI > .Scene .Element:hover,
+.Application .InGameUI > .Inventory .Item:hover {
     outline: 3px solid var(--HIGHLIGHT);
     box-shadow: none;
 }
-.Application .GameUI > .Scene .Element.Highlight,
-.Application .GameUI > .Inventory .Item.Highlight {
+.Application .InGameUI > .Scene .Element.Highlight,
+.Application .InGameUI > .Inventory .Item.Highlight {
     outline: 3px solid #ff0000;
     box-shadow: none;
 }
 
-.Application .GameUI > .Dialogue {
+.Application .InGameUI > .Dialogue {
 
     grid-column-start: 1;
     grid-row-start: 2;
     grid-column-end: 3;
 
     background-color: rgba(255, 255, 255, 0.5);
-} */
+}
 
 /*
 
@@ -302,7 +299,7 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
 
 .Application .Highlight {text-shadow: -1px 0 #ff0000, 0 1px #ff0000, 1px 0 #ff0000, 0 -1px #ff0000;}
 
-.Application>.Inventory {
+.Application .Inventory {
     position: relative;
     display: flex;
     width: calc(var(--APPWIDTH) - 20px); height: var(--INVENTORYHEIGHT);

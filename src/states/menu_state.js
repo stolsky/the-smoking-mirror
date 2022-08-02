@@ -23,11 +23,11 @@ const MenuState = class {
             .setSubTitle(getWord("GameSubTitle"))
             .setDisclaimer(getWord("menuDisclaimer"))
             .addButton(getWord("menuNewGame"), () => {
-                loadScript("paris1").then((script_data) => {
+                loadScript("paris1").then((script) => {
                     GameStates.pop();
-                    GameStates.push(new InGameState(script_data));
-                    if (hasProperty(script_data, "intro")) {
-                        GameStates.push(new GameIntroState(script_data.intro));
+                    GameStates.push(new InGameState(script, script.start));
+                    if (hasProperty(script, "intro")) {
+                        GameStates.push(new GameIntroState(script.intro));
                     }
                 });
             });

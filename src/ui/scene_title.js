@@ -1,7 +1,7 @@
 
 import TextComponent from "../../lib/JST/dom/text_component.js";
 
-import Wrapper from "../ui/wrapper.js";
+import Wrapper from "./wrapper.js";
 
 
 const SceneTitle = class extends Wrapper {

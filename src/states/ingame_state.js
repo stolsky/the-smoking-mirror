@@ -1,9 +1,12 @@
 
+import InGameUI from "../ui/ingame.js";
+import Act from "../am/act.js";
+import Scene from "../ui/scene.js";
+
+
 // import { hasProperty, isString } from "../lib/JST/native/type_check.js";
-// import { JSONLoader } from "../lib/JST/resource/loaders.js";
 // import * as Lang from "../lib/JST/resource/lang.js";
 
-// import { clear as clearUI, initGameUI, Inventory, Log, Menu, Overlay, Scene, setup as setupUI } from "./ui/ui.js";
 // import { COMBINATION, create as createAct, Heroes, Interaction, Scenes, TYPE } from "./am/am.js";
 
 // import Element from "./am/element.js";
@@ -181,47 +184,23 @@
 
 // };
 
-
-// // TODO move as much as you can to ingame_state enter
-// initGameUI(
-//     // TODO try to avoid this. make it kind of default behaviour or make it possible to ask/get this information from UI
-//     () => {
-//         if (Interaction.hasActiveCombination()) {
-//             clearCombination();
-//         }
-//     }
-// );
-
 const InGameState = class {
+
+    #act;
+
+    #scene;
 
     #toRender;
 
+    /** @type {InGameUI} */
     #wrapper;
 
-    constructor(script) {
+    constructor(script, start_scene) {
 
-        // createAct(script);
-        // loadScene(script.start);
+        this.#act = new Act(script);
+        // this.#scene = new Scene(start_scene);
 
-        Scene.init();
-        Log.init();
-        Inventory.init();
-        Dialogue.init();
-
-        this.#wrapper = new Container("GameUI");
-        this.#wrapper.addClass("Maximize");
-        this.#wrapper.append(
-            Scene.getTitle(),
-            Scene.getContainer(),
-            Log.getContainer(),
-            Dialogue.getContainer(),
-            Inventory.getContainer()
-        );
-
-        if (isFunction(listener)) {
-            this.#wrapper.addEventListener(EventType.mouseup, listener);
-        }
-
+        this.#wrapper = new InGameUI();
         this.#toRender = true;
     }
 
@@ -242,8 +221,15 @@ const InGameState = class {
 
     update() {
         // calculate animation
-        return this;
+        const input = this.#wrapper.getInputEvent();
+        if (input) {
+            // if (Interaction.hasActiveCombination()) {
+            //     clearCombination();
+            // }
+        }
     }
+
 };
+
 
 export default InGameState;

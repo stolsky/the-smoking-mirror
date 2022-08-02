@@ -23,7 +23,7 @@
         "no-console": "off",
         "import/extensions": ["error", "always"],
         "indent": ["error", 4],
-        "linebreak-style": ["error", "windows"],
+        "linebreak-style": ["error", "unix"],
         "max-len": "off",
         "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 0 }],
         "object-curly-newline": ["error", {"ObjectExpression": {"multiline": true}, "ImportDeclaration": {"multiline": true}}],

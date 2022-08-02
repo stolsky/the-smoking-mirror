@@ -2,6 +2,24 @@
 import { isString } from "../../lib/JST/native/type_check.js";
 
 
+// still necessary or completely redundant due to Scene class
+
+// loadScene = (id) => {
+
+//     Scenes.setCurrent(id);
+//     const scene = Scenes.getCurrent();
+//     const hero = Heroes.getCurrent();
+
+//     Scene.clear();
+//     Scene.setTitle(getWord(scene.getName()));
+
+//     renderObject(Scene, hero);
+
+//     Scenes.getCurrentElements().forEach((elem) => renderElement(elem));
+//     Heroes.getCurrentInventory().forEach((item) => renderObject(Inventory, item));
+
+// };
+
 const Scene = class {
 
     #id;

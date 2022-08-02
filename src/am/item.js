@@ -3,21 +3,20 @@ import BaseObject from "./base_object.js";
 
 const Item = class extends BaseObject {
 
-    constructor(id = "item", name = "Item", states = null, initState = 1) {
+    constructor(id = "item", name = "Item", states = null) {
         super(id, name, states);
 
-        this.updateState(initState);
+        this.updateState(1);
     }
 
     updateState(id) {
 
-        super.currentState = id;
-        const now = super.currentState;
+        const now = this.setCurrentState(id).getCurrentState();
         if (now) {
-            super.info = now.info;
-            super.name = now.name;
-            super.foreground = now.fore;
-            super.background = now.back;
+            this.setInformation(now.info)
+                .setName(now.name)
+                .setForeground(now.fore)
+                .setBackground(now.back);
         }
     }
 

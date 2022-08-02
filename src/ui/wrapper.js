@@ -24,6 +24,7 @@ const Wrapper = class {
 
     append(...components) {
         components.forEach((component) => this.addComponent(component));
+        return this;
     }
 
     clear() {

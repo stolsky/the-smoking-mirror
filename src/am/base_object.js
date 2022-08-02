@@ -9,8 +9,6 @@ const BaseObject = class {
 
     #current_state;
 
-    #explored;
-
     #info;
 
     #foreground;
@@ -23,7 +21,6 @@ const BaseObject = class {
 
         this.#id = (isString(id)) ? id : "obj";
         this.#current_state = null;
-        this.#explored = false;
 
         this.name = name;
         this.info = "";
@@ -37,82 +34,85 @@ const BaseObject = class {
         return this.#id;
     }
 
-    set name(name) {
+    setName(name) {
         if (isString(name)) {
             this.#name = name;
         }
+        return this;
     }
 
-    get name() {
+    getName() {
         return this.#name;
     }
 
-    set info(info) {
+    setInformation(info) {
         if (isString(info, true)) {
             this.#info = info;
         }
+        return this;
     }
 
-    get info() {
+    getInformation() {
         return this.#info;
     }
 
-    set foreground(color) {
+    setForeground(color) {
         if (isString(color)) {
             this.#foreground = color;
         }
+        return this;
     }
 
-    get foreground() {
+    getForeground() {
         return this.#foreground;
     }
 
-    set background(color) {
+    setBackground(color) {
         if (isString(color)) {
             this.#background = color;
         }
+        return this;
     }
 
-    get background() {
+    getBackground() {
         return this.#background;
     }
 
     /** @param {{foreground: string, background: string}} colors */
-    set colors(colors = {}) {
+    setColors(colors = {}) {
         if (hasProperty(colors, "foreground") && isString(colors.foreground)) {
             this.#foreground = colors.foreground;
         }
         if (hasProperty(colors, "background") && isString(colors.background)) {
             this.#background = colors.background;
         }
+        return this;
     }
 
-    get colors() {
+    getColors() {
         return { foreground: this.#foreground, background: this.#background };
     }
 
     /** @param {Array<Object>} states */
-    set states(states) {
+    setStates(states) {
         if (states instanceof Array) {
             this.#states = states.map((state) => ({ ...state, ...{ leftIndex: 0, rightIndex: 0 } }));
         }
+        return this;
     }
 
-    get states() {
+    getStates() {
         return this.#states;
     }
 
-    set currentState(id) {
+    setCurrentState(id) {
         if (isNumber(id) && this.#states instanceof Array) {
-            if (id === 0) {
-                this.#current_state = null;
-            } else {
-                this.#current_state = this.#states.find((state) => state.id === id);
-            }
+            this.#current_state = this.#states.find((state) => state.id === id) ?? null;
         }
+        return this;
     }
 
-    get currentState() {
+    getCurrentState() {
         return this.#current_state;
     }
 
@@ -158,10 +158,6 @@ const BaseObject = class {
 
     getCombinations() {
         return (this.#current_state && hasProperty(this.#current_state, "comb")) ? this.#current_state.comb : null;
-    }
-
-    isExlored() {
-        return this.#explored;
     }
 
 };

@@ -10,58 +10,61 @@ const Element = class extends BaseObject {
 
     #visible;
 
-    constructor(id = "elem", name = "Element", states = null, initState = 1) {
+    constructor(id = "elem", name = "Element", states = null) {
 
         super(id, name, states);
 
-        this.type = "Look";
-        this.moveable = false;
-        this.visible = true;
+        this.#type = "Look";
+        this.#moveable = false;
+        this.#visible = true;
 
-        this.updateState(initState);
+        this.updateState(1);
     }
 
-    set type(type) {
+    setType(type) {
         if (isString(type)) {
             this.#type = type;
         }
+        return this;
     }
 
-    get type() {
+    getType() {
         return this.#type;
     }
 
-    set visible(bool) {
+    setVisible(bool) {
         if (isBoolean(bool)) {
             this.#visible = bool;
         }
+        return this;
     }
 
-    get visible() {
+    getVisible() {
         return this.#visible;
     }
 
-    set moveable(bool) {
+    setMoveable(bool) {
         if (isBoolean(bool)) {
             this.#moveable = bool;
         }
+        return this;
     }
 
-    get moveable() {
+    getMoveable() {
         return this.#moveable;
     }
 
     updateState(id) {
-        super.currentState = id;
-        const now = super.currentState;
+
+        const now = this.setCurrentState(id).getCurrentState();
         if (now) {
-            this.type = now.type;
-            super.info = now.info;
-            super.name = now.name;
-            super.foreground = now.fore;
-            super.background = now.back;
-            this.moveable = now.moveable;
-            this.visible = now.visible;
+            this.setType(now.type)
+                .setInformation(now.info)
+                .setName(now.name)
+                .setForeground(now.fore)
+                .setBackground(now.back)
+                .setMoveable(now.moveable)
+                .setVisible(now.visible);
         }
     }
 

@@ -11,27 +11,34 @@ import SetupState from "./states/setup_state.js";
 
 let ctx = null;
 
+const TIME_FRAME = 100;
+let time_elapsed = 0;
+
 const game_loop = (dt) => {
 
-    console.log(dt);
+    time_elapsed = time_elapsed + dt;
 
-    GameStates.update(dt);
-    GameStates.render(ctx);
+    if (time_elapsed > TIME_FRAME) {
 
-    if (GameStates.isEmpty()) {
-        Tick.stop();
-        throw new Error("The game states stack is empty.");
+        GameStates.update(dt);
+        GameStates.render(ctx);
+
+        if (GameStates.isEmpty()) {
+            Tick.stop();
+            throw new Error("The game states stack is empty.");
+        }
+
+        time_elapsed = 0;
     }
+
 };
 
 const create_application = () => {
 
-    const GAME_TITLE = Lang.getWord("GameTitle");
-
-    Application.setTitle(GAME_TITLE);
+    Application.setTitle(Lang.getWord("GameTitle"));
     Application.setContextMenuEnabled(false);
 
-    const app = new Application(GAME_TITLE);
+    const app = new Application();
     app.addClass("Center");
     ctx = app.getRootPane(); //getDefaultRendererContext();
 

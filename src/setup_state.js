@@ -6,19 +6,15 @@ import * as MenuState from "./menu_state.js";
 let ready = false;
 
 const enter = () => {
-    // load resources
+
     ready = true;
 };
 
-const exit = () => {
+const exit = () => true;
 
-};
+const render = () => true;
 
-const renderer = (ctx) => {
-
-};
-
-const update = (dt) => {
+const update = () => {
     if (ready) {
         GameStates.pop();
         GameStates.push(MenuState);
@@ -29,6 +25,6 @@ const update = (dt) => {
 export {
     enter,
     exit,
-    renderer,
+    render,
     update
 };

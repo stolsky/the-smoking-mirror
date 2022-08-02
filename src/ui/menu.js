@@ -3,11 +3,10 @@ import Container from "../../lib/JST/dom/container.js";
 import TextComponent from "../../lib/JST/dom/text_component.js";
 import TextButton from "../../lib/JST/dom/text_button.js";
 
+import Wrapper from "./wrapper.js";
 
-const Menu = class {
 
-    /** @type {Container} */
-    #wrapper = null;
+const Menu = class extends Wrapper {
 
     /** @type {TextComponent} */
     #title = null;
@@ -29,17 +28,16 @@ const Menu = class {
 
     constructor() {
 
-        this.#wrapper = new Container("Menu");
-        this.#wrapper.addClass("Center");
+        super("Menu Center");
 
-        this.#title = new TextComponent("Title");
-        this.#subtitle = new TextComponent("SubTitle");
+        this.#title = new TextComponent(null, "Title");
+        this.#subtitle = new TextComponent(null, "SubTitle");
 
         this.#buttons = new Container("ButtonBox");
 
-        this.#disclaimer = new TextComponent("Disclaimer");
+        this.#disclaimer = new TextComponent(null, "Disclaimer");
 
-        this.#wrapper.append(
+        this.append(
             new Container("TitleBox").append(this.#title, this.#subtitle),
             this.#buttons,
             this.#disclaimer
@@ -49,30 +47,24 @@ const Menu = class {
 
     setTitle(val) {
         Menu.#setTextComponentText(this.#title, val);
+        return this;
     }
 
     setSubTitle(val) {
         Menu.#setTextComponentText(this.#subtitle, val);
+        return this;
     }
 
     addButton(text, action) {
         if (this.#buttons instanceof Container) {
             this.#buttons.addComponent(new TextButton(text, action));
         }
-    }
-
-    clearButtons() {
-        if (this.#buttons instanceof Container) {
-            this.#buttons.clear();
-        }
+        return this;
     }
 
     setDisclaimer(val) {
         Menu.#setTextComponentText(this.#disclaimer, val);
-    }
-
-    getContainer() {
-        return this.#wrapper;
+        return this;
     }
 
 };

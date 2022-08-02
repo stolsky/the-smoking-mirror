@@ -5,13 +5,15 @@ import Application from "../lib/JST/dom/application.js";
 import * as Lang from "../lib/JST/resource/lang.js";
 //import { getDefaultRendererContext } from "../lib/JST/";
 
-import GameStates from "./game_states.js";
-import * as SetupState from "./setup_state.js";
+import GameStates from "./states/game_states.js";
+import SetupState from "./states/setup_state.js";
 
 
 let ctx = null;
 
 const game_loop = (dt) => {
+
+    console.log(dt);
 
     GameStates.update(dt);
     GameStates.render(ctx);
@@ -34,7 +36,7 @@ const create_application = () => {
     ctx = app.getRootPane(); //getDefaultRendererContext();
 
     // push initial state(s) to gameStates
-    GameStates.push(SetupState);
+    GameStates.push(new SetupState());
 
     Tick.start(game_loop);
 };

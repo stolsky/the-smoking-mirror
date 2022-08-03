@@ -1,68 +1,71 @@
 
-import { hasProperty, isFunction } from "../../lib/JST/native/type_check.js";
+import { isNotEmptyString } from "../../lib/JST/native/type_check.js";
 import Cache from "../../lib/JST/resource/cache.js";
 
-import List from "./list.js";
+import { loadItems, loadScenes } from "../states/resource_loader.js";
+import { parseDialogs, parseFlags, parseHeroes, parseItems, parseScenes } from "../states/resource_parser.js";
 
-
-// /**
-//  * @param {Object} data
-//  * @param {string} prop
-//  * @param {Function} create
-//  */
-//  const createFromData = (data, prop, create) => {
-//     if (hasProperty(data, prop) && data[prop] instanceof Array) {
-//         data[prop].forEach((obj) => {
-
-//             if (hasProperty(obj, "id") && !cache.hasItem(obj.id) && isFunction(create)) {
-
-//                 const newObj = create(obj);
-
-//                 if (newObj && newObj.getId instanceof Function) {
-//                     cache.setItem(newObj.getId(), newObj);
-//                 }
-
-//             }
-//         });
-//     }
-// };
 
 const Act = class {
 
     #name;
 
+    #flags;
+
     #elements;
 
-    #heroes;
+    #dialogs;
 
-    #scenes;
+    #activeHero;
 
-    /** @param {{}} act_data */
-    #parseActData = (act_data) => {
+    #currentScene;
 
-    };
+    /** @param {{name: string, flags: {}, heroes: {}, scenes: {}}} script */
+    constructor(script) {
 
-    /** @param {{}} act_data */
-    constructor(act_data) {
+        this.#name = script.name;
 
-        this.#name = act_data.name;
+        this.#flags = parseFlags(script.flags.split(","));
 
         this.#elements = new Cache();
-        this.#heroes = new List();
-        this.#scenes = new List();
+        this.#elements.append(parseHeroes(script.heroes));
+        Promise.all([loadItems(), loadScenes(script.scenes.split(","))]).then((result) => {
+            this.#elements.append(parseItems(result[0]));
+            this.#elements.append(parseScenes(result[1]));
+        });
 
-        createFromData(act_data, "heroes", (dataObj) => Heroes.create(dataObj));
-        createFromData(act_data, "items", (dataObj) => createItem(dataObj));
-        createFromData(act_data, "scenes", (dataObj) => Scenes.create(dataObj));
-
-        if (hasProperty(act_data, "active")) {
-            this.#heroes.setActive(act_data.active);
-        }
+        this.#dialogs = parseDialogs(script.dialogs);
 
     }
 
     getName() {
         return this.#name;
+    }
+
+    loadScene(sceneID) {
+
+        if (isNotEmptyString(sceneID)) {
+            this.#currentScene = sceneID;
+        }
+
+        //     Scenes.setCurrent(id);
+        //     const scene = Scenes.getCurrent();
+        //     const hero = Heroes.getCurrent();
+
+        //     Scene.clear();
+        //     Scene.setTitle(getWord(scene.getName()));
+
+        //     renderObject(Scene, hero);
+
+        //     Scenes.getCurrentElements().forEach((elem) => renderElement(elem));
+        //     Heroes.getCurrentInventory().forEach((item) => renderObject(Inventory, item));
+
+    }
+
+    setActiveHero(heroID) {
+        if (isNotEmptyString(heroID)) {
+            this.#activeHero = heroID;
+        }
     }
 
 };

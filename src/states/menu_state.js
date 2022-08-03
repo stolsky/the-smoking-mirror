@@ -6,7 +6,8 @@ import GameStates from "./game_states.js";
 import LoadGameState from "./load_game_state.js";
 import InGameState from "./ingame_state.js";
 import GameIntroState from "./game_intro_state.js";
-import { getWord, hasSaveGame, loadScript } from "./load_scripts.js";
+import { hasSaveGame, loadActScript } from "./resource_loader.js";
+import getWord from "./translate.js";
 
 
 const MenuState = class {
@@ -23,9 +24,9 @@ const MenuState = class {
             .setSubTitle(getWord("GameSubTitle"))
             .setDisclaimer(getWord("menuDisclaimer"))
             .addButton(getWord("menuNewGame"), () => {
-                loadScript("paris1").then((script) => {
+                loadActScript("paris1").then((script) => {
                     GameStates.pop();
-                    GameStates.push(new InGameState(script, script.start));
+                    GameStates.push(new InGameState(script, { start: script.start, hero: script.active }));
                     if (hasProperty(script, "intro")) {
                         GameStates.push(new GameIntroState(script.intro));
                     }
@@ -53,7 +54,7 @@ const MenuState = class {
 
     render(ctx) {
         if (this.#toRender) {
-            ctx.addComponent(this.#wrapper.getContainer());
+            this.#wrapper.render(ctx);
             this.#toRender = false;
         }
     }

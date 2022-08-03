@@ -4,10 +4,10 @@ import Container from "../../lib/JST/dom/container.js";
 import Wrapper from "./wrapper.js";
 
 
-const Dialogue = class extends Wrapper {
+const Dialog = class extends Wrapper {
 
     /** @type {Container} */
-    #dialogue;
+    #dialog;
 
     /** @type {Container} */
     #topics;
@@ -20,24 +20,26 @@ const Dialogue = class extends Wrapper {
 
     constructor() {
 
-        super("Dialogue");
+        super("Dialog");
 
-        this.#dialogue = new Container("Box");
+        this.#dialog = new Container("Box");
         this.#topics = new Container("Topics");
 
         this.append(
-            this.#dialogue,
+            this.#dialog,
             this.#topics
         );
 
     }
 
     addMessage(name, text, type) {
-        //this.#dialogue.addComponent();
+        //this.#dialog.addComponent();
         return this;
     }
+
+    // TODO set action to show next part of dialog -> time delay or mouse/key event
 
 };
 
 
-export default Dialogue;
+export default Dialog;

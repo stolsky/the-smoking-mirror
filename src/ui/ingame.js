@@ -4,7 +4,7 @@ import Scene from "./scene.js";
 import SceneTitle from "./scene_title.js";
 import Log from "./log.js";
 import Inventory from "./inventory.js";
-import Dialogue from "./dialogue.js";
+import Dialog from "./dialog.js";
 
 
 const InGameUI = class extends Wrapper {
@@ -22,7 +22,7 @@ const InGameUI = class extends Wrapper {
     #inventory;
 
     /** @type {Wrapper} */
-    #dialogue;
+    #dialog;
 
     #event;
 
@@ -36,14 +36,14 @@ const InGameUI = class extends Wrapper {
         this.#sceneTitle = new SceneTitle();
         this.#log = new Log();
         this.#inventory = new Inventory();
-        this.#dialogue = new Dialogue();
+        this.#dialog = new Dialog();
 
         this.append(
             this.#scene.getContainer(),
             this.#sceneTitle.getContainer(),
             this.#log.getContainer(),
             this.#inventory.getContainer(),
-            this.#dialogue.getContainer().hide()
+            this.#dialog.getContainer().hide()
         )
             .addAction((event) => {
                 this.#event[0] = event;

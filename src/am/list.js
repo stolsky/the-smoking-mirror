@@ -6,36 +6,31 @@ const List = class {
 
     #elements;
 
-    #active;
-
     #hasElement = (id) => isNotEmptyString(id) && this.#elements.includes(id);
 
     constructor() {
         this.#elements = [];
-        this.#active = null;
     }
 
     /** @param {string} id */
     add(id) {
-        if (isNotEmptyString(id) && !this.#hasElement(id)) {
+        if (!this.#hasElement(id)) {
             this.#elements.push(id);
         }
+        return this;
     }
 
-    /** @param {string} id */
-    setActive(id) {
+    remove(id) {
         if (this.#hasElement(id)) {
-            this.#active = id;
+            const index = this.#elements.indexOf(id);
+            this.#elements.splice(index, 1);
         }
-    }
-
-    getActive() {
-        return this.#active;
+        return this;
     }
 
     clear() {
-        this.#active = null;
         this.#elements = [];
+        return this;
     }
 
 };

@@ -1,7 +1,6 @@
 
 import InGameUI from "../ui/ingame.js";
 import Act from "../am/act.js";
-import Scene from "../ui/scene.js";
 
 
 // import { hasProperty, isString } from "../lib/JST/native/type_check.js";
@@ -168,37 +167,24 @@ import Scene from "../ui/scene.js";
 
 // };
 
-// loadScene = (id) => {
-
-//     Scenes.setCurrent(id);
-//     const scene = Scenes.getCurrent();
-//     const hero = Heroes.getCurrent();
-
-//     Scene.clear();
-//     Scene.setTitle(getWord(scene.getName()));
-
-//     renderObject(Scene, hero);
-
-//     Scenes.getCurrentElements().forEach((elem) => renderElement(elem));
-//     Heroes.getCurrentInventory().forEach((item) => renderObject(Inventory, item));
-
-// };
-
 const InGameState = class {
 
-    #act;
-
-    #scene;
+    #currentAct;
 
     #toRender;
 
     /** @type {InGameUI} */
     #wrapper;
 
-    constructor(script, start_scene) {
+    /**
+     * @param {} script
+     * @param {{start: string, hero: string}} options loading parameters
+     */
+    constructor(script, options) {
 
-        this.#act = new Act(script);
-        // this.#scene = new Scene(start_scene);
+        this.#currentAct = new Act(script);
+        this.#currentAct.loadScene(options.start);
+        this.#currentAct.setActiveHero(options.hero);
 
         this.#wrapper = new InGameUI();
         this.#toRender = true;
@@ -214,7 +200,7 @@ const InGameState = class {
 
     render(ctx) {
         if (this.#toRender) {
-            ctx.addComponent(this.#wrapper.getContainer());
+            this.#wrapper.render(ctx);
             this.#toRender = false;
         }
     }

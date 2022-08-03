@@ -1,7 +1,7 @@
 
 import GameStates from "./game_states.js";
 import Intro from "../ui/intro.js";
-import { getWord } from "./load_scripts.js";
+import getWord from "./translate.js";
 
 
 const GameIntroState = class {
@@ -44,7 +44,7 @@ const GameIntroState = class {
     /** @param {Container} ctx */
     render(ctx) {
         if (this.#toRender) {
-            ctx.addComponent(this.#wrapper.getContainer());
+            this.#wrapper.render(ctx);
             this.#toRender = false;
         }
     }

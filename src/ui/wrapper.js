@@ -41,8 +41,15 @@ const Wrapper = class {
         return this;
     }
 
+    /** @param {} renderer */
+    render(renderer) {
+        renderer.addComponent(this.#wrapper);
+        return this;
+    }
+
     replaceComponent(newComponent, oldComponent) {
         this.#wrapper.replaceComponent(newComponent, oldComponent);
+        return this;
     }
 
 };

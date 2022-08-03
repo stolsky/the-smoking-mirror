@@ -259,7 +259,7 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
     box-shadow: none;
 }
 
-.Application .InGameUI > .Dialogue {
+.Application .InGameUI > .Dialog {
 
     grid-column-start: 1;
     grid-row-start: 2;

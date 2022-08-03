@@ -1,71 +1,69 @@
 
-import { isNotEmptyString } from "../../lib/JST/native/type_check.js";
-import Cache from "../../lib/JST/resource/cache.js";
-
-import { loadItems, loadScenes } from "../states/resource_loader.js";
-import { parseDialogs, parseFlags, parseHeroes, parseItems, parseScenes } from "../states/resource_parser.js";
-
-
 const Act = class {
 
     #name;
 
-    #flags;
-
     #elements;
 
-    #dialogs;
-
+    /** @type {Hero} */
     #activeHero;
 
+    /** @type {Scene} */
     #currentScene;
 
-    /** @param {{name: string, flags: {}, heroes: {}, scenes: {}}} script */
-    constructor(script) {
+    /**
+     * @param {string} name
+     * @param {Cache} elements
+     */
+    constructor(name, elements = null) {
+        this.#name = name;
+        this.#elements = elements;
+    }
 
-        this.#name = script.name;
-
-        this.#flags = parseFlags(script.flags.split(","));
-
-        this.#elements = new Cache();
-        this.#elements.append(parseHeroes(script.heroes));
-        Promise.all([loadItems(), loadScenes(script.scenes.split(","))]).then((result) => {
-            this.#elements.append(parseItems(result[0]));
-            this.#elements.append(parseScenes(result[1]));
-        });
-
-        this.#dialogs = parseDialogs(script.dialogs);
-
+    /** @returns {Scene} */
+    getCurrentScene() {
+        return this.#currentScene;
     }
 
     getName() {
         return this.#name;
     }
 
-    loadScene(sceneID) {
+    /** @returns {Array<{id: string, name: string, type: string, foreground: string, background: string, information: string, moveable: boolean, visible: boolean}>} */
+    getAllElements() {
+        const elements = [];
+        this.#currentScene.getAllElements().forEach((id) => {
 
-        if (isNotEmptyString(sceneID)) {
-            this.#currentScene = sceneID;
-        }
+            /** @type {Element} */
+            const element = this.#elements.getItem(id);
 
-        //     Scenes.setCurrent(id);
-        //     const scene = Scenes.getCurrent();
-        //     const hero = Heroes.getCurrent();
+            elements.push({
+                id: element.getId(),
+                name: element.getName(),
+                type: element.getType(),
+                foreground: element.getForeground(),
+                background: element.getBackground(),
+                information: element.getInformation(),
+                moveable: element.isMoveable(),
+                visible: element.isVisible()
+            });
 
-        //     Scene.clear();
-        //     Scene.setTitle(getWord(scene.getName()));
-
-        //     renderObject(Scene, hero);
-
-        //     Scenes.getCurrentElements().forEach((elem) => renderElement(elem));
-        //     Heroes.getCurrentInventory().forEach((item) => renderObject(Inventory, item));
-
+        });
+        return elements;
     }
 
-    setActiveHero(heroID) {
-        if (isNotEmptyString(heroID)) {
-            this.#activeHero = heroID;
+    loadScene(id) {
+        if (this.#elements.hasItem(id)) {
+            this.#currentScene = this.#elements.getItem(id);
         }
+        return this;
+    }
+
+    setActiveHero(id) {
+        if (this.#elements.hasItem(id)) {
+            this.#activeHero = this.#elements.getItem(id);
+        }
+        return this;
     }
 
 };

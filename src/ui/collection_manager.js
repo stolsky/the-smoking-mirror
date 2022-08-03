@@ -19,6 +19,34 @@ const CollectionManager = class extends Wrapper {
         this.#elements = {};
     }
 
+    clear() {
+        this.#elements = {};
+        super.clear();
+    }
+
+    highlightElement(id) {
+        if (this.#hasElement(id)) {
+            this.#elements[`${id}`].addClass(HIGHLIGHT);
+        }
+    }
+
+    remove(id) {
+        if (this.#hasElement(id)) {
+            this.#elements[`${id}`].remove();
+            delete this.#elements[`${id}`];
+        }
+    }
+
+    removeHighlights() {
+        Object.values(this.#elements).forEach((item) => item.removeClass(HIGHLIGHT));
+    }
+
+    renderAllElements(elements) {
+        if (elements instanceof Array) {
+            elements.forEach((element) => this.renderElement(element.id, element));
+        }
+    }
+
     /**
      * @param {string} id
      * @param {{visible: boolean, type: string, name: string, info: string, foreground: string, background: string, action: Function}} properties
@@ -26,7 +54,7 @@ const CollectionManager = class extends Wrapper {
     renderElement(id, properties) {
         if (isNotEmptyString(id)) {
 
-            const elem = new Container("Item");
+            const elem = new Container("Element");
 
             if (this.#hasElement(id)) {
                 this.replaceComponent(elem, this.#elements[`${id}`]);
@@ -66,28 +94,6 @@ const CollectionManager = class extends Wrapper {
 
             this.#elements[`${id}`] = elem;
         }
-    }
-
-    highlightElement(id) {
-        if (this.#hasElement(id)) {
-            this.#elements[`${id}`].addClass(HIGHLIGHT);
-        }
-    }
-
-    removeHighlights() {
-        Object.values(this.#elements).forEach((item) => item.removeClass(HIGHLIGHT));
-    }
-
-    remove(id) {
-        if (this.#hasElement(id)) {
-            this.#elements[`${id}`].remove();
-            delete this.#elements[`${id}`];
-        }
-    }
-
-    clear() {
-        this.#elements = {};
-        super.clear();
     }
 
 };

@@ -1,13 +1,13 @@
 
-import { hasProperty } from "../../lib/JST/native/type_check.js";
-import Cache from "../../lib/JST/resource/cache.js";
+import { hasProperty } from "../lib/JST/native/type_check.js";
+import Cache from "../lib/JST/resource/cache.js";
 
-import Dialog from "../am/dialog.js";
-import Element from "../am/element.js";
-import Flag from "../am/flag.js";
-import Hero from "../am/hero.js";
-import Item from "../am/item.js";
-import Scene from "../am/scene.js";
+import Dialog from "./am/dialog.js";
+import Element from "./am/element.js";
+import Flag from "./am/flag.js";
+import Hero from "./am/hero.js";
+import Item from "./am/item.js";
+import Scene from "./am/scene.js";
 
 
 /** @returns {Cache} */
@@ -28,21 +28,12 @@ const parseResource = (source, method) => {
     return cache;
 };
 
-const parseDialogs = (source) => parseResource(source, (dialog) => ({ key: dialog.id, value: new Dialog(dialog) }));
+const parseDialogs = (source) => parseResource(source, (dialog) => ({ key: dialog.id, value: new Dialog(dialog.id, dialog.states) }));
 
 const parseFlags = (source) => parseResource(source, (flag) => {
-    const [name, type] = flag.split(":");
-    let init = null;
-    if (type === "boolean") {
-        init = false;
-    } else if (type === "number") {
-        init = 0;
-    } else if (type === "string") {
-        init = "";
-    }
-    return { key: name, value: new Flag(type, init) };
+    const [id, type, value] = flag.split(":");
+    return { key: id, value: new Flag(id, type, value) };
 });
-
 
 const parseHeroes = (source) => parseResource(source, (hero) => ({ key: hero.id, value: new Hero(hero) }));
 
@@ -72,6 +63,10 @@ const parseScenes = (source) => {
                 elementsIDs = scene.elems.map((element) => element.id);
             }
             temporyCache.append(parseElements(scene.elems));
+        }
+
+        if (hasProperty(scene, "dialogs")) {
+            temporyCache.append(parseDialogs(scene.dialogs));
         }
 
         if (hasProperty(scene, "id") && hasProperty(scene, "name")) {

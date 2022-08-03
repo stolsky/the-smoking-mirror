@@ -1,7 +1,7 @@
 
 import GameStates from "./game_states.js";
 import Intro from "../ui/intro.js";
-import getWord from "./translate.js";
+import getWord from "../translate.js";
 
 
 const GameIntroState = class {

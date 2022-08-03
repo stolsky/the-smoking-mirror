@@ -22,11 +22,11 @@ const BaseObject = class {
         this.#id = (isString(id)) ? id : "obj";
         this.#current_state = null;
 
-        this.name = name;
-        this.info = "";
-        this.foreground = "0,0,0";
-        this.background = "255,255,255";
-        this.states = states;
+        this.#name = name;
+        this.#info = "";
+        this.#foreground = "0,0,0";
+        this.#background = "255,255,255";
+        this.#states = states;
 
     }
 

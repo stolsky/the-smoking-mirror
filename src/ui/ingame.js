@@ -1,15 +1,14 @@
 
 import Wrapper from "./wrapper.js";
-import Scene from "./scene.js";
 import SceneTitle from "./scene_title.js";
 import Log from "./log.js";
-import Inventory from "./inventory.js";
 import Dialog from "./dialog.js";
+import CollectionManager from "./collection_manager.js";
 
 
 const InGameUI = class extends Wrapper {
 
-    /** @type {Wrapper} */
+    /** @type {CollectionManager} */
     #scene;
 
     /** @type {Wrapper} */
@@ -18,7 +17,7 @@ const InGameUI = class extends Wrapper {
     /** @type {Wrapper} */
     #log;
 
-    /** @type {Wrapper} */
+    /** @type {CollectionManager} */
     #inventory;
 
     /** @type {Wrapper} */
@@ -32,10 +31,10 @@ const InGameUI = class extends Wrapper {
 
         this.#event = [];
 
-        this.#scene = new Scene();
+        this.#scene = new CollectionManager("Scene");
         this.#sceneTitle = new SceneTitle();
         this.#log = new Log();
-        this.#inventory = new Inventory();
+        this.#inventory = new CollectionManager("Inventory");
         this.#dialog = new Dialog();
 
         this.append(
@@ -51,10 +50,29 @@ const InGameUI = class extends Wrapper {
 
     }
 
+    addInventory() {
+
+        return this;
+    }
+
+    addSceneElements(elements) {
+        this.#scene.renderAllElements(elements);
+        return this;
+    }
+
     getInputEvent() {
         return this.#event.pop();
     }
 
+    setLog() {
+
+        return this;
+    }
+
+    setSceneTitle(title) {
+        this.#sceneTitle.setTitle(title);
+        return this;
+    }
 };
 
 

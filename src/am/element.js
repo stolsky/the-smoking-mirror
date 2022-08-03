@@ -39,7 +39,7 @@ const Element = class extends BaseObject {
         return this;
     }
 
-    getVisible() {
+    isVisible() {
         return this.#visible;
     }
 
@@ -50,7 +50,7 @@ const Element = class extends BaseObject {
         return this;
     }
 
-    getMoveable() {
+    isMoveable() {
         return this.#moveable;
     }
 

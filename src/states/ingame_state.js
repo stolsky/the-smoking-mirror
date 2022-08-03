@@ -1,6 +1,7 @@
 
 import InGameUI from "../ui/ingame.js";
 import Act from "../am/act.js";
+import getWord from "../translate.js";
 
 
 // import { hasProperty, isString } from "../lib/JST/native/type_check.js";
@@ -167,6 +168,20 @@ import Act from "../am/act.js";
 
 // };
 
+//     Act.loadScene(id);
+
+//     const scene = Scenes.getCurrent();
+//     const hero = Heroes.getCurrent();
+
+//     Scene.clear();
+//     Scene.setTitle(getWord(scene.getName()));
+
+//     renderObject(Scene, hero);
+
+//     Scenes.getCurrentElements().forEach((elem) => renderElement(elem));
+//     Heroes.getCurrentInventory().forEach((item) => renderObject(Inventory, item));
+
+
 const InGameState = class {
 
     #currentAct;
@@ -177,16 +192,20 @@ const InGameState = class {
     #wrapper;
 
     /**
-     * @param {} script
-     * @param {{start: string, hero: string}} options loading parameters
+     * @param {{name: string, start: string, hero: string, elements: Cache}} properties
      */
-    constructor(script, options) {
+    constructor(properties) {
 
-        this.#currentAct = new Act(script);
-        this.#currentAct.loadScene(options.start);
-        this.#currentAct.setActiveHero(options.hero);
+        this.#currentAct = new Act(properties.name, properties.elements)
+            .loadScene(properties.start)
+            .setActiveHero(properties.hero);
 
-        this.#wrapper = new InGameUI();
+        this.#wrapper = new InGameUI()
+            .setSceneTitle(getWord(this.#currentAct.getCurrentScene().getName()))
+            .addSceneElements(this.#currentAct.getAllElements())
+            .addInventory()
+            .setLog();
+
         this.#toRender = true;
     }
 

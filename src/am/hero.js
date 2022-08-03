@@ -1,6 +1,6 @@
 
 import Element from "./element.js";
-import Inventory from "./inventory.js";
+import StringList from "./string_list.js";
 
 
 const Hero = class extends Element {
@@ -11,7 +11,7 @@ const Hero = class extends Element {
 
         super(id, name, states);
 
-        this.#inventory = new Inventory(items);
+        this.#inventory = new StringList(items);
     }
 
     /** @returns {Inventory} */

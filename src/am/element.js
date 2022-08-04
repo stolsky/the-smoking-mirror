@@ -1,5 +1,5 @@
-import { isBoolean, isString } from "../../lib/JST/native/type_check.js";
-import BaseObject from "./base_object.js";
+import { isBoolean, isString } from "../../lib/JST/native/typeCheck.js";
+import BaseObject from "./BaseObject.js";
 
 
 const Element = class extends BaseObject {

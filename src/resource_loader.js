@@ -1,7 +1,7 @@
 
-import { isNotEmptyString } from "../lib/JST/native/type_check.js";
+import { isNotEmptyString } from "../lib/JST/native/typeCheck.js";
 import { loadJSON } from "../lib/JST/resource/loaders.js";
-import { getCurrentLanguage } from "../lib/JST/resource/lang.js";
+import { getCurrentLanguage } from "../lib/JST/resource/Lang.js";
 
 import { setDictionary } from "./translate.js";
 

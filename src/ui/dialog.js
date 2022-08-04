@@ -1,7 +1,7 @@
 
-import Container from "../../lib/JST/dom/container.js";
+import Container from "../../lib/JST/dom/Container.js";
 
-import Wrapper from "./wrapper.js";
+import Wrapper from "./Wrapper.js";
 
 
 const Dialog = class extends Wrapper {

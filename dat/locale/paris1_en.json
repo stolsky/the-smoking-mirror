@@ -1,7 +1,8 @@
 {
     "paris1Name": "Paris",
     "paris1Prolog": "This must be the place - Professor Oubier's house. Looks pretty creepy...!;I'd been away from Paris and hadn't seen Nico for nearly six months. I wanted to celebrate our reunion, but she had other plans. An appointment with an archaeologist...;Something to do with a Mayan stone she came across while researching a story. I didn't argue. We'd done enough of that before we'd split up.;The guy who answered the door didn't look much like an archaeologist to me. I had a bad feeling about this...",
-            
+    "paris1NewGame": "TODO describe scene if new game",
+
     "paris1Scene01": "Oubier's Room",
     "paris1Spider01": "Spider",
     "paris1Spider02": "I tried to stamp the spider to death, but it evaded with ease... It looked more furious now.",

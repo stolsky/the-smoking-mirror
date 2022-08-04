@@ -1,9 +1,9 @@
 
-import Container from "../../lib/JST/dom/container.js";
-import TextComponent from "../../lib/JST/dom/text_component.js";
-import TextButton from "../../lib/JST/dom/text_button.js";
+import Container from "../../lib/JST/dom/Container.js";
+import TextComponent from "../../lib/JST/dom/TextComponent.js";
+import TextButton from "../../lib/JST/dom/TextButton.js";
 
-import Wrapper from "./wrapper.js";
+import Wrapper from "./Wrapper.js";
 
 
 const Menu = class extends Wrapper {

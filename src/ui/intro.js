@@ -1,8 +1,8 @@
 
-import Container from "../../lib/JST/dom/container.js";
-import TextComponent from "../../lib/JST/dom/text_component.js";
+import Container from "../../lib/JST/dom/Container.js";
+import TextComponent from "../../lib/JST/dom/TextComponent.js";
 
-import Wrapper from "./wrapper.js";
+import Wrapper from "./Wrapper.js";
 
 
 const Intro = class extends Wrapper {
@@ -18,16 +18,18 @@ const Intro = class extends Wrapper {
 
     constructor() {
 
-        super("Intro Center");
+        super("ActIntro Maximize");
 
         this.#title_container = new TextComponent(null, "Title");
         this.#text_container = new Container("Text");
         this.#hint_container = new TextComponent(null, "Hint");
 
-        this.append(
-            this.#title_container,
-            this.#text_container,
-            this.#hint_container
+        this.addComponent(
+            new Container("Page Center").append(
+                this.#title_container,
+                this.#text_container,
+                this.#hint_container
+            )
         );
     }
 

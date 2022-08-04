@@ -1,0 +1,32 @@
+
+.Application .ActIntro {
+    height: 90%;
+}
+
+.Application .ActIntro .Page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: normal;
+    gap: 50px;
+}
+
+.Application .ActIntro .Page .Title {
+    font-size: 2em;
+}
+
+.Application .ActIntro .Page .Text {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.Application .ActIntro .Page .Text span {
+    text-align: justify;
+}
+
+.Application .ActIntro .Page .Hint {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 90%;
+    font-style: italic;
+}

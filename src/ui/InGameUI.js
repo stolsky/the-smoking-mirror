@@ -1,0 +1,73 @@
+
+import { EventType } from "../../lib/JST/native/typeCheck.js";
+
+import Wrapper from "./Wrapper.js";
+import SceneTitle from "./SceneTitle.js";
+import Log from "./Log.js";
+import Dialog from "./Dialog.js";
+import CollectionManager from "./CollectionManager.js";
+import EventManager from "../EventManager.js";
+
+
+const InGameUI = class extends Wrapper {
+
+    /** @type {CollectionManager} */
+    #scene;
+
+    /** @type {Wrapper} */
+    #sceneTitle;
+
+    /** @type {Wrapper} */
+    #log;
+
+    /** @type {CollectionManager} */
+    #inventory;
+
+    /** @type {Wrapper} */
+    #dialog;
+
+    constructor() {
+
+        super("InGameUI");
+
+        this.#scene = new CollectionManager("Scene");
+        this.#sceneTitle = new SceneTitle();
+        this.#log = new Log();
+        this.#inventory = new CollectionManager("Inventory");
+        this.#dialog = new Dialog();
+
+        this.append(
+            this.#scene.getContainer(),
+            this.#sceneTitle.getContainer(),
+            this.#log.getContainer(),
+            this.#inventory.getContainer(),
+            this.#dialog.getContainer().hide()
+        );
+
+        this.addEventListener(EventType.mouseup, (event) => EventManager.setInputEvent(event));
+    }
+
+    updateInventoryElements(elements) {
+        this.#inventory.updateElements(elements);
+        return this;
+    }
+
+    updateLog() {
+
+        return this;
+    }
+
+    updateSceneElements(elements) {
+        this.#scene.updateElements(elements);
+        return this;
+    }
+
+    setSceneTitle(title) {
+        this.#sceneTitle.setTitle(title);
+        return this;
+    }
+
+};
+
+
+export default InGameUI;

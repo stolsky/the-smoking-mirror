@@ -1,8 +1,12 @@
 
+import getWord from "../translate.js";
+
+
 const Act = class {
 
     #name;
 
+    /** @type {Cache} */
     #elements;
 
     /** @type {Hero} */
@@ -20,48 +24,53 @@ const Act = class {
         this.#elements = elements;
     }
 
-    /** @returns {Scene} */
-    getCurrentScene() {
-        return this.#currentScene;
-    }
-
-    getName() {
-        return this.#name;
+    getActiveHero() {
+        return this.#activeHero;
     }
 
     /** @returns {Array<{id: string, name: string, type: string, foreground: string, background: string, information: string, moveable: boolean, visible: boolean}>} */
     getAllElements() {
         const elements = [];
         this.#currentScene.getAllElements().forEach((id) => {
-
             /** @type {Element} */
-            const element = this.#elements.getItem(id);
-
+            const element = this.getElement(id);
             elements.push({
                 id: element.getId(),
-                name: element.getName(),
+                name: getWord(element.getName()),
                 type: element.getType(),
                 foreground: element.getForeground(),
                 background: element.getBackground(),
-                information: element.getInformation(),
+                information: getWord(element.getInformation()),
                 moveable: element.isMoveable(),
                 visible: element.isVisible()
             });
-
         });
         return elements;
     }
 
+    /** @returns {Scene} */
+    getCurrentScene() {
+        return this.#currentScene;
+    }
+
+    getElement(id) {
+        return this.#elements.getItem(id);
+    }
+
+    getName() {
+        return this.#name;
+    }
+
     loadScene(id) {
         if (this.#elements.hasItem(id)) {
-            this.#currentScene = this.#elements.getItem(id);
+            this.#currentScene = this.getElement(id);
         }
         return this;
     }
 
     setActiveHero(id) {
         if (this.#elements.hasItem(id)) {
-            this.#activeHero = this.#elements.getItem(id);
+            this.#activeHero = this.getElement(id);
         }
         return this;
     }

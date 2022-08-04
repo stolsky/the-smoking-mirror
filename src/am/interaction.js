@@ -1,7 +1,7 @@
 
-import { hasProperty, isBoolean, isNumber, isString } from "../../lib/JST/native/type_check.js";
+import { hasProperty, isBoolean, isNumber, isString } from "../../lib/JST/native/typeCheck.js";
 
-import Hero from "./hero.js";
+import Hero from "./Hero.js";
 
 
 export const TYPE = Object.freeze({

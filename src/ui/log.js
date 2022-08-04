@@ -1,9 +1,9 @@
 
-import { isString, isNotEmptyString } from "../../lib/JST/native/type_check.js";
-import Container from "../../lib/JST/dom/container.js";
-import TextComponent from "../../lib/JST/dom/text_component.js";
+import { isString, isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
+import Container from "../../lib/JST/dom/Container.js";
+import TextComponent from "../../lib/JST/dom/TextComponent.js";
 
-import Wrapper from "./wrapper.js";
+import Wrapper from "./Wrapper.js";
 
 
 const Log = class extends Wrapper {

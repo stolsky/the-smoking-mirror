@@ -1,5 +1,5 @@
 
-import { isString } from "../../lib/JST/native/type_check.js";
+import { isString } from "../../lib/JST/native/typeCheck.js";
 
 
 const Scene = class {

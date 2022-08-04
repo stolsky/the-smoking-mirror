@@ -1,0 +1,60 @@
+
+.Application .Menu {
+
+    --INTRO_BLUR: 100px;
+
+    width: 70%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+.Application .Menu .TitleBox {
+    padding: 10px 0;
+    text-align: center;
+    color: #ffffff;
+    background: #000000;
+    width: 80%;
+    border-radius: 10px;
+    filter: blur(var(--INTRO_BLUR));
+    animation: IntroSimple1 2s ease-in-out 0s forwards;
+}
+.Application .Menu .TitleBox .Title {
+    font-size: 3em;
+    display: block;
+}
+.Application .Menu .TitleBox .SubTitle {
+
+}
+.Application .Menu .ButtonBox {
+    width: 80%;
+    margin: 10%;
+    text-align: center;
+    opacity: 0;
+    animation: IntroSimple2 0.5s ease-in-out 2s forwards;
+}
+.Application .Menu .ButtonBox button {
+    font-size: 1.5em;
+    border: 0;
+    background: 0;
+}
+.Application .Menu .ButtonBox button:hover {
+    color: #ff0000;
+    cursor: inherit;
+}
+.Application .Menu .Disclaimer {
+    font-size: 0.8em;
+    display: block;
+    opacity: 0;
+    animation: IntroSimple2 0.5s ease-in-out 2s forwards;
+    width: 80%;
+}
+
+@keyframes IntroSimple1 {
+    0% {filter: blur(var(--INTRO_BLUR));}
+    100% {filter: blur(0px);}
+}
+
+@keyframes IntroSimple2 {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}

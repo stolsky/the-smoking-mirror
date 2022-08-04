@@ -1,6 +1,6 @@
 
-import Element from "./element.js";
-import StringList from "./string_list.js";
+import Element from "./Element.js";
+import StringList from "./StringList.js";
 
 
 const Hero = class extends Element {

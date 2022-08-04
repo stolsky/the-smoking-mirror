@@ -1,5 +1,10 @@
 
-@import url(../../lib/JST/dom/gui.css);
+@import "../../lib/JST/dom/gui.css";
+
+@import "./cursors.css";
+
+@import "./intro.css";
+@import "./menu.css";
 
 :root {
     --APPWIDTH: 1000px;
@@ -11,78 +16,7 @@
     --HIGHLIGHT: rgba(255, 0, 0, 0.5);
 }
 
-@keyframes IntroSimple1 {
-    0% {filter: blur(var(--INTRO_BLUR));}
-    100% {filter: blur(0px);}
-}
-@keyframes IntroSimple2 {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
-}
 
-@keyframes exit {
-    0%{cursor: url(../../res/cursor/exit0.png) 51 26, default;}
-    11%{cursor: url(../../res/cursor/exit1.png) 51 26, default;}
-    22%{cursor: url(../../res/cursor/exit2.png) 51 26, default;}
-    33%{cursor: url(../../res/cursor/exit3.png) 51 26, default;}
-    44%{cursor: url(../../res/cursor/exit4.png) 51 26, default;}
-    55%{cursor: url(../../res/cursor/exit5.png) 51 26, default;}
-    66%{cursor: url(../../res/cursor/exit6.png) 51 26, default;}
-    77%{cursor: url(../../res/cursor/exit7.png) 51 26, default;}
-    88%{cursor: url(../../res/cursor/exit8.png) 51 26, default;}
-    100%{cursor: url(../../res/cursor/exit0.png) 51 26, default;}
-}
-/*
-@keyframes left {
-    0%{cursor: url(../res/cursor/left0.png) 1 19, default;}
-    10%{cursor: url(../res/cursor/left1.png) 1 19, default;}
-    20%{cursor: url(../res/cursor/left2.png) 1 19, default;}
-    30%{cursor: url(../res/cursor/left3.png) 1 19, default;}
-    40%{cursor: url(../res/cursor/left4.png) 1 19, default;}
-    50%{cursor: url(../res/cursor/left5.png) 1 19, default;}
-    60%{cursor: url(../res/cursor/left6.png) 1 19, default;}
-    70%{cursor: url(../res/cursor/left7.png) 1 19, default;}
-    80%{cursor: url(../res/cursor/left8.png) 1 19, default;}
-    90%{cursor: url(../res/cursor/left9.png) 1 19, default;}
-    100%{cursor: url(../res/cursor/left0.png) 1 19, default;}
-}
-@keyframes right {
-    0%{cursor: url(../res/cursor/right0.png) 34 19, default;}
-    10%{cursor: url(../res/cursor/right1.png) 34 19, default;}
-    20%{cursor: url(../res/cursor/right2.png) 34 19, default;}
-    30%{cursor: url(../res/cursor/right3.png) 34 19, default;}
-    40%{cursor: url(../res/cursor/right4.png) 34 19, default;}
-    50%{cursor: url(../res/cursor/right5.png) 34 19, default;}
-    60%{cursor: url(../res/cursor/right6.png) 34 19, default;}
-    70%{cursor: url(../res/cursor/right7.png) 34 19, default;}
-    80%{cursor: url(../res/cursor/right8.png) 34 19, default;}
-    90%{cursor: url(../res/cursor/right9.png) 34 19, default;}
-    100%{cursor: url(../res/cursor/right0.png) 34 19, default;}
-}
-*/
-@keyframes take {
-    0%{cursor: url(../../res/cursor/take1.png) 28 48, default;}
-    13%{cursor: url(../../res/cursor/take2.png) 28 48, default;}
-    26%{cursor: url(../../res/cursor/take2.png) 28 48, default;}
-    40%{cursor: url(../../res/cursor/take4.png) 28 48, default;}
-    52%{cursor: url(../../res/cursor/take5.png) 28 48, default;}
-    64%{cursor: url(../../res/cursor/take6.png) 28 48, default;}
-    76%{cursor: url(../../res/cursor/take7.png) 28 48, default;}
-    88%{cursor: url(../../res/cursor/take8.png) 28 48, default;}
-    100%{cursor: url(../../res/cursor/take9.png) 28 48, default;}
-}
-@keyframes use {
-    0%{cursor: url(../../res/cursor/use0.png) 23 28, default;}
-    11%{cursor: url(../../res/cursor/use1.png) 23 28, default;}
-    22%{cursor: url(../../res/cursor/use2.png) 23 28, default;}
-    33%{cursor: url(../../res/cursor/use3.png) 23 28, default;}
-    44%{cursor: url(../../res/cursor/use4.png) 23 28, default;}
-    55%{cursor: url(../../res/cursor/use5.png) 23 28, default;}
-    66%{cursor: url(../../res/cursor/use6.png) 23 28, default;}
-    77%{cursor: url(../../res/cursor/use7.png) 23 28, default;}
-    88%{cursor: url(../../res/cursor/use8.png) 23 28, default;}
-    100%{cursor: url(../../res/cursor/use9.png) 23 28, default;}
-}
 
 html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat center center fixed; background-size: cover;}
 
@@ -107,6 +41,7 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
     height: calc(100% - 10px);
 }
 
+/* @deprecated
 .Application .InGameUI > .Overlay {
 
     display: flex;
@@ -134,6 +69,7 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
     bottom: 1%;
     font-size: 0.8em;
 }
+*/
 
 .Application .InGameUI > .Title {
     grid-column-start: 1;
@@ -185,7 +121,7 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
     display: block;
     font-weight: bold;
 }
-.Application .InGameUI > .Scene .Element .Info {
+.Application .InGameUI > .Scene .Element .Information {
     display: block;
     font-style: italic;
     margin-top: -2px;
@@ -251,12 +187,12 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
 .Application .InGameUI > .Scene .Element:hover,
 .Application .InGameUI > .Inventory .Item:hover {
     outline: 3px solid var(--HIGHLIGHT);
-    box-shadow: none;
+    box-shadow: 0;
 }
 .Application .InGameUI > .Scene .Element.Highlight,
 .Application .InGameUI > .Inventory .Item.Highlight {
     outline: 3px solid #ff0000;
-    box-shadow: none;
+    box-shadow: 0;
 }
 
 .Application .InGameUI > .Dialog {
@@ -311,75 +247,3 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
 .Application>.Inventory>.Item {}
 
 */
-
-.Application .Menu {
-    width: 70%;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-}
-.Application .Menu .TitleBox {
-    padding: 10px 0;
-    text-align: center;
-    color: #ffffff;
-    background: #000000;
-    width: 80%;
-    border-radius: 10px;
-    filter: blur(var(--INTRO_BLUR));
-    animation: IntroSimple1 2s ease-in-out 0s forwards;
-}
-.Application .Menu .TitleBox .Title {
-    font-size: 3em;
-    display: block;
-}
-.Application .Menu .TitleBox .SubTitle {
-
-}
-.Application .Menu .ButtonBox {
-    width: 80%;
-    margin: 10%;
-    text-align: center;
-    opacity: 0;
-    animation: IntroSimple2 0.5s ease-in-out 2s forwards;
-}
-.Application .Menu .ButtonBox button {
-    font-size: 1.5em;
-    border: none;
-    background: none;
-}
-.Application .Menu .ButtonBox button:hover {
-    color: #ff0000;
-    cursor: inherit;
-}
-.Application .Menu .Disclaimer {
-    font-size: 0.8em;
-    display: block;
-    opacity: 0;
-    animation: IntroSimple2 0.5s ease-in-out 2s forwards;
-    width: 80%;
-}
-
-.Application .Intro {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 90%;
-    justify-content: normal;
-    gap: 50px;
-}
-.Application .Intro .Title {
-    font-size: 2em;
-}
-.Intro .Text {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-}
-.Intro .Text span {
-    text-align: justify;
-}
-.Application .Intro .Hint {
-    color: rgba(0, 0, 0, 0.5);
-    font-size: 90%;
-    font-style: italic;
-}

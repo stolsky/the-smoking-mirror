@@ -1,6 +1,5 @@
 
-import Container from "../../lib/JST/dom/container.js";
-import { EventType } from "../../lib/JST/native/type_check.js";
+import Container from "../../lib/JST/dom/Container.js";
 
 
 const Wrapper = class {
@@ -12,8 +11,14 @@ const Wrapper = class {
         this.#wrapper = new Container(classNames);
     }
 
-    addAction(listener) {
-        this.#wrapper.addEventListener(EventType.click, listener);
+    /**
+     * @param {EventType} type
+     * @param {Function} listener
+     *
+     * @returns {Wrapper}
+     */
+    addEventListener(type, listener) {
+        this.#wrapper.addEventListener(type, listener);
         return this;
     }
 
@@ -23,7 +28,7 @@ const Wrapper = class {
     }
 
     append(...components) {
-        components.forEach((component) => this.addComponent(component));
+        this.#wrapper.append(components);
         return this;
     }
 

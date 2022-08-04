@@ -1,5 +1,5 @@
 
-import { isNotEmptyString } from "../lib/JST/native/type_check.js";
+import { isNotEmptyString } from "../lib/JST/native/typeCheck.js";
 import * as Lang from "../lib/JST/resource/lang.js";
 
 

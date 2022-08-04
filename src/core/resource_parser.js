@@ -1,13 +1,13 @@
 
-import { hasProperty } from "../lib/JST/native/typeCheck.js";
-import Cache from "../lib/JST/resource/Cache.js";
+import { hasProperty } from "../../lib/JST/native/typeCheck.js";
+import Cache from "../../lib/JST/resource/Cache.js";
 
-import Dialog from "./am/Dialog.js";
-import Element from "./am/Element.js";
-import Flag from "./am/Flag.js";
-import Hero from "./am/Hero.js";
-import Item from "./am/Item.js";
-import Scene from "./am/Scene.js";
+import Dialog from "../am/Dialog.js";
+import Element from "../am/Element.js";
+import Flag from "../am/Flag.js";
+import Hero from "../am/Hero.js";
+import Item from "../am/Item.js";
+import Scene from "../am/Scene.js";
 
 
 /** @returns {Cache} */

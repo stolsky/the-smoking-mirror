@@ -4,7 +4,7 @@ import Cache from "../../lib/JST/resource/Cache.js";
 import Container from "../../lib/JST/dom/Container.js";
 import TextComponent from "../../lib/JST/dom/TextComponent.js";
 
-import EventManager from "../EventManager.js";
+import EventManager from "../core/EventManager.js";
 import Wrapper from "./Wrapper.js";
 
 
@@ -68,11 +68,11 @@ const CollectionManager = class extends Wrapper {
                 element = this.#elements.getItem(id);
             } else {
                 element = new Container("Element");
+                // MouseEvent.click applies only to the left mouse button
+                element.addEventListener(EventType.mouseup, (event) => EventManager.setInputEvent(event, id));
                 this.#elements.setItem(id, element);
+                this.addComponent(element);
             }
-
-            // MouseEvent.click applies only to the left mouse button
-            element.addEventListener(EventType.mouseup, (event) => EventManager.setInputEvent(event, id));
 
             const { visible } = properties;
             if (visible === undefined || visible) {

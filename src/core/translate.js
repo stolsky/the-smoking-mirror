@@ -1,6 +1,6 @@
 
-import { isNotEmptyString } from "../lib/JST/native/typeCheck.js";
-import * as Lang from "../lib/JST/resource/lang.js";
+import { isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
+import * as Lang from "../../lib/JST/resource/lang.js";
 
 
 let current_script_id = "";

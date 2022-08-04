@@ -1,5 +1,5 @@
 
-import getWord from "../translate.js";
+import getWord from "../core/translate.js";
 
 
 const Act = class {

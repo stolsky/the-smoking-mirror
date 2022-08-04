@@ -1,8 +1,10 @@
 
-import EventManager from "../EventManager.js";
+import EventManager from "../core/EventManager.js";
+import getWord from "../core/translate.js";
+import Interaction from "../core/Interaction.js";
+
 import InGameUI from "../ui/InGameUI.js";
 import Act from "../am/Act.js";
-import getWord from "../translate.js";
 
 
 // const createMessage = (id) => id.split("+").reduce((acc, part) => `${acc} ${getWord(part)}`, "");
@@ -116,30 +118,40 @@ const InGameState = class {
     /** @type {InGameUI} */
     #wrapper;
 
+    /** @param {Array<{}>} updates  */
+    #processUpdates = (updates) => {
+
+        // clear highlights after combination or canceled combination
+        // render death
+        // update elements from Scene -> remove, hide, show
+        // update elements from Inventory -> add, remove
+
+        // scene: {hide: [id1, id2, ...], remove: [id3, id4, ...], show: [id5, id6, ...]}
+        // select?: [id7, id8, ..], deselect?: [..]
+        // inventory: {add: [..], remove: [..]}
+
+        if (updates instanceof Array) {
+            updates.forEach((update) => {
+
+            });
+        }
+    };
+
     #handleInput = (input) => {
         if (input) {
 
             /** @type {Array<string>} Array with all element IDs that need to be updated. */
-            const updates = [];
+            let updates = [];
 
-            if (input.id) {
-                const element = this.#currentAct.getElement(input.id);
+            const element = (input.id) ? this.#currentAct.getElement(input.id) : null;
 
-                if (input.left) {
-                    // updates = Interaction.leftClick(element);
-                    console.log("left click on", input.id);
-                } else if (input.right) {
-                    // updates = Interaction.rightClick(element);
-                    console.log("right click on", input.id);
-                }
-            } else {
-                // TODO here necessary ??
-                // Interaction.hasActiveCombination()
-                // updates = Interaction.clearCombination()
-                console.log("Reset Interaction/startet Combination");
+            if (input.left) {
+                updates = Interaction.leftClick(element);
+            } else if (input.right) {
+                updates = Interaction.rightClick(element);
             }
 
-            // this.#wrapper.updateElements(updates);
+            this.#processUpdates(updates);
         }
     };
 

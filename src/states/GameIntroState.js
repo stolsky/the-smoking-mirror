@@ -3,7 +3,7 @@ import { EventType } from "../../lib/JST/native/typeCheck.js";
 
 import GameStates from "./GameStates.js";
 import Intro from "../ui/Intro.js";
-import getWord from "../translate.js";
+import getWord from "../core/translate.js";
 
 
 const GameIntroState = class {

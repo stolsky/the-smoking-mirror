@@ -6,7 +6,7 @@ import SceneTitle from "./SceneTitle.js";
 import Log from "./Log.js";
 import Dialog from "./Dialog.js";
 import CollectionManager from "./CollectionManager.js";
-import EventManager from "../EventManager.js";
+import EventManager from "../core/EventManager.js";
 
 
 const InGameUI = class extends Wrapper {
@@ -37,11 +37,11 @@ const InGameUI = class extends Wrapper {
         this.#dialog = new Dialog();
 
         this.append(
-            this.#scene.getContainer(),
-            this.#sceneTitle.getContainer(),
-            this.#log.getContainer(),
-            this.#inventory.getContainer(),
-            this.#dialog.getContainer().hide()
+            this.#scene,
+            this.#sceneTitle,
+            this.#log,
+            this.#inventory,
+            this.#dialog.hide()
         );
 
         this.addEventListener(EventType.mouseup, (event) => EventManager.setInputEvent(event));

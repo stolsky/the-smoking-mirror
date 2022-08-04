@@ -1,11 +1,11 @@
 
-import { loadJSON } from "../lib/JST/resource/loaders.js";
-import * as Tick from "../lib/JST/native/tick.js";
-import Application from "../lib/JST/dom/Application.js";
-import * as Lang from "../lib/JST/resource/lang.js";
+import { loadJSON } from "../../lib/JST/resource/loaders.js";
+import * as Tick from "../../lib/JST/native/tick.js";
+import Application from "../../lib/JST/dom/Application.js";
+import * as Lang from "../../lib/JST/resource/lang.js";
 
-import GameStates from "./states/GameStates.js";
-import SetupState from "./states/SetupState.js";
+import GameStates from "../states/GameStates.js";
+import SetupState from "../states/SetupState.js";
 
 
 let ctx = null;

@@ -6,7 +6,7 @@ const Wrapper = class extends Container {
 
     /** @param {Container} renderer */
     render(renderer) {
-        renderer.addComponent(this.getHTMLElement());
+        renderer.addComponent(this);
         return this;
     }
 

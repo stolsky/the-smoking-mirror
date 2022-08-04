@@ -3,7 +3,6 @@ import { loadJSON } from "../lib/JST/resource/loaders.js";
 import * as Tick from "../lib/JST/native/tick.js";
 import Application from "../lib/JST/dom/Application.js";
 import * as Lang from "../lib/JST/resource/lang.js";
-//import { getDefaultRendererContext } from "../lib/JST/";
 
 import GameStates from "./states/GameStates.js";
 import SetupState from "./states/SetupState.js";
@@ -40,7 +39,7 @@ const create_application = () => {
 
     const app = new Application();
     app.addClass("Center");
-    ctx = app.getRootPane(); //getDefaultRendererContext();
+    ctx = app.getRootPane();
 
     // push initial state(s) to gameStates
     GameStates.push(new SetupState());

@@ -4,7 +4,7 @@ import Container from "../../lib/JST/dom/Container.js";
 
 const Wrapper = class extends Container {
 
-    /** @param {} renderer */
+    /** @param {Container} renderer */
     render(renderer) {
         renderer.addComponent(this.getHTMLElement());
         return this;

@@ -26,15 +26,22 @@
 }
 
 .Application .TextPage .Hint {
-    color: rgba(0, 0, 0, 0.5);
     font-size: 90%;
     font-style: italic;
 }
 
 .Application .TextPage.Intro {
-
+    color: #000000;
+    background-color: #ffffff;
+}
+.Application .TextPage.Intro .Hint {
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .Application .TextPage.GameOver {
-
+    color: #ffffff;
+    background-color: #000000;
+}
+.Application .TextPage.GameOver .Hint {
+    color: rgba(255, 255, 255, 0.5);
 }

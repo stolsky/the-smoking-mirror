@@ -1,5 +1,5 @@
 
-import { hasProperty, isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
+import { isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
 import Cache from "../../lib/JST/resource/Cache.js";
 
 import { hasSaveGame, loadActScript, loadItems, loadScenes } from "../core/resource_loader.js";
@@ -43,8 +43,8 @@ const MenuState = class {
                         elements.append(importScenes(result[1]));
                         GameStates.push(new InGameState({ name, start, hero: active, elements }));
 
-                        if (hasProperty(script, "intro")) {
-                            GameStates.push(new TextPageState(intro));
+                        if (intro) {
+                            GameStates.push(new TextPageState("Intro", intro));
                         }
                     });
                 });

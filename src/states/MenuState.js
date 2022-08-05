@@ -10,7 +10,7 @@ import Menu from "../ui/Menu.js";
 import GameStates from "./GameStates.js";
 import LoadGameState from "./LoadGameState.js";
 import InGameState from "./InGameState.js";
-import GameIntroState from "./GameIntroState.js";
+import TextPageState from "./TextPageState.js";
 
 
 const MenuState = class {
@@ -44,7 +44,7 @@ const MenuState = class {
                         GameStates.push(new InGameState({ name, start, hero: active, elements }));
 
                         if (hasProperty(script, "intro")) {
-                            GameStates.push(new GameIntroState(intro));
+                            GameStates.push(new TextPageState(intro));
                         }
                     });
                 });

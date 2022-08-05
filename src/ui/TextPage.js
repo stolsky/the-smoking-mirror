@@ -21,6 +21,7 @@ const TextPage = class extends Wrapper {
     constructor(className) {
 
         super("Page Maximize");
+        super.addClass(className);
 
         this.#title_container = new TextComponent(null, "Title");
         this.#text_container = new Container("Text");

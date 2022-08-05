@@ -1,24 +1,25 @@
 
 import { EventType } from "../../lib/JST/native/typeCheck.js";
 
-import GameIntro from "../ui/GameIntro.js";
+import TextPage from "../ui/TextPage.js";
 
 import GameStates from "./GameStates.js";
 
 
-const GameIntroState = class {
+const TextPageState = class {
 
     #toRender;
 
-    /** @type {Intro} */
+    /** @type {TextPage} */
     #wrapper;
 
-    constructor(data) {
+    constructor(properties) {
 
-        this.#wrapper = new GameIntro();
-        this.#wrapper
-            .setTitle(data.title)
-            .setText(data.text)
+        const { className, title, text } = properties;
+
+        this.#wrapper = new TextPage(className)
+            .setTitle(title)
+            .setText(text)
             .setHint("clickToContinue")
             .addEventListener(EventType.mouseup, () => GameStates.pop());
 
@@ -52,4 +53,4 @@ const GameIntroState = class {
 };
 
 
-export default GameIntroState;
+export default TextPageState;

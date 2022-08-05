@@ -1,9 +1,9 @@
 
-.Application .ActIntro {
+.Application .TextPage {
     height: 90%;
 }
 
-.Application .ActIntro .Page {
+.Application .TextPage {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,22 +11,30 @@
     gap: 50px;
 }
 
-.Application .ActIntro .Page .Title {
+.Application .TextPage .Title {
     font-size: 2em;
 }
 
-.Application .ActIntro .Page .Text {
+.Application .TextPage .Text {
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
 
-.Application .ActIntro .Page .Text span {
+.Application .TextPage .Text span {
     text-align: justify;
 }
 
-.Application .ActIntro .Page .Hint {
+.Application .TextPage .Hint {
     color: rgba(0, 0, 0, 0.5);
     font-size: 90%;
     font-style: italic;
+}
+
+.Application .TextPage.Intro {
+
+}
+
+.Application .TextPage.GameOver {
+
 }

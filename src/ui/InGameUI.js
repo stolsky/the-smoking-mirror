@@ -1,12 +1,14 @@
 
 import { EventType } from "../../lib/JST/native/typeCheck.js";
 
+import EventManager from "../core/EventManager.js";
+import getWord from "../core/translate.js";
+
 import Wrapper from "./Wrapper.js";
 import SceneTitle from "./SceneTitle.js";
 import Log from "./Log.js";
 import Dialog from "./Dialog.js";
 import CollectionManager from "./CollectionManager.js";
-import EventManager from "../core/EventManager.js";
 
 
 const InGameUI = class extends Wrapper {
@@ -63,7 +65,7 @@ const InGameUI = class extends Wrapper {
     }
 
     setSceneTitle(title) {
-        this.#sceneTitle.setTitle(title);
+        this.#sceneTitle.setTitle(getWord(title));
         return this;
     }
 

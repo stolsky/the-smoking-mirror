@@ -1,15 +1,16 @@
 
-import { hasProperty } from "../../lib/JST/native/typeCheck.js";
+import { hasProperty, isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
 import Cache from "../../lib/JST/resource/Cache.js";
 
+import { hasSaveGame, loadActScript, loadItems, loadScenes } from "../core/resource_loader.js";
+import { importFlags, importHeroes, importItems, importScenes } from "../core/resource_importer.js";
+
 import Menu from "../ui/Menu.js";
+
 import GameStates from "./GameStates.js";
 import LoadGameState from "./LoadGameState.js";
 import InGameState from "./InGameState.js";
 import GameIntroState from "./GameIntroState.js";
-import { hasSaveGame, loadActScript, loadItems, loadScenes } from "../resource_loader.js";
-import { parseFlags, parseHeroes, parseItems, parseScenes } from "../resource_parser.js";
-import getWord from "../translate.js";
 
 
 const MenuState = class {
@@ -22,32 +23,35 @@ const MenuState = class {
     constructor() {
 
         this.#wrapper = new Menu()
-            .setTitle(getWord("GameTitle"))
-            .setSubTitle(getWord("GameSubTitle"))
-            .setDisclaimer(getWord("menuDisclaimer"))
-            .addButton(getWord("menuNewGame"), () => {
+            .setTitle("GameTitle")
+            .setSubTitle("GameSubTitle")
+            .setDisclaimer("menuDisclaimer")
+            .addButton("menuNewGame", () => {
                 loadActScript("paris1").then((script) => {
+
                     GameStates.pop();
 
+                    const { active, flags, heroes, intro, name, scenes, start } = script;
                     const elements = new Cache();
-                    elements.append(parseFlags(script.flags.split(",")));
-                    elements.append(parseHeroes(script.heroes));
-                    Promise.all([loadItems(), loadScenes(script.scenes.split(","))]).then((result) => {
+                    if (isNotEmptyString(flags)) {
+                        elements.append(importFlags(flags.split(",")));
+                    }
+                    elements.append(importHeroes(heroes));
+                    Promise.all([loadItems(), loadScenes(scenes.split(","))]).then((result) => {
 
-                        elements.append(parseItems(result[0]));
-                        elements.append(parseScenes(result[1]));
-
-                        GameStates.push(new InGameState({ name: script.name, start: script.start, hero: script.active, elements }));
+                        elements.append(importItems(result[0]));
+                        elements.append(importScenes(result[1]));
+                        GameStates.push(new InGameState({ name, start, hero: active, elements }));
 
                         if (hasProperty(script, "intro")) {
-                            GameStates.push(new GameIntroState(script.intro));
+                            GameStates.push(new GameIntroState(intro));
                         }
                     });
                 });
             });
 
         if (hasSaveGame()) {
-            this.#wrapper.addButton(getWord("menuLoadGame"), () => {
+            this.#wrapper.addButton("menuLoadGame", () => {
                 GameStates.push(new LoadGameState());
             });
         }

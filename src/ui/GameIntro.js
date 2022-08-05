@@ -2,6 +2,8 @@
 import Container from "../../lib/JST/dom/Container.js";
 import TextComponent from "../../lib/JST/dom/TextComponent.js";
 
+import getWord from "../core/translate.js";
+
 import Wrapper from "./Wrapper.js";
 
 
@@ -33,18 +35,18 @@ const Intro = class extends Wrapper {
         );
     }
 
-    setTitle(title) {
-        this.#title_container.setText(title);
+    setTitle(id) {
+        this.#title_container.setText(getWord(id));
         return this;
     }
 
-    setText(text) {
-        text.split(";").forEach((part) => this.#text_container.addComponent(new TextComponent(part)));
+    setText(id) {
+        getWord(id).split(";").forEach((part) => this.#text_container.addComponent(new TextComponent(part)));
         return this;
     }
 
-    setHint(hint) {
-        this.#hint_container.setText(hint);
+    setHint(id) {
+        this.#hint_container.setText(getWord(id));
         return this;
     }
 

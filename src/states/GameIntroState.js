@@ -1,29 +1,25 @@
 
 import { EventType } from "../../lib/JST/native/typeCheck.js";
 
+import GameIntro from "../ui/GameIntro.js";
+
 import GameStates from "./GameStates.js";
-import Intro from "../ui/Intro.js";
-import getWord from "../core/translate.js";
 
 
 const GameIntroState = class {
 
     #toRender;
 
-    #data;
-
     /** @type {Intro} */
     #wrapper;
 
     constructor(data) {
 
-        this.#data = data;
-
-        this.#wrapper = new Intro();
+        this.#wrapper = new GameIntro();
         this.#wrapper
-            .setTitle(getWord(this.#data.title))
-            .setText(getWord(this.#data.text))
-            .setHint(getWord("clickToContinue"))
+            .setTitle(data.title)
+            .setText(data.text)
+            .setHint("clickToContinue")
             .addEventListener(EventType.mouseup, () => GameStates.pop());
 
         this.#toRender = true;
@@ -35,7 +31,6 @@ const GameIntroState = class {
 
     exit() {
         // remove intro components
-        this.#data = null;
         this.#wrapper.remove();
         this.#wrapper = null;
         this.#toRender = false;

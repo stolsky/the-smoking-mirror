@@ -11,7 +11,7 @@ import Scene from "../am/Scene.js";
 
 
 /** @returns {Cache} */
-const parseResource = (source, method) => {
+const importResource = (source, method) => {
 
     const cache = new Cache();
 
@@ -28,45 +28,45 @@ const parseResource = (source, method) => {
     return cache;
 };
 
-const parseDialogs = (source) => parseResource(source, (dialog) => ({ key: dialog.id, value: new Dialog(dialog.id, dialog.states) }));
+const importDialogs = (source) => importResource(source, (dialog) => ({ key: dialog.id, value: new Dialog(dialog.id, dialog.states) }));
 
-const parseFlags = (source) => parseResource(source, (flag) => {
+const importFlags = (source) => importResource(source, (flag) => {
     const [id, type, value] = flag.split(":");
     return { key: id, value: new Flag(id, type, value) };
 });
 
-const parseHeroes = (source) => parseResource(source, (hero) => ({ key: hero.id, value: new Hero(hero) }));
+const importHeroes = (source) => importResource(source, (hero) => ({ key: hero.id, value: new Hero(hero) }));
 
-const parseItems = (source) => parseResource(source, (item) => {
+const importItems = (source) => importResource(source, (item) => {
     if (hasProperty(item, "id") && hasProperty(item, "name") && hasProperty(item, "states")) {
         return { key: item.id, value: new Item(item.id, item.name, item.states) };
     }
     return null;
 });
 
-const parseElements = (source) => parseResource(source, (element) => {
+const importElements = (source) => importResource(source, (element) => {
     if (hasProperty(element, "id") && hasProperty(element, "name") && hasProperty(element, "states")) {
         return { key: element.id, value: new Element(element.id, element.name, element.states) };
     }
     return null;
 });
 
-const parseScenes = (source) => {
+const importScenes = (source) => {
 
     const temporyCache = new Cache();
 
-    temporyCache.append(parseResource(source, (scene) => {
+    temporyCache.append(importResource(source, (scene) => {
 
         let elementsIDs = null;
         if (hasProperty(scene, "elems")) {
             if (scene.elems instanceof Array) {
                 elementsIDs = scene.elems.map((element) => element.id);
             }
-            temporyCache.append(parseElements(scene.elems));
+            temporyCache.append(importElements(scene.elems));
         }
 
         if (hasProperty(scene, "dialogs")) {
-            temporyCache.append(parseDialogs(scene.dialogs));
+            temporyCache.append(importDialogs(scene.dialogs));
         }
 
         if (hasProperty(scene, "id") && hasProperty(scene, "name")) {
@@ -81,10 +81,10 @@ const parseScenes = (source) => {
 
 
 export {
-    parseDialogs,
-    parseElements,
-    parseFlags,
-    parseHeroes,
-    parseItems,
-    parseScenes
+    importDialogs,
+    importElements,
+    importFlags,
+    importHeroes,
+    importItems,
+    importScenes
 };

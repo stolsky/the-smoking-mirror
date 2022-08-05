@@ -3,6 +3,8 @@ import Container from "../../lib/JST/dom/Container.js";
 import TextComponent from "../../lib/JST/dom/TextComponent.js";
 import TextButton from "../../lib/JST/dom/TextButton.js";
 
+import getWord from "../core/translate.js";
+
 import Wrapper from "./Wrapper.js";
 
 
@@ -22,7 +24,7 @@ const Menu = class extends Wrapper {
 
     static #setTextComponentText = (textComponent, text) => {
         if (textComponent instanceof TextComponent) {
-            textComponent.setText(text);
+            textComponent.setText(getWord(text));
         }
     };
 
@@ -57,7 +59,7 @@ const Menu = class extends Wrapper {
 
     addButton(text, action) {
         if (this.#buttons instanceof Container) {
-            this.#buttons.addComponent(new TextButton(text, action));
+            this.#buttons.addComponent(new TextButton(getWord(text), action));
         }
         return this;
     }

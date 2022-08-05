@@ -17,7 +17,7 @@
                     "right": [
                         {"text": "paris1Doo08"}
                     ],
-                    "comb": [
+                    "combos": [
                         {"id": "blowDart", "text": "paris1Doo15"},
                         {"id": "houseKey", "text": "paris1Doo17", "stmt": ["door2 2", "CafeKnown true:cafe SHOW", "GalleryKnown true:gallery SHOW"]}
                     ]
@@ -32,7 +32,7 @@
                     "right": [
                         {"text": "paris1Doo08"}
                     ],
-                    "comb": [
+                    "combos": [
                         {"id": "blowDart", "text": "paris1Doo15"},
                         {"id": "houseKey", "text": "paris1Doo18", "stmt": ["door2 1", "door2 INFO statLocked", "cafe HIDE", "gallery HIDE"]}
                     ]
@@ -53,7 +53,7 @@
                     "right": [
                         {"text": "paris1Doo10"}
                     ],
-                    "comb": [
+                    "combos": [
                         {"id": "blowDart", "text": "paris1Doo15"},
                         {"id": "houseKey", "text": "paris1Doo16"}
                     ]
@@ -65,7 +65,7 @@
                     ], "right": [
                         {"text": "paris1Doo14"}
                     ],
-                    "comb": [
+                    "combos": [
                         {"id": "blowDart", "text": "paris1Doo15"},
                         {"id": "houseKey", "text": "paris1Doo16"}
                     ]
@@ -91,7 +91,7 @@
                 {
                     "id": 2,
                     "left": [
-                        {"text": "paris1Telephone05", "stmt": ["HERO SPEAK andre1", "SELF 3", "CafeKnown true"]}
+                        {"text": "paris1Telephone05", "stmt": ["DIALOG andre1", "SELF 3", "CafeKnown true"]}
                     ],
                     "right": [
                         {"text": "paris1Telephone04"}
@@ -117,10 +117,10 @@
                     "type": "Take",
                     "back": "171,171,171",
                     "left": [
-                        {"text": "paris1Newspaper203", "stmt": ["HERO TAKE iNew", "SELF 0"]}
+                        {"text": "paris1Newspaper03", "stmt": ["TAKE newspaper", "SELF 0"]}
                     ],
                     "right": [
-                        {"text": "paris1Newspaper202"}
+                        {"text": "paris1Newspaper02"}
                     ]
                 }
             ]
@@ -134,7 +134,7 @@
                     "type": "Exit",
                     "back": "144,18,15",
                     "left": [
-                        {"stmt": ["HERO ENTER eDoo oubier1"]}
+                        {"stmt": ["ENTER oubier1"]}
                     ],
                     "right": [
                         {"text": "paris1Sta02", "stmt": ["SELF INFO paris1Sta03"]},
@@ -153,8 +153,8 @@
                     "back": "223,178,147",
                     "visible": false,
                     "left": [
-                        {"text": "paris1Doo21", "stmt": ["HERO ENTER cafe"]},
-                        {"stmt": ["HERO ENTER cafe"]}
+                        {"text": "paris1Doo21", "stmt": ["ENTER cafe"]},
+                        {"stmt": ["ENTER cafe"]}
                     ]
                 }
             ]
@@ -169,7 +169,7 @@
                     "back": "212,212,212",
                     "visible": false,
                     "left": [
-                        {"stmt": ["HERO ENTER gallery"]}
+                        {"stmt": ["ENTER gallery"]}
                     ]
                 }
             ]

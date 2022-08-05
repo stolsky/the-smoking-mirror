@@ -15,7 +15,7 @@
                         {"text": "paris1Spider02", "stmt": ["SELF INFO statFurious1"]},
                         {"text": "paris1Spider02", "stmt": ["SELF INFO statFurious2"]},
                         {"text": "paris1Spider02", "stmt": ["SELF INFO statFurious3"]},
-                        {"stmt": ["HERO LOST paris1Spider07"]}
+                        {"stmt": ["LOST paris1Spider07"]}
                     ],
                     "right": [
                         {"text": "paris1Spider03"},
@@ -274,7 +274,7 @@
                     "visible": false,
                     "back": "187,185,173",
                     "left": [
-                        {"text": "paris1Worm04", "stmt": ["HERO TAKE iWor", "SELF 0"]}
+                        {"text": "paris1Worm04", "stmt": ["TAKE worm", "SELF 0"]}
                     ],
                     "right": [
                         {"text": "paris1Worm02", "stmt": ["SELF 2"]}
@@ -283,7 +283,7 @@
                 {
                     "id": 2,
                     "left": [
-                        {"text": "paris1Worm03", "stmt": ["HERO TAKE iWor", "SELF 0"]}
+                        {"text": "paris1Worm03", "stmt": ["TAKE worm", "SELF 0"]}
                     ],
                     "right": [
                         {"text": "paris1Worm02"}
@@ -301,7 +301,7 @@
                     "visible": false,
                     "back": "152,80,52",
                     "left": [
-                        {"text": "paris1Drawer03", "stmt": ["SELF 2", "HERO TAKE iPot"]}
+                        {"text": "paris1Drawer03", "stmt": ["SELF 2", "TAKE pot"]}
                     ],
                     "right": [
                         {"text": "paris1Drawer02"}
@@ -412,7 +412,7 @@
                     "visible": false,
                     "back": "146,0,0",
                     "left": [
-                        {"text": "paris1Bag03", "stmt": ["SELF 2", "HERO TAKE iLip", "HERO TAKE iNot", "HERO TAKE iPan"]}
+                        {"text": "paris1Bag03", "stmt": ["SELF 2", "TAKE lipstick", "TAKE letter", "TAKE panties"]}
                     ],
                     "right": [
                         {"text": "paris1Bag02"}
@@ -439,7 +439,7 @@
                     "visible": false,
                     "back": "39,71,58",
                     "left": [
-                        {"text": "paris1Dart03", "stmt": ["HERO TAKE iDar", "SELF 0"]}
+                        {"text": "paris1Dart03", "stmt": ["TAKE blowDart", "SELF 0"]}
                     ],
                     "right": [
                         {"text": "paris1Dart02"}
@@ -481,7 +481,7 @@
                     "right": [
                         {"text": "paris1Syphon02"}
                     ],
-                    "comb": [
+                    "combos": [
                         {"id": "cylinder", "text": "paris1Syphon04", "stmt": ["cylinder 0", "syphon 2", "syphon INFO statReadyForUse"]}
                     ]
                 },
@@ -510,7 +510,7 @@
                     "right": [
                         {"text": "paris1Cabinet02"}
                     ],
-                    "comb": [
+                    "combos": [
                         {"id": "houseKey", "text": "paris1Cabinet07"},
                         {"id": "blowDart", "text": "paris1Cabinet08", "stmt": ["cabinet 2", "cylinder2 SHOW", "cylinder3 SHOW"]}
                     ]
@@ -551,8 +551,8 @@
                     "right": [
                         {"text": "paris1Cylinder02"}
                     ],
-                    "comb": [
-                        {"id": "panties", "text": "paris1Cylinder04", "stmt": ["cylinder2 0", "HERO TAKE iCyl", "cabinet 3"]}
+                    "combos": [
+                        {"id": "panties", "text": "paris1Cylinder04", "stmt": ["cylinder2 0", "TAKE cylinder", "cabinet 3"]}
                     ]
                 }
             ]
@@ -591,7 +591,7 @@
                     "right": [
                         {"text": "paris1Flames02"}
                     ],
-                    "comb": [
+                    "combos": [
                         {"id": "syphon", "text": "paris1Flames05", "stmt": ["flames 0", "door 2"]}
                     ]
                 }
@@ -623,7 +623,7 @@
                     "right": [
                         {"text": "paris1Door02"}
                     ],
-                    "comb": [
+                    "combos": [
                         {"id": "houseKey", "text": "paris1Door06"}
                     ]
                 }
@@ -639,7 +639,7 @@
                     "visible": false,
                     "back": "221,194,125",
                     "left": [
-                        {"stmt": ["HERO ENTER eSta oubier2"]}
+                        {"stmt": ["ENTER oubier2"]}
                     ], "right": [
                         {"text": "paris1Doorway03", "stmt": ["SELF INFO paris1Doorway02"]},
                         {"text": "paris1Doorway03"}

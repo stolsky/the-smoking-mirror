@@ -3,35 +3,52 @@ import { hasProperty, isNotEmptyString, isNumber, isString } from "../../lib/JST
 
 const BaseObject = class {
 
+    /** @type {string} */
     #id;
 
+    /** @type {string} */
     #name;
 
+    /** @type {{}} */
     #current_state;
 
+    /** @type {string} */
     #info;
 
+    /** @type {string} */
     #foreground;
 
+    /** @type {string} */
     #background;
 
+    /** @type {Array<{}>} */
     #states;
 
     constructor(id, name = "Object", states = null) {
 
         this.#id = (isNotEmptyString(id)) ? id : "obj";
-        this.#current_state = null;
 
-        this.#name = name;
-        this.#info = "";
-        this.#foreground = "0,0,0";
-        this.#background = "255,255,255";
-        this.#states = states;
-
+        this.setName(name)
+            .setInformation("")
+            .setForeground("0,0,0")
+            .setBackground("255,255,255")
+            .setStates(states)
+            .setCurrentState(-1);
     }
 
     getId() {
         return this.#id;
+    }
+
+    /** @returns {{id: string, name: string, foreground: string, background: string, information: string}} */
+    getProperties() {
+        return {
+            id: this.getId(),
+            name: this.getName(),
+            foreground: this.getForeground(),
+            background: this.getBackground(),
+            information: this.getInformation()
+        };
     }
 
     setName(name) {

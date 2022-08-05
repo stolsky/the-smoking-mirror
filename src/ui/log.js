@@ -8,7 +8,6 @@ import Wrapper from "./Wrapper.js";
 
 const Log = class extends Wrapper {
 
-
     constructor() {
         super("Log");
     }

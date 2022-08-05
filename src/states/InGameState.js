@@ -1,86 +1,15 @@
 
-import EventManager from "../core/EventManager.js";
-import getWord from "../core/translate.js";
-import Interaction from "../core/Interaction.js";
+import { isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
 
-import InGameUI from "../ui/InGameUI.js";
+import EventManager from "../core/EventManager.js";
+import processClick from "../core/Interaction.js";
+
+import GameCache from "../am/GameCache.js";
 import Act from "../am/Act.js";
 
-
-// const createMessage = (id) => id.split("+").reduce((acc, part) => `${acc} ${getWord(part)}`, "");
-// /** @param {Object} message */
-// const addMessage = (message) => {
-//     if (message && hasProperty(message, "text") && isString(message.text)) {
-
-//         const text = createMessage(message.text);
-
-//         let narrator = null;
-//         if (hasProperty(message, "narrator")) {
-//             narrator = getWord(message.narrator);
-//         }
-
-//         Log.add(text, narrator);
-//     }
-// };
-
-// // move to am ???
-// const isElement = (object) => object instanceof Element;
-// const isItem = (object) => object instanceof Item;
-// const isHero = (object) => object instanceof Hero;
+import InGameUI from "../ui/InGameUI.js";
 
 
-// // TODO refactor ??
-
-// const renderElement = (element) => {
-//     if (Scenes.getCurrent().hasElement(element.getId())) {
-
-//         if (element.currentState) {
-//             renderObject(Scene, element);
-//         } else {
-//             Scene.remove(element.getId());
-//         }
-
-//     }
-// };
-// const renderItem = (item) => {
-
-//     if (item.currentState) {
-//         renderObject(Inventory, item);
-//     } else {
-//         Heroes.getCurrent().getInventory().removeItem(item.getId());
-//         Inventory.remove(item.getId());
-//     }
-// };
-// const renderHero = (hero) => {
-//     if (hero.currentState) {
-//         renderObject(Scene, hero);
-//     } else {
-//         Scene.remove(hero.getId());
-//     }
-// };
-// const changeObject = (object) => {
-//     if (isElement(object)) {
-//         renderElement(object);
-//     } else if (isItem(object)) {
-//         renderItem(object);
-//     } else if (isHero(object)) {
-//         renderHero(object);
-//     }
-// };
-// const highlightObject = (object) => {
-//     if (isElement(object)) {
-//         Scene.highlight(object.getId());
-//     } else if (isItem(object)) {
-//         Inventory.highlight(object.getId());
-//     } else if (isHero(object)) {
-//         Scene.highlight(object.getId());
-//     }
-// };
-// const clearCombination = () => {
-//     Interaction.clearCombination();
-//     Scene.removeHighlights();
-//     Inventory.removeHighlights();
-// };
 // const renderDeath = (id) => {
 //     Overlay.setTitle(createMessage("deathTitle"));
 //     Overlay.setText(createMessage(id));
@@ -88,50 +17,74 @@ import Act from "../am/Act.js";
 //     Overlay.show();
 // };
 
-// /** @param {Array<Object>} updates */
-// const handleUpdates = (updates) => {
-
-//     // console.log(updates);
-//     updates.forEach((update) => {
-
-//         if (update.type === TYPE.CHANGE) {
-//             changeObject(update.object);
-//         } else if (update.type === TYPE.COMBINE) {
-//             highlightObject(update.object);
-//         } else if (update.type === TYPE.DIALOG) {
-//             //
-//         } else if (update.type === TYPE.ENTER) {
-//             loadScene(update.object.getId());
-//         } else if (update.type === TYPE.LOST) {
-//             renderDeath(update.object.getId());
-//         }
-
-//     });
-// };
-
 const InGameState = class {
 
     #currentAct;
+
+    #updateSceneElements;
+
+    #updateInventoryElements;
+
+    #updateLog;
 
     #toRender;
 
     /** @type {InGameUI} */
     #wrapper;
 
-    /** @param {Array<{}>} updates  */
+    // TODO refactor
+    /** @param {Array<{text: string, elements: [{id: string, highlight?: boolean, remove?: boolean}]}>} updates  */
     #processUpdates = (updates) => {
 
-        // clear highlights after combination or canceled combination
-        // render death
-        // update elements from Scene -> remove, hide, show
-        // update elements from Inventory -> add, remove
+        const { text, elements } = updates;
 
-        // scene: {hide: [id1, id2, ...], remove: [id3, id4, ...], show: [id5, id6, ...]}
-        // select?: [id7, id8, ..], deselect?: [..]
-        // inventory: {add: [..], remove: [..]}
+        if (isNotEmptyString(text)) {
 
-        if (updates instanceof Array) {
-            updates.forEach((update) => {
+            // TODO insert: BUT no getWord -> move all the IDs to UI
+            // const createMessage = (id) => id.split("+").reduce((acc, part) => `${acc} ${getWord(part)}`, "");
+            // /** @param {Object} message */
+            // const addMessage = (message) => {
+            //     if (message && hasProperty(message, "text") && isString(message.text)) {
+
+            //         const text = createMessage(message.text);
+
+            //         let narrator = null;
+            //         if (hasProperty(message, "narrator")) {
+            //             narrator = getWord(message.narrator);
+            //         }
+
+            //         Log.add(text, narrator);
+            //     }
+            // };
+            // this.nextMessage = { text };//, narrator);
+        }
+
+        if (elements instanceof Array) {
+
+            elements.forEach((element) => {
+
+                console.log(element);
+
+                const { id, item, remove } = element;
+
+                if (isNotEmptyString(id) && GameCache.hasItem(id)) {
+                    this.#updateSceneElements.push(Act.getElement(id).getProperties());
+                }
+
+                if (isNotEmptyString(item)) {
+                    this.#updateInventoryElements.push(Act.getElement(item).getProperties());
+                    // add item to hero's inventory
+                    this.#currentAct.getActiveHero().getInventory().addItem(item);
+                }
+
+                if (isNotEmptyString(remove)) {
+                    this.#updateSceneElements.push({ ...Act.getElement(remove).getProperties(), remove: true });
+                }
+
+                // enter: string = scene id
+                // dialog: string = dialog id -> GameStates.push(new DialogState(dialog))
+                // lost: string = text id -> GameStates.pop(); GameStates.push(new GameOverState())
+                // highlight: boolean
 
             });
         }
@@ -139,16 +92,17 @@ const InGameState = class {
 
     #handleInput = (input) => {
         if (input) {
+            const { id, left, right } = input;
 
             /** @type {Array<string>} Array with all element IDs that need to be updated. */
             let updates = [];
 
-            const element = (input.id) ? this.#currentAct.getElement(input.id) : null;
+            const element = (isNotEmptyString(id)) ? Act.getElement(id) : null;
 
-            if (input.left) {
-                updates = Interaction.leftClick(element);
-            } else if (input.right) {
-                updates = Interaction.rightClick(element);
+            if (left) {
+                updates = processClick(element || null, element?.getLeftAction() || null);
+            } else if (right) {
+                updates = processClick(element || null, element?.getRightAction() || null);
             }
 
             this.#processUpdates(updates);
@@ -160,18 +114,21 @@ const InGameState = class {
      */
     constructor(properties) {
 
-        this.#currentAct = new Act(properties.name, properties.elements)
+        GameCache.append(properties?.elements);
+
+        this.#currentAct = new Act(properties.name)
             .loadScene(properties.start)
             .setActiveHero(properties.hero);
 
         this.#wrapper = new InGameUI()
-            .setSceneTitle(getWord(this.#currentAct.getCurrentScene().getName()))
-            // TODO clear scene before adding elements of another scene
-            .updateSceneElements(this.#currentAct.getAllElements())
-            .updateInventoryElements()
-            .updateLog();
+            .setSceneTitle(this.#currentAct.getCurrentScene().getName());
+        // TODO clear scene before adding elements of another scene
 
-        // move between scenes
+        this.#updateSceneElements = this.#currentAct.getAllElementsProperties();
+        this.#updateInventoryElements = [];
+        this.#updateLog = null;
+
+        // TODO move between scenes
         // * load elements of new scene
         // * set scene title
         // * reset log if necessary
@@ -192,12 +149,22 @@ const InGameState = class {
             this.#wrapper.render(ctx);
             this.#toRender = false;
         }
+        if (this.#updateSceneElements.length > 0) {
+            this.#wrapper.updateSceneElements(this.#updateSceneElements);
+            this.#updateSceneElements = [];
+        }
+        if (this.#updateInventoryElements.length > 0) {
+            this.#wrapper.updateInventoryElements(this.#updateInventoryElements);
+            this.#updateInventoryElements = [];
+        }
+        if (this.#updateLog !== null) {
+            this.#wrapper.updateLog(this.#updateLog);
+            this.#updateLog = null;
+        }
     }
 
     update() {
-
         this.#handleInput(EventManager.getInputEvent());
-
     }
 
 };

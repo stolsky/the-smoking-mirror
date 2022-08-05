@@ -4,10 +4,13 @@ import BaseObject from "./BaseObject.js";
 
 const Element = class extends BaseObject {
 
+    /** @type {string} */
     #type;
 
+    /** @type {boolean} */
     #moveable;
 
+    /** @type {boolean} */
     #visible;
 
     constructor(id = "elem", name = "Element", states = null) {
@@ -21,6 +24,34 @@ const Element = class extends BaseObject {
         this.updateState(1);
     }
 
+    getProperties() {
+        return {
+            ...super.getProperties(),
+            type: this.getType(),
+            moveable: this.isMoveable(),
+            visible: this.isVisible()
+        };
+    }
+
+    getType() {
+        return this.#type;
+    }
+
+    isMoveable() {
+        return this.#moveable;
+    }
+
+    isVisible() {
+        return this.#visible;
+    }
+
+    setMobility(bool) {
+        if (isBoolean(bool)) {
+            this.#moveable = bool;
+        }
+        return this;
+    }
+
     setType(type) {
         if (isString(type)) {
             this.#type = type;
@@ -28,30 +59,11 @@ const Element = class extends BaseObject {
         return this;
     }
 
-    getType() {
-        return this.#type;
-    }
-
-    setVisible(bool) {
+    setVisibility(bool) {
         if (isBoolean(bool)) {
             this.#visible = bool;
         }
         return this;
-    }
-
-    isVisible() {
-        return this.#visible;
-    }
-
-    setMoveable(bool) {
-        if (isBoolean(bool)) {
-            this.#moveable = bool;
-        }
-        return this;
-    }
-
-    isMoveable() {
-        return this.#moveable;
     }
 
     updateState(id) {
@@ -63,8 +75,8 @@ const Element = class extends BaseObject {
                 .setName(now.name)
                 .setForeground(now.fore)
                 .setBackground(now.back)
-                .setMoveable(now.moveable)
-                .setVisible(now.visible);
+                .setMobility(now.moveable)
+                .setVisibility(now.visible);
         }
     }
 

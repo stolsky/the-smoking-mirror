@@ -1,6 +1,5 @@
 
 import { EventType, isNotEmptyString, isString } from "../../lib/JST/native/typeCheck.js";
-import { $ } from "../../lib/JST/dom/queries.js";
 import Cache from "../../lib/JST/resource/Cache.js";
 import Container from "../../lib/JST/dom/Container.js";
 import TextComponent from "../../lib/JST/dom/TextComponent.js";
@@ -18,36 +17,24 @@ const HIGHLIGHT = "Highlight";
  * @param {string} className
  */
 const updateClassName = (element, className) => {
-    if (isNotEmptyString(className) && !element.hasClass(className)) {
+    if (!element.hasClass(className)) {
         // TODO replace class type not add it
         element.addClass(className);
     }
 };
 
-/**
- * @param {TextComponent} element
- * @param {string} text
- */
 const updateText = (element, text) => {
-    if (isString(text)) {
-        if (element.getText() !== text) {
-            element.setText(text);
-        }
+    if (element.getText() !== text) {
+        element.setText(text);
     }
 };
 
-/**
- * @param {Container} parent
- * @param {string} className
- * @param {string} text
- */
-const updateTextComponent = (parent, className, text) => {
-    const child = $(parent, `.${className}`);
-    if (child) {
-        updateText(child, text);
-    } else {
-        parent.addComponent(new TextComponent(text, className));
-    }
+const updateName = (parent, id) => {
+    updateText(parent.getChildren()[0], getWord(id));
+};
+
+const updateInformation = (parent, id) => {
+    updateText(parent.getChildren()[1], getWord(id));
 };
 
 /**
@@ -57,11 +44,18 @@ const updateTextComponent = (parent, className, text) => {
  */
 const updateStyle = (element, key, value) => {
     if (isNotEmptyString(value)) {
-        // TODO add space after commas in color values
-        if (element.getStyle(key) !== value) {
+        //if (element.getStyle(key) !== value) {
             element.setStyle(key, value);
-        }
+        //}
     }
+};
+
+const updateForeground = (element, rgbValue) => {
+    updateStyle(element, "color", `rgb(${rgbValue})`);
+};
+
+const updateBckground = (element, rgbValue) => {
+    updateStyle(element, "background-color", `rgba(${rgbValue}, 0.5)`);
 };
 
 const CollectionManager = class extends Wrapper {
@@ -108,6 +102,8 @@ const CollectionManager = class extends Wrapper {
 
         // before add properties remove = true, highlight = true/false
 
+        console.log(properties);
+
         // TODO create private methods for all property updates with checks if update is necessary -> property of the element has changed
 
         const { id } = properties;
@@ -118,9 +114,12 @@ const CollectionManager = class extends Wrapper {
             if (this.#elements.hasItem(id)) {
                 element = this.#elements.getItem(id);
             } else {
-                element = new Container("Element");
-                // MouseEvent.click applies only to the left mouse button
-                element.addEventListener(EventType.mouseup, (event) => EventManager.setInputEvent(event, id));
+
+                element = new Container("Element")
+                    .append(new TextComponent("", "Name"), new TextComponent("", "Information"))
+                    // MouseEvent.click applies only to the left mouse button
+                    .addEventListener(EventType.mouseup, (event) => EventManager.setInputEvent(event, id));
+
                 this.#elements.setItem(id, element);
                 this.addComponent(element);
             }
@@ -128,17 +127,30 @@ const CollectionManager = class extends Wrapper {
             const { visible } = properties;
             if (visible === undefined || visible) {
 
+                element.show();
+
                 const { background, name, foreground, information, type } = properties;
 
-                updateClassName(element, type);
+                if (isNotEmptyString(type)) {
+                    updateClassName(element, type);
+                }
 
-                updateTextComponent(element, "Name", getWord(name));
+                if (isNotEmptyString(type)) {
+                    updateName(element, name);
+                }
 
-                updateTextComponent(element, "Information", getWord(information));
+                if (isString(information)) {
+                    updateInformation(element, information);
+                }
 
-                updateStyle(element, "color", `rgb(${foreground})`);
+                // TODO improve rgb values
+                if (isNotEmptyString(foreground)) {
+                    updateForeground(element, foreground);
+                }
 
-                updateStyle(element, "background-color", `rgba(${background}, 0.5)`);
+                if (isNotEmptyString(background)) {
+                    updateBckground(element, background);
+                }
 
             } else {
                 element.hide();

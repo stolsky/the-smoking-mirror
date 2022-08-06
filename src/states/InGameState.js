@@ -36,6 +36,8 @@ const InGameState = class {
     /** @param {Array<{text: string, elements: [{id: string, highlight?: boolean, remove?: boolean}]}>} updates  */
     #processUpdates = (updates) => {
 
+        console.log(updates);
+
         const { text, elements } = updates;
 
         if (isNotEmptyString(text)) {
@@ -62,8 +64,6 @@ const InGameState = class {
         if (elements instanceof Array) {
 
             elements.forEach((element) => {
-
-                console.log(element);
 
                 const { id, item, remove } = element;
 

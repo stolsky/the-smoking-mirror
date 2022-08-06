@@ -1,33 +1,34 @@
 
-.Application .TextPage {
-    height: 90%;
-}
-
-.Application .TextPage {
+.Application .TextPage .Content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: normal;
-    gap: 50px;
+    font-family: serif;
 }
 
-.Application .TextPage .Title {
+.Application .TextPage .Content .Title {
     font-size: 2em;
+    margin-bottom: 2em;
 }
 
-.Application .TextPage .Text {
+.Application .TextPage .Content .Text {
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
 
-.Application .TextPage .Text span {
+.Application .TextPage .Content .Text span {
     text-align: justify;
 }
 
 .Application .TextPage .Hint {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 5px 0;
     font-size: 90%;
     font-style: italic;
+    text-align: center;
 }
 
 .Application .TextPage.Intro {

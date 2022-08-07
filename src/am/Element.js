@@ -68,6 +68,7 @@ const Element = class extends BaseObject {
 
     updateState(id) {
 
+        // TODO improve with object destructuring
         const now = this.setCurrentState(id).getCurrentState();
         if (now) {
             this.setType(now.type)

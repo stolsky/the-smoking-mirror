@@ -117,7 +117,7 @@
                     "type": "Take",
                     "back": "171,171,171",
                     "left": [
-                        {"text": "paris1Newspaper03", "stmt": ["TAKE newspaper", "SELF 0"]}
+                        {"text": "paris1Newspaper03", "stmt": ["HERO TAKE newspaper", "SELF 0"]}
                     ],
                     "right": [
                         {"text": "paris1Newspaper02"}

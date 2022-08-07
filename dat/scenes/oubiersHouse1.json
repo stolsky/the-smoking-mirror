@@ -104,7 +104,7 @@
                     "visible": false,
                     "back": "119,134,133",
                     "left": [
-                        {"text": "paris1Bracket04", "stmt": ["SELF 2", "bookcase 3", "HERO 2", "chair SHOW", "rope SHOW", "photograph SHOW", "candle SHOW", "bureau SHOW", "drawer SHOW", "window SHOW", "window2 SHOW", "bag SHOW", "dart2 SHOW", "box SHOW", "syphon SHOW", "cabinet SHOW", "flames SHOW", "door SHOW"]}
+                        {"text": "paris1Bracket04", "stmt": ["SELF 2", "HERO 2", "bookcase 3", "chair SHOW", "rope SHOW", "photograph SHOW", "candle SHOW", "bureau SHOW", "drawer SHOW", "window SHOW", "window2 SHOW", "bag SHOW", "blowDart2 SHOW", "box SHOW", "syphon SHOW", "cabinet SHOW", "flames SHOW", "door SHOW"]}
                     ],
                     "right": [
                         {"text": "paris1Bracket02"},
@@ -124,7 +124,7 @@
         },
         {
             "id": "chair",
-            "name": "chairparis1Chair01",
+            "name": "paris1Chair01",
             "states": [
                 {
                     "id": 1,
@@ -132,10 +132,10 @@
                     "visible": false,
                     "back": "49,25,10",
                     "left": [
-                        {"text": "chairparis1Chair02"}
+                        {"text": "paris1Chair02"}
                     ],
                     "right": [
-                        {"text": "chairparis1Chair03"}
+                        {"text": "paris1Chair03"}
                     ]
                 }
             ]
@@ -274,7 +274,7 @@
                     "visible": false,
                     "back": "187,185,173",
                     "left": [
-                        {"text": "paris1Worm04", "stmt": ["TAKE worm", "SELF 0"]}
+                        {"text": "paris1Worm04", "stmt": ["HERO TAKE worm", "SELF 0"]}
                     ],
                     "right": [
                         {"text": "paris1Worm02", "stmt": ["SELF 2"]}
@@ -283,7 +283,7 @@
                 {
                     "id": 2,
                     "left": [
-                        {"text": "paris1Worm03", "stmt": ["TAKE worm", "SELF 0"]}
+                        {"text": "paris1Worm03", "stmt": ["HERO TAKE worm", "SELF 0"]}
                     ],
                     "right": [
                         {"text": "paris1Worm02"}
@@ -301,7 +301,7 @@
                     "visible": false,
                     "back": "152,80,52",
                     "left": [
-                        {"text": "paris1Drawer03", "stmt": ["SELF 2", "TAKE pot"]}
+                        {"text": "paris1Drawer03", "stmt": ["SELF 2", "HERO TAKE pot"]}
                     ],
                     "right": [
                         {"text": "paris1Drawer02"}
@@ -412,7 +412,7 @@
                     "visible": false,
                     "back": "146,0,0",
                     "left": [
-                        {"text": "paris1Bag03", "stmt": ["SELF 2", "TAKE lipstick", "TAKE letter", "TAKE panties"]}
+                        {"text": "paris1Bag03", "stmt": ["SELF 2", "HERO TAKE lipstick", "HERO TAKE letter", "HERO TAKE panties"]}
                     ],
                     "right": [
                         {"text": "paris1Bag02"}
@@ -430,7 +430,7 @@
             ]
         },
         {
-            "id": "dart2",
+            "id": "blowDart2",
             "name": "paris1Dart01",
             "states": [
                 {
@@ -439,7 +439,7 @@
                     "visible": false,
                     "back": "39,71,58",
                     "left": [
-                        {"text": "paris1Dart03", "stmt": ["TAKE blowDart", "SELF 0"]}
+                        {"text": "paris1Dart03", "stmt": ["HERO TAKE blowDart", "SELF 0"]}
                     ],
                     "right": [
                         {"text": "paris1Dart02"}
@@ -552,7 +552,7 @@
                         {"text": "paris1Cylinder02"}
                     ],
                     "combos": [
-                        {"id": "panties", "text": "paris1Cylinder04", "stmt": ["cylinder2 0", "TAKE cylinder", "cabinet 3"]}
+                        {"id": "panties", "text": "paris1Cylinder04", "stmt": ["cylinder2 0", "HERO TAKE cylinder", "cabinet 3"]}
                     ]
                 }
             ]

@@ -41,36 +41,6 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
     height: calc(100% - 10px);
 }
 
-/* @deprecated
-.Application .InGameUI > .Overlay {
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-
-    background-color: #000;
-    color: #ffffff;
-}
-.Application .InGameUI > .Overlay .Title {
-    font-size: 2em;
-    margin-bottom: 5%;
-}
-.Application .InGameUI > .Overlay .Text {
-}
-.Application .InGameUI > .Overlay .Hint {
-    position: absolute;
-    bottom: 1%;
-    font-size: 0.8em;
-}
-*/
-
 .Application .InGameUI > .Title {
     grid-column-start: 1;
     grid-column-end: 3;
@@ -177,7 +147,7 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
     align-content: flex-start;
 
 }
-.Application .InGameUI > .Inventory .Item {
+.Application .InGameUI > .Inventory .Element {
     box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
     font-size: 0.8em;
     padding: 2px 4px;
@@ -185,12 +155,12 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
 }
 
 .Application .InGameUI > .Scene .Element:hover,
-.Application .InGameUI > .Inventory .Item:hover {
+.Application .InGameUI > .Inventory .Element:hover {
     outline: 3px solid var(--HIGHLIGHT);
     box-shadow: 0;
 }
 .Application .InGameUI > .Scene .Element.Highlight,
-.Application .InGameUI > .Inventory .Item.Highlight {
+.Application .InGameUI > .Inventory .Element.Highlight {
     outline: 3px solid #ff0000;
     box-shadow: 0;
 }
@@ -203,47 +173,3 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
 
     background-color: rgba(255, 255, 255, 0.5);
 }
-
-/*
-
-.Application>.Title {position: relative; text-align: center; color: #ffffff; background: #000000; line-height: var(--TITLEHEIGHT); font-size: 1em;}
-
-.Application>.Scene, .Application .TextBox {
-    position: relative;
-    width: calc(var(--APPWIDTH) * 0.5 - var(--GAP) * 2);
-    padding: var(--GAP);
-    overflow: hidden;
-    float: left;
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--GAP) * 0.5);
-}
-
-.Application>.Scene {height: calc(var(--APPHEIGHT) - var(--TITLEHEIGHT) - var(--INVENTORYHEIGHT) - var(--GAP) * 2);}
-.Application>.Scene>.Element {padding: 2px 5px; font-size: 0.8em;}
-.Application>.Scene>.Element>.Name {font-weight: bold; margin-right: 5px;}
-.Application>.Scene>.Element>.Info {font-style: italic;}
-.Application>.Scene>.Element.Explored {color: #666666;}
-
-
-
-.Application>.TextBox>.Message {font-size: 0.9em; color: #666666;}
-.Application>.TextBox>.Message:first-child {color: #000000;}
-.Application>.TextBox .Name {font-weight: bold;}
-.Application>.TextBox .Name::after {content: ":";}
-.Application>.TextBox .Text {text-align: justify;}
-
-.Application .Highlight {text-shadow: -1px 0 #ff0000, 0 1px #ff0000, 1px 0 #ff0000, 0 -1px #ff0000;}
-
-.Application .Inventory {
-    position: relative;
-    display: flex;
-    width: calc(var(--APPWIDTH) - 20px); height: var(--INVENTORYHEIGHT);
-    align-items: center;
-    color: #ffffff;
-    background: #000000;
-    padding: 0px 10px;
-}
-.Application>.Inventory>.Item {}
-
-*/

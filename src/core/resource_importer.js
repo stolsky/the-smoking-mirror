@@ -1,5 +1,5 @@
 
-import { hasProperty } from "../../lib/JST/native/typeCheck.js";
+import { isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
 import Cache from "../../lib/JST/resource/Cache.js";
 
 import Dialog from "../am/Dialog.js";
@@ -17,9 +17,8 @@ const importResource = (source, method) => {
 
     if (source instanceof Array) {
         source.forEach((element) => {
-            const result = method(element);
-            if (result instanceof Object && hasProperty(result, "key") && hasProperty(result, "value")) {
-                const { key, value } = result;
+            const { key, value } = method(element);
+            if (isNotEmptyString(key) && value) {
                 cache.setItem(key, value);
             }
         });
@@ -35,20 +34,20 @@ const importFlags = (source) => importResource(source, (flag) => {
     return { key: id, value: new Flag(id, type, value) };
 });
 
-const importHeroes = (source) => importResource(source, (hero) => ({ key: hero.id, value: new Hero(hero) }));
+const importHeroes = (source) => importResource(source, (hero) => {
+    const { id, name, states } = hero;
+    return { key: id, value: new Hero(id, name, states) };
+});
+
 
 const importItems = (source) => importResource(source, (item) => {
-    if (hasProperty(item, "id") && hasProperty(item, "name") && hasProperty(item, "states")) {
-        return { key: item.id, value: new Item(item.id, item.name, item.states) };
-    }
-    return null;
+    const { id, name, states } = item;
+    return { key: id, value: new Item(id, name, states) };
 });
 
 const importElements = (source) => importResource(source, (element) => {
-    if (hasProperty(element, "id") && hasProperty(element, "name") && hasProperty(element, "states")) {
-        return { key: element.id, value: new Element(element.id, element.name, element.states) };
-    }
-    return null;
+    const { id, name, states } = element;
+    return { key: id, value: new Element(id, name, states) };
 });
 
 const importScenes = (source) => {
@@ -58,22 +57,23 @@ const importScenes = (source) => {
     temporyCache.append(importResource(source, (scene) => {
 
         let elementsIDs = null;
-        if (hasProperty(scene, "elems")) {
+        const { id, name, elems, dialogs } = scene;
+        if (elems) {
             if (scene.elems instanceof Array) {
                 elementsIDs = scene.elems.map((element) => element.id);
             }
             temporyCache.append(importElements(scene.elems));
         }
 
-        if (hasProperty(scene, "dialogs")) {
+        if (dialogs) {
             temporyCache.append(importDialogs(scene.dialogs));
         }
 
-        if (hasProperty(scene, "id") && hasProperty(scene, "name")) {
-            return { key: scene.id, value: new Scene(scene.id, scene.name, elementsIDs) };
+        if (id && name) {
+            return { key: id, value: new Scene(id, name, elementsIDs) };
         }
-        return null;
 
+        return null;
     }));
 
     return temporyCache;

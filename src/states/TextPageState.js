@@ -31,8 +31,7 @@ const TextPageState = class {
     }
 
     exit() {
-        // remove intro components
-        this.#wrapper.remove();
+        this.#wrapper.clear().remove();
         this.#wrapper = null;
         this.#toRender = false;
     }

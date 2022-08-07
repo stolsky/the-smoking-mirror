@@ -1,5 +1,6 @@
 import { hasProperty, isNotEmptyString, isNumber, isString } from "../../lib/JST/native/typeCheck.js";
 
+// TODO improve code not returning null
 
 const BaseObject = class {
 
@@ -13,7 +14,7 @@ const BaseObject = class {
     #current_state;
 
     /** @type {string} */
-    #info;
+    #information;
 
     /** @type {string} */
     #foreground;
@@ -36,101 +37,28 @@ const BaseObject = class {
             .setCurrentState(-1);
     }
 
-    getId() {
-        return this.#id;
+    getBackground() {
+        return this.#background;
     }
 
-    /** @returns {{id: string, name: string, foreground: string, background: string, information: string}} */
-    getProperties() {
-        return {
-            id: this.getId(),
-            name: this.getName(),
-            foreground: this.getForeground(),
-            background: this.getBackground(),
-            information: this.getInformation()
-        };
+    getCombinations() {
+        return (this.#current_state && hasProperty(this.#current_state, "comb")) ? this.#current_state.comb : null;
     }
 
-    setName(name) {
-        if (isNotEmptyString(name)) {
-            this.#name = name;
-        }
-        return this;
-    }
-
-    getName() {
-        return this.#name;
-    }
-
-    setInformation(info) {
-        if (isString(info, true)) {
-            this.#info = info;
-        }
-        return this;
-    }
-
-    getInformation() {
-        return this.#info;
-    }
-
-    setForeground(color) {
-        if (isString(color)) {
-            this.#foreground = color;
-        }
-        return this;
+    getCurrentState() {
+        return this.#current_state;
     }
 
     getForeground() {
         return this.#foreground;
     }
 
-    setBackground(color) {
-        if (isString(color)) {
-            this.#background = color;
-        }
-        return this;
+    getId() {
+        return this.#id;
     }
 
-    getBackground() {
-        return this.#background;
-    }
-
-    /** @param {{foreground: string, background: string}} colors */
-    setColors(colors = {}) {
-        if (hasProperty(colors, "foreground") && isString(colors.foreground)) {
-            this.#foreground = colors.foreground;
-        }
-        if (hasProperty(colors, "background") && isString(colors.background)) {
-            this.#background = colors.background;
-        }
-        return this;
-    }
-
-    getColors() {
-        return { foreground: this.#foreground, background: this.#background };
-    }
-
-    /** @param {Array<Object>} states */
-    setStates(states) {
-        if (states instanceof Array) {
-            this.#states = states.map((state) => ({ ...state, ...{ leftIndex: 0, rightIndex: 0 } }));
-        }
-        return this;
-    }
-
-    getStates() {
-        return this.#states;
-    }
-
-    setCurrentState(id) {
-        if (isNumber(id) && this.#states instanceof Array) {
-            this.#current_state = this.#states.find((state) => state.id === id) ?? null;
-        }
-        return this;
-    }
-
-    getCurrentState() {
-        return this.#current_state;
+    getInformation() {
+        return this.#information;
     }
 
     getLeftAction() {
@@ -144,6 +72,21 @@ const BaseObject = class {
         return action;
     }
 
+    getName() {
+        return this.#name;
+    }
+
+    /** @returns {{id: string, name: string, foreground: string, background: string, information: string}} */
+    getProperties() {
+        return {
+            id: this.getId(),
+            name: this.getName(),
+            foreground: this.getForeground(),
+            background: this.getBackground(),
+            information: this.getInformation()
+        };
+    }
+
     getRightAction() {
         let action = null;
         if (this.#current_state && hasProperty(this.#current_state, "right")) {
@@ -155,8 +98,51 @@ const BaseObject = class {
         return action;
     }
 
-    getCombinations() {
-        return (this.#current_state && hasProperty(this.#current_state, "comb")) ? this.#current_state.comb : null;
+    getStates() {
+        return this.#states;
+    }
+
+    setBackground(color) {
+        if (isNotEmptyString(color)) {
+            this.#background = color;
+        }
+        return this;
+    }
+
+    setCurrentState(id) {
+        if (isNumber(id) && this.#states instanceof Array) {
+            this.#current_state = this.#states.find((state) => state.id === id) ?? null;
+        }
+        return this;
+    }
+
+    setForeground(color) {
+        if (isNotEmptyString(color)) {
+            this.#foreground = color;
+        }
+        return this;
+    }
+
+    setInformation(information) {
+        if (isString(information, true)) {
+            this.#information = information;
+        }
+        return this;
+    }
+
+    setName(name) {
+        if (isNotEmptyString(name)) {
+            this.#name = name;
+        }
+        return this;
+    }
+
+    /** @param {Array<Object>} states */
+    setStates(states) {
+        if (states instanceof Array) {
+            this.#states = states.map((state) => ({ ...state, ...{ leftIndex: 0, rightIndex: 0 } }));
+        }
+        return this;
     }
 
 };

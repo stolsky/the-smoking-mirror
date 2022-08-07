@@ -13,6 +13,30 @@ import InGameState from "./InGameState.js";
 import TextPageState from "./TextPageState.js";
 
 
+const loadNewGame = () => {
+    loadActScript("paris1").then((script) => {
+
+        GameStates.pop();
+
+        const { active, flags, heroes, intro, name, scenes, start } = script;
+        const elements = new Cache();
+        if (isNotEmptyString(flags)) {
+            elements.append(importFlags(flags.split(",")));
+        }
+        elements.append(importHeroes(heroes));
+        Promise.all([loadItems(), loadScenes(scenes.split(","))]).then((result) => {
+
+            elements.append(importItems(result[0]));
+            elements.append(importScenes(result[1]));
+            GameStates.push(new InGameState({ name, start, hero: active, elements }));
+
+            if (intro) {
+                GameStates.push(new TextPageState("Intro", intro));
+            }
+        });
+    });
+};
+
 const MenuState = class {
 
     #toRender;
@@ -26,29 +50,7 @@ const MenuState = class {
             .setTitle("GameTitle")
             .setSubTitle("GameSubTitle")
             .setDisclaimer("menuDisclaimer")
-            .addButton("menuNewGame", () => {
-                loadActScript("paris1").then((script) => {
-
-                    GameStates.pop();
-
-                    const { active, flags, heroes, intro, name, scenes, start } = script;
-                    const elements = new Cache();
-                    if (isNotEmptyString(flags)) {
-                        elements.append(importFlags(flags.split(",")));
-                    }
-                    elements.append(importHeroes(heroes));
-                    Promise.all([loadItems(), loadScenes(scenes.split(","))]).then((result) => {
-
-                        elements.append(importItems(result[0]));
-                        elements.append(importScenes(result[1]));
-                        GameStates.push(new InGameState({ name, start, hero: active, elements }));
-
-                        if (intro) {
-                            GameStates.push(new TextPageState("Intro", intro));
-                        }
-                    });
-                });
-            });
+            .addButton("menuNewGame", () => loadNewGame());
 
         if (hasSaveGame()) {
             this.#wrapper.addButton("menuLoadGame", () => {
@@ -64,7 +66,7 @@ const MenuState = class {
     }
 
     exit() {
-        this.#wrapper.remove();
+        this.#wrapper.clear().remove();
         this.#wrapper = null;
         this.#toRender = false;
     }

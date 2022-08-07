@@ -12,7 +12,7 @@
 
     "charGeorgeName": "George",
 
-    "deathTitle": "You are dead!",
+    "gameOver": "You are dead!",
 
     "georgeWrong1": "That wouldn't work.",
     "georgeWrong2": "Uhh... no.",

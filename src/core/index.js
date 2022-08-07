@@ -10,7 +10,7 @@ import SetupState from "../states/SetupState.js";
 
 let ctx = null;
 
-const TIME_FRAME = 100;
+const TIME_FRAME = 200;
 let time_elapsed = 0;
 
 const game_loop = (dt) => {

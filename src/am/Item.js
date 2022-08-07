@@ -1,14 +1,10 @@
-import { hasProperty } from "../../lib/JST/native/typeCheck.js";
+
 import BaseObject from "./BaseObject.js";
 
 
 const Item = class extends BaseObject {
 
     constructor(id = "item", name = "Item", states = null) {
-
-        if (!hasProperty(states, "left")) {
-            Object.defineProperty(states, "left", { value: [{ stmt: ["SELF USE"] }] });
-        }
 
         super(id, name, states);
 

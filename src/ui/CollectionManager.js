@@ -1,5 +1,5 @@
 
-import { EventType, isNotEmptyString, isString } from "../../lib/JST/native/typeCheck.js";
+import { EventType, isBoolean, isNotEmptyString, isString } from "../../lib/JST/native/typeCheck.js";
 import Cache from "../../lib/JST/resource/Cache.js";
 import Container from "../../lib/JST/dom/Container.js";
 import TextComponent from "../../lib/JST/dom/TextComponent.js";
@@ -12,21 +12,14 @@ import Wrapper from "./Wrapper.js";
 
 const HIGHLIGHT = "Highlight";
 
-/**
- * @param {Container} element
- * @param {string} className
- */
+// TODO improve update methods -> only update if something has changed
+
 const updateClassName = (element, className) => {
-    if (!element.hasClass(className)) {
-        // TODO replace class type not add it
-        element.addClass(className);
-    }
+    element.addClass(className);
 };
 
 const updateText = (element, text) => {
-    if (element.getText() !== text) {
-        element.setText(text);
-    }
+    element.setText(text);
 };
 
 const updateName = (parent, id) => {
@@ -37,51 +30,34 @@ const updateInformation = (parent, id) => {
     updateText(parent.getChildren()[1], getWord(id));
 };
 
+const updateHighlight = (element, highlight) => {
+    if (highlight && !element.hasClass(HIGHLIGHT)) {
+        element.addClass(HIGHLIGHT);
+    } else if (!highlight && element.hasClass(HIGHLIGHT)) {
+        element.removeClass(HIGHLIGHT);
+    }
+};
+
 /**
  * @param {Container} element
  * @param {string} cssProperty
  * @param {string} value
  */
 const updateStyle = (element, key, value) => {
-    if (isNotEmptyString(value)) {
-        //if (element.getStyle(key) !== value) {
-            element.setStyle(key, value);
-        //}
-    }
+    element.setStyle(key, value);
 };
 
+const updateBackground = (element, rgbValue) => {
+    updateStyle(element, "background-color", `rgba(${rgbValue}, 0.5)`);
+};
 const updateForeground = (element, rgbValue) => {
     updateStyle(element, "color", `rgb(${rgbValue})`);
-};
-
-const updateBckground = (element, rgbValue) => {
-    updateStyle(element, "background-color", `rgba(${rgbValue}, 0.5)`);
 };
 
 const CollectionManager = class extends Wrapper {
 
     /** @type {Cache} */
     #elements;
-
-    #highlightElement = (id, highlight = true) => {
-        if (this.#elements.hasItem(id)) {
-            const element = this.#elements.getItem("id");
-            if (highlight && !element.hasClass(HIGHLIGHT)) {
-                element.addClass(HIGHLIGHT);
-            } else if (!highlight && element.hasClass(HIGHLIGHT)) {
-                element.removeClass(HIGHLIGHT);
-            }
-        }
-        return this;
-    };
-
-    #removeElement = (id) => {
-        if (this.#elements.hasItem(id)) {
-            this.#elements.getItem(id).remove();
-            this.#elements.deleteItem(id);
-        }
-        return this;
-    };
 
     constructor(classNames) {
         super(classNames);
@@ -100,11 +76,7 @@ const CollectionManager = class extends Wrapper {
      */
     updateElement(properties) {
 
-        // before add properties remove = true, highlight = true/false
-
-        console.log(properties);
-
-        // TODO create private methods for all property updates with checks if update is necessary -> property of the element has changed
+        //console.log(properties);
 
         const { id } = properties;
         if (isNotEmptyString(id)) {
@@ -114,33 +86,28 @@ const CollectionManager = class extends Wrapper {
             if (this.#elements.hasItem(id)) {
                 element = this.#elements.getItem(id);
             } else {
-
                 element = new Container("Element")
                     .append(new TextComponent("", "Name"), new TextComponent("", "Information"))
                     // MouseEvent.click applies only to the left mouse button
                     .addEventListener(EventType.mouseup, (event) => EventManager.setInputEvent(event, id));
-
                 this.#elements.setItem(id, element);
                 this.addComponent(element);
             }
 
-            const { visible } = properties;
-            if (visible === undefined || visible) {
+            const { visible, remove } = properties;
+            if (remove) {
+
+                this.#elements.deleteItem(id);
+                element.remove();
+
+            } else if (visible === undefined || visible) {
 
                 element.show();
 
-                const { background, name, foreground, information, type } = properties;
+                const { background, foreground, highlight, information, name, type } = properties;
 
-                if (isNotEmptyString(type)) {
-                    updateClassName(element, type);
-                }
-
-                if (isNotEmptyString(type)) {
-                    updateName(element, name);
-                }
-
-                if (isString(information)) {
-                    updateInformation(element, information);
+                if (isNotEmptyString(background)) {
+                    updateBackground(element, background);
                 }
 
                 // TODO improve rgb values
@@ -148,8 +115,22 @@ const CollectionManager = class extends Wrapper {
                     updateForeground(element, foreground);
                 }
 
-                if (isNotEmptyString(background)) {
-                    updateBckground(element, background);
+                if (isBoolean(highlight)) {
+                    updateHighlight(element, highlight);
+                }
+
+
+                if (isString(information)) {
+                    updateInformation(element, information);
+                }
+
+                if (isNotEmptyString(name)) {
+                    updateName(element, name);
+                }
+
+
+                if (isNotEmptyString(type)) {
+                    updateClassName(element, type);
                 }
 
             } else {

@@ -2,9 +2,7 @@
 import { isNotEmptyString, isNumber } from "../../lib/JST/native/typeCheck.js";
 
 import GameCache from "../am/GameCache.js";
-import Element from "../am/Element.js";
 import Flag from "../am/Flag.js";
-import Item from "../am/Item.js";
 
 
 const Combination = (() => {
@@ -12,21 +10,68 @@ const Combination = (() => {
     /** @type {boolean} */
     let isInProgress = false;
 
-    const elements = [];
+    let lock = null;
+    let keys = [];
+
+    const clear = () => {
+        isInProgress = false;
+        lock = null;
+        keys = [];
+    };
 
     const core = {};
 
-    /**
-     * @param {Element | Item} element
-     *
-     * @returns {Array<{}>}
-     */
     core.add = (element) => {
-        console.log(element.getCombinations());
+
+        const combos = element.getCombinations();
+        if (combos instanceof Array) {
+            lock = element;
+        } else {
+            keys.push(element);
+        }
+
+        isInProgress = true;
+        return { id: element.getId(), highlight: true };
     };
 
     core.cancel = () => {
+        if (lock) {
+            keys.push(lock);
+        }
+        const deselectElements = keys.map((element) => ({ id: element.getId(), highlight: false }));
+        clear();
+        return deselectElements;
+    };
 
+    core.check = () => {
+
+        if (lock && keys.length > 0) {
+            let isCombination = true;
+
+            const { id, text, stmt } = lock.getCombinations();
+            const allIDs = id.split(",");
+
+            for (let i = 0; i < keys.length; i = i + 1) {
+                const currentID = keys[`${i}`].getId();
+                if (!allIDs.includes(currentID)) {
+                    isCombination = false;
+                    break;
+                }
+            }
+
+            if (isCombination) {
+                if (allIDs.length > keys.length) {
+                    return {};
+                }
+                isInProgress = false;
+                return { text, stmt };
+            }
+
+            isInProgress = false;
+            return { text: "Wrong Combination" };
+        }
+
+        return {};
     };
 
     core.isInProgress = () => isInProgress;
@@ -35,12 +80,18 @@ const Combination = (() => {
 })();
 
 /** @type {Element | Item} */
-let currentObject = null;
+let clickedObject = null;
+
+/** @type {Hero} */
+let activeHero = null;
 
 const evaluate = (condition) => {
-    const [id, value] = condition.split(" ");
-    const flag = GameCache.getItem(id);
-    return (flag instanceof Flag) ? flag.compareTo(value) : true;
+    if (isNotEmptyString(condition)) {
+        const [id, value] = condition.split(" ");
+        const flag = GameCache.getItem(id);
+        return (flag instanceof Flag) ? flag.compareTo(value) : true;
+    }
+    return false;
 };
 
 /**
@@ -52,25 +103,36 @@ const evaluate = (condition) => {
  */
 const applyMethod = (target, methodName, value = null) => {
 
+    //console.log(target, methodName, value);
+
     let result = null;
 
-    const targetId = target.getId();
-    const stateId = Number.parseInt(methodName, 10);
+    const targetID = target.getId();
+    const stateID = Number.parseInt(methodName, 10);
 
-    if (isNumber(stateId)) {
-        target.setCurrentState(stateId);
-        result = { id: targetId };
+    if (isNumber(stateID)) {
+        target.updateState(stateID);
+        if (targetID !== activeHero.getId()) {
+            result = { id: targetID };
+            if (stateID === 0) {
+                result.remove = true;
+            }
+        }
 
-    } else if (target instanceof Element && (methodName === "SHOW" || methodName === "HIDE")) {
+    } else if (methodName === "SHOW" || methodName === "HIDE") {
         target.setVisibility(methodName === "SHOW");
-        result = { id: targetId };
+        result = { id: targetID };
 
     } else if (methodName === "INFO") {
         target.setInformation(value);
-        result = { id: targetId };
+        result = { id: targetID };
 
     } else if (methodName === "USE") {
         result = Combination.add(target);
+
+    } else if (methodName === "TAKE" && GameCache.hasItem(value)) {
+        activeHero.getInventory().add(value);
+        result = { id: value };
 
     } else if (methodName === "INCLEFT") {
         target.getLeftAction();
@@ -82,17 +144,24 @@ const applyMethod = (target, methodName, value = null) => {
     return result;
 };
 
-const parseTarget = (id) => ((id === "SELF") ? currentObject : GameCache.getItem(id));
+const parseTarget = (id) => {
+
+    if (id === "SELF") {
+        return clickedObject;
+    }
+
+    if (id === "HERO") {
+        return activeHero;
+    }
+
+    return GameCache.getItem(id);
+};
 
 const parseAction = (action) => {
 
     if (isNotEmptyString(action)) {
 
         const [id, value1, value2] = action.split(" ");
-
-        if (id === "TAKE" && GameCache.hasItem(value1)) {
-            return { item: value1, remove: currentObject.getId() };
-        }
 
         if (id === "ENTER") {
             return { enter: value1 };
@@ -110,10 +179,10 @@ const parseAction = (action) => {
         if (target instanceof Flag) {
             // TODO improve options like adding, substracting here
             target.setValue(value1);
+
         } else {
             return applyMethod(target, value1, value2);
         }
-
 
     }
 
@@ -133,29 +202,42 @@ const processStatement = (statement) => {
     return parseAction(action);
 };
 
-const processClick = (element = null, action = null) => {
+const processClick = (hero, element = null, action = {}) => {
 
     const updates = {};
 
     if (element && action) {
 
-        currentObject = element;
+        activeHero = hero;
+        clickedObject = element;
+        let temp = action;
 
-        const { text, stmt } = action;
+        updates.elements = [];
+
+        if (Combination.isInProgress()) {
+            updates.elements.push(Combination.add(element));
+            temp = Combination.check();
+            if (!Combination.isInProgress()) {
+                updates.elements.splice(updates.elements.length, 0, Combination.cancel());
+            }
+        }
+
+        const { text, stmt } = temp;
 
         if (isNotEmptyString(text)) {
             updates.text = text;
         }
 
         if (stmt instanceof Array) {
-            updates.elements = [];
             stmt.forEach((statement) => {
+                // TODO optimize: no null return
                 const result = processStatement(statement);
                 if (result) {
                     updates.elements.push(result);
                 }
             });
         }
+
 
     } else if (Combination.isInProgress()) {
         updates.elements = Combination.cancel();

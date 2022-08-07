@@ -1,21 +1,20 @@
 
-import { isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
+import { isBoolean, isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
 
 import EventManager from "../core/EventManager.js";
 import processClick from "../core/interaction.js";
 
 import GameCache from "../am/GameCache.js";
 import Act from "../am/Act.js";
+import Element from "../am/Element.js";
+import Item from "../am/Item.js";
 
 import InGameUI from "../ui/InGameUI.js";
 
+import GameStates from "./GameStates.js";
+import MenuState from "./MenuState.js";
+import TextPageState from "./TextPageState.js";
 
-// const renderDeath = (id) => {
-//     Overlay.setTitle(createMessage("deathTitle"));
-//     Overlay.setText(createMessage(id));
-//     // Overlay.setCallback();
-//     Overlay.show();
-// };
 
 const InGameState = class {
 
@@ -42,49 +41,45 @@ const InGameState = class {
 
         if (isNotEmptyString(text)) {
 
-            // TODO insert: BUT no getWord -> move all the IDs to UI
-            // const createMessage = (id) => id.split("+").reduce((acc, part) => `${acc} ${getWord(part)}`, "");
-            // /** @param {Object} message */
-            // const addMessage = (message) => {
-            //     if (message && hasProperty(message, "text") && isString(message.text)) {
+            this.#updateLog = { text, narrator: this.#currentAct.getActiveHero().getName() };
 
-            //         const text = createMessage(message.text);
-
-            //         let narrator = null;
-            //         if (hasProperty(message, "narrator")) {
-            //             narrator = getWord(message.narrator);
-            //         }
-
-            //         Log.add(text, narrator);
-            //     }
-            // };
-            // this.nextMessage = { text };//, narrator);
         }
 
         if (elements instanceof Array) {
 
-            elements.forEach((element) => {
+            elements.forEach((elementProperties) => {
 
-                const { id, item, remove } = element;
+                const { highlight, id, lost, remove } = elementProperties;
 
-                if (isNotEmptyString(id) && GameCache.hasItem(id)) {
-                    this.#updateSceneElements.push(Act.getElement(id).getProperties());
+                if (lost) {
+
+                    GameStates.pop();
+                    GameStates.push(new MenuState());
+                    GameStates.push(new TextPageState("GameOver", { title: "gameOver", text: lost }));
+
+                } else {
+
+                    const element = GameCache.getItem(id);
+                    const propertiesToUpdate = element.getProperties();
+
+                    if (isBoolean(highlight)) {
+                        propertiesToUpdate.highlight = highlight;
+                    }
+
+                    if (isBoolean(remove)) {
+                        propertiesToUpdate.remove = remove;
+                    }
+
+                    if (element instanceof Element) {
+                        this.#updateSceneElements.push(propertiesToUpdate);
+                    } else if (element instanceof Item) {
+                        this.#updateInventoryElements.push(propertiesToUpdate);
+                    }
+
                 }
 
-                if (isNotEmptyString(item)) {
-                    this.#updateInventoryElements.push(Act.getElement(item).getProperties());
-                    // add item to hero's inventory
-                    this.#currentAct.getActiveHero().getInventory().addItem(item);
-                }
-
-                if (isNotEmptyString(remove)) {
-                    this.#updateSceneElements.push({ ...Act.getElement(remove).getProperties(), remove: true });
-                }
-
-                // enter: string = scene id
-                // dialog: string = dialog id -> GameStates.push(new DialogState(dialog))
-                // lost: string = text id -> GameStates.pop(); GameStates.push(new GameOverState())
-                // highlight: boolean
+                // TODO enter: string = scene id
+                // TODO dialog: string = dialog id -> GameStates.push(new DialogState(dialog))
 
             });
         }
@@ -92,20 +87,22 @@ const InGameState = class {
 
     #handleInput = (input) => {
         if (input) {
+
             const { id, left, right } = input;
+            const element = GameCache.getItem(id);
+            let action = {};
 
-            /** @type {Array<string>} Array with all element IDs that need to be updated. */
-            let updates = [];
-
-            const element = (isNotEmptyString(id)) ? Act.getElement(id) : null;
-
-            if (left) {
-                updates = processClick(element || null, element?.getLeftAction() || null);
-            } else if (right) {
-                updates = processClick(element || null, element?.getRightAction() || null);
+            if (element) {
+                if (left) {
+                    action = element.getLeftAction();
+                } else if (right) {
+                    action = element.getRightAction();
+                }
             }
 
-            this.#processUpdates(updates);
+            this.#processUpdates(
+                processClick(this.#currentAct.getActiveHero(), element, action)
+            );
         }
     };
 
@@ -141,7 +138,17 @@ const InGameState = class {
     }
 
     exit() {
-        return this;
+        this.#updateSceneElements = null;
+        this.#updateInventoryElements = null;
+        this.#updateLog = null;
+
+        this.#currentAct.clear();
+        this.#currentAct = null;
+        GameCache.clear();
+
+        this.#wrapper.clear().remove();
+        this.#wrapper = null;
+        this.#toRender = false;
     }
 
     render(ctx) {

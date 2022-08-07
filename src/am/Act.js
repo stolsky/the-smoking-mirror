@@ -26,6 +26,13 @@ const Act = class {
         return GameCache.getItem(id);
     }
 
+    clear() {
+        this.#name = null;
+        this.#activeHero = null;
+        this.#currentScene = null;
+        return this;
+    }
+
     getActiveHero() {
         return this.#activeHero;
     }

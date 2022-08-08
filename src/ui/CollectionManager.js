@@ -4,7 +4,7 @@ import Cache from "../../lib/JST/resource/Cache.js";
 import Container from "../../lib/JST/dom/Container.js";
 import TextComponent from "../../lib/JST/dom/TextComponent.js";
 
-import EventManager from "../core/EventManager.js";
+import EventManager from "../core/InputEventManager.js";
 import getWord from "../core/translate.js";
 
 import Wrapper from "./Wrapper.js";

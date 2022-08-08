@@ -1,41 +1,11 @@
 
-import { isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
-import Cache from "../../lib/JST/resource/Cache.js";
-
-import { hasSaveGame, loadActScript, loadItems, loadScenes } from "../core/resource_loader.js";
-import { importFlags, importHeroes, importItems, importScenes } from "../core/resource_importer.js";
+import { hasSaveGame } from "../core/resource_loader.js";
 
 import Menu from "../ui/Menu.js";
 
-import GameStates from "./GameStates.js";
-import LoadGameState from "./LoadGameState.js";
-import InGameState from "./InGameState.js";
-import TextPageState from "./TextPageState.js";
+import createNewGame from "./createNewGame.js";
+import GameStatesManager from "./GameStatesManager.js";
 
-
-const loadNewGame = () => {
-    loadActScript("paris1").then((script) => {
-
-        GameStates.pop();
-
-        const { active, flags, heroes, intro, name, scenes, start } = script;
-        const elements = new Cache();
-        if (isNotEmptyString(flags)) {
-            elements.append(importFlags(flags.split(",")));
-        }
-        elements.append(importHeroes(heroes));
-        Promise.all([loadItems(), loadScenes(scenes.split(","))]).then((result) => {
-
-            elements.append(importItems(result[0]));
-            elements.append(importScenes(result[1]));
-            GameStates.push(new InGameState({ name, start, hero: active, elements }));
-
-            if (intro) {
-                GameStates.push(new TextPageState("Intro", intro));
-            }
-        });
-    });
-};
 
 const MenuState = class {
 
@@ -50,11 +20,14 @@ const MenuState = class {
             .setTitle("GameTitle")
             .setSubTitle("GameSubTitle")
             .setDisclaimer("menuDisclaimer")
-            .addButton("menuNewGame", () => loadNewGame());
+            .addButton("menuNewGame", () => {
+                GameStatesManager.notify("done");
+                createNewGame();
+            });
 
         if (hasSaveGame()) {
             this.#wrapper.addButton("menuLoadGame", () => {
-                GameStates.push(new LoadGameState());
+                GameStatesManager.notify("loadGame");
             });
         }
 

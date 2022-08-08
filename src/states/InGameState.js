@@ -1,7 +1,7 @@
 
 import { isBoolean, isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
 
-import EventManager from "../core/EventManager.js";
+import EventManager from "../core/InputEventManager.js";
 import processClick from "../core/interaction.js";
 
 import GameCache from "../am/GameCache.js";
@@ -11,9 +11,7 @@ import Item from "../am/Item.js";
 
 import InGameUI from "../ui/InGameUI.js";
 
-import GameStates from "./GameStates.js";
-import MenuState from "./MenuState.js";
-import TextPageState from "./TextPageState.js";
+import GameStatesManager from "./GameStatesManager.js";
 
 
 const InGameState = class {
@@ -33,7 +31,7 @@ const InGameState = class {
 
     // TODO refactor
     /** @param {Array<{text: string, elements: [{id: string, highlight?: boolean, remove?: boolean}]}>} updates  */
-    #processUpdates = (updates) => {
+    #processUpdates(updates) {
 
         console.log(updates);
 
@@ -53,9 +51,9 @@ const InGameState = class {
 
                 if (lost) {
 
-                    GameStates.pop();
-                    GameStates.push(new MenuState());
-                    GameStates.push(new TextPageState("GameOver", { title: "gameOver", text: lost }));
+                    GameStatesManager
+                        .notify("done")
+                        .notify("gameOver", { title: "gameOver", text: lost });
 
                 } else {
 
@@ -83,9 +81,9 @@ const InGameState = class {
 
             });
         }
-    };
+    }
 
-    #handleInput = (input) => {
+    #handleInput(input) {
         if (input) {
 
             const { id, left, right } = input;
@@ -104,7 +102,7 @@ const InGameState = class {
                 processClick(this.#currentAct.getActiveHero(), element, action)
             );
         }
-    };
+    }
 
     /**
      * @param {{name: string, start: string, hero: string, elements: Cache}} properties

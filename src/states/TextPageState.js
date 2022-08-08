@@ -3,7 +3,7 @@ import { EventType } from "../../lib/JST/native/typeCheck.js";
 
 import TextPage from "../ui/TextPage.js";
 
-import GameStates from "./GameStates.js";
+import GameStatesManager from "./GameStatesManager.js";
 
 
 const TextPageState = class {
@@ -13,15 +13,15 @@ const TextPageState = class {
     /** @type {TextPage} */
     #wrapper;
 
-    constructor(className, properties) {
+    constructor(properties) {
 
-        const { title, text } = properties;
+        const { className, title, text } = properties;
 
         this.#wrapper = new TextPage(className)
             .setTitle(title)
             .setText(text)
             .setHint("clickToContinue")
-            .addEventListener(EventType.mouseup, () => GameStates.pop());
+            .addEventListener(EventType.mouseup, () => GameStatesManager.notify("done"));
 
         this.#toRender = true;
     }

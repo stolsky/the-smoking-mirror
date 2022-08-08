@@ -1,9 +1,8 @@
 
-import GameStates from "./GameStates.js";
-import MenuState from "./MenuState.js";
+import GameStatesManager from "./GameStatesManager.js";
 
 
-const SetupState = class {
+const SetupIntroState = class {
 
     #is_ready;
 
@@ -28,11 +27,12 @@ const SetupState = class {
 
     update() {
         if (this.#is_ready) {
-            GameStates.pop();
-            GameStates.push(new MenuState());
+            GameStatesManager
+                .notify("done")
+                .notify("gameMenu");
         }
     }
 };
 
 
-export default SetupState;
+export default SetupIntroState;

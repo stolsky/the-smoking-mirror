@@ -1,4 +1,6 @@
+
 import { isBoolean, isString } from "../../lib/JST/native/typeCheck.js";
+
 import BaseObject from "./BaseObject.js";
 
 

@@ -1,7 +1,7 @@
 
 import { EventType } from "../../lib/JST/native/typeCheck.js";
 
-import EventManager from "../core/EventManager.js";
+import EventManager from "../core/InputEventManager.js";
 import getWord from "../core/translate.js";
 
 import Wrapper from "./Wrapper.js";

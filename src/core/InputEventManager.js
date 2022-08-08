@@ -1,5 +1,5 @@
 
-const EventManager = class {
+const InputEventManager = class {
 
     /** @type {Array<{id: string, left?: boolean, middle?: boolean, right?: boolean}>} */
     #events;
@@ -17,6 +17,7 @@ const EventManager = class {
             const store = {};
             store.id = targetID;
             if (event instanceof MouseEvent) {
+                store.mouseEvent = true;
                 if (event.button === 0) {
                     store.left = true;
                 } else if (event.button === 1) {
@@ -36,4 +37,4 @@ const EventManager = class {
 };
 
 
-export default new EventManager();
+export default new InputEventManager();

@@ -1,98 +1,85 @@
 
-let inProgress = false;
 
-/** @type {Element | Hero | Item} */
-let lock = null;
-/** @type {Element | Hero | Item} */
-let key = null;
+const Combination = class {
 
-let success = false;
-let resultingActions = [];
-let updateElements = [];
+    /** @type {Element | Hero | Item} */
+    #lock;
 
-const clear = () => {
-    inProgress = false;
-    lock = null;
-    key = null;
-    success = false;
-    resultingActions = [];
-    updateElements = [];
-};
+    /** @type {Element | Hero | Item} */
+    #key;
 
-const add = (element) => {
-    const combos = element.getCombinations();
-    if (lock === null && combos instanceof Array && combos.length > 0) {
-        lock = element;
-    } else if (key === null) {
-        key = element;
+    #success;
+
+    #init() {
+        this.#lock = null;
+        this.#key = null;
+        this.#success = false;
     }
-    inProgress = true;
-    return { id: element.getId(), highlight: true };
-};
 
-const cancel = () => {
-    const deselect = [];
-    if (lock) {
-        deselect.push(lock);
+    constructor() {
+        this.#init();
     }
-    if (key) {
-        deselect.push(key);
+
+    add(element) {
+        const combos = element.getCombinations();
+        if (this.#lock === null && combos instanceof Array && combos.length > 0) {
+            this.#lock = element;
+        } else if (this.#key === null) {
+            this.#key = element;
+        }
+        return { id: element.getId(), highlight: true };
     }
-    clear();
-    return deselect.map((element) => ({ id: element.getId(), highlight: false }));
-};
 
-// TODO set private arrays and use proivate success variable
-const check = () => {
+    cancel() {
+        const deselect = [];
+        if (this.#lock) {
+            deselect.push(this.#lock);
+        }
+        if (this.#key) {
+            deselect.push(this.#key);
+        }
 
-    let result = {};
+        this.#init();
 
-    if (lock && key) {
+        return deselect.map((element) => ({ id: element.getId(), highlight: false }));
+    }
 
-        let success = false;
+    /** @returns {{text?: string, stmt?: Array<string>}} */
+    check() {
 
-        const combinations = lock.getCombinations();
-        for (let i = 0; i < combinations.length; i = i + 1) {
-            const { id, text, stmt } = combinations[`${i}`];
-            if (key.getId() === id) {
-                result = { text, stmt };
-                success = true;
-                break;
+        let result = {};
+
+        if (this.#lock && this.#key) {
+
+            const combinations = this.#lock.getCombinations();
+            for (let i = 0; i < combinations.length; i = i + 1) {
+                const { id, text, stmt } = combinations[`${i}`];
+                if (this.#key.getId() === id) {
+                    this.#success = true;
+                    result = { text, stmt };
+                    break;
+                }
             }
+
+            if (!result.text || !result.stmt) {
+                // TODO randomly choose wrong combination text
+                result = { text: "TODO WRONG COMBINATION" };
+            }
+
         }
 
-        if (!success) {
-            // TODO randomly choose wrong combination text
-            result = { text: "TODO WRONG COMBINATION" };
-        }
-
-        inProgress = false;
+        return result;
     }
 
-    return result;
-};
-
-const isActive = () => inProgress;
-
-const tryOut = (element) => {
-    let updates = [];
-
-    const highlightElement = add(element);
-    const resultAction = check();
-
-    if (!inProgress) {
-        updates = 
-    } else {
-        updates.push(highlightElement);
+    isActive() {
+        return (this.#lock || this.#key) !== null;
     }
 
-    updates = [...resultAction, 
-    return updates;
+    wasSuccessful() {
+        return this.#success;
+    }
+
 };
 
-export {
-    add,
-    cancel,
-    isActive,
-    tryOut
-};
+
+export default new Combination();

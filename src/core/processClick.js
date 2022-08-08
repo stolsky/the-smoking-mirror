@@ -4,7 +4,7 @@ import { isNotEmptyString, isNumber } from "../../lib/JST/native/typeCheck.js";
 import GameCache from "../am/GameCache.js";
 import Flag from "../am/Flag.js";
 
-import * as Combination from "./combination.js";
+import Combination from "./combination.js";
 
 /** @type {Element | Item} */
 let clickedObject = null;
@@ -30,9 +30,9 @@ const evaluate = (condition) => {
  */
 const applyMethod = (target, methodName, value = null) => {
 
-    //console.log(target, methodName, value);
+    // console.log(target, methodName, value);
 
-    let result = null;
+    let result = {};
 
     const targetID = target.getId();
     const stateID = Number.parseInt(methodName, 10);
@@ -113,7 +113,7 @@ const parseAction = (action) => {
 
     }
 
-    return null;
+    return {};
 };
 
 const evaluateStatement = (statement) => {
@@ -124,7 +124,7 @@ const evaluateStatement = (statement) => {
 const processStatement = (statement) => {
     const [condition, action] = evaluateStatement(statement);
     if (condition && !evaluate(condition)) {
-        return null;
+        return {};
     }
     return parseAction(action);
 };
@@ -137,32 +137,29 @@ const processClick = (hero, element = null, action = {}) => {
 
         activeHero = hero;
         clickedObject = element;
-        let temp = action;
+        let nextAction = action;
 
         updates.elements = [];
 
+        // TODO Combination adding highlights that not part of  are not cleared
         if (Combination.isActive()) {
-            const result = Combination.tryOut(element);
-            // overwrite action
-            // push to update.elements -> highlight: true/false
+            updates.elements.push(Combination.add(element));
+            nextAction = Combination.check();
+            if (Combination.wasSuccessful()) {
+                updates.elements = Combination.cancel();
+            }
+            console.log(updates.elements);
         }
 
-        const { text, stmt } = temp;
+        const { text, stmt } = nextAction;
 
         if (isNotEmptyString(text)) {
             updates.text = text;
         }
 
         if (stmt instanceof Array) {
-            stmt.forEach((statement) => {
-                // TODO optimize: no null return
-                const result = processStatement(statement);
-                if (result) {
-                    updates.elements.push(result);
-                }
-            });
+            stmt.forEach((statement) => updates.elements.push(processStatement(statement)));
         }
-
 
     } else if (Combination.isActive()) {
         updates.elements = Combination.cancel();

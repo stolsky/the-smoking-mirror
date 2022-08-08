@@ -29,33 +29,46 @@ const InGameState = class {
     /** @type {InGameUI} */
     #wrapper;
 
-    // TODO refactor
-    /** @param {Array<{text: string, elements: [{id: string, highlight?: boolean, remove?: boolean}]}>} updates  */
+    #enterScene(id) {
+
+        this.#currentAct.loadScene(id);
+        this.#wrapper
+            .setSceneTitle(this.#currentAct.getCurrentScene().getName())
+            .clearScene();
+        this.#updateSceneElements = this.#currentAct.getAllElementsProperties();
+
+        // reset log if necessary
+    }
+
+    /** @param {Array<{text: string, elements: [{enter?: string, highlight?: boolean, id?: string, lost?: string, remove?: boolean}]}>} updates  */
     #processUpdates(updates) {
 
-        console.log(updates);
+        // console.log(updates);
 
         const { text, elements } = updates;
 
         if (isNotEmptyString(text)) {
-
             this.#updateLog = { text, narrator: this.#currentAct.getActiveHero().getName() };
-
         }
 
         if (elements instanceof Array) {
 
             elements.forEach((elementProperties) => {
 
-                const { highlight, id, lost, remove } = elementProperties;
+                const { enter, highlight, id, lost, remove } = elementProperties;
 
-                if (lost) {
+                if (isNotEmptyString(enter)) {
+
+                    // GameStatesManager.notify("blackTransition");
+                    this.#enterScene(enter);
+
+                } else if (lost) {
 
                     GameStatesManager
                         .notify("done")
                         .notify("gameOver", { title: "gameOver", text: lost });
 
-                } else {
+                } else if (id) {
 
                     const element = GameCache.getItem(id);
                     const propertiesToUpdate = element.getProperties();
@@ -76,7 +89,6 @@ const InGameState = class {
 
                 }
 
-                // TODO enter: string = scene id
                 // TODO dialog: string = dialog id -> GameStates.push(new DialogState(dialog))
 
             });
@@ -111,22 +123,13 @@ const InGameState = class {
 
         GameCache.append(properties?.elements);
 
-        this.#currentAct = new Act(properties.name)
-            .loadScene(properties.start)
-            .setActiveHero(properties.hero);
+        this.#currentAct = new Act(properties.name).setActiveHero(properties.hero);
+        this.#wrapper = new InGameUI();
 
-        this.#wrapper = new InGameUI()
-            .setSceneTitle(this.#currentAct.getCurrentScene().getName());
-        // TODO clear scene before adding elements of another scene
+        this.#enterScene(properties.start);
 
-        this.#updateSceneElements = this.#currentAct.getAllElementsProperties();
         this.#updateInventoryElements = [];
         this.#updateLog = null;
-
-        // TODO move between scenes
-        // * load elements of new scene
-        // * set scene title
-        // * reset log if necessary
 
         this.#toRender = true;
     }

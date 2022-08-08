@@ -42,7 +42,13 @@ const BaseObject = class {
     }
 
     getCombinations() {
-        return (this.#current_state && hasProperty(this.#current_state, "comb")) ? this.#current_state.comb : null;
+        if (this.#current_state) {
+            const { combos } = this.#current_state;
+            if (combos instanceof Array) {
+                return this.#current_state.combos;
+            }
+        }
+        return null;
     }
 
     getCurrentState() {

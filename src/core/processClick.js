@@ -4,80 +4,7 @@ import { isNotEmptyString, isNumber } from "../../lib/JST/native/typeCheck.js";
 import GameCache from "../am/GameCache.js";
 import Flag from "../am/Flag.js";
 
-
-const Combination = (() => {
-
-    /** @type {boolean} */
-    let isInProgress = false;
-
-    let lock = null;
-    let keys = [];
-
-    const clear = () => {
-        isInProgress = false;
-        lock = null;
-        keys = [];
-    };
-
-    const core = {};
-
-    core.add = (element) => {
-
-        const combos = element.getCombinations();
-        if (combos instanceof Array) {
-            lock = element;
-        } else {
-            keys.push(element);
-        }
-
-        isInProgress = true;
-        return { id: element.getId(), highlight: true };
-    };
-
-    core.cancel = () => {
-        if (lock) {
-            keys.push(lock);
-        }
-        const deselectElements = keys.map((element) => ({ id: element.getId(), highlight: false }));
-        clear();
-        return deselectElements;
-    };
-
-    core.check = () => {
-
-        if (lock && keys.length > 0) {
-            let isCombination = true;
-
-            const { id, text, stmt } = lock.getCombinations();
-            const allIDs = id.split(",");
-
-            for (let i = 0; i < keys.length; i = i + 1) {
-                const currentID = keys[`${i}`].getId();
-                if (!allIDs.includes(currentID)) {
-                    isCombination = false;
-                    break;
-                }
-            }
-
-            if (isCombination) {
-                if (allIDs.length > keys.length) {
-                    return {};
-                }
-                isInProgress = false;
-                return { text, stmt };
-            }
-
-            isInProgress = false;
-            return { text: "Wrong Combination" };
-        }
-
-        return {};
-    };
-
-    core.isInProgress = () => isInProgress;
-
-    return Object.freeze(core);
-})();
+import * as Combination from "./combination.js";
 
 /** @type {Element | Item} */
 let clickedObject = null;
@@ -214,12 +141,10 @@ const processClick = (hero, element = null, action = {}) => {
 
         updates.elements = [];
 
-        if (Combination.isInProgress()) {
-            updates.elements.push(Combination.add(element));
-            temp = Combination.check();
-            if (!Combination.isInProgress()) {
-                updates.elements.splice(updates.elements.length, 0, Combination.cancel());
-            }
+        if (Combination.isActive()) {
+            const result = Combination.tryOut(element);
+            // overwrite action
+            // push to update.elements -> highlight: true/false
         }
 
         const { text, stmt } = temp;
@@ -239,7 +164,7 @@ const processClick = (hero, element = null, action = {}) => {
         }
 
 
-    } else if (Combination.isInProgress()) {
+    } else if (Combination.isActive()) {
         updates.elements = Combination.cancel();
     }
 

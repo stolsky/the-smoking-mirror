@@ -37,7 +37,7 @@ const GameStatesManager = {};
 
 GameStatesManager.notify = (id, properties = {}) => {
     if (id === "done") {
-        GameStatesManager.pop();
+        states.pop();
     } else if (register.hasItem(id)) {
         register.getItem(id)(properties);
     }

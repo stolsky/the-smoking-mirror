@@ -2,7 +2,7 @@
 import { isBoolean, isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
 
 import EventManager from "../core/InputEventManager.js";
-import processClick from "../core/interaction.js";
+import processClick from "../core/processClick.js";
 
 import GameCache from "../am/GameCache.js";
 import Act from "../am/Act.js";

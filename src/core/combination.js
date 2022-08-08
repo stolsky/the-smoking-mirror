@@ -1,4 +1,6 @@
 
+import { getNext } from "../../lib/JST/random/random.js";
+
 
 const Combination = class {
 
@@ -62,8 +64,7 @@ const Combination = class {
             }
 
             if (!result.text || !result.stmt) {
-                // TODO randomly choose wrong combination text
-                result = { text: "TODO WRONG COMBINATION" };
+                result = { text: `georgeWrong${Math.floor(getNext() * 12)}` };
             }
 
         }

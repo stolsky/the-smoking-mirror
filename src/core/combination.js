@@ -74,7 +74,7 @@ const Combination = class {
                 }
             }
 
-            if (!result.text || !result.stmt) {
+            if (!result.text && !result.stmt) {
                 result = { text: `georgeWrong${Math.floor(getNext() * 12)}` };
             }
 

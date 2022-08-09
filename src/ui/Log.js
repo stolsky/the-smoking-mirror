@@ -14,11 +14,8 @@ const Log = class extends Wrapper {
         super("Log");
     }
 
-    /** @param {{text:string, narrtor: string}} message */
-    add(message) {
-
-        const { text, narrator } = message;
-
+    /** @param {{text:string, narrtor: string}} */
+    add({ text, narrator }) {
         if (isNotEmptyString(text)) {
 
             const messageContainer = new Container("Message");
@@ -36,7 +33,6 @@ const Log = class extends Wrapper {
             //Fx.scrollTop(container, 0);
 
         }
-
     }
 
 };

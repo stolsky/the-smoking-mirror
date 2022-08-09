@@ -27,46 +27,35 @@ const importResource = (source, method) => {
     return cache;
 };
 
-const importDialogs = (source) => importResource(source, (dialog) => ({ key: dialog.id, value: new Dialog(dialog.id, dialog.states) }));
+const importDialogs = (source) => importResource(source, ({ id, states }) => ({ key: id, value: new Dialog(id, states) }));
 
 const importFlags = (source) => importResource(source, (flag) => {
     const [id, type, value] = flag.split(":");
     return { key: id, value: new Flag(id, type, value) };
 });
 
-const importHeroes = (source) => importResource(source, (hero) => {
-    const { id, name, states } = hero;
-    return { key: id, value: new Hero(id, name, states) };
-});
-
-
-const importItems = (source) => importResource(source, (item) => {
-    const { id, name, states } = item;
-    return { key: id, value: new Item(id, name, states) };
-});
-
-const importElements = (source) => importResource(source, (element) => {
-    const { id, name, states } = element;
-    return { key: id, value: new Element(id, name, states) };
-});
+// TODO remove duplicate code
+const importHeroes = (source) => importResource(source, ({ id, name, states }) => ({ key: id, value: new Hero(id, name, states) }));
+const importItems = (source) => importResource(source, ({ id, name, states }) => ({ key: id, value: new Item(id, name, states) }));
+const importElements = (source) => importResource(source, ({ id, name, states }) => ({ key: id, value: new Element(id, name, states) }));
 
 const importScenes = (source) => {
 
     const temporyCache = new Cache();
 
-    temporyCache.append(importResource(source, (scene) => {
+    temporyCache.append(importResource(source, ({ id, name, elems, dialogs }) => {
 
         let elementsIDs = null;
-        const { id, name, elems, dialogs } = scene;
+
         if (elems) {
-            if (scene.elems instanceof Array) {
-                elementsIDs = scene.elems.map((element) => element.id);
+            if (elems instanceof Array) {
+                elementsIDs = elems.map((element) => element.id);
             }
-            temporyCache.append(importElements(scene.elems));
+            temporyCache.append(importElements(elems));
         }
 
         if (dialogs) {
-            temporyCache.append(importDialogs(scene.dialogs));
+            temporyCache.append(importDialogs(dialogs));
         }
 
         if (id && name) {

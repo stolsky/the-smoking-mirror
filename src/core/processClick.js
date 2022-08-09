@@ -30,8 +30,6 @@ const evaluate = (condition) => {
  */
 const applyMethod = (target, methodName, value = null) => {
 
-    // console.log(target, methodName, value);
-
     let result = {};
 
     const targetID = target.getId();
@@ -55,7 +53,7 @@ const applyMethod = (target, methodName, value = null) => {
         result = { id: targetID };
 
     } else if (methodName === "USE") {
-        result = Combination.add(target);
+        result = Combination.check(target);
 
     } else if (methodName === "TAKE" && GameCache.hasItem(value)) {
         activeHero.getInventory().add(value);
@@ -141,14 +139,9 @@ const processClick = (hero, element = null, action = {}) => {
 
         updates.elements = [];
 
-        // TODO Combination adding highlights that not part of  are not cleared
         if (Combination.isActive()) {
-            updates.elements.push(Combination.add(element));
-            nextAction = Combination.check();
-            if (Combination.wasSuccessful()) {
-                updates.elements = Combination.cancel();
-            }
-            console.log(updates.elements);
+            nextAction = Combination.check(element);
+            updates.elements = Combination.cancel();
         }
 
         const { text, stmt } = nextAction;

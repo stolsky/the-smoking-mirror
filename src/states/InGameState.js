@@ -4,7 +4,6 @@ import { isBoolean, isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
 import EventManager from "../core/InputEventManager.js";
 import processClick from "../core/processClick.js";
 
-import GameCache from "../am/GameCache.js";
 import Act from "../am/Act.js";
 import Element from "../am/Element.js";
 import Item from "../am/Item.js";
@@ -31,21 +30,23 @@ const InGameState = class {
 
     #enterScene(id) {
 
+        GameStatesManager.notify("transition", { color: "black" });
+
         this.#currentAct.loadScene(id);
         this.#wrapper
             .setSceneTitle(this.#currentAct.getCurrentScene().getName())
             .clearScene();
+        console.log(this.#currentAct.getAllElementsProperties());
         this.#updateSceneElements = this.#currentAct.getAllElementsProperties();
 
+        // TODO add scene description if exists
         // reset log if necessary
     }
 
-    /** @param {Array<{text: string, elements: [{enter?: string, highlight?: boolean, id?: string, lost?: string, remove?: boolean}]}>} updates  */
-    #processUpdates(updates) {
+    /** @param {Array<{text: string, elements: [{enter?: string, highlight?: boolean, id?: string, lost?: string, remove?: boolean}]}>} */
+    #processUpdates({ text, elements }) {
 
-        // console.log(updates);
-
-        const { text, elements } = updates;
+        // console.log(text, elements);
 
         if (isNotEmptyString(text)) {
             this.#updateLog = { text, narrator: this.#currentAct.getActiveHero().getName() };
@@ -53,13 +54,10 @@ const InGameState = class {
 
         if (elements instanceof Array) {
 
-            elements.forEach((elementProperties) => {
-
-                const { enter, highlight, id, lost, remove } = elementProperties;
+            elements.forEach(({ enter, highlight, id, lost, remove }) => {
 
                 if (isNotEmptyString(enter)) {
 
-                    // GameStatesManager.notify("blackTransition");
                     this.#enterScene(enter);
 
                 } else if (lost) {
@@ -70,7 +68,7 @@ const InGameState = class {
 
                 } else if (id) {
 
-                    const element = GameCache.getItem(id);
+                    const element = Act.getElement(id);
                     const propertiesToUpdate = element.getProperties();
 
                     if (isBoolean(highlight)) {
@@ -79,6 +77,7 @@ const InGameState = class {
 
                     if (isBoolean(remove)) {
                         propertiesToUpdate.remove = remove;
+                        Act.removeElement(id);
                     }
 
                     if (element instanceof Element) {
@@ -95,39 +94,33 @@ const InGameState = class {
         }
     }
 
-    #handleInput(input) {
-        if (input) {
+    #handleInput({ id, left, right }) {
 
-            const { id, left, right } = input;
-            const element = GameCache.getItem(id);
-            let action = {};
+        const element = Act.getElement(id);
+        let action = {};
 
-            if (element) {
-                if (left) {
-                    action = element.getLeftAction();
-                } else if (right) {
-                    action = element.getRightAction();
-                }
+        if (element) {
+            if (left) {
+                action = element.getLeftAction();
+            } else if (right) {
+                action = element.getRightAction();
             }
-
-            this.#processUpdates(
-                processClick(this.#currentAct.getActiveHero(), element, action)
-            );
         }
+
+        this.#processUpdates(processClick(this.#currentAct.getActiveHero(), element, action));
     }
 
     /**
-     * @param {{name: string, start: string, hero: string, elements: Cache}} properties
+     * @param {{name: string, start: string, hero: string, elements: Cache}}
      */
-    constructor(properties) {
+    constructor({ name, start, hero, elements }) {
 
-        GameCache.append(properties?.elements);
-
-        this.#currentAct = new Act(properties.name).setActiveHero(properties.hero);
+        this.#currentAct = new Act({ name, elements }).setActiveHero(hero);
         this.#wrapper = new InGameUI();
 
-        this.#enterScene(properties.start);
+        this.#enterScene(start);
 
+        // TODO fill inventory with previuos inventory
         this.#updateInventoryElements = [];
         this.#updateLog = null;
 
@@ -145,7 +138,6 @@ const InGameState = class {
 
         this.#currentAct.clear();
         this.#currentAct = null;
-        GameCache.clear();
 
         this.#wrapper.clear().remove();
         this.#wrapper = null;
@@ -172,7 +164,10 @@ const InGameState = class {
     }
 
     update() {
-        this.#handleInput(EventManager.getInputEvent());
+        const input = EventManager.getInputEvent();
+        if (input) {
+            this.#handleInput(input);
+        }
     }
 
 };

@@ -4,70 +4,70 @@
     "elems": [
         {
             "id": "door2",
-            "name": "paris1Doo13",
+            "name": "paris1Door13",
             "states": [
                 {
                     "id": 1,
                     "type": "Use",
                     "back": "144,65,5",
                     "left": [
-                        {"text": "paris1Doo09+paris1Doo12", "stmt": ["SELF INFO statLocked"]},
-                        {"text": "paris1Doo09"}
+                        {"text": "paris1Door09+paris1Door12", "stmt": ["SELF INFO statLocked"]},
+                        {"text": "paris1Door09"}
                     ],
                     "right": [
-                        {"text": "paris1Doo08"}
+                        {"text": "paris1Door08"}
                     ],
                     "combos": [
-                        {"id": "blowDart", "text": "paris1Doo15"},
-                        {"id": "houseKey", "text": "paris1Doo17", "stmt": ["door2 2", "CafeKnown true:cafe SHOW", "GalleryKnown true:gallery SHOW"]}
+                        {"id": "blowDart", "text": "paris1Door15"},
+                        {"id": "houseKey", "text": "paris1Door17", "stmt": ["door2 2", "CafeKnown true:cafe SHOW", "GalleryKnown true:gallery SHOW"]}
                     ]
                 },
                 {
                     "id": 2,
                     "info": "statOpen",
                     "left": [
-                        {"text": "paris1Doo19"},
-                        {"text": "paris1Doo20"}
+                        {"text": "paris1Door19"},
+                        {"text": "paris1Door20"}
                     ],
                     "right": [
-                        {"text": "paris1Doo08"}
+                        {"text": "paris1Door08"}
                     ],
                     "combos": [
-                        {"id": "blowDart", "text": "paris1Doo15"},
-                        {"id": "houseKey", "text": "paris1Doo18", "stmt": ["door2 1", "door2 INFO statLocked", "cafe HIDE", "gallery HIDE"]}
+                        {"id": "blowDart", "text": "paris1Door15"},
+                        {"id": "houseKey", "text": "paris1Door18", "stmt": ["door2 1", "door2 INFO statLocked", "cafe HIDE", "gallery HIDE"]}
                     ]
                 }
             ]
         },
         {
             "id": "door3",
-            "name": "paris1Doo01",
+            "name": "paris1Door01",
             "states": [
                 {
                     "id": 1,
                     "type": "Use",
                     "back": "62,18,7",
                     "left": [
-                        {"text": "paris1Doo11", "stmt": ["SELF INFO statLocked", "SELF 2"]}
+                        {"text": "paris1Door11", "stmt": ["SELF INFO statLocked", "SELF 2"]}
                     ],
                     "right": [
-                        {"text": "paris1Doo10"}
+                        {"text": "paris1Door10"}
                     ],
                     "combos": [
-                        {"id": "blowDart", "text": "paris1Doo15"},
-                        {"id": "houseKey", "text": "paris1Doo16"}
+                        {"id": "blowDart", "text": "paris1Door15"},
+                        {"id": "houseKey", "text": "paris1Door16"}
                     ]
                 },
                 {
                     "id": 2,
                     "left": [
-                        {"text": "paris1Doo11"}
+                        {"text": "paris1Door11"}
                     ], "right": [
-                        {"text": "paris1Doo14"}
+                        {"text": "paris1Door14"}
                     ],
                     "combos": [
-                        {"id": "blowDart", "text": "paris1Doo15"},
-                        {"id": "houseKey", "text": "paris1Doo16"}
+                        {"id": "blowDart", "text": "paris1Door15"},
+                        {"id": "houseKey", "text": "paris1Door16"}
                     ]
                 }
             ]
@@ -110,7 +110,7 @@
         },
         {
             "id": "newspaper2",
-            "name": "paris1Newspaper201",
+            "name": "paris1Newspaper01",
             "states": [
                 {
                     "id": 1,
@@ -127,7 +127,7 @@
         },
         {
             "id": "stairs",
-            "name": "paris1Sta01",
+            "name": "paris1Stairs01",
             "states": [
                 {
                     "id": 1,
@@ -137,8 +137,8 @@
                         {"stmt": ["ENTER oubier1"]}
                     ],
                     "right": [
-                        {"text": "paris1Sta02", "stmt": ["SELF INFO paris1Sta03"]},
-                        {"text": "paris1Sta02"}
+                        {"text": "paris1Stairs02", "stmt": ["SELF INFO paris1Stairs03"]},
+                        {"text": "paris1Stairs02"}
                     ]
                 }
             ]
@@ -153,7 +153,7 @@
                     "back": "223,178,147",
                     "visible": false,
                     "left": [
-                        {"text": "paris1Doo21", "stmt": ["ENTER cafe"]},
+                        {"text": "paris1Door21", "stmt": ["ENTER cafe"]},
                         {"stmt": ["ENTER cafe"]}
                     ]
                 }

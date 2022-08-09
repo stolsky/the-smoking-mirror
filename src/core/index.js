@@ -17,6 +17,7 @@ const create_application = () => {
 
     GameStatesManager.setTimeFrame(200)
         .setGraphicsContext(app.getRootPane())
+
         .register("setupIntro", () => GameStatesManager.push(StateFactory.createSetupIntroState()))
         .register("gameMenu", () => GameStatesManager.push(StateFactory.createMenuState()))
         .register("loadGame", () => GameStatesManager.push(StateFactory.createLoadGameState()))
@@ -24,6 +25,8 @@ const create_application = () => {
         .register("runGame", (properties) => GameStatesManager.push(StateFactory.createInGameState(properties)))
         .register("gameOver", (properties) => GameStatesManager.push(StateFactory.createMenuState())
             .push(StateFactory.createTextPageState({ className: "GameOver", ...properties })))
+        .register("transition", (properties) => GameStatesManager.push(StateFactory.createTransitionState(properties)))
+
         .notify("setupIntro")
         .start();
 

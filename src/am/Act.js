@@ -12,24 +12,27 @@ const Act = class {
     /** @type {Scene} */
     #currentScene;
 
-    /**
-     * @param {string} name
-     * @param {Cache} elements
-     */
-    constructor(name) {
+    /** @param {{ name?: string, elements?: Cache }} */
+    constructor({ name, elements }) {
         this.#name = name;
         this.#activeHero = null;
         this.#currentScene = null;
+        GameCache.append(elements);
     }
 
     static getElement(id) {
         return GameCache.getItem(id);
     }
 
+    static removeElement(id) {
+        GameCache.deleteItem(id);
+    }
+
     clear() {
         this.#name = null;
         this.#activeHero = null;
         this.#currentScene = null;
+        GameCache.clear();
         return this;
     }
 

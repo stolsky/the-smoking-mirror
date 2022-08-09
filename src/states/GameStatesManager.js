@@ -36,6 +36,8 @@ const gameLoop = (dt) => {
 const GameStatesManager = {};
 
 GameStatesManager.notify = (id, properties = {}) => {
+    console.log(id, properties);
+    console.log(states);
     if (id === "done") {
         states.pop();
     } else if (register.hasItem(id)) {

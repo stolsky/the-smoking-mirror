@@ -49,6 +49,14 @@ const InGameUI = class extends Wrapper {
         this.addEventListener(EventType.mouseup, (event) => EventManager.setInputEvent(event));
     }
 
+    clearInventory() {
+        this.#inventory.clear();
+    }
+
+    clearLog() {
+        this.#log.clear();
+    }
+
     clearScene() {
         this.#scene.clear();
     }

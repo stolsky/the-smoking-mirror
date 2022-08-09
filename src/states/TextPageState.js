@@ -13,9 +13,8 @@ const TextPageState = class {
     /** @type {TextPage} */
     #wrapper;
 
-    constructor(properties) {
-
-        const { className, title, text } = properties;
+    /** @param {{className: string, title: string, text: string}} */
+    constructor({ className, title, text }) {
 
         this.#wrapper = new TextPage(className)
             .setTitle(title)

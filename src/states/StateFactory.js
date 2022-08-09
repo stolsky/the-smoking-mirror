@@ -5,6 +5,7 @@ import LoadGameState from "./LoadGameState.js";
 import MenuState from "./MenuState.js";
 import SetupIntroState from "./SetupIntroState.js";
 import TextPageState from "./TextPageState.js";
+import TransitionState from "./TransitionState.js";
 
 
 const StateFactory = Object.freeze({
@@ -19,7 +20,9 @@ const StateFactory = Object.freeze({
 
     createSetupIntroState: (properties) => new SetupIntroState(properties),
 
-    createTextPageState: (className, properties) => new TextPageState(className, properties)
+    createTextPageState: (className, properties) => new TextPageState(className, properties),
+
+    createTransitionState: (properties) => new TransitionState(properties)
 
 });
 

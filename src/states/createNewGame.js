@@ -9,9 +9,8 @@ import GameStatesManager from "./GameStatesManager.js";
 
 
 const createNewGame = () => {
-    loadActScript("paris1").then((script) => {
+    loadActScript("paris1").then(({ active, flags, heroes, intro, name, scenes, start }) => {
 
-        const { active, flags, heroes, intro, name, scenes, start } = script;
         const elements = new Cache();
         if (isNotEmptyString(flags)) {
             elements.append(importFlags(flags.split(",")));

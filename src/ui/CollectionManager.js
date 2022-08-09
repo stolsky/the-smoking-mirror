@@ -70,15 +70,11 @@ const CollectionManager = class extends Wrapper {
         return this;
     }
 
-    /**
-     * @param {string} id
-     * @param {{visible: boolean, type: string, name: string, info: string, foreground: string, background: string, action: Function}} properties
-     */
-    updateElement(properties) {
+    /** @param {{id?: string, remove?: boolean, visible?: boolean, name?: string, type?: string, information?: string, highlight?: boolean, foreground?: string, background?: string }} */
+    updateElement({ id, remove, visible, name, type, information, highlight, foreground, background }) {
 
-        //console.log(properties);
+        // console.log({ id, remove, visible, name, type, information, highlight, foreground, background });
 
-        const { id } = properties;
         if (isNotEmptyString(id)) {
 
             /** @type {Container} */
@@ -90,24 +86,36 @@ const CollectionManager = class extends Wrapper {
                     .append(new TextComponent("", "Name"), new TextComponent("", "Information"))
                     // MouseEvent.click applies only to the left mouse button
                     .addEventListener(EventType.mouseup, (event) => EventManager.setInputEvent(event, id));
+
                 this.#elements.setItem(id, element);
                 this.addComponent(element);
             }
 
-            const { visible, remove } = properties;
+            // console.log(element, (visible === undefined || visible));
+
             if (remove) {
 
                 this.#elements.deleteItem(id);
-                element.remove();
+                this.removeComponent(element.remove());
 
             } else if (visible === undefined || visible) {
 
                 element.show();
 
-                const { background, foreground, highlight, information, name, type } = properties;
+                if (isNotEmptyString(name)) {
+                    updateName(element, name);
+                }
 
-                if (isNotEmptyString(background)) {
-                    updateBackground(element, background);
+                if (isNotEmptyString(type)) {
+                    updateClassName(element, type);
+                }
+
+                if (isString(information)) {
+                    updateInformation(element, information);
+                }
+
+                if (isBoolean(highlight)) {
+                    updateHighlight(element, highlight);
                 }
 
                 // TODO improve rgb values
@@ -115,22 +123,8 @@ const CollectionManager = class extends Wrapper {
                     updateForeground(element, foreground);
                 }
 
-                if (isBoolean(highlight)) {
-                    updateHighlight(element, highlight);
-                }
-
-
-                if (isString(information)) {
-                    updateInformation(element, information);
-                }
-
-                if (isNotEmptyString(name)) {
-                    updateName(element, name);
-                }
-
-
-                if (isNotEmptyString(type)) {
-                    updateClassName(element, type);
+                if (isNotEmptyString(background)) {
+                    updateBackground(element, background);
                 }
 
             } else {

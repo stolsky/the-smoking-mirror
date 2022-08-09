@@ -8,18 +8,17 @@ const Scene = class {
 
     #name;
 
+    #intro;
+
     /** @type {Array<string>} */
     #elements;
 
-    /**
-     * @param {string} id
-     * @param {string} name
-     * @param {Array<string>} elements
-     */
-    constructor(id, name, elements) {
+    /** @param {{id: string, name: string, intro: string, elements: Array<string>}} */
+    constructor({ id, name, intro = null, elements = null }) {
 
         this.#id = (isString(id)) ? id : "scene";
         this.#name = (isString(name)) ? name : "Scene";
+        this.#intro = intro;
 
         this.#elements = [];
         this.addAllElements(elements);
@@ -27,6 +26,10 @@ const Scene = class {
 
     getId() {
         return this.#id;
+    }
+
+    getIntro() {
+        return this.#intro;
     }
 
     getName() {

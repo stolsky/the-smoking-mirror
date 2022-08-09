@@ -43,7 +43,7 @@ const importScenes = (source) => {
 
     const temporyCache = new Cache();
 
-    temporyCache.append(importResource(source, ({ id, name, elems, dialogs }) => {
+    temporyCache.append(importResource(source, ({ id, name, intro, elems, dialogs }) => {
 
         let elementsIDs = null;
 
@@ -59,7 +59,7 @@ const importScenes = (source) => {
         }
 
         if (id && name) {
-            return { key: id, value: new Scene(id, name, elementsIDs) };
+            return { key: id, value: new Scene({ id, name, intro, elements: elementsIDs }) };
         }
 
         return null;

@@ -1,7 +1,7 @@
 {
     "id": "oubier1",
     "name": "paris1Scene01",
-    "new": "paris1NewGame",
+    "intro": "paris1NewGame",
     "elems": [
         {
             "id": "spider",

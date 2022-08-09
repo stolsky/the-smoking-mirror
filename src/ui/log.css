@@ -16,6 +16,7 @@
 }
 .Application .InGameUI > .Log .Message:hover {
     color: #000000;
+    font-size: 0.9em;
 }
 .Application .InGameUI > .Log .Message:first-child {
     color: #000000;

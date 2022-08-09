@@ -30,13 +30,10 @@ const InGameState = class {
 
     #enterScene(id) {
 
-        GameStatesManager.notify("transition", { color: "black" });
-
         this.#currentAct.loadScene(id);
         this.#wrapper
             .setSceneTitle(this.#currentAct.getCurrentScene().getName())
             .clearScene();
-        console.log(this.#currentAct.getAllElementsProperties());
         this.#updateSceneElements = this.#currentAct.getAllElementsProperties();
 
         // TODO add scene description if exists
@@ -58,13 +55,17 @@ const InGameState = class {
 
                 if (isNotEmptyString(enter)) {
 
+                    GameStatesManager.notify("transition", { name: "InOut" });
+                    // TODO split transition inOut into 2 transitions 1 "in" and 1 "out"
+                    // TODO create callback/Promise -> after "in" event call enterScene and then trigger "out"
                     this.#enterScene(enter);
 
                 } else if (lost) {
 
                     GameStatesManager
                         .notify("done")
-                        .notify("gameOver", { title: "gameOver", text: lost });
+                        .notify("menuMenu")
+                        .notify("textPage", { name: "GameOver", title: "gameOver", text: lost });
 
                 } else if (id) {
 
@@ -117,7 +118,6 @@ const InGameState = class {
 
         this.#currentAct = new Act({ name, elements }).setActiveHero(hero);
         this.#wrapper = new InGameUI();
-
         this.#enterScene(start);
 
         // TODO fill inventory with previuos inventory
@@ -128,6 +128,7 @@ const InGameState = class {
     }
 
     enter() {
+        GameStatesManager.notify("transition", { name: "Out" });
         return this;
     }
 

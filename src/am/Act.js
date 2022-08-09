@@ -43,7 +43,11 @@ const Act = class {
     /** @returns {Array<{id: string, name: string, type?: string, foreground: string, background: string, information: string, moveable?: boolean, visible?: boolean}>} */
     getAllElementsProperties() {
         const elements = [];
-        this.#currentScene.getAllElements().forEach((id) => elements.push(Act.getElement(id).getProperties()));
+        this.#currentScene.getAllElements().forEach((id) => {
+            if (GameCache.hasItem(id)) {
+                elements.push(GameCache.getItem(id).getProperties());
+            }
+        });
         return elements;
     }
 
@@ -58,14 +62,14 @@ const Act = class {
 
     loadScene(id) {
         if (GameCache.hasItem(id)) {
-            this.#currentScene = Act.getElement(id);
+            this.#currentScene = GameCache.getItem(id);
         }
         return this;
     }
 
     setActiveHero(id) {
         if (GameCache.hasItem(id)) {
-            this.#activeHero = Act.getElement(id);
+            this.#activeHero = GameCache.getItem(id);
         }
         return this;
     }

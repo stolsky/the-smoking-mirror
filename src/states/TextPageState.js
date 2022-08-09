@@ -13,13 +13,14 @@ const TextPageState = class {
     /** @type {TextPage} */
     #wrapper;
 
-    /** @param {{className: string, title: string, text: string}} */
-    constructor({ className, title, text }) {
+    /** @param {{name: string, title: string, text: string}} */
+    constructor({ name, title, text }) {
 
-        this.#wrapper = new TextPage(className)
+        this.#wrapper = new TextPage(name)
             .setTitle(title)
             .setText(text)
             .setHint("clickToContinue")
+            // TODO maybe use InputEventManager and fire notify in update method
             .addEventListener(EventType.mouseup, () => GameStatesManager.notify("done"));
 
         this.#toRender = true;
@@ -35,7 +36,6 @@ const TextPageState = class {
         this.#toRender = false;
     }
 
-    /** @param {Container} ctx */
     render(ctx) {
         if (this.#toRender) {
             this.#wrapper.render(ctx);
@@ -44,7 +44,6 @@ const TextPageState = class {
     }
 
     update() {
-        // calculate animation
         return this;
     }
 

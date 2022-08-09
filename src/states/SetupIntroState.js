@@ -29,7 +29,7 @@ const SetupIntroState = class {
         if (this.#is_ready) {
             GameStatesManager
                 .notify("done")
-                .notify("gameMenu");
+                .notify("mainMenu");
         }
     }
 };

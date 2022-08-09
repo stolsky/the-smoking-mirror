@@ -18,14 +18,12 @@ const create_application = () => {
     GameStatesManager.setTimeFrame(200)
         .setGraphicsContext(app.getRootPane())
 
-        .register("setupIntro", () => GameStatesManager.push(StateFactory.createSetupIntroState()))
-        .register("gameMenu", () => GameStatesManager.push(StateFactory.createMenuState()))
-        .register("loadGame", () => GameStatesManager.push(StateFactory.createLoadGameState()))
-        .register("gameIntro", (properties) => GameStatesManager.push(StateFactory.createTextPageState({ className: "Intro", ...properties })))
-        .register("runGame", (properties) => GameStatesManager.push(StateFactory.createInGameState(properties)))
-        .register("gameOver", (properties) => GameStatesManager.push(StateFactory.createMenuState())
-            .push(StateFactory.createTextPageState({ className: "GameOver", ...properties })))
-        .register("transition", (properties) => GameStatesManager.push(StateFactory.createTransitionState(properties)))
+        .register("setupIntro", StateFactory.createSetupIntroState)
+        .register("mainMenu", StateFactory.createMenuState)
+        .register("loadGame", StateFactory.createLoadGameState)
+        .register("textPage", StateFactory.createTextPageState)
+        .register("runGame", StateFactory.createInGameState)
+        .register("transition", StateFactory.createTransitionState)
 
         .notify("setupIntro")
         .start();

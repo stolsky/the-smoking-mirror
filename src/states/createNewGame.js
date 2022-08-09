@@ -24,7 +24,7 @@ const createNewGame = () => {
             GameStatesManager.notify("runGame", { name, start, hero: active, elements });
 
             if (intro) {
-                GameStatesManager.notify("gameIntro", intro);
+                GameStatesManager.notify("textPage", { name: "Intro", ...intro });
             }
         });
     });

@@ -46,3 +46,25 @@
 .Application .TextPage.GameOver .Hint {
     color: rgba(255, 255, 255, 0.5);
 }
+
+.Application .Transition {
+    background-color: #ffffff;
+}
+.Application .Transition.InOut {
+    animation: 1s ease-in-out paused opacityInOut;
+}
+.Application .Transition.Out {
+    animation: 1s ease-out paused opacityOut;
+}
+
+@keyframes opacityInOut {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+@keyframes opacityOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  

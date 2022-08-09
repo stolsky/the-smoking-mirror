@@ -4,11 +4,9 @@ import Wrapper from "./Wrapper.js";
 
 const Transition = class extends Wrapper {
 
-    constructor(color) {
-
+    constructor(className) {
         super("Transition Maximize");
-
-        this.setStyle("background-color", color);
+        this.addClass(className);
     }
 
 };

@@ -36,8 +36,6 @@ const gameLoop = (dt) => {
 const GameStatesManager = {};
 
 GameStatesManager.notify = (id, properties = {}) => {
-    console.log(id, properties);
-    console.log(states);
     if (id === "done") {
         states.pop();
     } else if (register.hasItem(id)) {
@@ -46,14 +44,9 @@ GameStatesManager.notify = (id, properties = {}) => {
     return GameStatesManager;
 };
 
-GameStatesManager.push = (state) => {
-    states.push(state);
-    return GameStatesManager;
-};
-
 GameStatesManager.register = (id, method) => {
     if (isNotEmptyString(id) && isFunction(method)) {
-        register.setItem(id, method);
+        register.setItem(id, (properties) => states.push(method(properties)));
     }
     return GameStatesManager;
 };

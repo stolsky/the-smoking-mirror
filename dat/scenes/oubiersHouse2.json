@@ -1,0 +1,190 @@
+{
+    "id": "oubier2",
+    "name": "paris1Scene02",
+    "elems": [
+        {
+            "id": "door2",
+            "name": "paris1Door13",
+            "states": [
+                {
+                    "id": 1,
+                    "type": "Use",
+                    "back": "144,65,5",
+                    "left": [
+                        {"text": "paris1Door09+paris1Door12", "stmt": ["SELF INFO statLocked"]},
+                        {"text": "paris1Door09"}
+                    ],
+                    "right": [
+                        {"text": "paris1Door08"}
+                    ],
+                    "combos": [
+                        {"id": "blowDart", "text": "paris1Door15"},
+                        {"id": "houseKey", "text": "paris1Door17", "stmt": ["door2 2", "CafeKnown true:cafe SHOW", "GalleryKnown true:gallery SHOW"]}
+                    ]
+                },
+                {
+                    "id": 2,
+                    "info": "statOpen",
+                    "left": [
+                        {"text": "paris1Door19"},
+                        {"text": "paris1Door20"}
+                    ],
+                    "right": [
+                        {"text": "paris1Door08"}
+                    ],
+                    "combos": [
+                        {"id": "blowDart", "text": "paris1Door15"},
+                        {"id": "houseKey", "text": "paris1Door18", "stmt": ["door2 1", "door2 INFO statLocked", "cafe HIDE", "gallery HIDE"]}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "door3",
+            "name": "paris1Door01",
+            "states": [
+                {
+                    "id": 1,
+                    "type": "Use",
+                    "back": "62,18,7",
+                    "left": [
+                        {"text": "paris1Door11", "stmt": ["SELF INFO statLocked", "SELF 2"]}
+                    ],
+                    "right": [
+                        {"text": "paris1Door10"}
+                    ],
+                    "combos": [
+                        {"id": "blowDart", "text": "paris1Door15"},
+                        {"id": "houseKey", "text": "paris1Door16"}
+                    ]
+                },
+                {
+                    "id": 2,
+                    "left": [
+                        {"text": "paris1Door11"}
+                    ], "right": [
+                        {"text": "paris1Door14"}
+                    ],
+                    "combos": [
+                        {"id": "blowDart", "text": "paris1Door15"},
+                        {"id": "houseKey", "text": "paris1Door16"}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "telephone",
+            "name": "paris1Telephone01",
+            "states": [
+                {
+                    "id": 1,
+                    "type": "Take",
+                    "back": "187,34,23",
+                    "left": [
+                        {"text": "paris1Telephone02+paris1Telephone03"},
+                        {"text": "paris1Telephone02"}
+                    ],
+                    "right": [
+                        {"text": "paris1Telephone04"}
+                    ]
+                },
+                {
+                    "id": 2,
+                    "left": [
+                        {"text": "paris1Telephone05", "stmt": ["DIALOG andre1", "SELF 3", "CafeKnown true"]}
+                    ],
+                    "right": [
+                        {"text": "paris1Telephone04"}
+                    ]
+                },
+                {
+                    "id": 3,
+                    "left": [
+                        {"text": "paris1Telephone06"}
+                    ],
+                    "right": [
+                        {"text": "paris1Telephone04"}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "newspaper2",
+            "name": "paris1Newspaper01",
+            "states": [
+                {
+                    "id": 1,
+                    "type": "Take",
+                    "back": "171,171,171",
+                    "left": [
+                        {"text": "paris1Newspaper03", "stmt": ["HERO TAKE newspaper", "SELF 0"]}
+                    ],
+                    "right": [
+                        {"text": "paris1Newspaper02"}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "stairs",
+            "name": "paris1Stairs01",
+            "states": [
+                {
+                    "id": 1,
+                    "type": "Exit",
+                    "back": "144,18,15",
+                    "left": [
+                        {"stmt": ["ENTER oubier1"]}
+                    ],
+                    "right": [
+                        {"text": "paris1Stairs02", "stmt": ["SELF INFO paris1Stairs03"]},
+                        {"text": "paris1Stairs02"}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "cafe",
+            "name": "paris1Exit1",
+            "states": [
+                {
+                    "id": 1,
+                    "type": "Exit",
+                    "back": "223,178,147",
+                    "visible": false,
+                    "left": [
+                        {"text": "paris1Door21", "stmt": ["ENTER cafe"]},
+                        {"stmt": ["ENTER cafe"]}
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "gallery",
+            "name": "paris1Exit2",
+            "states": [
+                {
+                    "id": 1,
+                    "type": "Exit",
+                    "back": "212,212,212",
+                    "visible": false,
+                    "left": [
+                        {"stmt": ["ENTER gallery"]}
+                    ]
+                }
+            ]
+        }
+    ],
+    "dialogs": [
+        {
+            "id": "andre",
+            "states": [
+                {
+                    "id": 1,
+                    "prefix": "paris1DialogAndre",
+                    "dialog": "01;02;03;04;05;06;07+08;09;10;11;12;13;14+15+16"
+                }
+            ]
+        }
+    ]
+}

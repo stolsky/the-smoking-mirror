@@ -1,0 +1,70 @@
+
+.Application .TextPage .Content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: serif;
+}
+
+.Application .TextPage .Content .Title {
+    font-size: 2em;
+    margin-bottom: 2em;
+}
+
+.Application .TextPage .Content .Text {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.Application .TextPage .Content .Text span {
+    text-align: justify;
+}
+
+.Application .TextPage .Hint {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 5px 0;
+    font-size: 90%;
+    font-style: italic;
+    text-align: center;
+}
+
+.Application .TextPage.Intro {
+    color: #000000;
+    background-color: #ffffff;
+}
+.Application .TextPage.Intro .Hint {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.Application .TextPage.GameOver {
+    color: #ffffff;
+    background-color: #000000;
+}
+.Application .TextPage.GameOver .Hint {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.Application .Transition {
+    background-color: #ffffff;
+}
+.Application .Transition.InOut {
+    animation: 1s ease-in-out paused opacityInOut;
+}
+.Application .Transition.Out {
+    animation: 1s ease-out paused opacityOut;
+}
+
+@keyframes opacityInOut {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+@keyframes opacityOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+  

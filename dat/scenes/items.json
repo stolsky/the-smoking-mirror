@@ -1,0 +1,141 @@
+[
+    {
+        "id": "worm",
+        "name": "itemWorm01",
+        "states": [
+            {
+                "id": 1,
+                "back": "187,185,173",
+                "left": [{ "stmt": ["SELF USE"] }],
+                "right": [
+                    {"text": "itemWorm02"}
+                ]
+            }
+        ]
+    },
+    {
+        "id": "pot",
+        "name": "itemPot01",
+        "states": [
+            {
+                "id": 1,
+                "left": [{ "stmt": ["SELF USE"] }],
+                "right": [
+                    {"text": "itemPot02", "stmt": ["HERO TAKE houseKey"]},
+                    {"text": "itemPot03+itemPot04"},
+                    {"text": "itemPot03"}
+                ]
+            }
+        ]
+    },
+    {
+        "id": "houseKey",
+        "name": "itemKey01",
+        "states": [
+            {
+                "id": 1,
+                "left": [{ "stmt": ["SELF USE"] }],
+                "right": [
+                    {"text": "itemKey02"}
+                ]
+            }
+        ]
+    },
+    {
+        "id": "blowDart",
+        "name": "itemDart01",
+        "states": [
+            {
+                "id": 1,
+                "back": "39,71,58",
+                "left": [{ "stmt": ["SELF USE"] }],
+                "right": [
+                    {"text": "itemDart02+itemDart03"},
+                    {"text": "itemDart02"}
+                ]
+            }
+        ]
+    },
+    {
+        "id": "panties",
+        "name": "itemPanties01",
+        "states": [
+            {
+                "id": 1,
+                "left": [{ "stmt": ["SELF USE"] }],
+                "right": [
+                    {"text": "itemPanties02"}
+                ]
+            }
+        ]
+    },
+    {
+        "id": "letter",
+        "name": "itemNote01",
+        "states": [
+            {
+                "id": 1,
+                "left": [{ "stmt": ["SELF USE"] }],
+                "right": [
+                    {"text": "itemNote02", "stmt": ["telephone 2"]},
+                    {"text": "itemNote03"}
+                ]
+            }
+        ]
+    },
+    {
+        "id": "lipstick",
+        "name": "itemLipstick01",
+        "states": [
+            {
+                "id": 1,
+                "left": [{ "stmt": ["SELF USE"] }],
+                "right": [
+                    {"text": "itemLipstick02+itemLipstick03"},
+                    {"text": "itemLipstick02"}
+                ]
+            }
+        ]
+    },
+    {
+        "id": "cylinder",
+        "name": "itemCylinder01",
+        "states": [
+            {
+                "id": 1,
+                "back": "88,145,32",
+                "left": [{ "stmt": ["SELF USE"] }],
+                "right": [
+                    {"text": "itemCylinder02"}
+                ]
+            }
+        ]
+    },
+    {
+        "id": "newspaper",
+        "name": "itemNewspaper01",
+        "states": [
+            {
+                "id": 1,
+                "back": "171,171,171",
+                "left": [{ "stmt": ["SELF USE"] }],
+                "right": [
+                    {"text": "itemNewspaper02", "stmt": ["HERO TAKE bankStatement"]}
+                ]
+            }
+        ]
+    },
+    {
+        "id": "bankStatement",
+        "name": "itemBankStatement01",
+        "states": [
+            {
+                "id": 1,
+                "left": [{ "stmt": ["SELF USE"] }],
+                "right": [
+                    {"text": "itemBankStatement02"}
+                ]
+            }
+        ]
+    }
+]

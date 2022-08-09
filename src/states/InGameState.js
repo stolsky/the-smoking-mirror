@@ -56,8 +56,6 @@ const InGameState = class {
                 if (isNotEmptyString(enter)) {
 
                     GameStatesManager.notify("transition", { name: "InOut" });
-                    // TODO split transition inOut into 2 transitions 1 "in" and 1 "out"
-                    // TODO create callback/Promise -> after "in" event call enterScene and then trigger "out"
                     this.#enterScene(enter);
 
                 } else if (lost) {

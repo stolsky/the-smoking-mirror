@@ -23,11 +23,6 @@ const gameLoop = (dt) => {
         states.update(dt);
         states.render(graphicsContext);
 
-        if (states.isEmpty()) {
-            Tick.stop();
-            throw new Error("The game states stack is empty.");
-        }
-
         timeElapsed = 0;
     }
 

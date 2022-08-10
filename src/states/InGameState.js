@@ -17,10 +17,13 @@ const InGameState = class {
 
     #currentAct;
 
+    /** @type {Array} */
     #updateSceneElements;
 
+    /** @type {Array} */
     #updateInventoryElements;
 
+    /** @type {Array} */
     #updateLog;
 
     #toRender;
@@ -28,7 +31,7 @@ const InGameState = class {
     /** @type {InGameUI} */
     #wrapper;
 
-    #enterScene(id) {
+    #enterScene(id, resetLog = false) {
 
         this.#currentAct.loadScene(id);
         this.#wrapper
@@ -36,17 +39,26 @@ const InGameState = class {
             .clearScene();
         this.#updateSceneElements = this.#currentAct.getAllElementsProperties();
 
-        // TODO add scene description if exists
-        // reset log if necessary
+        // TODO refactor to own function
+        const intro = this.#currentAct.getCurrentScene().getIntro();
+        if (intro) {
+            this.#updateLog.push({ text: intro, narrator: this.#currentAct.getActiveHero().getName() });
+        }
+
+        // TODO refactor to own function
+        if (resetLog) {
+            this.#wrapper.clearLog();
+        }
+
     }
 
     /** @param {Array<{text: string, elements: [{enter?: string, highlight?: boolean, id?: string, lost?: string, remove?: boolean}]}>} */
-    #processUpdates({ text, elements }) {
+    #processResults({ text, elements }) {
 
         // console.log(text, elements);
 
         if (isNotEmptyString(text)) {
-            this.#updateLog = { text, narrator: this.#currentAct.getActiveHero().getName() };
+            this.#updateLog.push({ text, narrator: this.#currentAct.getActiveHero().getName() });
         }
 
         if (elements instanceof Array) {
@@ -55,16 +67,13 @@ const InGameState = class {
 
                 if (isNotEmptyString(enter)) {
 
-                    GameStatesManager.notify("transition", { name: "InOut" });
-                    // TODO split transition inOut into 2 transitions 1 "in" and 1 "out"
-                    // TODO create callback/Promise -> after "in" event call enterScene and then trigger "out"
-                    this.#enterScene(enter);
+                    GameStatesManager.notify("transition", ["In", () => this.#enterScene(enter), "Out"]);
 
                 } else if (lost) {
 
                     GameStatesManager
                         .notify("done")
-                        .notify("menuMenu")
+                        .notify("mainMenu")
                         .notify("textPage", { name: "GameOver", title: "gameOver", text: lost });
 
                 } else if (id) {
@@ -96,19 +105,12 @@ const InGameState = class {
     }
 
     #handleInput({ id, left, right }) {
-
-        const element = Act.getElement(id);
-        let action = {};
-
-        if (element) {
-            if (left) {
-                action = element.getLeftAction();
-            } else if (right) {
-                action = element.getRightAction();
-            }
-        }
-
-        this.#processUpdates(processClick(this.#currentAct.getActiveHero(), element, action));
+        this.#processResults(processClick({
+            hero: this.#currentAct.getActiveHero(),
+            element: Act.getElement(id),
+            left,
+            right
+        }));
     }
 
     /**
@@ -116,19 +118,20 @@ const InGameState = class {
      */
     constructor({ name, start, hero, elements }) {
 
+        this.#updateSceneElements = [];
+        // TODO fill inventory with previuos inventory
+        this.#updateInventoryElements = [];
+        this.#updateLog = [];
+
         this.#currentAct = new Act({ name, elements }).setActiveHero(hero);
         this.#wrapper = new InGameUI();
         this.#enterScene(start);
-
-        // TODO fill inventory with previuos inventory
-        this.#updateInventoryElements = [];
-        this.#updateLog = null;
 
         this.#toRender = true;
     }
 
     enter() {
-        GameStatesManager.notify("transition", { name: "Out" });
+        GameStatesManager.notify("transition", ["Out"]);
         return this;
     }
 
@@ -158,9 +161,9 @@ const InGameState = class {
             this.#wrapper.updateInventoryElements(this.#updateInventoryElements);
             this.#updateInventoryElements = [];
         }
-        if (this.#updateLog !== null) {
+        if (this.#updateLog.length > 0) {
             this.#wrapper.updateLog(this.#updateLog);
-            this.#updateLog = null;
+            this.#updateLog = [];
         }
     }
 

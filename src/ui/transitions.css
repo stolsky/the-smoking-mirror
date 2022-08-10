@@ -50,21 +50,21 @@
 .Application .Transition {
     background-color: #ffffff;
 }
-.Application .Transition.InOut {
-    animation: 1s ease-in-out paused opacityInOut;
+
+.Application .Transition.In {
+    animation: 0.5s ease-out paused forwards opacityIn;
 }
 .Application .Transition.Out {
-    animation: 1s ease-out paused opacityOut;
+    animation: 0.5s ease-out paused forwards opacityOut;
 }
 
-@keyframes opacityInOut {
+@keyframes opacityIn {
     0% { opacity: 0; }
-    50% { opacity: 1; }
-    100% { opacity: 0; }
-  }
+    100% { opacity: 1; }
+}
 
 @keyframes opacityOut {
     0% { opacity: 1; }
     100% { opacity: 0; }
-  }
+}
   

@@ -1,0 +1,36 @@
+
+.Application .InGameUI > .Log {
+    grid-column-start: 2;
+    grid-row-start: 2;
+    border-left: 1px solid #000000;
+    padding: 5px;
+
+    overflow: auto;
+    scrollbar-color: #888 #fff;
+    scrollbar-width: thin;
+}
+.Application .InGameUI > .Log .Message {
+    margin-bottom: 10px;
+    font-size: 0.8em;
+    color: #888888;
+}
+.Application .InGameUI > .Log .Message:hover {
+    color: #000000;
+    font-size: 0.9em;
+}
+.Application .InGameUI > .Log .Message:first-child {
+    color: #000000;
+    font-size: 0.9em;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #000000;
+}
+.Application .InGameUI > .Log .Message .Narrator {
+    font-weight: bold;
+}
+.Application .InGameUI > .Log .Message .Narrator::after {
+    content: ":";
+    margin-right: 10px;    
+}
+.Application .InGameUI > .Log .Message .Text {
+    font-family: sans-serif;    
+}

@@ -127,24 +127,29 @@ const processStatement = (statement) => {
     return parseAction(action);
 };
 
-const processClick = (hero, element = null, action = {}) => {
+const processClick = ({ hero, element = null, left, right }) => {
 
     const updates = {};
 
-    if (element && action) {
-
-        activeHero = hero;
-        clickedObject = element;
-        let nextAction = action;
+    if (element) {
 
         updates.elements = [];
 
+        activeHero = hero;
+        clickedObject = element;
+
+        let action = null;
+
         if (Combination.isActive()) {
-            nextAction = Combination.check(element);
+            action = Combination.check(element);
             updates.elements = Combination.cancel();
+        } else if (left) {
+            action = element.getLeftAction();
+        } else if (right) {
+            action = element.getRightAction();
         }
 
-        const { text, stmt } = nextAction;
+        const { text, stmt } = action;
 
         if (isNotEmptyString(text)) {
             updates.text = text;

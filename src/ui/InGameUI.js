@@ -66,8 +66,8 @@ const InGameUI = class extends Wrapper {
         return this;
     }
 
-    updateLog(message) {
-        this.#log.add(message);
+    updateLog(messages) {
+        this.#log.append(messages);
         return this;
     }
 

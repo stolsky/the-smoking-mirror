@@ -3,7 +3,7 @@
 
 @import "./cursors.css";
 
-@import "./textPages.css";
+@import "./transitions.css";
 @import "./menu.css";
 @import "./log.css";
 
@@ -117,17 +117,21 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
     font-size: 0.8em;
     padding: 2px 4px;
     font-weight: bold;
+    border-radius: 5px;
+}
+.Application .InGameUI > .Inventory .Element .Name {
+    text-shadow: 0px -1px 2px #ddd;
 }
 
 .Application .InGameUI > .Scene .Element:hover,
 .Application .InGameUI > .Inventory .Element:hover {
     outline: 3px solid var(--HIGHLIGHT);
-    box-shadow: 0;
+    box-shadow: none;
 }
 .Application .InGameUI > .Scene .Element.Highlight,
 .Application .InGameUI > .Inventory .Element.Highlight {
     outline: 3px solid #ff0000;
-    box-shadow: 0;
+    box-shadow: none;
 }
 
 .Application .InGameUI > .Dialog {

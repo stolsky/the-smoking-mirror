@@ -31,7 +31,7 @@ const InGameState = class {
     /** @type {InGameUI} */
     #wrapper;
 
-    #enterScene(id) {
+    #enterScene(id, resetLog = false) {
 
         this.#currentAct.loadScene(id);
         this.#wrapper
@@ -39,11 +39,17 @@ const InGameState = class {
             .clearScene();
         this.#updateSceneElements = this.#currentAct.getAllElementsProperties();
 
+        // TODO refactor to own function
         const intro = this.#currentAct.getCurrentScene().getIntro();
         if (intro) {
             this.#updateLog.push({ text: intro, narrator: this.#currentAct.getActiveHero().getName() });
         }
-        // reset log if necessary
+
+        // TODO refactor to own function
+        if (resetLog) {
+            this.#wrapper.clearLog();
+        }
+
     }
 
     /** @param {Array<{text: string, elements: [{enter?: string, highlight?: boolean, id?: string, lost?: string, remove?: boolean}]}>} */
@@ -61,14 +67,13 @@ const InGameState = class {
 
                 if (isNotEmptyString(enter)) {
 
-                    GameStatesManager.notify("transition", { name: "InOut" });
-                    this.#enterScene(enter);
+                    GameStatesManager.notify("transition", ["In", () => this.#enterScene(enter), "Out"]);
 
                 } else if (lost) {
 
                     GameStatesManager
                         .notify("done")
-                        .notify("menuMenu")
+                        .notify("mainMenu")
                         .notify("textPage", { name: "GameOver", title: "gameOver", text: lost });
 
                 } else if (id) {
@@ -126,7 +131,7 @@ const InGameState = class {
     }
 
     enter() {
-        GameStatesManager.notify("transition", { name: "Out" });
+        GameStatesManager.notify("transition", ["Out"]);
         return this;
     }
 

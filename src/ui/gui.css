@@ -89,12 +89,12 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
 .Application .InGameUI > .Scene .Element .Name {
     display: block;
     font-weight: bold;
-    text-shadow: 0px -1px 2px #ddd;
+    text-shadow: 0px -1px 0px rgba(255,255,255,0.5);
 }
 .Application .InGameUI > .Scene .Element .Information {
     display: block;
     font-style: italic;
-    margin-top: -2px;
+    text-shadow: 0px -1px 0px rgba(255,255,255,0.5);
 }
 
 .Application .InGameUI > .Inventory {

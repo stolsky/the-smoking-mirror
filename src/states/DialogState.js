@@ -1,3 +1,5 @@
+import Dialog from "../ui/Dialog.js";
+
 
 const DialogState = class {
 
@@ -7,38 +9,31 @@ const DialogState = class {
 
     #wrapper;
 
-    constructor(data) {
+    constructor({ dialog }) {
 
         // create components
-        //this.#wrapper = new ...
+        this.#wrapper = new Dialog();
 
         this.#toRender = true;
     }
 
     enter() {
-        // set initial values
         return this;
     }
 
     exit() {
-        // remove intro components
         return this;
     }
 
     render(ctx) {
         if (this.#toRender) {
             // add intro component to screen
-            ctx.addComponent(this.#wrapper);
+            this.#wrapper.render(ctx);
             this.#toRender = false;
-        }
-        if (this.#toAnimate) {
-            // render animation
-            this.#toAnimate = false;
         }
     }
 
     update() {
-        // calculate animation
         return this;
     }
 

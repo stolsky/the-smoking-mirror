@@ -4,13 +4,13 @@ import GameStatesManager from "./GameStatesManager.js";
 
 const SetupIntroState = class {
 
-    #is_ready;
+    #isDone;
 
     constructor() {
 
         // load resources
 
-        this.#is_ready = true;
+        this.#isDone = true;
     }
 
     enter() {
@@ -22,11 +22,11 @@ const SetupIntroState = class {
     }
 
     render() {
-        this.#is_ready = false;
+        this.#isDone = false;
     }
 
     update() {
-        if (this.#is_ready) {
+        if (this.#isDone) {
             GameStatesManager
                 .notify("done")
                 .notify("mainMenu");

@@ -13,6 +13,11 @@ import InGameUI from "../ui/InGameUI.js";
 import GameStatesManager from "./GameStatesManager.js";
 
 
+const loadGameOver = (text) => GameStatesManager
+    .notify("done")
+    .notify("mainMenu")
+    .notify("textPage", { name: "GameOver", title: "gameOver", text });
+
 const InGameState = class {
 
     #currentAct;
@@ -52,10 +57,31 @@ const InGameState = class {
 
     }
 
+    #processElements({ id, highlight, remove }) {
+
+        const element = Act.getElement(id);
+        const propertiesToUpdate = element.getProperties();
+
+        if (isBoolean(highlight)) {
+            propertiesToUpdate.highlight = highlight;
+        }
+
+        if (isBoolean(remove)) {
+            propertiesToUpdate.remove = remove;
+            Act.removeElement(id);
+        }
+
+        if (element instanceof Element) {
+            this.#updateSceneElements.push(propertiesToUpdate);
+        } else if (element instanceof Item) {
+            this.#updateInventoryElements.push(propertiesToUpdate);
+        }
+    }
+
     /** @param {Array<{text: string, elements: [{enter?: string, highlight?: boolean, id?: string, lost?: string, remove?: boolean}]}>} */
     #processResults({ text, elements }) {
 
-        // console.log(text, elements);
+        console.log(text, elements);
 
         if (isNotEmptyString(text)) {
             this.#updateLog.push({ text, narrator: this.#currentAct.getActiveHero().getName() });
@@ -63,42 +89,19 @@ const InGameState = class {
 
         if (elements instanceof Array) {
 
-            elements.forEach(({ enter, highlight, id, lost, remove }) => {
+            elements.forEach(({ dialog, enter, highlight, id, lost, remove }) => {
 
                 if (isNotEmptyString(enter)) {
-
                     GameStatesManager.notify("transition", ["In", () => this.#enterScene(enter), "Out"]);
-
                 } else if (lost) {
-
-                    GameStatesManager
-                        .notify("done")
-                        .notify("mainMenu")
-                        .notify("textPage", { name: "GameOver", title: "gameOver", text: lost });
-
+                    loadGameOver(lost);
                 } else if (id) {
-
-                    const element = Act.getElement(id);
-                    const propertiesToUpdate = element.getProperties();
-
-                    if (isBoolean(highlight)) {
-                        propertiesToUpdate.highlight = highlight;
-                    }
-
-                    if (isBoolean(remove)) {
-                        propertiesToUpdate.remove = remove;
-                        Act.removeElement(id);
-                    }
-
-                    if (element instanceof Element) {
-                        this.#updateSceneElements.push(propertiesToUpdate);
-                    } else if (element instanceof Item) {
-                        this.#updateInventoryElements.push(propertiesToUpdate);
-                    }
-
+                    this.#processElements({ id, highlight, remove });
                 }
 
-                // TODO dialog: string = dialog id -> GameStates.push(new DialogState(dialog))
+                if (isNotEmptyString(dialog)) {
+                    GameStatesManager.notify("dialog", { dialog });
+                }
 
             });
         }

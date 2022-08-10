@@ -15,16 +15,20 @@ const create_application = () => {
     const app = new Application()
         .addClass("Center");
 
-    GameStatesManager.setTimeFrame(200)
+    GameStatesManager
+        .setTimeFrame(200)
         .setGraphicsContext(app.getRootPane())
 
+        // register all states used
         .register("setupIntro", StateFactory.createSetupIntroState)
         .register("mainMenu", StateFactory.createMenuState)
         .register("loadGame", StateFactory.createLoadGameState)
         .register("textPage", StateFactory.createTextPageState)
         .register("runGame", StateFactory.createInGameState)
         .register("transition", StateFactory.createTransitionState)
+        .register("dialog", StateFactory.createDialogState)
 
+        // call first state
         .notify("setupIntro")
         .start();
 

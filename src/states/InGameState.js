@@ -81,7 +81,7 @@ const InGameState = class {
     /** @param {Array<{text: string, elements: [{enter?: string, highlight?: boolean, id?: string, lost?: string, remove?: boolean}]}>} */
     #processResults({ text, elements }) {
 
-        console.log(text, elements);
+        // console.log(text, elements);
 
         if (isNotEmptyString(text)) {
             this.#updateLog.push({ text, narrator: this.#currentAct.getActiveHero().getName() });

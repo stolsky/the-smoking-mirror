@@ -12,7 +12,7 @@ import Wrapper from "./Wrapper.js";
 
 const HIGHLIGHT = "Highlight";
 
-// TODO improve update methods -> only update if something has changed
+// TODO improve update methods -> only update if something has changed -> how to check if is the right class -> somehow store!!
 
 const updateClassName = (element, className) => {
     element.addClass(className);
@@ -30,11 +30,13 @@ const updateInformation = (parent, id) => {
     updateText(parent.getChildren()[1], getWord(id));
 };
 
-const updateHighlight = (element, highlight) => {
-    if (highlight && !element.hasClass(HIGHLIGHT)) {
-        element.addClass(HIGHLIGHT);
-    } else if (!highlight && element.hasClass(HIGHLIGHT)) {
-        element.removeClass(HIGHLIGHT);
+/**
+ * @param {TextComponent} element
+ * @param {boolean} highlight
+ */
+const updateHighlight = (element, highlight = true) => {
+    if (isBoolean(highlight)) {
+        element.toggleClass(HIGHLIGHT, highlight);
     }
 };
 

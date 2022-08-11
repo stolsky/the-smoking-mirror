@@ -1,4 +1,5 @@
 
+import { hasProperty } from "../../lib/JST/native/typeCheck.js";
 import { getNext } from "../../lib/JST/random/random.js";
 
 
@@ -74,7 +75,7 @@ const Combination = class {
                 }
             }
 
-            if (!result.text && !result.stmt) {
+            if (!hasProperty(result, "text") && !hasProperty(result, "stmt")) {
                 result = { text: `georgeWrong${Math.floor(getNext() * 12)}` };
             }
 

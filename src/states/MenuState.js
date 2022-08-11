@@ -52,7 +52,7 @@ const MenuState = class {
     }
 
     update() {
-        // calculate animations
+
         return this;
     }
 

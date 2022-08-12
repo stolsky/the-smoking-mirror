@@ -24,10 +24,6 @@ const Act = class {
         return GameCache.getItem(id);
     }
 
-    static removeElement(id) {
-        GameCache.deleteItem(id);
-    }
-
     clear() {
         this.#name = null;
         this.#activeHero = null;
@@ -65,6 +61,11 @@ const Act = class {
             this.#currentScene = GameCache.getItem(id);
         }
         return this;
+    }
+
+    removeElement(id) {
+        this.#currentScene.removeElement(id);
+        GameCache.deleteItem(id);
     }
 
     setActiveHero(id) {

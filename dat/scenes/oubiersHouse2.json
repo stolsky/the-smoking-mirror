@@ -1,6 +1,6 @@
 {
     "id": "oubier2",
-    "name": "paris1Scene02",
+    "name": "paris1Scene2",
     "elems": [
         {
             "id": "door2",
@@ -11,11 +11,11 @@
                     "type": "Use",
                     "back": "144,65,5",
                     "left": [
-                        {"text": "paris1Door09+paris1Door12", "cmd": ["SELF INFO statLocked"]},
-                        {"text": "paris1Door09"}
+                        {"text": "paris1Door9+paris1Door12", "cmd": ["SELF INFO statLocked"]},
+                        {"text": "paris1Door9"}
                     ],
                     "right": [
-                        {"text": "paris1Door08"}
+                        {"text": "paris1Door8"}
                     ],
                     "combos": [
                         {"id": "blowDart", "text": "paris1Door15"},
@@ -30,7 +30,7 @@
                         {"text": "paris1Door20"}
                     ],
                     "right": [
-                        {"text": "paris1Door08"}
+                        {"text": "paris1Door8"}
                     ],
                     "combos": [
                         {"id": "blowDart", "text": "paris1Door15"},
@@ -41,7 +41,7 @@
         },
         {
             "id": "door3",
-            "name": "paris1Door01",
+            "name": "paris1Door1",
             "states": [
                 {
                     "id": 1,
@@ -74,60 +74,60 @@
         },
         {
             "id": "telephone",
-            "name": "paris1Telephone01",
+            "name": "paris1Telephone1",
             "states": [
                 {
                     "id": 1,
                     "type": "Take",
                     "back": "187,34,23",
                     "left": [
-                        {"text": "paris1Telephone02+paris1Telephone03"},
-                        {"text": "paris1Telephone02"}
+                        {"text": "paris1Telephone2+paris1Telephone3"},
+                        {"text": "paris1Telephone2"}
                     ],
                     "right": [
-                        {"text": "paris1Telephone04"}
+                        {"text": "paris1Telephone4"}
                     ]
                 },
                 {
                     "id": 2,
                     "left": [
-                        {"text": "paris1Telephone05", "cmd": ["DIALOG andre1", "SELF 3", "CafeKnown true"]}
+                        {"text": "paris1Telephone5", "cmd": ["DIALOG andre1", "SELF 3"]}
                     ],
                     "right": [
-                        {"text": "paris1Telephone04"}
+                        {"text": "paris1Telephone4"}
                     ]
                 },
                 {
                     "id": 3,
                     "left": [
-                        {"text": "paris1Telephone06"}
+                        {"text": "paris1Telephone6"}
                     ],
                     "right": [
-                        {"text": "paris1Telephone04"}
+                        {"text": "paris1Telephone4"}
                     ]
                 }
             ]
         },
         {
             "id": "newspaper2",
-            "name": "paris1Newspaper01",
+            "name": "paris1Newspaper1",
             "states": [
                 {
                     "id": 1,
                     "type": "Take",
                     "back": "171,171,171",
                     "left": [
-                        {"text": "paris1Newspaper03", "cmd": ["HERO TAKE newspaper", "SELF 0"]}
+                        {"text": "paris1Newspaper3", "cmd": ["HERO TAKE newspaper", "SELF 0"]}
                     ],
                     "right": [
-                        {"text": "paris1Newspaper02"}
+                        {"text": "paris1Newspaper2"}
                     ]
                 }
             ]
         },
         {
             "id": "stairs",
-            "name": "paris1Stairs01",
+            "name": "paris1Stairs1",
             "states": [
                 {
                     "id": 1,
@@ -137,8 +137,8 @@
                         {"cmd": ["ENTER oubier1"]}
                     ],
                     "right": [
-                        {"text": "paris1Stairs02", "cmd": ["SELF INFO paris1Stairs03"]},
-                        {"text": "paris1Stairs02"}
+                        {"text": "paris1Stairs2", "cmd": ["SELF INFO paris1Stairs3"]},
+                        {"text": "paris1Stairs2"}
                     ]
                 }
             ]
@@ -178,11 +178,31 @@
     "dialogs": [
         {
             "id": "andre",
-            "states": [
+            "prefix": "paris1DialogAndre",
+            "intro": "andreTelephone",
+            "elems": [
                 {
-                    "id": 1,
-                    "prefix": "paris1DialogAndre",
-                    "dialog": "01;02;03;04;05;06;07+08;09;10;11;12;13;14+15+16"
+                    "id": "andreTelephone",
+                    "states": [
+                        {
+                            "id": 1,
+                            "left": [
+                                { "char": "georgeFirstName", "text": "1" },
+                                { "type": "SOUND", "text": "2"},
+                                { "char": "georgeFirstName", "text": "3" },
+                                { "char": "andreFirstName", "text": "4"},
+                                { "char": "georgeFirstName", "text": "5" },
+                                { "char": "andreFirstName", "text": "6"},
+                                { "char": "georgeFirstName", "text": "7+8" },
+                                { "char": "andreFirstName", "text": "9"},
+                                { "char": "georgeFirstName", "text": "10" },
+                                { "char": "andreFirstName", "text": "11", "cmd": ["CafeKnown true"]},
+                                { "char": "georgeFirstName", "text": "12" },
+                                { "type": "SOUND", "text": "13"},
+                                { "char": "georgeFirstName", "text": "14+15+16" }
+                            ]
+                        }
+                    ]
                 }
             ]
         }

@@ -25,6 +25,27 @@ const BaseObject = class {
     /** @type {Array<{}>} */
     #states;
 
+    #getAction(property = "left") {
+
+        let action = null;
+
+        if (this.#current_state instanceof Object && hasProperty(this.#current_state, property)) {
+
+            const indexKey = `${property}Index`;
+            const index = this.#current_state[`${indexKey}`];
+            const actionStack = this.#current_state[`${property}`];
+
+            if (actionStack instanceof Array) {
+                action = actionStack[`${index}`];
+                if (index < actionStack.length - 1) {
+                    this.#current_state[`${indexKey}`] = index + 1;
+                }
+            }
+        }
+
+        return action;
+    }
+
     constructor(id, name = "Object", states = null) {
 
         this.#id = (isNotEmptyString(id)) ? id : "obj";
@@ -35,6 +56,20 @@ const BaseObject = class {
             .setBackground("255,255,255")
             .setStates(states)
             .setCurrentState(-1);
+    }
+
+    // eslint-disable-next-line no-unused-vars
+    getAction({ left, middle, right }) {
+
+        if (left) {
+            return this.#getAction("left");
+        }
+
+        if (right) {
+            return this.#getAction("right");
+        }
+
+        return {};
     }
 
     getBackground() {
@@ -67,17 +102,6 @@ const BaseObject = class {
         return this.#information;
     }
 
-    getLeftAction() {
-        let action = null;
-        if (this.#current_state && hasProperty(this.#current_state, "left")) {
-            action = this.#current_state.left[this.#current_state.leftIndex];
-            if (this.#current_state.leftIndex < this.#current_state.left.length - 1) {
-                this.#current_state.leftIndex = this.#current_state.leftIndex + 1;
-            }
-        }
-        return action;
-    }
-
     getName() {
         return this.#name;
     }
@@ -91,17 +115,6 @@ const BaseObject = class {
             background: this.getBackground(),
             information: this.getInformation()
         };
-    }
-
-    getRightAction() {
-        let action = null;
-        if (this.#current_state && hasProperty(this.#current_state, "right")) {
-            action = this.#current_state.right[this.#current_state.rightIndex];
-            if (this.#current_state.rightIndex < this.#current_state.right.length - 1) {
-                this.#current_state.rightIndex = this.#current_state.rightIndex + 1;
-            }
-        }
-        return action;
     }
 
     getStates() {

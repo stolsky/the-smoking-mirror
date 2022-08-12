@@ -1,0 +1,78 @@
+// almost same structure as scene
+{
+    "dialogs": [
+        {
+            // @type {string} @required @unique inside GameCache
+            // identifies the dialog in the GameCache
+            "id": "dialogID",
+
+            // @type {string} @optional
+            // Can be used to reduce the size of dictionary identifiers if they always start with that same prefix.
+            // 
+            "prefix": "idPart",
+
+            // @type {string} @optional
+            // if set, the elem with this ID will be treated differently
+            //      the text of the elem will be loaded immediately and displayed on the screen
+            //      the "visible" attribute will be skipped if used
+            //      the "fore" attribute sets the font color
+            //      the "back" attribute sets the background color
+            "intro": "elemId",
+
+            // @type {Array<{}>} @optional
+            "elems": [
+                {
+                    // @type {string} @required @unique inside elems
+                    "id": "elemID",
+
+                    // @type {string} @optional
+                    "name": "elemName", 
+
+                    // @type {Array<{}>} @optional
+                    // states of a simplified finite state machine
+                    "states": [
+                        {
+                            // @type {number>0} @required @unique inside elems
+                            "id": 1,
+
+                            // @type {string} @optional
+                            // sets the font color of the option
+                            "fore": "color",
+
+                            // @type {string} @optional
+                            // sets the background color of the option's container
+                            "back": "color",
+
+                            // @type {boolean} @optional
+                            // hides(false)/shows(true) the option in the option's panel depending on the boolean
+                            // This can be used to display the options available to the main character at a particular time during the dialog.
+                            "visible": true,
+
+                            "left": [
+                                {
+                                    // @type {string} @optional
+                                    // sets the name of the character in front of the text
+                                    "char": "",
+
+                                    // @type {"SPEECH", "THOUGHT", "SOUND"} @optional @default = "SPEAK"
+                                    // sets the visual style of the communication bubbles
+                                    "type": "",
+
+                                    // @type {Array<string>} @optional
+                                    // dictionary id of text
+                                    // text can be concatinated i.e. `"text": "paris1DialogAndre07+paris1DialogAndre08"`
+                                    // text can be reduced if dialog's prefix is used i.e. `"prefix": "paris1DialogAndre", "text": "07+08"`
+                                    "text": "textID1",
+
+                                    // @type {Array<string>} @optional
+                                    // if present, these commands are processed if the option is used in the dialog (clicked on)
+                                    "cmd": ["command1", "command2", "..."]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

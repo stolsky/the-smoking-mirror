@@ -1,145 +1,145 @@
 [
     {
         "id": "worm",
-        "name": "itemWorm01",
+        "name": "itemWorm1",
         "states": [
             {
                 "id": 1,
                 "back": "187,185,173",
                 "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
-                    {"text": "itemWorm02"}
+                    {"text": "itemWorm2"}
                 ]
             }
         ]
     },
     {
         "id": "pot",
-        "name": "itemPot01",
+        "name": "itemPot1",
         "states": [
             {
                 "id": 1,
                 "back": "181,77,17",
                 "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
-                    {"text": "itemPot02", "cmd": ["HERO TAKE houseKey"]},
-                    {"text": "itemPot03+itemPot04"},
-                    {"text": "itemPot03"}
+                    {"text": "itemPot2", "cmd": ["HERO TAKE houseKey"]},
+                    {"text": "itemPot03+itemPot4"},
+                    {"text": "itemPot3"}
                 ]
             }
         ]
     },
     {
         "id": "houseKey",
-        "name": "itemKey01",
+        "name": "itemKey1",
         "states": [
             {
                 "id": 1,
                 "back": "75,81,108",
                 "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
-                    {"text": "itemKey02"}
+                    {"text": "itemKey2"}
                 ]
             }
         ]
     },
     {
         "id": "blowDart",
-        "name": "itemDart01",
+        "name": "itemDart1",
         "states": [
             {
                 "id": 1,
                 "back": "39,71,58",
                 "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
-                    {"text": "itemDart02+itemDart03"},
-                    {"text": "itemDart02"}
+                    {"text": "itemDart02+itemDart3"},
+                    {"text": "itemDart2"}
                 ]
             }
         ]
     },
     {
         "id": "panties",
-        "name": "itemPanties01",
+        "name": "itemPanties1",
         "states": [
             {
                 "id": 1,
                 "back": "196,32,4",
                 "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
-                    {"text": "itemPanties02"}
+                    {"text": "itemPanties2"}
                 ]
             }
         ]
     },
     {
         "id": "letter",
-        "name": "itemNote01",
+        "name": "itemNote1",
         "states": [
             {
                 "id": 1,
                 "back": "239,239,239",
                 "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
-                    {"text": "itemNote02", "cmd": ["telephone 2"]},
-                    {"text": "itemNote03"}
+                    {"text": "itemNote2", "cmd": ["telephone 2"]},
+                    {"text": "itemNote3"}
                 ]
             }
         ]
     },
     {
         "id": "lipstick",
-        "name": "itemLipstick01",
+        "name": "itemLipstick1",
         "states": [
             {
                 "id": 1,
                 "back": "120,16,0",
                 "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
-                    {"text": "itemLipstick02+itemLipstick03"},
-                    {"text": "itemLipstick02"}
+                    {"text": "itemLipstick02+itemLipstick3"},
+                    {"text": "itemLipstick2"}
                 ]
             }
         ]
     },
     {
         "id": "cylinder",
-        "name": "itemCylinder01",
+        "name": "itemCylinder1",
         "states": [
             {
                 "id": 1,
                 "back": "88,145,32",
                 "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
-                    {"text": "itemCylinder02"}
+                    {"text": "itemCylinder2"}
                 ]
             }
         ]
     },
     {
         "id": "newspaper",
-        "name": "itemNewspaper01",
+        "name": "itemNewspaper1",
         "states": [
             {
                 "id": 1,
                 "back": "171,171,171",
                 "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
-                    {"text": "itemNewspaper02", "cmd": ["HERO TAKE bankStatement"]}
+                    {"text": "itemNewspaper2", "cmd": ["HERO TAKE bankStatement"]}
                 ]
             }
         ]
     },
     {
         "id": "bankStatement",
-        "name": "itemBankStatement01",
+        "name": "itemBankStatement1",
         "states": [
             {
                 "id": 1,
                 "back": "39,239,239",
                 "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
-                    {"text": "itemBankStatement02"}
+                    {"text": "itemBankStatement2"}
                 ]
             }
         ]

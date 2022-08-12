@@ -60,10 +60,10 @@ const applyMethod = (target, methodName, value = null) => {
         result = { id: value };
 
     } else if (methodName === "INCLEFT") {
-        target.getLeftAction();
+        target.getAction("left");
 
     } else if (methodName === "INCRIGHT") {
-        target.getRightAction();
+        target.getAction("right");
     }
 
     return result;
@@ -127,7 +127,7 @@ const processStatement = (statement) => {
     return parseAction(action);
 };
 
-const processClick = ({ hero, element = null, left, right }) => {
+const processClick = ({ hero, element, buttons }) => {
 
     const updates = {};
 
@@ -143,10 +143,8 @@ const processClick = ({ hero, element = null, left, right }) => {
         if (Combination.isActive()) {
             action = Combination.check(element);
             updates.elements = Combination.cancel();
-        } else if (left) {
-            action = element.getLeftAction();
-        } else if (right) {
-            action = element.getRightAction();
+        } else if (buttons) {
+            action = element.getAction(buttons);
         }
 
         const { text, cmd } = action;

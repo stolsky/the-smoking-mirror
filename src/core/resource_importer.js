@@ -27,7 +27,7 @@ const importResource = (source, method) => {
     return cache;
 };
 
-const importDialogs = (source) => importResource(source, ({ id, states }) => ({ key: id, value: new Dialog(id, states) }));
+const importDialogs = (source) => importResource(source, ({ id, ...properties }) => ({ key: id, value: new Dialog(id, properties) }));
 
 const importFlags = (source) => importResource(source, (flag) => {
     const [id, type, value] = flag.split(":");
@@ -35,9 +35,9 @@ const importFlags = (source) => importResource(source, (flag) => {
 });
 
 // TODO remove duplicate code
-const importHeroes = (source) => importResource(source, ({ id, name, states }) => ({ key: id, value: new Hero(id, name, states) }));
-const importItems = (source) => importResource(source, ({ id, name, states }) => ({ key: id, value: new Item(id, name, states) }));
-const importElements = (source) => importResource(source, ({ id, name, states }) => ({ key: id, value: new Element(id, name, states) }));
+const importHeroes = (source) => importResource(source, ({ id, ...properties }) => ({ key: id, value: new Hero(id, properties) }));
+const importItems = (source) => importResource(source, ({ id, ...properties }) => ({ key: id, value: new Item(id, properties) }));
+const importElements = (source) => importResource(source, ({ id, ...properties }) => ({ key: id, value: new Element(id, properties) }));
 
 const importScenes = (source) => {
 

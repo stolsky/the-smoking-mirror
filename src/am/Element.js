@@ -15,7 +15,7 @@ const Element = class extends BaseObject {
     /** @type {boolean} */
     #visible;
 
-    constructor(id = "elem", name = "Element", states = null) {
+    constructor(id = "elem", { name = "Element", states = null } = {}) {
 
         super(id, name, states);
 

@@ -68,7 +68,7 @@ const InGameState = class {
 
         if (isBoolean(remove)) {
             propertiesToUpdate.remove = remove;
-            Act.removeElement(id);
+            this.#currentAct.removeElement(id);
         }
 
         if (element instanceof Element) {
@@ -82,6 +82,7 @@ const InGameState = class {
     #processResults({ text, elements }) {
 
         // console.log(text, elements);
+        console.log(this.#currentAct.getActiveHero());
 
         if (isNotEmptyString(text)) {
             this.#updateLog.push({ text, narrator: this.#currentAct.getActiveHero().getName() });
@@ -93,6 +94,7 @@ const InGameState = class {
 
                 if (isNotEmptyString(enter)) {
                     GameStatesManager.notify("transition", ["In", () => this.#enterScene(enter), "Out"]);
+                    // TODO add empty line to log, so all log info is grayed out
                 } else if (lost) {
                     loadGameOver(lost);
                 } else if (id) {
@@ -100,19 +102,18 @@ const InGameState = class {
                 }
 
                 if (isNotEmptyString(dialog)) {
-                    GameStatesManager.notify("dialog", { dialog });
+                    GameStatesManager.notify("dialog", Act.getElement(dialog));
                 }
 
             });
         }
     }
 
-    #handleInput({ id, left, right }) {
+    #handleInput({ id, buttons }) {
         this.#processResults(processClick({
             hero: this.#currentAct.getActiveHero(),
             element: Act.getElement(id),
-            left,
-            right
+            buttons
         }));
     }
 

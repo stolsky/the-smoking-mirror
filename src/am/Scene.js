@@ -24,6 +24,25 @@ const Scene = class {
         this.addAllElements(elements);
     }
 
+    addAllElements(list) {
+        if (list instanceof Array) {
+            list.forEach((id) => this.addElement(id));
+        }
+        return this;
+    }
+
+    addElement(id = "elem") {
+        if (!this.hasElement(id)) {
+            this.#elements.push(id);
+        }
+        return this;
+    }
+
+    /** @returns {Array<string>} */
+    getAllElements() {
+        return this.#elements;
+    }
+
     getId() {
         return this.#id;
     }
@@ -40,21 +59,11 @@ const Scene = class {
         return isString(id) && this.#elements.includes(id);
     }
 
-    addElement(id = "elem") {
-        if (!this.hasElement(id)) {
-            this.#elements.push(id);
+    removeElement(id) {
+        const index = this.#elements.indexOf(id);
+        if (index !== -1) {
+            this.#elements.splice(index, 1);
         }
-    }
-
-    addAllElements(list) {
-        if (list instanceof Array) {
-            list.forEach((id) => this.addElement(id));
-        }
-    }
-
-    /** @returns {Array<string>} */
-    getAllElements() {
-        return this.#elements;
     }
 
 };

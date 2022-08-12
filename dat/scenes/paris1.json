@@ -10,7 +10,7 @@
     "active": "georg",
     "heroes": [{
         "id": "georg",
-        "name": "charGeorgeName",
+        "name": "georgFirstName",
         "states": [
             {
                 "id": 1,

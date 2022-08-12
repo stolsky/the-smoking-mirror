@@ -4,7 +4,7 @@ import BaseObject from "./BaseObject.js";
 
 const Item = class extends BaseObject {
 
-    constructor(id = "item", name = "Item", states = null) {
+    constructor(id = "item", { name = "Item", states = null } = {}) {
 
         super(id, name, states);
 

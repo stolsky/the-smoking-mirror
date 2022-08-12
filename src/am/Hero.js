@@ -7,9 +7,9 @@ const Hero = class extends Element {
 
     #inventory;
 
-    constructor(id, name, states = {}, items = []) {
+    constructor(id, { name, states = {}, items = [] } = {}) {
 
-        super(id, name, states);
+        super(id, { name, states });
 
         this.#inventory = new StringList(items);
     }

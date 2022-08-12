@@ -5,11 +5,11 @@ const DialogState = class {
 
     #toRender;
 
-    #toAnimate;
-
     #wrapper;
 
-    constructor({ dialog }) {
+    constructor(properties) {
+
+        console.log(properties);
 
         // create components
         this.#wrapper = new Dialog();
@@ -27,7 +27,6 @@ const DialogState = class {
 
     render(ctx) {
         if (this.#toRender) {
-            // add intro component to screen
             this.#wrapper.render(ctx);
             this.#toRender = false;
         }

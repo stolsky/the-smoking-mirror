@@ -1,25 +1,25 @@
 {
     "id": "oubier1",
-    "name": "paris1Scene01",
+    "name": "paris1Scene1",
     "intro": "paris1NewGame",
     "elems": [
         {
             "id": "spider",
-            "name": "paris1Spider01",
+            "name": "paris1Spider1",
             "states": [
                 {
                     "id": 1,
                     "type": "Use",
                     "back": "186,61,41",
                     "left": [
-                        {"text": "paris1Spider02", "cmd": ["SELF INFO statFurious1"]},
-                        {"text": "paris1Spider02", "cmd": ["SELF INFO statFurious2"]},
-                        {"text": "paris1Spider02", "cmd": ["SELF INFO statFurious3"]},
-                        {"cmd": ["LOST paris1Spider07"]}
+                        {"text": "paris1Spider2", "cmd": ["SELF INFO statFurious1"]},
+                        {"text": "paris1Spider2", "cmd": ["SELF INFO statFurious2"]},
+                        {"text": "paris1Spider2", "cmd": ["SELF INFO statFurious3"]},
+                        {"cmd": ["LOST paris1Spider7"]}
                     ],
                     "right": [
-                        {"text": "paris1Spider03"},
-                        {"text": "paris1Spider04"}
+                        {"text": "paris1Spider3"},
+                        {"text": "paris1Spider4"}
                     ]
                 },
                 {
@@ -27,58 +27,58 @@
                     "back": "67,19,11",
                     "info": "statSquashed",
                     "left": [
-                        {"text": "paris1Spider06"}
+                        {"text": "paris1Spider6"}
                     ],
                     "right": [
-                        {"text": "paris1Spider05"}
+                        {"text": "paris1Spider5"}
                     ]
                 }
             ]
         },
         {
             "id": "bookcase",
-            "name": "paris1Bookcase01",
+            "name": "paris1Bookcase1",
             "states": [
                 {
                     "id": 1,
                     "type": "Use",
                     "back": "93,48,26",
                     "left": [
-                        {"text": "paris1Bookcase02", "cmd": ["block SHOW", "SELF INCRIGHT"]},
-                        {"text": "paris1Bookcase03"}
+                        {"text": "paris1Bookcase2", "cmd": ["block SHOW", "SELF INCRIGHT"]},
+                        {"text": "paris1Bookcase3"}
                     ],
                     "right": [
-                        {"text": "paris1Bookcase02", "cmd": ["block SHOW", "SELF INCLEFT"]},
-                        {"text": "paris1Bookcase04"},
-                        {"text": "paris1Bookcase05"},
-                        {"text": "paris1Bookcase06"}
+                        {"text": "paris1Bookcase2", "cmd": ["block SHOW", "SELF INCLEFT"]},
+                        {"text": "paris1Bookcase4"},
+                        {"text": "paris1Bookcase5"},
+                        {"text": "paris1Bookcase6"}
                     ]
                 },
                 {
                     "id": 2,
                     "info": "statFallen",
                     "left": [
-                        {"text": "paris1Bookcase07"}
+                        {"text": "paris1Bookcase7"}
                     ],
                     "right": [
-                        {"text": "paris1Bookcase07"}
+                        {"text": "paris1Bookcase7"}
                     ]
                 },
                 {
                     "id": 3,
                     "left": [
-                        {"text": "paris1Bookcase09"},
+                        {"text": "paris1Bookcase9"},
                         {"text": "paris1Bookcase10"}
                     ],
                     "right": [
-                        {"text": "paris1Bookcase08"}
+                        {"text": "paris1Bookcase8"}
                     ]
                 }
             ]
         },
         {
             "id": "block",
-            "name": "paris1Block01",
+            "name": "paris1Block1",
             "states": [
                 {
                     "id": 1,
@@ -86,17 +86,17 @@
                     "visible": false,
                     "back": "93,48,26",
                     "left": [
-                        {"text": "paris1Block03", "cmd": ["SELF 0", "bracket SHOW", "bookcase 2", "spider 2"]}
+                        {"text": "paris1Block3", "cmd": ["SELF 0", "bracket SHOW", "bookcase 2", "spider 2"]}
                     ],
                     "right": [
-                        {"text": "paris1Block02"}
+                        {"text": "paris1Block2"}
                     ]
                 }
             ]
         },
         {
             "id": "bracket",
-            "name": "paris1Bracket01",
+            "name": "paris1Bracket1",
             "states": [
                 {
                     "id": 1,
@@ -104,27 +104,27 @@
                     "visible": false,
                     "back": "119,134,133",
                     "left": [
-                        {"text": "paris1Bracket04", "cmd": ["SELF 2", "HERO 2", "bookcase 3", "chair SHOW", "rope SHOW", "photograph SHOW", "candle SHOW", "bureau SHOW", "drawer SHOW", "window SHOW", "window2 SHOW", "bag SHOW", "blowDart2 SHOW", "box SHOW", "syphon SHOW", "cabinet SHOW", "flames SHOW", "door SHOW"]}
+                        {"text": "paris1Bracket4", "cmd": ["SELF 2", "HERO 2", "bookcase 3", "chair SHOW", "rope SHOW", "photograph SHOW", "candle SHOW", "bureau SHOW", "drawer SHOW", "window SHOW", "window2 SHOW", "bag SHOW", "blowDart2 SHOW", "box SHOW", "syphon SHOW", "cabinet SHOW", "flames SHOW", "door SHOW"]}
                     ],
                     "right": [
-                        {"text": "paris1Bracket02"},
-                        {"text": "paris1Bracket03"}
+                        {"text": "paris1Bracket2"},
+                        {"text": "paris1Bracket3"}
                     ]
                 },
                 {
                     "id": 2,
                     "left": [
-                        {"text": "paris1Bracket06"}
+                        {"text": "paris1Bracket6"}
                     ],
                     "right": [
-                        {"text": "paris1Bracket05"}
+                        {"text": "paris1Bracket5"}
                     ]
                 }
             ]
         },
         {
             "id": "chair",
-            "name": "paris1Chair01",
+            "name": "paris1Chair1",
             "states": [
                 {
                     "id": 1,
@@ -132,17 +132,17 @@
                     "visible": false,
                     "back": "49,25,10",
                     "left": [
-                        {"text": "paris1Chair02"}
+                        {"text": "paris1Chair2"}
                     ],
                     "right": [
-                        {"text": "paris1Chair03"}
+                        {"text": "paris1Chair3"}
                     ]
                 }
             ]
         },
         {
             "id": "rope",
-            "name": "paris1Rope01",
+            "name": "paris1Rope1",
             "states": [
                 {
                     "id": 1,
@@ -150,19 +150,19 @@
                     "visible": false,
                     "back": "84,46,23",
                     "left": [
-                        {"text": "paris1Rope02", "cmd": ["SELF INFO statShredded", "SELF INCRIGHT"]},
-                        {"text": "paris1Rope02"}
+                        {"text": "paris1Rope2", "cmd": ["SELF INFO statShredded", "SELF INCRIGHT"]},
+                        {"text": "paris1Rope2"}
                     ],
                     "right": [
-                        {"text": "paris1Rope02", "cmd": ["SELF INFO statShredded", "SELF INCLEFT"]},
-                        {"text": "paris1Rope02"}
+                        {"text": "paris1Rope2", "cmd": ["SELF INFO statShredded", "SELF INCLEFT"]},
+                        {"text": "paris1Rope2"}
                     ]
                 }
             ]
         },
         {
             "id": "photograph",
-            "name": "paris1Photograph01",
+            "name": "paris1Photograph1",
             "states": [
                 {
                     "id": 1,
@@ -170,18 +170,18 @@
                     "visible": false,
                     "back": "38,83,83",
                     "left": [
-                        {"text": "paris1Photograph02"},
-                        {"text": "paris1Photograph03"}
+                        {"text": "paris1Photograph2"},
+                        {"text": "paris1Photograph3"}
                     ],
                     "right": [
-                        {"text": "paris1Photograph02"}
+                        {"text": "paris1Photograph2"}
                     ]
                 }
             ]
         },
         {
             "id": "candle",
-            "name": "paris1Candle01",
+            "name": "paris1Candle1",
             "states": [
                 {
                     "id": 1,
@@ -189,17 +189,17 @@
                     "visible": false,
                     "back": "64,93,97",
                     "left": [
-                        {"text": "paris1Candle03"}
+                        {"text": "paris1Candle3"}
                     ],
                     "right": [
-                        {"text": "paris1Candle02"}
+                        {"text": "paris1Candle2"}
                     ]
                 }
             ]
         },
         {
             "id": "bureau",
-            "name": "paris1Bureau01",
+            "name": "paris1Bureau1",
             "states": [
                 {
                     "id": 1,
@@ -208,37 +208,37 @@
                     "visible": false,
                     "back": "152,80,52",
                     "left": [
-                        {"text": "paris1Bureau03", "cmd": ["SELF 2", "tequila SHOW"]}
+                        {"text": "paris1Bureau3", "cmd": ["SELF 2", "tequila SHOW"]}
                     ],
                     "right": [
-                        {"text": "paris1Bureau02"}
+                        {"text": "paris1Bureau2"}
                     ]
                 },
                 {
                     "id": 2,
                     "info": "statOpen",
                     "left": [
-                        {"text": "paris1Bureau05", "cmd": ["SELF 3", "tequila HIDE"]}
+                        {"text": "paris1Bureau5", "cmd": ["SELF 3", "tequila HIDE"]}
                     ],
                     "right": [
-                        {"text": "paris1Bureau04"}
+                        {"text": "paris1Bureau4"}
                     ]
                 },
                 {
                     "id": 3,
                     "info": "statClosed",
                     "left": [
-                        {"text": "paris1Bureau03", "cmd": ["SELF 2", "tequila SHOW"]}
+                        {"text": "paris1Bureau3", "cmd": ["SELF 2", "tequila SHOW"]}
                     ],
                     "right": [
-                        {"text": "paris1Bureau02"}
+                        {"text": "paris1Bureau2"}
                     ]
                 }
             ]
         },
         {
             "id": "tequila",
-            "name": "paris1Tequila01",
+            "name": "paris1Tequila1",
             "states": [
                 {
                     "id": 1,
@@ -246,27 +246,27 @@
                     "visible": false,
                     "back": "242,182,94",
                     "left": [
-                        {"text": "paris1Tequila04", "cmd": ["SELF 2", "worm2 SHOW"]}
+                        {"text": "paris1Tequila4", "cmd": ["SELF 2", "worm2 SHOW"]}
                     ],
                     "right": [
-                        {"text": "paris1Tequila02"},
-                        {"text": "paris1Tequila03"}
+                        {"text": "paris1Tequila2"},
+                        {"text": "paris1Tequila3"}
                     ]
                 },
                 {
                     "id": 2,
                     "left": [
-                        {"text": "paris1Tequila05"}
+                        {"text": "paris1Tequila5"}
                     ],
                     "right": [
-                        {"text": "paris1Tequila03"}
+                        {"text": "paris1Tequila3"}
                     ]
                 }
             ]
         },
         {
             "id": "worm2",
-            "name": "paris1Worm01",
+            "name": "paris1Worm1",
             "states": [
                 {
                     "id": 1,
@@ -274,26 +274,26 @@
                     "visible": false,
                     "back": "187,185,173",
                     "left": [
-                        {"text": "paris1Worm04", "cmd": ["HERO TAKE worm", "SELF 0"]}
+                        {"text": "paris1Worm4", "cmd": ["HERO TAKE worm", "SELF 0"]}
                     ],
                     "right": [
-                        {"text": "paris1Worm02", "cmd": ["SELF 2"]}
+                        {"text": "paris1Worm2", "cmd": ["SELF 2"]}
                     ]
                 },
                 {
                     "id": 2,
                     "left": [
-                        {"text": "paris1Worm03", "cmd": ["HERO TAKE worm", "SELF 0"]}
+                        {"text": "paris1Worm3", "cmd": ["HERO TAKE worm", "SELF 0"]}
                     ],
                     "right": [
-                        {"text": "paris1Worm02"}
+                        {"text": "paris1Worm2"}
                     ]
                 }
             ]
         },
         {
             "id": "drawer",
-            "name": "paris1Drawer01",
+            "name": "paris1Drawer1",
             "states": [
                 {
                     "id": 1,
@@ -301,26 +301,26 @@
                     "visible": false,
                     "back": "152,80,52",
                     "left": [
-                        {"text": "paris1Drawer03", "cmd": ["SELF 2", "HERO TAKE pot"]}
+                        {"text": "paris1Drawer3", "cmd": ["SELF 2", "HERO TAKE pot"]}
                     ],
                     "right": [
-                        {"text": "paris1Drawer02"}
+                        {"text": "paris1Drawer2"}
                     ]
                 },
                 {
                     "id": 2,
                     "left": [
-                        {"text": "paris1Drawer04"}
+                        {"text": "paris1Drawer4"}
                     ],
                     "right": [
-                        {"text": "paris1Drawer02"}
+                        {"text": "paris1Drawer2"}
                     ]
                 }
             ]
         },
         {
             "id": "window",
-            "name": "paris1Window01",
+            "name": "paris1Window1",
             "states": [
                 {
                     "id": 1,
@@ -328,41 +328,41 @@
                     "visible": false,
                     "back": "149,202,255",
                     "left": [
-                        {"text": "paris1Window05"}
+                        {"text": "paris1Window5"}
                     ],
                     "right": [
-                        {"text": "paris1Window02", "cmd": ["SELF 2", "window2 3"]}
+                        {"text": "paris1Window2", "cmd": ["SELF 2", "window2 3"]}
                     ]
                 },
                 {
                     "id": 2,
                     "left": [
-                        {"text": "paris1Window05"}
+                        {"text": "paris1Window5"}
                     ],
                     "right": [
-                        {"text": "paris1Window03"}
+                        {"text": "paris1Window3"}
                     ]
                 },
                 {
                     "id": 3, "left": [
-                        {"text": "paris1Window05"}
+                        {"text": "paris1Window5"}
                     ], "right": [
-                        {"text": "paris1Window04", "cmd": ["SELF 4", "window2 4"]}
+                        {"text": "paris1Window4", "cmd": ["SELF 4", "window2 4"]}
                     ]
                 },
                 {
                     "id": 4, "left": [
-                        {"text": "paris1Window05"}
+                        {"text": "paris1Window5"}
                     ], "right": [
-                        {"text": "paris1Window06"},
-                        {"text": "paris1Window07"}
+                        {"text": "paris1Window6"},
+                        {"text": "paris1Window7"}
                     ]
                 }
             ]
         },
         {
             "id": "window2",
-            "name": "paris1Window01",
+            "name": "paris1Window1",
             "states": [
                 {
                     "id": 1,
@@ -370,41 +370,41 @@
                     "visible": false,
                     "back": "149,202,255",
                     "left": [
-                        {"text": "paris1Window05"}
+                        {"text": "paris1Window5"}
                     ],
                     "right": [
-                        {"text": "paris1Window02", "cmd": ["SELF 2", "window 3"]}
+                        {"text": "paris1Window2", "cmd": ["SELF 2", "window 3"]}
                     ]
                 },
                 {
                     "id": 2,
                     "left": [
-                        {"text": "paris1Window05"}
+                        {"text": "paris1Window5"}
                     ],
                     "right": [
-                        {"text": "paris1Window03"}
+                        {"text": "paris1Window3"}
                     ]
                 },
                 {
                     "id": 3, "left": [
-                        {"text": "paris1Window05"}
+                        {"text": "paris1Window5"}
                     ], "right": [
-                        {"text": "paris1Window04", "cmd": ["SELF 4", "window 4"]}
+                        {"text": "paris1Window4", "cmd": ["SELF 4", "window 4"]}
                     ]
                 },
                 {
                     "id": 4, "left": [
-                        {"text": "paris1Window05"}
+                        {"text": "paris1Window5"}
                     ], "right": [
-                        {"text": "paris1Window06"},
-                        {"text": "paris1Window07"}
+                        {"text": "paris1Window6"},
+                        {"text": "paris1Window7"}
                     ]
                 }
             ]
         },
         {
             "id": "bag",
-            "name": "paris1Bag01",
+            "name": "paris1Bag1",
             "states": [
                 {
                     "id": 1,
@@ -412,26 +412,26 @@
                     "visible": false,
                     "back": "146,0,0",
                     "left": [
-                        {"text": "paris1Bag03", "cmd": ["SELF 2", "HERO TAKE lipstick", "HERO TAKE letter", "HERO TAKE panties"]}
+                        {"text": "paris1Bag3", "cmd": ["SELF 2", "HERO TAKE lipstick", "HERO TAKE letter", "HERO TAKE panties"]}
                     ],
                     "right": [
-                        {"text": "paris1Bag02"}
+                        {"text": "paris1Bag2"}
                     ]
                 },
                 {
                     "id": 2,
                     "left": [
-                        {"text": "paris1Bag04"}
+                        {"text": "paris1Bag4"}
                     ],
                     "right": [
-                        {"text": "paris1Bag02"}
+                        {"text": "paris1Bag2"}
                     ]
                 }
             ]
         },
         {
             "id": "blowDart2",
-            "name": "paris1Dart01",
+            "name": "paris1Dart1",
             "states": [
                 {
                     "id": 1,
@@ -439,17 +439,17 @@
                     "visible": false,
                     "back": "39,71,58",
                     "left": [
-                        {"text": "paris1Dart03", "cmd": ["HERO TAKE blowDart", "SELF 0"]}
+                        {"text": "paris1Dart3", "cmd": ["HERO TAKE blowDart", "SELF 0"]}
                     ],
                     "right": [
-                        {"text": "paris1Dart02"}
+                        {"text": "paris1Dart2"}
                     ]
                 }
             ]
         },
         {
             "id": "box",
-            "name": "paris1Box01",
+            "name": "paris1Box1",
             "states": [
                 {
                     "id": 1,
@@ -457,17 +457,17 @@
                     "visible": false,
                     "back": "201,98,27",
                     "left": [
-                        {"text": "paris1Box03"}
+                        {"text": "paris1Box3"}
                     ],
                     "right": [
-                        {"text": "paris1Box02"}
+                        {"text": "paris1Box2"}
                     ]
                 }
             ]
         },
         {
             "id": "syphon",
-            "name": "paris1Syphon01",
+            "name": "paris1Syphon1",
             "states": [
                 {
                     "id": 1,
@@ -475,28 +475,28 @@
                     "visible": false,
                     "back": "210,210,210",
                     "left": [
-                        {"text": "paris1Syphon03", "cmd": ["SELF INFO paris1Syphon05"]},
-                        {"text": "paris1Syphon03"}
+                        {"text": "paris1Syphon3", "cmd": ["SELF INFO paris1Syphon5"]},
+                        {"text": "paris1Syphon3"}
                     ],
                     "right": [
-                        {"text": "paris1Syphon02"}
+                        {"text": "paris1Syphon2"}
                     ],
                     "combos": [
-                        {"id": "cylinder", "text": "paris1Syphon04", "cmd": ["cylinder 0", "syphon 2", "syphon INFO statReadyForUse"]}
+                        {"id": "cylinder", "text": "paris1Syphon4", "cmd": ["cylinder 0", "syphon 2", "syphon INFO statReadyForUse"]}
                     ]
                 },
                 {
                     "id": 2, "left": [
                         {"cmd": ["SELF USE"]}
                     ], "right": [
-                        {"text": "paris1Syphon02"}
+                        {"text": "paris1Syphon2"}
                     ]
                 }
             ]
         },
         {
             "id": "cabinet",
-            "name": "paris1Cabinet01",
+            "name": "paris1Cabinet1",
             "states": [
                 {
                     "id": 1,
@@ -504,40 +504,40 @@
                     "visible": false,
                     "back": "82,43,28",
                     "left": [
-                        {"text": "paris1Cabinet03", "cmd": ["SELF INFO statLocked"]},
-                        {"text": "paris1Cabinet03"}
+                        {"text": "paris1Cabinet3", "cmd": ["SELF INFO statLocked"]},
+                        {"text": "paris1Cabinet3"}
                     ],
                     "right": [
-                        {"text": "paris1Cabinet02"}
+                        {"text": "paris1Cabinet2"}
                     ],
                     "combos": [
-                        {"id": "houseKey", "text": "paris1Cabinet07"},
-                        {"id": "blowDart", "text": "paris1Cabinet08", "cmd": ["cabinet 2", "cylinder2 SHOW", "cylinder3 SHOW"]}
+                        {"id": "houseKey", "text": "paris1Cabinet7"},
+                        {"id": "blowDart", "text": "paris1Cabinet8", "cmd": ["cabinet 2", "cylinder2 SHOW", "cylinder3 SHOW"]}
                     ]
                 },
                 {
                     "id": 2,
                     "info": "statOpen",
                     "left": [
-                        {"text": "paris1Cabinet04"}
+                        {"text": "paris1Cabinet4"}
                     ], "right": [
-                        {"text": "paris1Cabinet05"}
+                        {"text": "paris1Cabinet5"}
                     ]
                 },
                 {
                     "id": 3,
                     "left": [
-                        {"text": "paris1Cabinet04"}
+                        {"text": "paris1Cabinet4"}
                     ],
                     "right": [
-                        {"text": "paris1Cabinet06"}
+                        {"text": "paris1Cabinet6"}
                     ]
                 }
             ]
         },
         {
             "id": "cylinder2",
-            "name": "paris1Cylinder01",
+            "name": "paris1Cylinder1",
             "states": [
                 {
                     "id": 1,
@@ -545,21 +545,21 @@
                     "visible": false,
                     "back": "88,145,32",
                     "left": [
-                        {"text": "paris1Cylinder03", "cmd": ["SELF INFO statVeryHot"]},
-                        {"text": "paris1Cylinder03"}
+                        {"text": "paris1Cylinder3", "cmd": ["SELF INFO statVeryHot"]},
+                        {"text": "paris1Cylinder3"}
                     ],
                     "right": [
-                        {"text": "paris1Cylinder02"}
+                        {"text": "paris1Cylinder2"}
                     ],
                     "combos": [
-                        {"id": "panties", "text": "paris1Cylinder04", "cmd": ["cylinder2 0", "HERO TAKE cylinder", "cabinet 3"]}
+                        {"id": "panties", "text": "paris1Cylinder4", "cmd": ["cylinder2 0", "HERO TAKE cylinder", "cabinet 3"]}
                     ]
                 }
             ]
         },
         {
             "id": "cylinder3",
-            "name": "paris1Cylinder05",
+            "name": "paris1Cylinder5",
             "states": [
                 {
                     "id": 1,
@@ -567,17 +567,17 @@
                     "visible": false,
                     "back": "79,82,79",
                     "left": [
-                        {"text": "paris1Cylinder06"}
+                        {"text": "paris1Cylinder6"}
                     ],
                     "right": [
-                        {"text": "paris1Cylinder07"}
+                        {"text": "paris1Cylinder7"}
                     ]
                 }
             ]
         },
         {
             "id": "flames",
-            "name": "paris1Flames01",
+            "name": "paris1Flames1",
             "states": [
                 {
                     "id": 1,
@@ -585,21 +585,21 @@
                     "visible": false,
                     "back": "255,100,0",
                     "left": [
-                        {"text": "paris1Flames03"},
-                        {"text": "paris1Flames04"}
+                        {"text": "paris1Flames3"},
+                        {"text": "paris1Flames4"}
                     ],
                     "right": [
-                        {"text": "paris1Flames02"}
+                        {"text": "paris1Flames2"}
                     ],
                     "combos": [
-                        {"id": "syphon", "text": "paris1Flames05", "cmd": ["flames 0", "door 2"]}
+                        {"id": "syphon", "text": "paris1Flames5", "cmd": ["flames 0", "door 2"]}
                     ]
                 }
             ]
         },
         {
             "id": "door",
-            "name": "paris1Door01",
+            "name": "paris1Door1",
             "states": [
                 {
                     "id": 1,
@@ -607,31 +607,31 @@
                     "visible": false,
                     "back": "107,43,23",
                     "left": [
-                        {"text": "paris1Door03"},
-                        {"text": "paris1Door07"},
-                        {"text": "paris1Door03"}
+                        {"text": "paris1Door3"},
+                        {"text": "paris1Door7"},
+                        {"text": "paris1Door3"}
                     ],
                     "right": [
-                        {"text": "paris1Door02"}
+                        {"text": "paris1Door2"}
                     ]
                 },
                 {
                     "id": 2,
                     "left": [
-                        {"text": "paris1Door04", "cmd": ["SELF 0", "doorway SHOW"]}
+                        {"text": "paris1Door4", "cmd": ["SELF 0", "doorway SHOW"]}
                     ],
                     "right": [
-                        {"text": "paris1Door02"}
+                        {"text": "paris1Door2"}
                     ],
                     "combos": [
-                        {"id": "houseKey", "text": "paris1Door06"}
+                        {"id": "houseKey", "text": "paris1Door6"}
                     ]
                 }
             ]
         },
         {
             "id": "doorway",
-            "name": "paris1Doorway01",
+            "name": "paris1Doorway1",
             "states": [
                 {
                     "id": 1,
@@ -641,8 +641,8 @@
                     "left": [
                         {"cmd": ["ENTER oubier2"]}
                     ], "right": [
-                        {"text": "paris1Doorway03", "cmd": ["SELF INFO paris1Doorway02"]},
-                        {"text": "paris1Doorway03"}
+                        {"text": "paris1Doorway3", "cmd": ["SELF INFO paris1Doorway2"]},
+                        {"text": "paris1Doorway3"}
                     ]
                 }
             ]

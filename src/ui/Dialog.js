@@ -1,5 +1,6 @@
 
 import Container from "../../lib/JST/dom/Container.js";
+import { isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
 
 import Wrapper from "./Wrapper.js";
 
@@ -13,7 +14,7 @@ const Dialog = class extends Wrapper {
     #topics;
 
     static TYPE = Object.freeze({
-        SPEECH: 0,
+        SPEECH: 0, // default
         SOUND: 1,
         THOUGHT: 2
     });
@@ -32,12 +33,21 @@ const Dialog = class extends Wrapper {
 
     }
 
-    addMessage(name, text, type) {
-        //this.#dialog.addComponent();
+    updateMessage(name, text, type) {
+
+        // if (Object.values(Dialog.TYPES).includes(type)) {
+
+        // } else {
+        //     Dialog.TYPE.SPEECH
+        // }
+        
         return this;
     }
 
-    // TODO set action to show next part of dialog -> time delay or mouse/key event
+    updateTopics(topics) {
+        
+        return this;
+    }
 
 };
 

@@ -6,7 +6,7 @@
             {
                 "id": 1,
                 "back": "187,185,173",
-                "left": [{ "stmt": ["SELF USE"] }],
+                "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
                     {"text": "itemWorm02"}
                 ]
@@ -20,9 +20,9 @@
             {
                 "id": 1,
                 "back": "181,77,17",
-                "left": [{ "stmt": ["SELF USE"] }],
+                "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
-                    {"text": "itemPot02", "stmt": ["HERO TAKE houseKey"]},
+                    {"text": "itemPot02", "cmd": ["HERO TAKE houseKey"]},
                     {"text": "itemPot03+itemPot04"},
                     {"text": "itemPot03"}
                 ]
@@ -36,7 +36,7 @@
             {
                 "id": 1,
                 "back": "75,81,108",
-                "left": [{ "stmt": ["SELF USE"] }],
+                "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
                     {"text": "itemKey02"}
                 ]
@@ -50,7 +50,7 @@
             {
                 "id": 1,
                 "back": "39,71,58",
-                "left": [{ "stmt": ["SELF USE"] }],
+                "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
                     {"text": "itemDart02+itemDart03"},
                     {"text": "itemDart02"}
@@ -65,7 +65,7 @@
             {
                 "id": 1,
                 "back": "196,32,4",
-                "left": [{ "stmt": ["SELF USE"] }],
+                "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
                     {"text": "itemPanties02"}
                 ]
@@ -79,9 +79,9 @@
             {
                 "id": 1,
                 "back": "239,239,239",
-                "left": [{ "stmt": ["SELF USE"] }],
+                "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
-                    {"text": "itemNote02", "stmt": ["telephone 2"]},
+                    {"text": "itemNote02", "cmd": ["telephone 2"]},
                     {"text": "itemNote03"}
                 ]
             }
@@ -94,7 +94,7 @@
             {
                 "id": 1,
                 "back": "120,16,0",
-                "left": [{ "stmt": ["SELF USE"] }],
+                "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
                     {"text": "itemLipstick02+itemLipstick03"},
                     {"text": "itemLipstick02"}
@@ -109,7 +109,7 @@
             {
                 "id": 1,
                 "back": "88,145,32",
-                "left": [{ "stmt": ["SELF USE"] }],
+                "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
                     {"text": "itemCylinder02"}
                 ]
@@ -123,9 +123,9 @@
             {
                 "id": 1,
                 "back": "171,171,171",
-                "left": [{ "stmt": ["SELF USE"] }],
+                "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
-                    {"text": "itemNewspaper02", "stmt": ["HERO TAKE bankStatement"]}
+                    {"text": "itemNewspaper02", "cmd": ["HERO TAKE bankStatement"]}
                 ]
             }
         ]
@@ -137,7 +137,7 @@
             {
                 "id": 1,
                 "back": "39,239,239",
-                "left": [{ "stmt": ["SELF USE"] }],
+                "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
                     {"text": "itemBankStatement02"}
                 ]

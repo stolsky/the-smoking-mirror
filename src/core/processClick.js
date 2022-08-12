@@ -149,14 +149,14 @@ const processClick = ({ hero, element = null, left, right }) => {
             action = element.getRightAction();
         }
 
-        const { text, stmt } = action;
+        const { text, cmd } = action;
 
         if (isNotEmptyString(text)) {
             updates.text = text;
         }
 
-        if (stmt instanceof Array) {
-            stmt.forEach((statement) => updates.elements.push(processStatement(statement)));
+        if (cmd instanceof Array) {
+            cmd.forEach((statement) => updates.elements.push(processStatement(statement)));
         }
 
     } else if (Combination.isActive()) {

@@ -27,14 +27,13 @@ const importResource = (source, method) => {
     return cache;
 };
 
-const importDialogs = (source) => importResource(source, ({ id, ...properties }) => ({ key: id, value: new Dialog(id, properties) }));
-
 const importFlags = (source) => importResource(source, (flag) => {
     const [id, type, value] = flag.split(":");
     return { key: id, value: new Flag(id, type, value) };
 });
 
 // TODO remove duplicate code
+const importDialogs = (source) => importResource(source, ({ id, ...properties }) => ({ key: id, value: new Dialog(id, properties) }));
 const importHeroes = (source) => importResource(source, ({ id, ...properties }) => ({ key: id, value: new Hero(id, properties) }));
 const importItems = (source) => importResource(source, ({ id, ...properties }) => ({ key: id, value: new Item(id, properties) }));
 const importElements = (source) => importResource(source, ({ id, ...properties }) => ({ key: id, value: new Element(id, properties) }));

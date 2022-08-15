@@ -2,46 +2,43 @@
 import { isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
 import Cache from "../../lib/JST/resource/Cache.js";
 
-import Element from "./Element.js";
+import Item from "./Item.js";
 
 
 const Dialog = class {
 
-    #id;
-
-    #names;
-
     #prefix;
 
-    #intro;
+    #current;
 
-    #once;
+    #parts;
 
-    /** @type {Cache} */
-    #options;
-
-    #createOptions(options) {
-        if (options instanceof Array) {
-            options.forEach(({ id, name, states }) => {
-                if (isNotEmptyString(id)) {
-                    this.#options.setItem(id, new Element(id, name, states));
-                }
-            });
-        }
+    #loadCompleteDialog(dialogParts) {
+        this.#parts = new Cache();
+        dialogParts.forEach(({ id, name, states }) => {
+            this.#parts.setItem(id, new Item(id, { name, states }));
+        });
+        this.#current = this.#parts.getItem(dialogParts[0].id);
     }
 
-    constructor(id, { names, prefix, intro, elems } = {}) {
+    /**
+     * @param {string} id
+     * @param {{ prefix?: string, states?: Array<string>}}
+     */
+    constructor(id = "dialog", { prefix, elems } = {}) {
 
-        this.#id = id;
+        this.#prefix = (isNotEmptyString(prefix)) ? prefix : "";
 
-        this.#options = new Cache();
+        if (elems instanceof Array) {
+            this.#loadCompleteDialog(elems);
+        }
 
-        this.#names = names;
-        this.#prefix = prefix;
-        this.#intro = intro;
+    }
 
-        this.#createOptions(elems);
-
+    getNextLine() {
+        const action = this.#current.getAction({ left: true });
+        const text = action.text.split("+").map((id) => `${this.#prefix}${id}`).join("+");
+        return { name: action.char, text };
     }
 
 };

@@ -1,4 +1,4 @@
-import { hasProperty, isNotEmptyString, isNumber, isString } from "../../lib/JST/native/typeCheck.js";
+import { hasProperty, isBoolean, isNotEmptyString, isNumber, isString } from "../../lib/JST/native/typeCheck.js";
 
 // TODO improve code not returning null
 
@@ -21,6 +21,9 @@ const BaseObject = class {
 
     /** @type {string} */
     #background;
+
+    /** @type {boolean} */
+    #visible;
 
     /** @type {Array<{}>} */
     #states;
@@ -46,15 +49,13 @@ const BaseObject = class {
         return action;
     }
 
-    constructor(id, name = "Object", states = null) {
+    constructor(id, name, states) {
 
         this.#id = (isNotEmptyString(id)) ? id : "obj";
 
         this.setName(name)
-            .setInformation("")
-            .setForeground("0,0,0")
-            .setBackground("255,255,255")
             .setStates(states)
+            .setVisibility(true)
             .setCurrentState(-1);
     }
 
@@ -113,12 +114,17 @@ const BaseObject = class {
             name: this.getName(),
             foreground: this.getForeground(),
             background: this.getBackground(),
-            information: this.getInformation()
+            information: this.getInformation(),
+            visible: this.isVisible()
         };
     }
 
     getStates() {
         return this.#states;
+    }
+
+    isVisible() {
+        return this.#visible;
     }
 
     setBackground(color) {
@@ -129,7 +135,7 @@ const BaseObject = class {
     }
 
     setCurrentState(id) {
-        if (isNumber(id) && this.#states instanceof Array) {
+        if (isNumber(id)) {
             this.#current_state = this.#states.find((state) => state.id === id) ?? null;
         }
         return this;
@@ -160,6 +166,15 @@ const BaseObject = class {
     setStates(states) {
         if (states instanceof Array) {
             this.#states = states.map((state) => ({ ...state, ...{ leftIndex: 0, rightIndex: 0 } }));
+        } else {
+            this.#states = [];
+        }
+        return this;
+    }
+
+    setVisibility(bool) {
+        if (isBoolean(bool)) {
+            this.#visible = bool;
         }
         return this;
     }

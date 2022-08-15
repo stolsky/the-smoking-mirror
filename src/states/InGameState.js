@@ -1,7 +1,7 @@
 
 import { isBoolean, isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
 
-import EventManager from "../core/InputEventManager.js";
+import InputEventManager from "../core/InputEventManager.js";
 import processClick from "../core/processClick.js";
 
 import Act from "../am/Act.js";
@@ -11,6 +11,7 @@ import Item from "../am/Item.js";
 import InGameUI from "../ui/InGameUI.js";
 
 import GameStatesManager from "./GameStatesManager.js";
+import GameCache, { getActiveHero, setActiveHero } from "../am/GameCache.js";
 
 
 const loadGameOver = (text) => GameStatesManager
@@ -36,7 +37,14 @@ const InGameState = class {
     /** @type {InGameUI} */
     #wrapper;
 
-    #enterScene(id, resetLog = false) {
+    #displaySceneIntro() {
+        const intro = this.#currentAct.getCurrentScene().getIntro();
+        if (intro) {
+            this.#updateLog.push({ text: intro, narrator: getActiveHero().getName() });
+        }
+    }
+
+    #enterScene(id) {
 
         this.#currentAct.loadScene(id);
         this.#wrapper
@@ -44,65 +52,59 @@ const InGameState = class {
             .clearScene();
         this.#updateSceneElements = this.#currentAct.getAllElementsProperties();
 
-        // TODO refactor to own function
-        const intro = this.#currentAct.getCurrentScene().getIntro();
-        if (intro) {
-            this.#updateLog.push({ text: intro, narrator: this.#currentAct.getActiveHero().getName() });
-        }
-
-        // TODO refactor to own function
-        if (resetLog) {
-            this.#wrapper.clearLog();
-        }
-
+        this.#displaySceneIntro();
     }
 
-    #processElements({ id, highlight, remove }) {
+    #collectElementDataForUIUpdate({ element, highlight, remove }) {
 
-        const element = Act.getElement(id);
-        const propertiesToUpdate = element.getProperties();
+        const loadedElement = this.#currentAct.getElement(element);
+        if (loadedElement) {
 
-        if (isBoolean(highlight)) {
-            propertiesToUpdate.highlight = highlight;
+            const propertiesToUpdate = loadedElement.getProperties();
+
+            if (isBoolean(highlight)) {
+                propertiesToUpdate.highlight = highlight;
+            }
+
+            if (isBoolean(remove)) {
+                propertiesToUpdate.remove = remove;
+                this.#currentAct.removeElement(element);
+            }
+
+            if (loadedElement instanceof Element) {
+                this.#updateSceneElements.push(propertiesToUpdate);
+            } else if (loadedElement instanceof Item) {
+                this.#updateInventoryElements.push(propertiesToUpdate);
+            }
         }
 
-        if (isBoolean(remove)) {
-            propertiesToUpdate.remove = remove;
-            this.#currentAct.removeElement(id);
-        }
-
-        if (element instanceof Element) {
-            this.#updateSceneElements.push(propertiesToUpdate);
-        } else if (element instanceof Item) {
-            this.#updateInventoryElements.push(propertiesToUpdate);
-        }
     }
 
     /** @param {Array<{text: string, elements: [{enter?: string, highlight?: boolean, id?: string, lost?: string, remove?: boolean}]}>} */
-    #processResults({ text, elements }) {
+    #processChanges({ text, elements }) {
 
         // console.log(text, elements);
-        console.log(this.#currentAct.getActiveHero());
+        // console.log(getActiveHero());
 
         if (isNotEmptyString(text)) {
-            this.#updateLog.push({ text, narrator: this.#currentAct.getActiveHero().getName() });
+            this.#updateLog.push({ text, narrator: getActiveHero().getName() });
         }
 
         if (elements instanceof Array) {
 
-            elements.forEach(({ dialog, enter, highlight, id, lost, remove }) => {
+            elements.forEach(({ dialog, enter, highlight, element, lost, remove }) => {
 
                 if (isNotEmptyString(enter)) {
                     GameStatesManager.notify("transition", ["In", () => this.#enterScene(enter), "Out"]);
-                    // TODO add empty line to log, so all log info is grayed out
+                    // TODO add information about which location I have entered
                 } else if (lost) {
                     loadGameOver(lost);
-                } else if (id) {
-                    this.#processElements({ id, highlight, remove });
+                } else if (isNotEmptyString(element)) {
+                    this.#collectElementDataForUIUpdate({ element, highlight, remove });
                 }
 
                 if (isNotEmptyString(dialog)) {
-                    GameStatesManager.notify("dialog", Act.getElement(dialog));
+                    GameStatesManager.notify("dialog", dialog);
                 }
 
             });
@@ -110,9 +112,8 @@ const InGameState = class {
     }
 
     #handleInput({ id, buttons }) {
-        this.#processResults(processClick({
-            hero: this.#currentAct.getActiveHero(),
-            element: Act.getElement(id),
+        this.#processChanges(processClick({
+            element: id,
             buttons
         }));
     }
@@ -123,19 +124,21 @@ const InGameState = class {
     constructor({ name, start, hero, elements }) {
 
         this.#updateSceneElements = [];
-        // TODO fill inventory with previuos inventory
         this.#updateInventoryElements = [];
         this.#updateLog = [];
 
-        this.#currentAct = new Act({ name, elements }).setActiveHero(hero);
+        this.#currentAct = new Act({ name, elements });
         this.#wrapper = new InGameUI();
+        setActiveHero(hero);
         this.#enterScene(start);
 
         this.#toRender = true;
     }
 
     enter() {
-        GameStatesManager.notify("transition", ["Out"]);
+        // GameStatesManager.notify("transition", ["Out"]);
+        GameCache.getItem("telephone").setCurrentState(2);
+        this.#enterScene("oubier2");
         return this;
     }
 
@@ -157,14 +160,17 @@ const InGameState = class {
             this.#wrapper.render(ctx);
             this.#toRender = false;
         }
+
         if (this.#updateSceneElements.length > 0) {
             this.#wrapper.updateSceneElements(this.#updateSceneElements);
             this.#updateSceneElements = [];
         }
+
         if (this.#updateInventoryElements.length > 0) {
             this.#wrapper.updateInventoryElements(this.#updateInventoryElements);
             this.#updateInventoryElements = [];
         }
+
         if (this.#updateLog.length > 0) {
             this.#wrapper.updateLog(this.#updateLog);
             this.#updateLog = [];
@@ -172,7 +178,7 @@ const InGameState = class {
     }
 
     update() {
-        const input = EventManager.getInputEvent();
+        const input = InputEventManager.getInputEvent();
         if (input) {
             this.#handleInput(input);
         }

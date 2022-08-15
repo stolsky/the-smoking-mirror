@@ -1,18 +1,45 @@
-import Dialog from "../ui/Dialog.js";
+
+import InputEventManager from "../core/InputEventManager.js";
+import processClick from "../core/processClick.js";
+
+import DialogUI from "../ui/DialogUI.js";
+
+import GameCache from "../am/GameCache.js";
 
 
 const DialogState = class {
+
+    #dialog;
+
+    /** @type {Array} */
+    #updateMessages;
+
+    /** @type {Array} */
+    #updateTopics;
 
     #toRender;
 
     #wrapper;
 
-    constructor(properties) {
+    #getNextPart() {
 
-        console.log(properties);
+    }
 
-        // create components
-        this.#wrapper = new Dialog();
+    #handleInput({ id, buttons }) {
+        // this.#processChanges(processClick({
+        //     element: id,
+        //     buttons
+        // }));
+    }
+
+    constructor(dialog) {
+
+        this.#dialog = (GameCache.hasItem(dialog)) ? GameCache.getItem(dialog) : null;
+
+        this.#updateMessages = [];
+        this.#updateTopics = [];
+
+        this.#wrapper = new DialogUI();
 
         this.#toRender = true;
     }
@@ -30,10 +57,23 @@ const DialogState = class {
             this.#wrapper.render(ctx);
             this.#toRender = false;
         }
+
+        if (this.#updateMessages.length > 0) {
+            this.#wrapper.updateMessages(this.#updateMessages);
+            this.#updateMessages = [];
+        }
+
+        if (this.#updateTopics.length > 0) {
+            this.#wrapper.updateTopics(this.#updateTopics);
+            this.#updateTopics = [];
+        }
     }
 
     update() {
-        return this;
+        const input = InputEventManager.getInputEvent();
+        if (input) {
+            this.#handleInput(input);
+        }
     }
 
 };

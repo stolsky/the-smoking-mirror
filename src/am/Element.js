@@ -12,16 +12,12 @@ const Element = class extends BaseObject {
     /** @type {boolean} */
     #moveable;
 
-    /** @type {boolean} */
-    #visible;
-
-    constructor(id = "elem", { name = "Element", states = null } = {}) {
+    constructor(id, { name, states = null } = {}) {
 
         super(id, name, states);
 
         this.#type = "Look";
         this.#moveable = false;
-        this.#visible = true;
 
         this.updateState(1);
     }
@@ -30,8 +26,7 @@ const Element = class extends BaseObject {
         return {
             ...super.getProperties(),
             type: this.getType(),
-            moveable: this.isMoveable(),
-            visible: this.isVisible()
+            moveable: this.isMoveable()
         };
     }
 
@@ -41,10 +36,6 @@ const Element = class extends BaseObject {
 
     isMoveable() {
         return this.#moveable;
-    }
-
-    isVisible() {
-        return this.#visible;
     }
 
     setMobility(bool) {
@@ -57,13 +48,6 @@ const Element = class extends BaseObject {
     setType(type) {
         if (isString(type)) {
             this.#type = type;
-        }
-        return this;
-    }
-
-    setVisibility(bool) {
-        if (isBoolean(bool)) {
-            this.#visible = bool;
         }
         return this;
     }

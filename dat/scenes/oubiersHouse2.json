@@ -91,7 +91,7 @@
                 {
                     "id": 2,
                     "left": [
-                        {"text": "paris1Telephone5", "cmd": ["DIALOG andre1", "SELF 3"]}
+                        {"text": "paris1Telephone5", "cmd": ["DIALOG andreTelephone", "SELF 3"]}
                     ],
                     "right": [
                         {"text": "paris1Telephone4"}
@@ -177,12 +177,11 @@
     ],
     "dialogs": [
         {
-            "id": "andre",
+            "id": "andreTelephone",
             "prefix": "paris1DialogAndre",
-            "intro": "andreTelephone",
             "elems": [
                 {
-                    "id": "andreTelephone",
+                    "id": "telephone1",
                     "states": [
                         {
                             "id": 1,

@@ -11,21 +11,16 @@
             // 
             "prefix": "idPart",
 
-            // @type {string} @optional
-            // if set, the elem with this ID will be treated differently
-            //      the text of the elem will be loaded immediately and displayed on the screen
-            //      the "visible" attribute will be skipped if used
-            //      the "fore" attribute sets the font color
-            //      the "back" attribute sets the background color
-            "intro": "elemId",
-
             // @type {Array<{}>} @optional
             "elems": [
                 {
+                    // the first element is the first part of the dialogue which will be displayed
+
                     // @type {string} @required @unique inside elems
                     "id": "elemID",
 
                     // @type {string} @optional
+                    // if the name is specified than this will be treated as option/topic
                     "name": "elemName", 
 
                     // @type {Array<{}>} @optional

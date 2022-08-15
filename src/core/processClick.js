@@ -1,7 +1,7 @@
 
 import { isNotEmptyString, isNumber } from "../../lib/JST/native/typeCheck.js";
 
-import GameCache from "../am/GameCache.js";
+import GameCache, { getActiveHero } from "../am/GameCache.js";
 import Flag from "../am/Flag.js";
 
 import Combination from "./combination.js";
@@ -38,7 +38,7 @@ const applyMethod = (target, methodName, value = null) => {
     if (isNumber(stateID)) {
         target.updateState(stateID);
         if (targetID !== activeHero.getId()) {
-            result = { id: targetID };
+            result = { element: targetID };
             if (stateID === 0) {
                 result.remove = true;
             }
@@ -46,18 +46,18 @@ const applyMethod = (target, methodName, value = null) => {
 
     } else if (methodName === "SHOW" || methodName === "HIDE") {
         target.setVisibility(methodName === "SHOW");
-        result = { id: targetID };
+        result = { element: targetID };
 
     } else if (methodName === "INFO") {
         target.setInformation(value);
-        result = { id: targetID };
+        result = { element: targetID };
 
     } else if (methodName === "USE") {
         result = Combination.check(target);
 
     } else if (methodName === "TAKE" && GameCache.hasItem(value)) {
         activeHero.getInventory().add(value);
-        result = { id: value };
+        result = { element: value };
 
     } else if (methodName === "INCLEFT") {
         target.getAction("left");
@@ -127,27 +127,34 @@ const processStatement = (statement) => {
     return parseAction(action);
 };
 
-const processClick = ({ hero, element, buttons }) => {
+/** @param {{hero: string, element: string, buttons { left: boolean, middle: boolean, right: boolean} }} */
+const processClick = ({ element, buttons }) => {
+
+    // console.log(hero, element, buttons);
+    // console.log("click", element, buttons);
 
     const updates = {};
 
-    if (element) {
+    const loadedElement = GameCache.getItem(element);
+    if (loadedElement) {
 
         updates.elements = [];
 
-        activeHero = hero;
-        clickedObject = element;
+        activeHero = getActiveHero();
+        clickedObject = loadedElement;
 
         let action = null;
 
         if (Combination.isActive()) {
-            action = Combination.check(element);
+            action = Combination.check(loadedElement);
             updates.elements = Combination.cancel();
         } else if (buttons) {
-            action = element.getAction(buttons);
+            action = loadedElement.getAction(buttons);
         }
 
         const { text, cmd } = action;
+
+        // console.log("action", text, cmd);
 
         if (isNotEmptyString(text)) {
             updates.text = text;
@@ -160,6 +167,8 @@ const processClick = ({ hero, element, buttons }) => {
     } else if (Combination.isActive()) {
         updates.elements = Combination.cancel();
     }
+
+    // console.log("updates", updates);
 
     return updates;
 };

@@ -24,7 +24,7 @@ const Combination = class {
             this.#key = element;
         }
 
-        return { id: element.getId(), highlight: true };
+        return { element: element.getId(), highlight: true };
     }
 
     #init() {
@@ -54,7 +54,7 @@ const Combination = class {
 
         this.#init();
 
-        return deselect.map((element) => ({ id: element.getId(), highlight: false }));
+        return deselect.map((element) => ({ element: element.getId(), highlight: false }));
     }
 
     /** @returns {{text?: string, cmd?: Array<string>}} */

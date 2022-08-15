@@ -1,13 +1,10 @@
 
-import { EventType } from "../../lib/JST/native/typeCheck.js";
-
-import EventManager from "../core/InputEventManager.js";
 import getWord from "../core/translate.js";
 
 import Wrapper from "./Wrapper.js";
 import SceneTitle from "./SceneTitle.js";
 import Log from "./Log.js";
-import Dialog from "./Dialog.js";
+import Dialog from "./DialogUI.js";
 import CollectionManager from "./CollectionManager.js";
 
 
@@ -46,7 +43,7 @@ const InGameUI = class extends Wrapper {
             this.#dialog.hide()
         );
 
-        this.addEventListener(EventType.mouseup, (event) => EventManager.setInputEvent(event));
+        this.addListener();
     }
 
     clearInventory() {

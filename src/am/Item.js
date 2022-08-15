@@ -4,7 +4,7 @@ import BaseObject from "./BaseObject.js";
 
 const Item = class extends BaseObject {
 
-    constructor(id = "item", { name = "Item", states = null } = {}) {
+    constructor(id, { name, states } = {}) {
 
         super(id, name, states);
 
@@ -18,7 +18,8 @@ const Item = class extends BaseObject {
             this.setInformation(now.info)
                 .setName(now.name)
                 .setForeground(now.fore)
-                .setBackground(now.back);
+                .setBackground(now.back)
+                .setVisibility(now.visible);
         }
     }
 

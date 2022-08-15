@@ -4,7 +4,7 @@ import Cache from "../../lib/JST/resource/Cache.js";
 import Container from "../../lib/JST/dom/Container.js";
 import TextComponent from "../../lib/JST/dom/TextComponent.js";
 
-import EventManager from "../core/InputEventManager.js";
+import InputEventManager from "../core/InputEventManager.js";
 import getWord from "../core/translate.js";
 
 import Wrapper from "./Wrapper.js";
@@ -87,7 +87,7 @@ const CollectionManager = class extends Wrapper {
                 element = new Container("Element")
                     .append(new TextComponent("", "Name"), new TextComponent("", "Information"))
                     // MouseEvent.click applies only to the left mouse button
-                    .addEventListener(EventType.mouseup, (event) => EventManager.setInputEvent(event, id));
+                    .addEventListener(EventType.mouseup, (event) => InputEventManager.setInputEvent(event, id));
 
                 this.#elements.setItem(id, element);
                 this.addComponent(element);

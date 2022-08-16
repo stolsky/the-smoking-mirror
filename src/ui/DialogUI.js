@@ -11,7 +11,7 @@ import Wrapper from "./Wrapper.js";
 const DialogUI = class extends Wrapper {
 
     /** @type {Container} */
-    #dialog;
+    #conversation;
 
     /** @type {CollectionManager} */
     #topics;
@@ -23,20 +23,23 @@ const DialogUI = class extends Wrapper {
     });
 
     static POSITION = Object.freeze({
-        LEFT: "left",
-        CENTER: "center", // default
-        RIGHT: "right"
+        LEFT: "AlignLeft",
+        CENTER: "AlignCenter", // default
+        RIGHT: "AlignRight"
     });
 
     constructor() {
 
         super("Dialog Maximize");
 
-        this.#dialog = new Container("Conversation");
+        this.#conversation = new Container("Conversation");
         this.#topics = new CollectionManager("Topics");
 
         this.append(
-            this.#dialog,
+            new Container("Wrapper").append(
+                this.#conversation,
+                new TextComponent(getWord("clickToContinue"), "Hint")
+            ),
             this.#topics
         );
 
@@ -44,7 +47,7 @@ const DialogUI = class extends Wrapper {
     }
 
     clearDialog() {
-        this.#dialog.clear();
+        this.#conversation.clear();
         return this;
     }
 
@@ -63,19 +66,15 @@ const DialogUI = class extends Wrapper {
 
     updateDialog({ nameID, textID, type, position }) {
 
-        console.log(nameID, textID, type, position);
-
         const name = (isNotEmptyString(nameID)) ? getWord(nameID) : "";
         const text = (isNotEmptyString(textID)) ? getWord(textID) : "";
         const className = (Object.values(DialogUI.TYPE).includes(type)) ? type : DialogUI.TYPE.SPEECH;
-        const textAlign = (Object.values(DialogUI.POSITION).includes(position)) ? position : DialogUI.POSITION.CENTER;
+        const align = (Object.values(DialogUI.POSITION).includes(position)) ? position : DialogUI.POSITION.CENTER;
 
-        console.log(name, text, className, textAlign);
-
-        this.#dialog.addComponent(new Container(className).append(
+        this.#conversation.addComponent(new Container(`${className} ${align}`).append(
             new TextComponent(name, "Person"),
             new TextComponent(text, "Message")
-        ).setStyle("text-align", textAlign));
+        ));
 
         return this;
     }

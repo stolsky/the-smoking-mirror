@@ -13,6 +13,7 @@ const InputEventManager = class {
     }
 
     setInputEvent(event, targetID = null) {
+        console.log(event);
         if (event instanceof Event) {
             const store = {};
             store.id = targetID;

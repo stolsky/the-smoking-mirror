@@ -21,7 +21,7 @@
     text-align: justify;
 }
 
-.Application .TextPage .Hint {
+.Application .Hint {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -35,7 +35,7 @@
     color: #000000;
     background-color: #ffffff;
 }
-.Application .TextPage.Intro .Hint {
+.Application .Intro .Hint {
     color: rgba(0, 0, 0, 0.5);
 }
 
@@ -43,7 +43,7 @@
     color: #ffffff;
     background-color: #000000;
 }
-.Application .TextPage.GameOver .Hint {
+.Application .GameOver .Hint {
     color: rgba(255, 255, 255, 0.5);
 }
 

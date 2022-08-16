@@ -12,10 +12,10 @@ OBJECTS
             TEXT paris1Door9+paris1Door12 COMMANDS SELF INFO statLocked
             TEXT paris1Door9
         RIGHT
-            {"text": "paris1Door8"}
+            TEXT paris1Door8
         COMBINATIONS
-            {"id": "blowDart TEXT paris1Door15"},
-            {"id": "houseKey TEXT paris1Door17", "cmd": ["door2 2", "CafeKnown true:cafe SHOW", "GalleryKnown true:gallery SHOW"]}
+            blowDart TEXT paris1Door15
+            houseKey TEXT paris1Door17 COMMANDS door2 2, CafeKnown true:cafe SHOW, GalleryKnown true:gallery SHOW
 
         2
         INFORMATION statOpen

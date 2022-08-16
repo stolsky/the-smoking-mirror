@@ -135,13 +135,11 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
 }
 
 .Application .Dialog {
-
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    gap: 2.5%;
     align-items: center;
-    
 }
 .Application .Dialog .Conversation,
 .Application .Dialog .Topics {
@@ -151,6 +149,12 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
 }
 .Application .Dialog .Conversation {
     height: 80%;
+    margin-top: 2.5%;
+    display: flex;
+    flex-direction: column;
+    scrollbar-color: #888 #fff;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
 }
 .Application .Dialog .Topics {
     height: 10%;

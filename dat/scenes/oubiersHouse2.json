@@ -91,7 +91,7 @@
                 {
                     "id": 2,
                     "left": [
-                        {"text": "paris1Telephone5", "cmd": ["DIALOG andreTelephone", "SELF 3"]}
+                        {"text": "paris1Telephone5", "cmd": ["DIALOG telephone1", "SELF 3"]}
                     ],
                     "right": [
                         {"text": "paris1Telephone4"}
@@ -177,30 +177,24 @@
     ],
     "dialogs": [
         {
-            "id": "andreTelephone",
-            "prefix": "paris1DialogAndre",
-            "elems": [
+            "id": "telephone1",
+            "states": [
                 {
-                    "id": "telephone1",
-                    "states": [
-                        {
-                            "id": 1,
-                            "left": [
-                                { "char": "georgeFirstName", "text": "1" },
-                                { "type": "SOUND", "text": "2"},
-                                { "char": "georgeFirstName", "text": "3" },
-                                { "char": "andreFirstName", "text": "4"},
-                                { "char": "georgeFirstName", "text": "5" },
-                                { "char": "andreFirstName", "text": "6"},
-                                { "char": "georgeFirstName", "text": "7+8" },
-                                { "char": "andreFirstName", "text": "9"},
-                                { "char": "georgeFirstName", "text": "10" },
-                                { "char": "andreFirstName", "text": "11", "cmd": ["CafeKnown true"]},
-                                { "char": "georgeFirstName", "text": "12" },
-                                { "type": "SOUND", "text": "13"},
-                                { "char": "georgeFirstName", "text": "14+15+16" }
-                            ]
-                        }
+                    "id": 1,
+                    "left": [
+                        { "char": "georgeFirstName", "text": "paris1DialogAndre1" },
+                        { "type": "Sound", "text": "paris1DialogAndre2"},
+                        { "char": "georgeFirstName", "text": "paris1DialogAndre3" },
+                        { "char": "andreFirstName", "text": "paris1DialogAndre4"},
+                        { "char": "georgeFirstName", "text": "paris1DialogAndre5" },
+                        { "char": "andreFirstName", "text": "paris1DialogAndre6"},
+                        { "char": "georgeFirstName", "text": "paris1DialogAndre7+paris1DialogAndre8" },
+                        { "char": "andreFirstName", "text": "paris1DialogAndre9"},
+                        { "char": "georgeFirstName", "text": "paris1DialogAndre10" },
+                        { "char": "andreFirstName", "text": "paris1DialogAndre11", "cmd": ["CafeKnown true"]},
+                        { "char": "georgeFirstName", "text": "paris1DialogAndre12" },
+                        { "type": "Sound", "text": "paris1DialogAndre13"},
+                        { "char": "georgeFirstName", "text": "paris1DialogAndre14+paris1DialogAndre15+paris1DialogAndre16" }
                     ]
                 }
             ]

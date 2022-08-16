@@ -20,7 +20,6 @@
                     "id": "elemID",
 
                     // @type {string} @optional
-                    // if the name is specified than this will be treated as option/topic
                     "name": "elemName", 
 
                     // @type {Array<{}>} @optional
@@ -43,13 +42,15 @@
                             // This can be used to display the options available to the main character at a particular time during the dialog.
                             "visible": true,
 
+                            // "left" states how to trigger moving the conversation forward, it is mostly the left mouse button
                             "left": [
+                                // multiple conversation lines/parts/blocks are allowed
                                 {
                                     // @type {string} @optional
                                     // sets the name of the character in front of the text
                                     "char": "",
 
-                                    // @type {"SPEECH", "THOUGHT", "SOUND"} @optional @default = "SPEAK"
+                                    // @type {"SPEECH", "THOUGHT", "SOUND"} @optional @default = "SPEECH"
                                     // sets the visual style of the communication bubbles
                                     "type": "",
 
@@ -57,12 +58,20 @@
                                     // dictionary id of text
                                     // text can be concatinated i.e. `"text": "paris1DialogAndre07+paris1DialogAndre08"`
                                     // text can be reduced if dialog's prefix is used i.e. `"prefix": "paris1DialogAndre", "text": "07+08"`
-                                    "text": "textID1",
+                                    "text": "textID",
 
                                     // @type {Array<string>} @optional
                                     // if present, these commands are processed if the option is used in the dialog (clicked on)
                                     "cmd": ["command1", "command2", "..."]
-                                }
+                                },
+                                // @optional if set, it must be at the end of the "left" array
+                                // if the last element of "left" is an array it is treated as the options list available to the player
+                                [
+                                    // option id to be shown if visible, initially all options treated as hidden
+                                    // to manipulate which option is available, use "cmd" property to set that option like `"cmd": [MayanPotTaken true:optionID SHOW]`
+                                    // TODO improve conditions by adding new elements like `hasItem(pot)` instead of using a flag: `hasItem(itemId, playerID = null)` -> if `playerID = null` the "activeHero" is used
+                                    "optionID"
+                                ]
                             ]
                         }
                     ]

@@ -15,7 +15,7 @@ const TransitionState = class {
     #toRender;
 
     /** @type {Transition} */
-    #wrapper;
+    #ui;
 
     #getNextTask() {
         // get next transition/animation id / function
@@ -24,12 +24,12 @@ const TransitionState = class {
 
             // clear previous transition/animation by id
             if (isNotEmptyString(this.#nextTask)) {
-                this.#wrapper.removeClass(this.#nextTask);
+                this.#ui.removeClass(this.#nextTask);
             }
 
             if (isNotEmptyString(next)) {
                 // init transition/animation by id (css class name)
-                this.#wrapper.addClass(next);
+                this.#ui.addClass(next);
             }
 
         }
@@ -42,7 +42,7 @@ const TransitionState = class {
         const next = this.#nextTask;
         if (isNotEmptyString(next)) {
             // play transition/animation
-            this.#wrapper.setStyle("animation-play-state", "running");
+            this.#ui.setStyle("animation-play-state", "running");
             this.#isAnimating = true;
         } else if (isFunction(next)) {
             next();
@@ -53,7 +53,7 @@ const TransitionState = class {
     /** @param {Array<string | Function} fifoQueue */
     constructor(fifoQueue) {
 
-        this.#wrapper = new Transition()
+        this.#ui = new Transition()
             .addEventListener(EventType.animationend, () => {
                 this.#isAnimating = false;
                 this.#getNextTask();
@@ -72,15 +72,15 @@ const TransitionState = class {
     }
 
     exit() {
-        this.#wrapper.remove();
-        this.#wrapper = null;
+        this.#ui.remove();
+        this.#ui = null;
         this.#nextTask = null;
         this.#fifo = null;
     }
 
     render(ctx) {
         if (this.#toRender) {
-            this.#wrapper.render(ctx);
+            this.#ui.render(ctx);
             this.#toRender = false;
         }
     }

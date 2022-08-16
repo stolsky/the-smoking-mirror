@@ -11,12 +11,12 @@ const TextPageState = class {
     #toRender;
 
     /** @type {TextPage} */
-    #wrapper;
+    #ui;
 
     /** @param {{name: string, title: string, text: string}} */
     constructor({ name, title, text }) {
 
-        this.#wrapper = new TextPage(name)
+        this.#ui = new TextPage(name)
             .setTitle(title)
             .setText(text)
             .setHint("clickToContinue")
@@ -31,14 +31,14 @@ const TextPageState = class {
     }
 
     exit() {
-        this.#wrapper.clear().remove();
-        this.#wrapper = null;
+        this.#ui.clear().remove();
+        this.#ui = null;
         this.#toRender = false;
     }
 
     render(ctx) {
         if (this.#toRender) {
-            this.#wrapper.render(ctx);
+            this.#ui.render(ctx);
             this.#toRender = false;
         }
     }

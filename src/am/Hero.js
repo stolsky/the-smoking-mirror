@@ -1,17 +1,19 @@
 
 import Element from "./Element.js";
-import StringList from "./StringList.js";
 
 
 const Hero = class extends Element {
 
+    /** @type {Array<string>} */
     #inventory;
 
     constructor(id, { name, states = {}, items = [] } = {}) {
 
         super(id, { name, states });
 
-        this.#inventory = new StringList(items);
+        if (items instanceof Array) {
+            this.#inventory = items;
+        }
     }
 
     /** @returns {Inventory} */

@@ -1,5 +1,5 @@
 
-import { isString } from "../../lib/JST/native/typeCheck.js";
+import { isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
 
 
 const Scene = class {
@@ -13,29 +13,29 @@ const Scene = class {
     /** @type {Array<string>} */
     #elements;
 
-    /** @param {{id: string, name: string, intro: string, elements: Array<string>}} */
-    constructor({ id, name, intro = null, elements = null }) {
-
-        this.#id = (isString(id)) ? id : "scene";
-        this.#name = (isString(name)) ? name : "Scene";
-        this.#intro = intro;
-
-        this.#elements = [];
-        this.addAllElements(elements);
-    }
-
-    addAllElements(list) {
+    #addAllElements(list) {
         if (list instanceof Array) {
-            list.forEach((id) => this.addElement(id));
+            list.forEach((id) => this.#addElement(id));
         }
         return this;
     }
 
-    addElement(id = "elem") {
+    #addElement(id = "elem") {
         if (!this.hasElement(id)) {
             this.#elements.push(id);
         }
         return this;
+    }
+
+    /** @param {{id: string, name: string, intro: string, elements: Array<string>}} */
+    constructor({ id, name, intro = null, elements = null }) {
+
+        this.#id = (isNotEmptyString(id)) ? id : "";
+        this.#name = (isNotEmptyString(name)) ? name : "";
+        this.#intro = intro;
+
+        this.#elements = [];
+        this.#addAllElements(elements);
     }
 
     /** @returns {Array<string>} */
@@ -56,7 +56,7 @@ const Scene = class {
     }
 
     hasElement(id) {
-        return isString(id) && this.#elements.includes(id);
+        return isNotEmptyString(id) && this.#elements.includes(id);
     }
 
     removeElement(id) {

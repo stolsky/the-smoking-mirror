@@ -1,15 +1,16 @@
 
 import InputEventManager from "../core/InputEventManager.js";
-import processClick from "../core/processClick.js";
+import { processCommands } from "../core/processClick.js";
 
 import DialogUI from "../ui/DialogUI.js";
 
 import GameCache from "../am/GameCache.js";
+import { isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
 
 
 const DialogState = class {
 
-    #dialog;
+    #current;
 
     /** @type {Array} */
     #updateMessages;
@@ -19,27 +20,45 @@ const DialogState = class {
 
     #toRender;
 
-    #wrapper;
+    #ui;
 
-    #getNextPart() {
+    #processResult(result) {
+
+        if (result instanceof Array) {
+            // this.#ui.updateTopics(topics);
+            // this.#ui.showTopics();
+        } else if (result instanceof Object) {
+            const { char, text, type, cmd } = result;
+            // TODO check for hero and set position
+            const position = DialogUI.POSITION.LEFT;
+            this.#ui.updateDialog({ nameID: char, textID: text, type, position });
+            if (cmd) {
+                // TODO process command results
+                console.log(processCommands(cmd));
+            }
+            this.#ui.hideTopics();
+        }
 
     }
 
     #handleInput({ id, buttons }) {
-        // this.#processChanges(processClick({
-        //     element: id,
-        //     buttons
-        // }));
+        if (isNotEmptyString(id)) {
+            this.#current = GameCache.getItem(id);
+        }
+        this.#processResult(this.#current.getAction({ left: true }));
     }
 
-    constructor(dialog) {
+    constructor(startDialog) {
 
-        this.#dialog = (GameCache.hasItem(dialog)) ? GameCache.getItem(dialog) : null;
+        this.#current = GameCache.getItem(startDialog);
+        console.log(this.#current);
 
         this.#updateMessages = [];
         this.#updateTopics = [];
 
-        this.#wrapper = new DialogUI();
+        this.#ui = new DialogUI();
+
+        this.#processResult(this.#current.getAction({ left: true }));
 
         this.#toRender = true;
     }
@@ -54,17 +73,17 @@ const DialogState = class {
 
     render(ctx) {
         if (this.#toRender) {
-            this.#wrapper.render(ctx);
+            this.#ui.render(ctx);
             this.#toRender = false;
         }
 
         if (this.#updateMessages.length > 0) {
-            this.#wrapper.updateMessages(this.#updateMessages);
+            this.#ui.updateMessages(this.#updateMessages);
             this.#updateMessages = [];
         }
 
         if (this.#updateTopics.length > 0) {
-            this.#wrapper.updateTopics(this.#updateTopics);
+            this.#ui.updateTopics(this.#updateTopics);
             this.#updateTopics = [];
         }
     }

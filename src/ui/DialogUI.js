@@ -24,7 +24,7 @@ const DialogUI = class extends Wrapper {
 
     static POSITION = Object.freeze({
         LEFT: "left",
-        CENTER: "center",
+        CENTER: "center", // default
         RIGHT: "right"
     });
 
@@ -34,8 +34,6 @@ const DialogUI = class extends Wrapper {
 
         this.#dialog = new Container("Conversation");
         this.#topics = new CollectionManager("Topics");
-
-        // TODO add default close button
 
         this.append(
             this.#dialog,
@@ -63,12 +61,16 @@ const DialogUI = class extends Wrapper {
         this.#topics.show();
     }
 
-    updateDialog({ nameID = "", textID = "", type = DialogUI.TYPE.SPEECH, position = "left" }) {
+    updateDialog({ nameID, textID, type, position }) {
+
+        console.log(nameID, textID, type, position);
 
         const name = (isNotEmptyString(nameID)) ? getWord(nameID) : "";
         const text = (isNotEmptyString(textID)) ? getWord(textID) : "";
-        const className = (Object.values(DialogUI.TYPES).includes(type)) ? type : DialogUI.TYPE.SPEECH;
+        const className = (Object.values(DialogUI.TYPE).includes(type)) ? type : DialogUI.TYPE.SPEECH;
         const textAlign = (Object.values(DialogUI.POSITION).includes(position)) ? position : DialogUI.POSITION.CENTER;
+
+        console.log(name, text, className, textAlign);
 
         this.#dialog.addComponent(new Container(className).append(
             new TextComponent(name, "Person"),
@@ -80,6 +82,7 @@ const DialogUI = class extends Wrapper {
 
     updateTopics(topics) {
         this.#topics.updateElements(topics);
+        // TODO add default close button
         return this;
     }
 

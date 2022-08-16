@@ -12,11 +12,11 @@ const MenuState = class {
     #toRender;
 
     /** @type {Menu} */
-    #wrapper;
+    #ui;
 
     constructor() {
 
-        this.#wrapper = new Menu()
+        this.#ui = new Menu()
             .setTitle("GameTitle")
             .setSubTitle("GameSubTitle")
             .setDisclaimer("menuDisclaimer")
@@ -26,7 +26,7 @@ const MenuState = class {
             });
 
         if (hasSaveGame()) {
-            this.#wrapper.addButton("menuLoadGame", () => {
+            this.#ui.addButton("menuLoadGame", () => {
                 GameStatesManager.notify("loadGame");
             });
         }
@@ -39,14 +39,14 @@ const MenuState = class {
     }
 
     exit() {
-        this.#wrapper.clear().remove();
-        this.#wrapper = null;
+        this.#ui.clear().remove();
+        this.#ui = null;
         this.#toRender = false;
     }
 
     render(ctx) {
         if (this.#toRender) {
-            this.#wrapper.render(ctx);
+            this.#ui.render(ctx);
             this.#toRender = false;
         }
     }

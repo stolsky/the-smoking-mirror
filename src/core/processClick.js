@@ -114,17 +114,25 @@ const parseAction = (action) => {
     return {};
 };
 
-const evaluateStatement = (statement) => {
-    const parts = statement.split(":");
+const evaluateCommand = (command) => {
+    const parts = command.split(":");
     return (parts.length === 1) ? [null, parts.pop()] : parts;
 };
 
-const processStatement = (statement) => {
-    const [condition, action] = evaluateStatement(statement);
+const processCommand = (command) => {
+    const [condition, action] = evaluateCommand(command);
     if (condition && !evaluate(condition)) {
         return {};
     }
     return parseAction(action);
+};
+
+const processCommands = (commands) => {
+    const updates = [];
+    if (commands instanceof Array) {
+        commands.forEach((statement) => updates.push(processCommand(statement)));
+    }
+    return updates;
 };
 
 /** @param {{hero: string, element: string, buttons { left: boolean, middle: boolean, right: boolean} }} */
@@ -160,9 +168,7 @@ const processClick = ({ element, buttons }) => {
             updates.text = text;
         }
 
-        if (cmd instanceof Array) {
-            cmd.forEach((statement) => updates.elements.push(processStatement(statement)));
-        }
+        updates.elements = [...updates.elements, ...processCommands(cmd)];
 
     } else if (Combination.isActive()) {
         updates.elements = Combination.cancel();
@@ -175,3 +181,4 @@ const processClick = ({ element, buttons }) => {
 
 
 export default processClick;
+export { processCommands };

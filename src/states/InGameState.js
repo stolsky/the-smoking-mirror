@@ -35,7 +35,7 @@ const InGameState = class {
     #toRender;
 
     /** @type {InGameUI} */
-    #wrapper;
+    #ui;
 
     #displaySceneIntro() {
         const intro = this.#currentAct.getCurrentScene().getIntro();
@@ -47,7 +47,7 @@ const InGameState = class {
     #enterScene(id) {
 
         this.#currentAct.loadScene(id);
-        this.#wrapper
+        this.#ui
             .setSceneTitle(this.#currentAct.getCurrentScene().getName())
             .clearScene();
         this.#updateSceneElements = this.#currentAct.getAllElementsProperties();
@@ -128,7 +128,7 @@ const InGameState = class {
         this.#updateLog = [];
 
         this.#currentAct = new Act({ name, elements });
-        this.#wrapper = new InGameUI();
+        this.#ui = new InGameUI();
         setActiveHero(hero);
         this.#enterScene(start);
 
@@ -150,29 +150,29 @@ const InGameState = class {
         this.#currentAct.clear();
         this.#currentAct = null;
 
-        this.#wrapper.clear().remove();
-        this.#wrapper = null;
+        this.#ui.clear().remove();
+        this.#ui = null;
         this.#toRender = false;
     }
 
     render(ctx) {
         if (this.#toRender) {
-            this.#wrapper.render(ctx);
+            this.#ui.render(ctx);
             this.#toRender = false;
         }
 
         if (this.#updateSceneElements.length > 0) {
-            this.#wrapper.updateSceneElements(this.#updateSceneElements);
+            this.#ui.updateSceneElements(this.#updateSceneElements);
             this.#updateSceneElements = [];
         }
 
         if (this.#updateInventoryElements.length > 0) {
-            this.#wrapper.updateInventoryElements(this.#updateInventoryElements);
+            this.#ui.updateInventoryElements(this.#updateInventoryElements);
             this.#updateInventoryElements = [];
         }
 
         if (this.#updateLog.length > 0) {
-            this.#wrapper.updateLog(this.#updateLog);
+            this.#ui.updateLog(this.#updateLog);
             this.#updateLog = [];
         }
     }

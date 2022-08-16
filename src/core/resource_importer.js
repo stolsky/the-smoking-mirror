@@ -2,7 +2,6 @@
 import { isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
 import Cache from "../../lib/JST/resource/Cache.js";
 
-import Dialog from "../am/Dialog.js";
 import Element from "../am/Element.js";
 import Flag from "../am/Flag.js";
 import Hero from "../am/Hero.js";
@@ -32,9 +31,8 @@ const importFlags = (source) => importResource(source, (flag) => {
     return { key: id, value: new Flag(id, type, value) };
 });
 
-// TODO remove duplicate code
-const importDialogs = (source) => importResource(source, ({ id, ...properties }) => ({ key: id, value: new Dialog(id, properties) }));
 const importHeroes = (source) => importResource(source, ({ id, ...properties }) => ({ key: id, value: new Hero(id, properties) }));
+// TODO remove duplicate code
 const importItems = (source) => importResource(source, ({ id, ...properties }) => ({ key: id, value: new Item(id, properties) }));
 const importElements = (source) => importResource(source, ({ id, ...properties }) => ({ key: id, value: new Element(id, properties) }));
 
@@ -54,7 +52,7 @@ const importScenes = (source) => {
         }
 
         if (dialogs) {
-            temporyCache.append(importDialogs(dialogs));
+            temporyCache.append(importItems(dialogs));
         }
 
         if (id && name) {
@@ -69,7 +67,6 @@ const importScenes = (source) => {
 
 
 export {
-    importDialogs,
     importElements,
     importFlags,
     importHeroes,

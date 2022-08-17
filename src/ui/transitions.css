@@ -51,11 +51,11 @@
     background-color: #ffffff;
 }
 
-.Application .Transition.In {
-    animation: 0.5s ease-out paused forwards opacityIn;
+.Application .ShowAnimation {
+    animation: 0.5s linear paused forwards opacityIn;
 }
-.Application .Transition.Out {
-    animation: 0.5s ease-out paused forwards opacityOut;
+.Application .HideAnimation {
+    animation: 0.5s linear paused forwards opacityOut;
 }
 
 @keyframes opacityIn {

@@ -1,14 +1,17 @@
 
+import { EventType, isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
+
 import InputEventManager from "../core/InputEventManager.js";
 import { processCommands } from "../core/processClick.js";
 
 import DialogUI from "../ui/DialogUI.js";
 
 import GameCache from "../am/GameCache.js";
-import { isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
 
 
 const DialogState = class {
+
+    #isFadingIn;
 
     #current;
 
@@ -56,7 +59,15 @@ const DialogState = class {
         this.#updateMessages = [];
         this.#updateTopics = [];
 
-        this.#ui = new DialogUI();
+        this.#ui = new DialogUI()
+            .addEventListener(
+                EventType.animationend,
+                () => {
+                    this.#isFadingIn = false;
+                    console.log("animation ended");
+                },
+                { once: true }
+            );
 
         this.#processResult(this.#current.getAction({ left: true }));
 

@@ -11,7 +11,7 @@ const BaseObject = class {
     #name;
 
     /** @type {{}} */
-    #current_state;
+    #currentState;
 
     /** @type {string} */
     #information;
@@ -28,20 +28,35 @@ const BaseObject = class {
     /** @type {Array<{}>} */
     #states;
 
+    static #createIndex({ left, right }) {
+        const indices = {};
+        if (left instanceof Array) {
+            indices.leftIndex = 0;
+        }
+        if (right instanceof Array) {
+            indices.rightIndex = 0;
+        }
+        return indices;
+    }
+
+    #isQueueExplored(queueName) {
+        return (hasProperty(this.#currentState, queueName)) ? this.#currentState[`${queueName}Index`] === this.#currentState[`${queueName}`].length : true;
+    }
+
     #getAction(property = "left") {
 
         let action = null;
 
-        if (this.#current_state instanceof Object && hasProperty(this.#current_state, property)) {
+        if (this.#currentState instanceof Object && hasProperty(this.#currentState, property)) {
 
             const indexKey = `${property}Index`;
-            const index = this.#current_state[`${indexKey}`];
-            const actionStack = this.#current_state[`${property}`];
+            const index = this.#currentState[`${indexKey}`];
+            const actionStack = this.#currentState[`${property}`];
 
             if (actionStack instanceof Array) {
-                action = actionStack[`${index}`];
-                if (index < actionStack.length - 1) {
-                    this.#current_state[`${indexKey}`] = index + 1;
+                action = actionStack[`${index}`] || actionStack.at(-1);
+                if (index < actionStack.length) {
+                    this.#currentState[`${indexKey}`] = index + 1;
                 }
             }
         }
@@ -60,8 +75,7 @@ const BaseObject = class {
     }
 
     // eslint-disable-next-line no-unused-vars
-    getAction({ left, middle, right }) {
-
+    getAction({ left, right }) {
         if (left) {
             return this.#getAction("left");
         }
@@ -69,7 +83,6 @@ const BaseObject = class {
         if (right) {
             return this.#getAction("right");
         }
-
         return {};
     }
 
@@ -78,17 +91,17 @@ const BaseObject = class {
     }
 
     getCombinations() {
-        if (this.#current_state) {
-            const { combos } = this.#current_state;
+        if (this.#currentState) {
+            const { combos } = this.#currentState;
             if (combos instanceof Array) {
-                return this.#current_state.combos;
+                return this.#currentState.combos;
             }
         }
         return null;
     }
 
     getCurrentState() {
-        return this.#current_state;
+        return this.#currentState;
     }
 
     getForeground() {
@@ -123,6 +136,10 @@ const BaseObject = class {
         return this.#states;
     }
 
+    isExplored() {
+        return this.#states.length === this.#currentState.id && this.#isQueueExplored("left") && this.#isQueueExplored("right");
+    }
+
     isVisible() {
         return this.#visible;
     }
@@ -136,7 +153,7 @@ const BaseObject = class {
 
     setCurrentState(id) {
         if (isNumber(id)) {
-            this.#current_state = this.#states.find((state) => state.id === id) ?? null;
+            this.#currentState = this.#states.find((state) => state.id === id) ?? null;
         }
         return this;
     }
@@ -165,7 +182,7 @@ const BaseObject = class {
     /** @param {Array<Object>} states */
     setStates(states) {
         if (states instanceof Array) {
-            this.#states = states.map((state) => ({ ...state, ...{ leftIndex: 0, rightIndex: 0 } }));
+            this.#states = states.map((state) => ({ ...state, ...BaseObject.#createIndex(state) }));
         } else {
             this.#states = [];
         }

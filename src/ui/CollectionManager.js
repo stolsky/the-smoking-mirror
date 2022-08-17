@@ -5,7 +5,6 @@ import Container from "../../lib/JST/dom/Container.js";
 import TextComponent from "../../lib/JST/dom/TextComponent.js";
 
 import InputEventManager from "../core/InputEventManager.js";
-import getWord from "../core/translate.js";
 
 import Wrapper from "./Wrapper.js";
 
@@ -18,16 +17,16 @@ const updateClassName = (element, className) => {
     element.addClass(className);
 };
 
-const updateText = (element, text) => {
-    element.setText(text);
+const updateText = (element, id) => {
+    element.setText(Wrapper.finalizeWord(id));
 };
 
 const updateName = (parent, id) => {
-    updateText(parent.getChildren()[0], getWord(id));
+    updateText(parent.getChildren()[0], id);
 };
 
 const updateInformation = (parent, id) => {
-    updateText(parent.getChildren()[1], getWord(id));
+    updateText(parent.getChildren()[1], id);
 };
 
 /**
@@ -87,7 +86,7 @@ const CollectionManager = class extends Wrapper {
                 element = new Container("Element")
                     .append(new TextComponent("", "Name"), new TextComponent("", "Information"))
                     // MouseEvent.click applies only to the left mouse button
-                    .addEventListener(EventType.mouseup, (event) => InputEventManager.setInputEvent(event, id));
+                    .addEventListener(EventType.pointerup, (event) => InputEventManager.setInputEvent(event, id));
 
                 this.#elements.setItem(id, element);
                 this.addComponent(element);

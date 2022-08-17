@@ -21,7 +21,7 @@ const TextPageState = class {
             .setText(text)
             .setHint("clickToContinue")
             // TODO maybe use InputEventManager and fire notify in update method
-            .addEventListener(EventType.mouseup, () => GameStatesManager.notify("done"));
+            .addPointerListener(() => GameStatesManager.notify("done"));
 
         this.#toRender = true;
     }

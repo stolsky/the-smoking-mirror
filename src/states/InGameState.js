@@ -95,7 +95,7 @@ const InGameState = class {
             elements.forEach(({ dialog, enter, highlight, element, lost, remove }) => {
 
                 if (isNotEmptyString(enter)) {
-                    GameStatesManager.notify("transition", ["In", () => this.#enterScene(enter), "Out"]);
+                    GameStatesManager.notify("transition", ["ShowAnimation", () => this.#enterScene(enter), "HideAnimation"]);
                     // TODO add information about which location I have entered
                 } else if (lost) {
                     loadGameOver(lost);
@@ -136,7 +136,7 @@ const InGameState = class {
     }
 
     enter() {
-        // GameStatesManager.notify("transition", ["Out"]);
+        // GameStatesManager.notify("transition", ["HideAnimation"]);
         GameCache.getItem("telephone").setCurrentState(2);
         this.#enterScene("oubier2");
         return this;

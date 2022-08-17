@@ -2,8 +2,6 @@
 import Container from "../../lib/JST/dom/Container.js";
 import TextComponent from "../../lib/JST/dom/TextComponent.js";
 
-import getWord from "../core/translate.js";
-
 import Wrapper from "./Wrapper.js";
 
 
@@ -38,17 +36,17 @@ const TextPage = class extends Wrapper {
     }
 
     setTitle(id) {
-        this.#title_container.setText(getWord(id));
+        this.#title_container.setText(Wrapper.finalizeWord(id));
         return this;
     }
 
     setText(id) {
-        getWord(id).split(";").forEach((part) => this.#text_container.addComponent(new TextComponent(part)));
+        Wrapper.finalizeText(id).forEach((part) => this.#text_container.addComponent(new TextComponent(part)));
         return this;
     }
 
     setHint(id) {
-        this.#hint_container.setText(getWord(id));
+        this.#hint_container.setText(Wrapper.finalizeWord(id));
         return this;
     }
 

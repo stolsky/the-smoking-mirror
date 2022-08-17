@@ -20,7 +20,7 @@ const SceneTitle = class extends Wrapper {
     }
 
     setTitle(title) {
-        this.#titleText.setText(title);
+        this.#titleText.setText(Wrapper.finalizeWord(title));
     }
 
 };

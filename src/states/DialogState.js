@@ -1,19 +1,21 @@
 
-import { EventType, isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
+import { isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
 
 import InputEventManager from "../core/InputEventManager.js";
 import { processCommands } from "../core/processClick.js";
 
+import GameCache, { getActiveHero } from "../am/GameCache.js";
+
 import DialogUI from "../ui/DialogUI.js";
 
-import GameCache from "../am/GameCache.js";
+import GameStatesManager from "./GameStatesManager.js";
 
 
 const DialogState = class {
 
-    #isFadingIn;
-
     #current;
+
+    #heroNameIDs;
 
     /** @type {Array} */
     #updateMessages;
@@ -25,49 +27,61 @@ const DialogState = class {
 
     #ui;
 
+    #isCharacterHero(name) {
+        return this.#heroNameIDs.includes(name);
+    }
+
     #processResult(result) {
 
         if (result instanceof Array) {
             // this.#ui.updateTopics(topics);
             // this.#ui.showTopics();
         } else if (result instanceof Object) {
+
             const { char, text, type, cmd } = result;
-            // TODO check for hero and set position
-            const position = DialogUI.POSITION.LEFT;
+            const isHero = this.#isCharacterHero(char);
+            let position = DialogUI.POSITION.LEFT;
+
+            if (type === DialogUI.TYPE.SOUND) {
+                position = DialogUI.POSITION.CENTER;
+            } else if (!isHero) {
+                position = DialogUI.POSITION.RIGHT;
+            }
+
             this.#ui.updateDialog({ nameID: char, textID: text, type, position });
             if (cmd) {
                 // TODO process command results
-                console.log(processCommands(cmd));
+                console.log("commands", ...processCommands(cmd));
             }
+
             this.#ui.hideTopics();
         }
 
     }
 
     #handleInput({ id, buttons }) {
-        if (isNotEmptyString(id)) {
-            this.#current = GameCache.getItem(id);
+        if (buttons.left) {
+            if (isNotEmptyString(id)) {
+                this.#current = GameCache.getItem(id);
+            }
+            //if (this.#current.isExplored()) {
+                // this.#ui.hide(() => GameStatesManager.notify("done"));
+            //} else {
+                this.#current.isExplored();
+                this.#processResult(this.#current.getAction({ left: buttons.left }));
+            //}
         }
-        this.#processResult(this.#current.getAction({ left: true }));
     }
 
     constructor(startDialog) {
 
         this.#current = GameCache.getItem(startDialog);
-        console.log(this.#current);
+        this.#heroNameIDs = getActiveHero().getName();
 
         this.#updateMessages = [];
         this.#updateTopics = [];
 
-        this.#ui = new DialogUI()
-            .addEventListener(
-                EventType.animationend,
-                () => {
-                    this.#isFadingIn = false;
-                    console.log("animation ended");
-                },
-                { once: true }
-            );
+        this.#ui = new DialogUI();
 
         this.#processResult(this.#current.getAction({ left: true }));
 
@@ -79,12 +93,19 @@ const DialogState = class {
     }
 
     exit() {
-        return this;
+        this.#current = null;
+        this.#heroNameIDs = null;
+        this.#updateMessages = null;
+        this.#updateTopics = null;
+
+        this.#toRender = false;
+        this.#ui.clear().remove();
+        this.#ui = null;
     }
 
     render(ctx) {
         if (this.#toRender) {
-            this.#ui.render(ctx);
+            this.#ui.render(ctx).show();
             this.#toRender = false;
         }
 

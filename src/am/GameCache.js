@@ -4,6 +4,7 @@ import Cache from "../../lib/JST/resource/Cache.js";
 
 const GameCache = new Cache();
 
+/** @type {Hero} */
 let activeHero = null;
 
 const getActiveHero = () => activeHero;

@@ -1,10 +1,7 @@
 
-import getWord from "../core/translate.js";
-
 import Wrapper from "./Wrapper.js";
 import SceneTitle from "./SceneTitle.js";
 import Log from "./Log.js";
-import Dialog from "./DialogUI.js";
 import CollectionManager from "./CollectionManager.js";
 
 
@@ -22,9 +19,6 @@ const InGameUI = class extends Wrapper {
     /** @type {CollectionManager} */
     #inventory;
 
-    /** @type {Wrapper} */
-    #dialog;
-
     constructor() {
 
         super("InGameUI");
@@ -33,17 +27,15 @@ const InGameUI = class extends Wrapper {
         this.#sceneTitle = new SceneTitle();
         this.#log = new Log();
         this.#inventory = new CollectionManager("Inventory");
-        this.#dialog = new Dialog();
 
         this.append(
             this.#scene,
             this.#sceneTitle,
             this.#log,
-            this.#inventory,
-            this.#dialog.hide()
+            this.#inventory
         );
 
-        this.addListener();
+        this.addPointerListener();
     }
 
     clearInventory() {
@@ -74,7 +66,7 @@ const InGameUI = class extends Wrapper {
     }
 
     setSceneTitle(title) {
-        this.#sceneTitle.setTitle(getWord(title));
+        this.#sceneTitle.setTitle(title);
         return this;
     }
 

@@ -1,6 +1,8 @@
 
 import TextComponent from "../../lib/JST/dom/TextComponent.js";
 
+import getWord from "../core/translate.js";
+
 import Wrapper from "./Wrapper.js";
 
 
@@ -20,7 +22,7 @@ const SceneTitle = class extends Wrapper {
     }
 
     setTitle(title) {
-        this.#titleText.setText(Wrapper.finalizeWord(title));
+        this.#titleText.setText(getWord(title));
     }
 
 };

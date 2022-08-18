@@ -5,6 +5,7 @@ import Container from "../../lib/JST/dom/Container.js";
 import TextComponent from "../../lib/JST/dom/TextComponent.js";
 
 import InputEventManager from "../core/InputEventManager.js";
+import getWord from "../core/translate.js";
 
 import Wrapper from "./Wrapper.js";
 
@@ -18,7 +19,7 @@ const updateClassName = (element, className) => {
 };
 
 const updateText = (element, id) => {
-    element.setText(Wrapper.finalizeWord(id));
+    element.setText(getWord(id));
 };
 
 const updateName = (parent, id) => {

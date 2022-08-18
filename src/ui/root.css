@@ -1,0 +1,24 @@
+:root {
+    --APPWIDTH: 1000px;
+    --APPHEIGHT: 700px;
+
+    --INTRO_BLUR: 100px;
+
+    /* COLORS */
+    --HIGHLIGHT: rgba(255, 0, 0, 0.5);
+}
+
+html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat center center fixed; background-size: cover;}
+
+.Application {
+
+    width: var(--APPWIDTH);
+    height: var(--APPHEIGHT);
+
+    cursor: url(../../res/cursor/default.png) 4 4, default;
+    font-family: sans-serif;
+    background: #ffffff;
+    border-radius: 10px;
+
+    scrollbar-color: #888 #fff;
+}

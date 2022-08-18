@@ -1,4 +1,6 @@
 {
+    "demoOver": "End of Demo",
+    "demoOverThanks": "You have reached the end of this demo. Thanks for playing!",
 
     "GameTitle": "The Smoking Mirror",
     "GameSubTitle": "a text adventure by Stephan Olschowsky",
@@ -57,8 +59,11 @@
     "itemPanties1": "Exotic Panties",
     "itemPanties2": "It was a pair of red, lace trimmed panties decorated with a large black satin heart.",
     "itemNote1": "Note",
-    "itemNote2": "I guess I had no business reading the note, but I figured it might give me a clue about what Nico was itemolved in. It was from André Lobineau, the history student Nico had known at college. The letter was sentimental mush, and revealed that the 'exotic Lingerie' as he called it was a gift from him! It gave his telephone number. Lobineau figured himself as a rival for Nico's affections, but I couldn't believe that that creep was in the running.",
-    "itemNote3": "It was the letter to Nico from that creep Lobineau. Sickening.",
+    "itemNote2": "I guess I had no business reading the note, but I figured it might give me a clue about what Nico was itemolved in.",
+    "itemNote3": "It was from André Lobineau, the history student Nico had known at college. The letter was sentimental mush, and revealed that the 'exotic Lingerie' as he called it was a gift from him!.",
+    "itemNote4": "It gave his telephone number.",
+    "itemNote5": "Lobineau figured himself as a rival for Nico's affections, but I couldn't believe that that creep was in the running.",
+    "itemNote6": "It was the letter to Nico from that creep Lobineau. Sickening.",
     "itemLipstick1": "Lipstick",
     "itemLipstick2": "It was Nico's lipstick.",
     "itemLipstick3": "It wasn't my colour - and it reminded me of clowns.",

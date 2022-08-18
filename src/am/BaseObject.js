@@ -137,7 +137,7 @@ const BaseObject = class {
     }
 
     isExplored() {
-        return this.#states.length === this.#currentState.id && this.#isQueueExplored("left") && this.#isQueueExplored("right");
+        return this.#isQueueExplored("left") && this.#isQueueExplored("right");
     }
 
     isVisible() {

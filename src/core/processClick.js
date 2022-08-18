@@ -60,10 +60,10 @@ const applyMethod = (target, methodName, value = null) => {
         result = { element: value };
 
     } else if (methodName === "INCLEFT") {
-        target.getAction("left");
+        target.getAction({ left: true });
 
     } else if (methodName === "INCRIGHT") {
-        target.getAction("right");
+        target.getAction({ right: true });
     }
 
     return result;
@@ -167,6 +167,9 @@ const processClick = ({ element, buttons }) => {
         if (isNotEmptyString(text)) {
             updates.text = text;
         }
+
+        // TODO check if object is explored and act accordingly
+        // console.log(clickedObject.isExplored());
 
         updates.elements = [...updates.elements, ...processCommands(cmd)];
 

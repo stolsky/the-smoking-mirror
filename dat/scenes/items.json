@@ -81,8 +81,8 @@
                 "back": "239,239,239",
                 "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
-                    {"text": "itemNote2", "cmd": ["telephone 2"]},
-                    {"text": "itemNote3"}
+                    {"text": "itemNote2+itemNote3+itemNote4+itemNote5", "cmd": ["telephone 2"]},
+                    {"text": "itemNote6"}
                 ]
             }
         ]
@@ -96,7 +96,7 @@
                 "back": "120,16,0",
                 "left": [{ "cmd": ["SELF USE"] }],
                 "right": [
-                    {"text": "itemLipstick02+itemLipstick3"},
+                    {"text": "itemLipstick2+itemLipstick3"},
                     {"text": "itemLipstick2"}
                 ]
             }

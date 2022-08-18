@@ -4,10 +4,9 @@
     grid-row-start: 2;
     border-left: 1px solid #000000;
     padding: 5px;
-
     overflow: auto;
-    scrollbar-color: #888 #fff;
-    scrollbar-width: thin;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
 }
 .Application .InGameUI > .Log .Message {
     margin-bottom: 10px;

@@ -20,7 +20,7 @@ const StateFactory = Object.freeze({
 
     createSetupIntroState: (properties) => new SetupIntroState(properties),
 
-    createTextPageState: (className, properties) => new TextPageState(className, properties),
+    createTextPageState: (properties) => new TextPageState(properties),
 
     createTransitionState: (properties) => new TransitionState(properties)
 

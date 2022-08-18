@@ -1,7 +1,8 @@
 
 import Container from "../../lib/JST/dom/Container.js";
 import TextComponent from "../../lib/JST/dom/TextComponent.js";
-import { isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
+
+import getWord, { getText } from "../core/translate.js";
 
 import CollectionManager from "./CollectionManager.js";
 import Wrapper from "./Wrapper.js";
@@ -14,6 +15,9 @@ const DialogUI = class extends Wrapper {
 
     /** @type {CollectionManager} */
     #topics;
+
+    /** @type {TextComponent} */
+    #hint;
 
     static TYPE = Object.freeze({
         SPEECH: "Speech", // default
@@ -34,10 +38,12 @@ const DialogUI = class extends Wrapper {
      * @param {string} align
      */
     #addBubble(person, text, type, align) {
-        this.#conversation.addComponent(new Container(`${type} ${align}`).append(
+        const bubble = new Container(`${type} ${align}`).append(
             new TextComponent(person, "Person"),
             new TextComponent(text, "Message")
-        ));
+        );
+        this.#conversation.addComponent(bubble);
+        bubble.view();
     }
 
     constructor() {
@@ -46,12 +52,10 @@ const DialogUI = class extends Wrapper {
 
         this.#conversation = new Container("Conversation");
         this.#topics = new CollectionManager("Topics");
+        this.#hint = new TextComponent(getWord("clickToContinue"), "Hint");
 
         this.append(
-            new Container("Wrapper").append(
-                this.#conversation,
-                new TextComponent(Wrapper.finalizeWord("clickToContinue"), "Hint")
-            ),
+            new Container("Wrapper").append(this.#conversation, this.#hint),
             this.#topics
         );
 
@@ -78,15 +82,16 @@ const DialogUI = class extends Wrapper {
         return this;
     }
 
+    // TODO hide/show/clear/set Hint -> to specify current action in dialogue
+
     updateDialog({ nameID, textID, type, position }) {
 
-        const person = Wrapper.finalizeName(nameID);
-        const text = Wrapper.finalizeText(textID);
+        const person = getText(nameID);
+        const text = getText(textID);
         const className = (Object.values(DialogUI.TYPE).includes(type)) ? type : DialogUI.TYPE.SPEECH;
         const align = (Object.values(DialogUI.POSITION).includes(position)) ? position : DialogUI.POSITION.CENTER;
 
-        // TODO add click event for each bubble -> in DialogState
-        text.forEach((line) => this.#addBubble(person, line, className, align));
+        this.#addBubble(person, text, className, align);
 
         return this;
     }

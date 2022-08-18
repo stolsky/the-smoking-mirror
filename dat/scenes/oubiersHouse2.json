@@ -19,7 +19,7 @@
                     ],
                     "combos": [
                         {"id": "blowDart", "text": "paris1Door15"},
-                        {"id": "houseKey", "text": "paris1Door17", "cmd": ["door2 2", "CafeKnown true:cafe SHOW", "GalleryKnown true:gallery SHOW"]}
+                        {"id": "houseKey", "text": "paris1Door17", "cmd": ["door2 2", "CafeKnown true:cafeExit SHOW", "GalleryKnown true:galleryExit SHOW"]}
                     ]
                 },
                 {
@@ -34,7 +34,7 @@
                     ],
                     "combos": [
                         {"id": "blowDart", "text": "paris1Door15"},
-                        {"id": "houseKey", "text": "paris1Door18", "cmd": ["door2 1", "door2 INFO statLocked", "cafe HIDE", "gallery HIDE"]}
+                        {"id": "houseKey", "text": "paris1Door18", "cmd": ["door2 1", "door2 INFO statLocked", "cafeExit HIDE", "galleryExit HIDE"]}
                     ]
                 }
             ]
@@ -91,7 +91,7 @@
                 {
                     "id": 2,
                     "left": [
-                        {"text": "paris1Telephone5", "cmd": ["DIALOG telephone1", "SELF 3"]}
+                        {"cmd": ["DIALOG telephone1", "SELF 3"]}
                     ],
                     "right": [
                         {"text": "paris1Telephone4"}
@@ -100,7 +100,7 @@
                 {
                     "id": 3,
                     "left": [
-                        {"text": "paris1Telephone6"}
+                        {"text": "paris1Telephone5"}
                     ],
                     "right": [
                         {"text": "paris1Telephone4"}
@@ -144,7 +144,7 @@
             ]
         },
         {
-            "id": "cafe",
+            "id": "cafeExit",
             "name": "paris1Exit1",
             "states": [
                 {
@@ -160,7 +160,7 @@
             ]
         },
         {
-            "id": "gallery",
+            "id": "galleryExit",
             "name": "paris1Exit2",
             "states": [
                 {
@@ -183,18 +183,21 @@
                     "id": 1,
                     "left": [
                         { "char": "georgeFirstName", "text": "paris1DialogAndre1" },
-                        { "type": "Sound", "text": "paris1DialogAndre2"},
+                        { "type": "Sound", "text": "paris1DialogAndre2" },
                         { "char": "georgeFirstName", "text": "paris1DialogAndre3" },
-                        { "char": "andreFirstName", "text": "paris1DialogAndre4"},
+                        { "char": "andreFirstName", "text": "paris1DialogAndre4" },
                         { "char": "georgeFirstName", "text": "paris1DialogAndre5" },
-                        { "char": "andreFirstName", "text": "paris1DialogAndre6"},
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre7+paris1DialogAndre8" },
-                        { "char": "andreFirstName", "text": "paris1DialogAndre9"},
+                        { "char": "andreFirstName", "text": "paris1DialogAndre6" },
+                        { "char": "georgeFirstName", "text": "paris1DialogAndre7" },
+                        { "char": "georgeFirstName", "text": "paris1DialogAndre8" },
+                        { "char": "andreFirstName", "text": "paris1DialogAndre9" },
                         { "char": "georgeFirstName", "text": "paris1DialogAndre10" },
-                        { "char": "andreFirstName", "text": "paris1DialogAndre11", "cmd": ["CafeKnown true"]},
+                        { "char": "andreFirstName", "text": "paris1DialogAndre11", "cmd": ["CafeKnown true"] },
                         { "char": "georgeFirstName", "text": "paris1DialogAndre12" },
-                        { "type": "Sound", "text": "paris1DialogAndre13"},
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre14+paris1DialogAndre15+paris1DialogAndre16" }
+                        { "type": "Sound", "text": "paris1DialogAndre13" },
+                        { "char": "georgeFirstName", "text": "paris1DialogAndre14" },
+                        { "char": "georgeFirstName", "text": "paris1DialogAndre15" },
+                        { "char": "georgeFirstName", "text": "paris1DialogAndre16" }
                     ]
                 }
             ]

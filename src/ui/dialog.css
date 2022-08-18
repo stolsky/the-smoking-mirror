@@ -31,13 +31,13 @@
 .Application .Dialog .Conversation {
     height: 90%;
     padding: 2.5%;
-    scrollbar-color: #888 #fff;
-    scroll-behavior: smooth;
-    overflow: auto;
     width: 95%;
     font-family: serif;
     display: flex;
     flex-direction: column;
+    overflow: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
 }
 .Application .Dialog .Conversation .Speech,
 .Application .Dialog .Conversation .Sound,

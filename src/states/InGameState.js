@@ -14,6 +14,11 @@ import GameStatesManager from "./GameStatesManager.js";
 import GameCache, { getActiveHero, setActiveHero } from "../am/GameCache.js";
 
 
+const loadEndOfDemo = () => GameStatesManager
+    .notify("done")
+    .notify("mainMenu")
+    .notify("textPage", { name: "GameOver", title: "demoOver", text: "demoOverThanks" });
+
 const loadGameOver = (text) => GameStatesManager
     .notify("done")
     .notify("mainMenu")
@@ -45,7 +50,6 @@ const InGameState = class {
     }
 
     #enterScene(id) {
-
         this.#currentAct.loadScene(id);
         this.#ui
             .setSceneTitle(this.#currentAct.getCurrentScene().getName())
@@ -95,8 +99,13 @@ const InGameState = class {
             elements.forEach(({ dialog, enter, highlight, element, lost, remove }) => {
 
                 if (isNotEmptyString(enter)) {
-                    GameStatesManager.notify("transition", ["ShowAnimation", () => this.#enterScene(enter), "HideAnimation"]);
-                    // TODO add information about which location I have entered
+                    // TODO branch only for DEVELOPMENT
+                    if (!GameCache.hasItem(enter)) {
+                        loadEndOfDemo();
+                    } else {
+                        GameStatesManager.notify("transition", ["ShowAnimation", () => this.#enterScene(enter), "HideAnimation"]);
+                        // TODO add information about which location I have entered
+                    }
                 } else if (lost) {
                     loadGameOver(lost);
                 } else if (isNotEmptyString(element)) {
@@ -136,9 +145,11 @@ const InGameState = class {
     }
 
     enter() {
-        // GameStatesManager.notify("transition", ["HideAnimation"]);
-        GameCache.getItem("telephone").setCurrentState(2);
-        this.#enterScene("oubier2");
+        GameStatesManager.notify("transition", ["HideAnimation"]);
+
+        // GameCache.getItem("telephone").setCurrentState(2);
+        // GameCache.getItem("cafeExit").setVisibility(true);
+        // this.#enterScene("oubier2");
         return this;
     }
 

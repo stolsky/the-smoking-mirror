@@ -13,6 +13,8 @@ import GameStatesManager from "./GameStatesManager.js";
 
 const DialogState = class {
 
+    #isAnimating;
+
     #current;
 
     #heroNameIDs;
@@ -36,6 +38,7 @@ const DialogState = class {
         if (result instanceof Array) {
             // this.#ui.updateTopics(topics);
             // this.#ui.showTopics();
+            // change hint to "click on a topic you want to discuss or exit the conversation"
         } else if (result instanceof Object) {
 
             const { char, text, type, cmd } = result;
@@ -50,11 +53,13 @@ const DialogState = class {
 
             this.#ui.updateDialog({ nameID: char, textID: text, type, position });
             if (cmd) {
-                // TODO process command results
-                console.log("commands", ...processCommands(cmd));
+                // TODO process command results if they are not empty -> show new topics, hide discussed ones
+                const commands = processCommands(cmd);
+                // console.log(...commands);
             }
 
             this.#ui.hideTopics();
+            // change hint to "click anywhere to continue"
         }
 
     }
@@ -64,16 +69,19 @@ const DialogState = class {
             if (isNotEmptyString(id)) {
                 this.#current = GameCache.getItem(id);
             }
-            //if (this.#current.isExplored()) {
-                // this.#ui.hide(() => GameStatesManager.notify("done"));
-            //} else {
-                this.#current.isExplored();
+            // TODO check if also no options available
+            if (this.#current.isExplored()) {
+                this.#isAnimating = true;
+                this.#ui.hide(() => GameStatesManager.notify("done"));
+            } else {
                 this.#processResult(this.#current.getAction({ left: buttons.left }));
-            //}
+            }
         }
     }
 
     constructor(startDialog) {
+
+        this.#isAnimating = false;
 
         this.#current = GameCache.getItem(startDialog);
         this.#heroNameIDs = getActiveHero().getName();
@@ -121,9 +129,11 @@ const DialogState = class {
     }
 
     update() {
-        const input = InputEventManager.getInputEvent();
-        if (input) {
-            this.#handleInput(input);
+        if (!this.#isAnimating) {
+            const input = InputEventManager.getInputEvent();
+            if (input) {
+                this.#handleInput(input);
+            }
         }
     }
 

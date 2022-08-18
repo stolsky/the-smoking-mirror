@@ -26,9 +26,10 @@ const importResource = (source, method) => {
     return cache;
 };
 
-const importFlags = (source) => importResource(source, (flag) => {
+/** @param {string} source */
+const importFlags = (source = null) => importResource(source?.split(","), (flag) => {
     const [id, type, value] = flag.split(":");
-    return { key: id, value: new Flag(id, type, value) };
+    return { key: id, value: new Flag({ id, type, value }) };
 });
 
 const importHeroes = (source) => importResource(source, ({ id, ...properties }) => ({ key: id, value: new Hero(id, properties) }));

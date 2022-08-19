@@ -6,23 +6,24 @@ import MenuState from "./MenuState.js";
 import SetupIntroState from "./SetupIntroState.js";
 import TextPageState from "./TextPageState.js";
 import TransitionState from "./TransitionState.js";
+import StateWrapper from "./StateWrapper.js";
 
 
 const StateFactory = Object.freeze({
 
-    createDialogState: (properties) => new DialogState(properties),
+    createDialogState: (properties) => new StateWrapper(new DialogState(properties)),
 
-    createInGameState: (properties) => new InGameState(properties),
+    createInGameState: (properties) => new StateWrapper(new InGameState(properties)),
 
-    createLoadGameState: (properties) => new LoadGameState(properties),
+    createLoadGameState: (properties) => new StateWrapper(new LoadGameState(properties)),
 
-    createMenuState: (properties) => new MenuState(properties),
+    createMenuState: (properties) => new StateWrapper(new MenuState(properties)),
 
-    createSetupIntroState: (properties) => new SetupIntroState(properties),
+    createSetupIntroState: (properties) => new StateWrapper(new SetupIntroState(properties)),
 
-    createTextPageState: (properties) => new TextPageState(properties),
+    createTextPageState: (properties) => new StateWrapper(new TextPageState(properties)),
 
-    createTransitionState: (properties) => new TransitionState(properties)
+    createTransitionState: (properties) => new StateWrapper(new TransitionState(properties))
 
 });
 

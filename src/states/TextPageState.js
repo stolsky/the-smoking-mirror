@@ -1,50 +1,28 @@
 
-import { EventType } from "../../lib/JST/native/typeCheck.js";
-
 import TextPage from "../ui/TextPage.js";
 
 import GameStatesManager from "./GameStatesManager.js";
+import State from "./State.js";
 
 
-const TextPageState = class {
-
-    #toRender;
-
-    /** @type {TextPage} */
-    #ui;
+const TextPageState = class extends State {
 
     /** @param {{name: string, title: string, text: string}} */
     constructor({ name, title, text }) {
 
-        this.#ui = new TextPage(name)
-            .setTitle(title)
-            .setText(text)
-            .setHint("clickToContinue")
-            // TODO maybe use InputEventManager and fire notify in update method
-            .addPointerListener(() => GameStatesManager.notify("done"));
+        super();
 
-        this.#toRender = true;
-    }
+        this.setUI(
+            new TextPage(name)
+                .setTitle(title)
+                .setText(text)
+                .setHint("clickToContinue")
+                .addPointerListener()
+        );
 
-    enter() {
-        return this;
-    }
-
-    exit() {
-        this.#ui.clear().remove();
-        this.#ui = null;
-        this.#toRender = false;
-    }
-
-    render(ctx) {
-        if (this.#toRender) {
-            this.#ui.render(ctx);
-            this.#toRender = false;
-        }
-    }
-
-    update() {
-        return this;
+        this.setInputHandler(
+            () => { GameStatesManager.notify("done"); }
+        );
     }
 
 };

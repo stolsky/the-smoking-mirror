@@ -40,14 +40,19 @@ const InGameUI = class extends Wrapper {
 
     clearInventory() {
         this.#inventory.clear();
+        return this;
     }
 
     clearLog() {
         this.#log.clear();
+        return this;
     }
 
     clearScene() {
+        console.log(this.#scene);
         this.#scene.clear();
+        console.log(this.#scene);
+        return this;
     }
 
     updateInventoryElements(elements) {

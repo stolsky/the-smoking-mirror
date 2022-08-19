@@ -8,19 +8,23 @@ import InputEventManager from "../core/InputEventManager.js";
 const Wrapper = class extends Container {
 
     #playAnimation(animationName = null, callback = null) {
-        if (isFunction(callback)) {
-            this.addEventListener(EventType.animationend, () => callback(), { once: true });
-        }
         if (isNotEmptyString(animationName)) {
+            this.addAnimationEndListener(callback, { once: true });
             this.addClass(animationName)
                 .setStyle("animation-play-state", "running");
         }
     }
 
+    addAnimationEndListener(listener, options) {
+        if (isFunction(listener)) {
+            this.addEventListener(EventType.animationend, listener, options);
+        }
+        return this;
+    }
+
     /** Adds specified event listener or a default one if no parameter is set. */
-    addPointerListener(method = null) {
-        const listener = (isFunction(method)) ? method : (event) => InputEventManager.setInputEvent(event);
-        this.addEventListener(EventType.pointerup, listener);
+    addPointerListener() {
+        this.addEventListener(EventType.pointerup, (event) => InputEventManager.setInputEvent(event));
         return this;
     }
 

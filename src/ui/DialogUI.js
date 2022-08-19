@@ -85,7 +85,7 @@ const DialogUI = class extends Wrapper {
     // TODO hide/show/clear/set Hint -> to specify current action in dialogue
 
     updateDialog({ nameID, textID, type, position }) {
-
+        console.log(nameID, textID, type, position);
         const person = getText(nameID);
         const text = getText(textID);
         const className = (Object.values(DialogUI.TYPE).includes(type)) ? type : DialogUI.TYPE.SPEECH;

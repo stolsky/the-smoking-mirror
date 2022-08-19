@@ -1,30 +1,19 @@
 
 import GameStatesManager from "./GameStatesManager.js";
+import State from "./State.js";
 
 
-const SetupIntroState = class {
+const SetupIntroState = class extends State {
 
     #isDone;
 
     constructor() {
-
-        // load resources
+        super();
 
         this.#isDone = true;
     }
 
-    enter() {
-        return this;
-    }
-
-    exit() {
-        return this;
-    }
-
-    render() {
-        this.#isDone = false;
-    }
-
+    /** @override */
     update() {
         if (this.#isDone) {
             GameStatesManager
@@ -32,6 +21,7 @@ const SetupIntroState = class {
                 .notify("mainMenu");
         }
     }
+
 };
 
 

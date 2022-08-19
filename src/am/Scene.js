@@ -17,22 +17,20 @@ const Scene = class {
         if (list instanceof Array) {
             list.forEach((id) => this.#addElement(id));
         }
-        return this;
     }
 
-    #addElement(id = "elem") {
-        if (!this.hasElement(id)) {
+    #addElement(id) {
+        if (isNotEmptyString(id) && !this.hasElement(id)) {
             this.#elements.push(id);
         }
-        return this;
     }
 
     /** @param {{id: string, name: string, intro: string, elements: Array<string>}} */
-    constructor({ id, name, intro = null, elements = null }) {
+    constructor({ id, name, intro, elements = [] } = {}) {
 
-        this.#id = (isNotEmptyString(id)) ? id : "";
-        this.#name = (isNotEmptyString(name)) ? name : "";
-        this.#intro = intro;
+        this.#id = (isNotEmptyString(id)) ? `${id}` : "";
+        this.#name = (isNotEmptyString(name)) ? `${name}` : "";
+        this.#intro = (isNotEmptyString(intro)) ? `${intro}` : "";
 
         this.#elements = [];
         this.#addAllElements(elements);
@@ -56,14 +54,15 @@ const Scene = class {
     }
 
     hasElement(id) {
-        return isNotEmptyString(id) && this.#elements.includes(id);
+        return this.#elements.includes(`${id}`);
     }
 
     removeElement(id) {
-        const index = this.#elements.indexOf(id);
+        const index = this.#elements.indexOf(`${id}`);
         if (index !== -1) {
             this.#elements.splice(index, 1);
         }
+        return this;
     }
 
 };

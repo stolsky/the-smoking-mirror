@@ -85,7 +85,10 @@ const Flag = class {
         return this.#value;
     }
 
-    /**  @param {string} value */
+    /** Before testing, every prameter is treated as string
+     *
+     * @param {string} value
+     */
     setValue(value) {
         const convertedValue = this.#convert(`${value}`);
         if (typeof convertedValue === typeof this.#type) {

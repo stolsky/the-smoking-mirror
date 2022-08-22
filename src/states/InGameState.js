@@ -39,7 +39,7 @@ const InGameState = class extends State {
 
         this.#currentAct.loadScene(id);
 
-        console.log(this.getUI());
+        // console.log(this.getUI());
         this.getUI()
             .setSceneTitle(this.#currentAct.getCurrentScene().getName())
             .clearScene();
@@ -94,7 +94,6 @@ const InGameState = class extends State {
                         loadEndOfDemo();
                     } else {
                         GameStatesManager.notify("transition", ["ShowAnimation", () => this.#enterScene(enter), "HideAnimation"]);
-                        // TODO add information about which location I have entered
                     }
                 } else if (lost) {
                     loadGameOver(lost);
@@ -126,16 +125,26 @@ const InGameState = class extends State {
         this.#currentAct = new Act({ name, elements });
         setActiveHero(hero);
         this.#enterScene(start);
+
+        // TODO DEVELOPMENT ONLY
+        this.jumpToLocation = true;
     }
 
     /** @override */
     enter() {
         // GameStatesManager.notify("transition", ["HideAnimation"]);
-
-        GameCache.getItem("telephone").setCurrentState(2);
-        // GameCache.getItem("cafeExit").setVisibility(true);
-        this.#enterScene("oubier2");
         // return this;
+    }
+
+    // TODO DEVELOPMENT ONLY
+    update() {
+        super.update();
+        if (this.jumpToLocation) {
+            GameCache.getItem("telephone").setCurrentState(2);
+            GameCache.getItem("cafeExit").setVisibility(true);
+            this.#enterScene("oubier2");
+            this.jumpToLocation = false;
+        }
     }
 
     /** @override */

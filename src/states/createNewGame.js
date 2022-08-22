@@ -22,8 +22,11 @@ const createNewGame = () => {
 
             GameStatesManager.notify("runGame", { name, start, hero: active, elements });
 
-            if (intro) {
-                GameStatesManager.notify("textPage", { name: "Intro", ...intro });
+            const { title, text } = intro;
+            if (text instanceof Array) {
+                text.reverse().forEach((part, index, arr) => {
+                    GameStatesManager.notify("textPage", { name: "Intro", title: (index === arr.length - 1) ? title : "", text: part });
+                });
             }
         });
     });

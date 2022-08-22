@@ -49,9 +49,7 @@ const InGameUI = class extends Wrapper {
     }
 
     clearScene() {
-        console.log(this.#scene);
         this.#scene.clear();
-        console.log(this.#scene);
         return this;
     }
 

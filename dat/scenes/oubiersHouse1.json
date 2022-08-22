@@ -104,7 +104,7 @@
                     "visible": false,
                     "back": "119,134,133",
                     "left": [
-                        {"text": "paris1Bracket4", "cmd": ["SELF 2", "HERO 2", "bookcase 3", "chair SHOW", "rope SHOW", "photograph SHOW", "candle SHOW", "bureau SHOW", "drawer SHOW", "window SHOW", "window2 SHOW", "bag SHOW", "blowDart2 SHOW", "box SHOW", "syphon SHOW", "cabinet SHOW", "flames SHOW", "door SHOW"]}
+                        {"text": "paris1Bracket4", "cmd": ["SELF 2", "HERO 2", "bookcase 3", "chair SHOW", "rope SHOW", "photograph SHOW", "candle SHOW", "bureau 2", "drawer 2", "window SHOW", "window2 SHOW", "bag 2", "blowDart2 2", "box SHOW", "syphon SHOW", "cabinet SHOW", "flames SHOW", "door SHOW"]}
                     ],
                     "right": [
                         {"text": "paris1Bracket2"},
@@ -205,33 +205,31 @@
                     "id": 1,
                     "type": "Use",
                     "info": "statClosed",
-                    "visible": false,
                     "back": "152,80,52",
                     "left": [
-                        {"text": "paris1Bureau3", "cmd": ["SELF 2", "tequila SHOW"]}
+                        {"text": "paris1Bureau6"}
                     ],
                     "right": [
-                        {"text": "paris1Bureau2"}
+                        {"text": "paris1Bureau6"}
                     ]
                 },
                 {
                     "id": 2,
-                    "info": "statOpen",
                     "left": [
-                        {"text": "paris1Bureau5", "cmd": ["SELF 3", "tequila HIDE"]}
+                        {"text": "paris1Bureau3", "cmd": ["SELF 3", "tequila SHOW"]}
                     ],
                     "right": [
-                        {"text": "paris1Bureau4"}
+                        {"text": "paris1Bureau2"}
                     ]
                 },
                 {
                     "id": 3,
-                    "info": "statClosed",
+                    "info": "statOpen",
                     "left": [
-                        {"text": "paris1Bureau3", "cmd": ["SELF 2", "tequila SHOW"]}
+                        {"text": "paris1Bureau5", "cmd": ["SELF 2", "SELF INFO statClosed", "tequila HIDE"]}
                     ],
                     "right": [
-                        {"text": "paris1Bureau2"}
+                        {"text": "paris1Bureau4"}
                     ]
                 }
             ]
@@ -298,17 +296,25 @@
                 {
                     "id": 1,
                     "type": "Use",
-                    "visible": false,
                     "back": "152,80,52",
                     "left": [
-                        {"text": "paris1Drawer3", "cmd": ["SELF 2", "HERO TAKE pot"]}
+                        {"text": "paris1Drawer5"}
+                    ],
+                    "right": [
+                        {"text": "paris1Drawer5"}
+                    ]
+                }, 
+                {
+                    "id": 2,
+                    "left": [
+                        {"text": "paris1Drawer3", "cmd": ["SELF 3", "HERO TAKE pot"]}
                     ],
                     "right": [
                         {"text": "paris1Drawer2"}
                     ]
                 },
                 {
-                    "id": 2,
+                    "id": 3,
                     "left": [
                         {"text": "paris1Drawer4"}
                     ],
@@ -409,17 +415,25 @@
                 {
                     "id": 1,
                     "type": "Take",
-                    "visible": false,
                     "back": "146,0,0",
                     "left": [
-                        {"text": "paris1Bag3", "cmd": ["SELF 2", "HERO TAKE lipstick", "HERO TAKE letter", "HERO TAKE panties"]}
+                        {"text": "paris1Bag5"}
+                    ],
+                    "right": [
+                        {"text": "paris1Bag5"}
+                    ]
+                },
+                {
+                    "id": 2,
+                    "left": [
+                        {"text": "paris1Bag3", "cmd": ["SELF 3", "HERO TAKE lipstick", "HERO TAKE letter", "HERO TAKE panties"]}
                     ],
                     "right": [
                         {"text": "paris1Bag2"}
                     ]
                 },
                 {
-                    "id": 2,
+                    "id": 3,
                     "left": [
                         {"text": "paris1Bag4"}
                     ],
@@ -436,8 +450,16 @@
                 {
                     "id": 1,
                     "type": "Take",
-                    "visible": false,
                     "back": "39,71,58",
+                    "left": [
+                        {"text": "paris1Dart4"}
+                    ],
+                    "right": [
+                        {"text": "paris1Dart4"}
+                    ]
+                },
+                {
+                    "id": 2,
                     "left": [
                         {"text": "paris1Dart3", "cmd": ["HERO TAKE blowDart", "SELF 0"]}
                     ],

@@ -84,15 +84,19 @@ const DialogUI = class extends Wrapper {
 
     // TODO hide/show/clear/set Hint -> to specify current action in dialogue
 
-    updateDialog({ nameID, textID, type, position }) {
-        // console.log(nameID, textID, type, position);
-        const person = getText(nameID);
-        const text = getText(textID);
-        const className = (Object.values(DialogUI.TYPE).includes(type)) ? type : DialogUI.TYPE.SPEECH;
-        const align = (Object.values(DialogUI.POSITION).includes(position)) ? position : DialogUI.POSITION.CENTER;
+    updateDialog(lines) {
+        if (lines instanceof Array) {
+            lines.forEach((line) => {
+                const { nameID, textID, type, position } = line;
 
-        this.#addBubble(person, text, className, align);
+                const person = getText(nameID);
+                const text = getText(textID);
+                const className = (Object.values(DialogUI.TYPE).includes(type)) ? type : DialogUI.TYPE.SPEECH;
+                const align = (Object.values(DialogUI.POSITION).includes(position)) ? position : DialogUI.POSITION.CENTER;
 
+                this.#addBubble(person, text, className, align);
+            });
+        }
         return this;
     }
 

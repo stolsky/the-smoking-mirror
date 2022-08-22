@@ -138,15 +138,16 @@ const InGameState = class extends State {
     }
 
     // TODO DEVELOPMENT ONLY
-    // update() {
-    //     super.update();
-    //     if (this.jumpToLocation) {
-    //         GameCache.getItem("telephone").setCurrentState(2);
-    //         GameCache.getItem("cafeExit").setVisibility(true);
-    //         this.#enterScene("oubier2");
-    //         this.jumpToLocation = false;
-    //     }
-    // }
+    update() {
+        super.update();
+        if (this.jumpToLocation) {
+            GameCache.getItem("telephone").setCurrentState(2);
+            // GameCache.getItem("cafeExit").setVisibility(true);
+            GameCache.getItem("door2").setCurrentState(2);
+            this.#enterScene("oubier2");
+            this.jumpToLocation = false;
+        }
+    }
 
     /** @override */
     exit() {

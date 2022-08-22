@@ -79,8 +79,10 @@ const State = class {
             if (hasProperty(this.#renderQueue, id)) {
                 const selectedQueue = this.#renderQueue[`${id}`].data;
                 if (data instanceof Array) {
+                    console.log("array", data);
                     selectedQueue.push(...data);
                 } else {
+                    console.log("object", data);
                     selectedQueue.push(data);
                 }
             }
@@ -119,7 +121,6 @@ const State = class {
     }
 
     exit() {
-
         if (this.#ui instanceof Wrapper) {
             this.#ui.clear().remove();
             this.#ui = null;
@@ -135,7 +136,6 @@ const State = class {
     }
 
     render(ctx) {
-
         if (this.#toRender && this.#ui instanceof Wrapper) {
             this.#ui.render(ctx);
             this.#toRender = false;
@@ -143,6 +143,7 @@ const State = class {
 
         Object.values(this.#renderQueue).forEach((queue) => {
             if (queue.data.length > 0) {
+                console.log("render", queue.data instanceof Array, queue.data);
                 this.#ui[`${queue.callback}`](queue.data);
                 // eslint-disable-next-line no-param-reassign
                 queue.data = [];

@@ -30,9 +30,9 @@ const DialogState = class extends State {
         } else if (result instanceof Object) {
 
             const { char, text, type, cmd } = result;
+
             const isHero = this.#isCharacterHero(char);
             let position = DialogUI.POSITION.LEFT;
-
             if (type === DialogUI.TYPE.SOUND) {
                 position = DialogUI.POSITION.CENTER;
             } else if (!isHero) {
@@ -74,9 +74,9 @@ const DialogState = class extends State {
         this.#current = GameCache.getItem(startDialog);
         this.#heroNameIDs = getActiveHero().getName();
 
-        this.addDataQueue("dialog", "updateDialog")
+        this.setUI(new DialogUI().show())
+            .addDataQueue("dialog", "updateDialog")
             .addDataQueue("topics", "updateTopics")
-            .setUI(new DialogUI().show())
             .setInputHandler(this.#handleInut);
 
         this.#processResult(this.#current.getAction({ left: true }));

@@ -30,9 +30,7 @@ const InGameState = class extends State {
 
     #displaySceneIntro() {
         const intro = this.#currentAct.getCurrentScene().getIntro();
-        if (intro) {
-            this.pushQueueData("log", { text: intro, narrator: getActiveHero().getName() });
-        }
+        this.pushQueueData("log", { text: intro, narrator: getActiveHero().getName() });
     }
 
     #enterScene(id) {
@@ -132,20 +130,23 @@ const InGameState = class extends State {
 
     /** @override */
     enter() {
-        // GameStatesManager.notify("transition", ["HideAnimation"]);
-        // return this;
+        GameStatesManager.notify("transition", ["HideAnimation"]);
+
+        window.save = () => GameCache.getAllKeys().forEach((key) => console.log(GameCache.getItem(key)));
+
+        return this;
     }
 
     // TODO DEVELOPMENT ONLY
-    update() {
-        super.update();
-        if (this.jumpToLocation) {
-            GameCache.getItem("telephone").setCurrentState(2);
-            GameCache.getItem("cafeExit").setVisibility(true);
-            this.#enterScene("oubier2");
-            this.jumpToLocation = false;
-        }
-    }
+    // update() {
+    //     super.update();
+    //     if (this.jumpToLocation) {
+    //         GameCache.getItem("telephone").setCurrentState(2);
+    //         GameCache.getItem("cafeExit").setVisibility(true);
+    //         this.#enterScene("oubier2");
+    //         this.jumpToLocation = false;
+    //     }
+    // }
 
     /** @override */
     exit() {

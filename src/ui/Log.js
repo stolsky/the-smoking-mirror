@@ -22,19 +22,26 @@ const Log = class extends Wrapper {
 
         const messageContainer = new Container("Message");
 
-        const fullName = getText(narrator);
-        if (isNotEmptyString(fullName)) {
-            messageContainer.addComponent(new TextComponent(fullName, "Narrator"));
-        }
-
         // TODO improve display of text
-        getTextAsArray(text).forEach((line) => messageContainer.addComponent(new TextComponent(line, "Text")));
-        this.addComponent(messageContainer, 0);
-        messageContainer.view();
+        getTextAsArray(text).forEach((line) => {
+            if (isNotEmptyString(line)) {
+                messageContainer.addComponent(new TextComponent(line, "Text"));
+            }
+        });
+
+        if (messageContainer.getChildren().length > 0) {
+            const fullName = getText(narrator);
+            if (isNotEmptyString(fullName)) {
+                messageContainer.addComponent(new TextComponent(fullName, "Narrator"), 0);
+            }
+            this.addComponent(messageContainer, 0);
+            messageContainer.view();
+        }
     }
 
     /** @param {Array<{text:string, narrtor: string}>} messages */
     append(messages) {
+        // console.log(messages);
         if (messages instanceof Array) {
             messages.forEach(({ narrator, text }) => this.#addMessage(narrator, text));
         }

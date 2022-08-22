@@ -28,6 +28,9 @@ const BaseObject = class {
     /** @type {Array<{}>} */
     #states;
 
+    /** @type {Array<number>} */
+    #changes;
+
     static #createIndex({ left, right }) {
         const indices = {};
         if (left instanceof Array) {
@@ -67,6 +70,7 @@ const BaseObject = class {
     constructor(id, name, states) {
 
         this.#id = (isNotEmptyString(id)) ? id : "obj";
+        this.#changes = [];
 
         this.setName(name)
             .setStates(states)
@@ -154,6 +158,9 @@ const BaseObject = class {
     setCurrentState(id) {
         if (isNumber(id)) {
             this.#currentState = this.#states.find((state) => state.id === id) ?? null;
+            if (this.#currentState) {
+                this.#changes.push(this.#currentState.id);
+            }
         }
         return this;
     }

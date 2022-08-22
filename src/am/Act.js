@@ -6,6 +6,7 @@ import Item from "./Item.js";
 
 const Act = class {
 
+    /** @type {string} */
     #name;
 
     /** @type {Scene} */

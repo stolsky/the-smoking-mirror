@@ -46,7 +46,9 @@ const Scene = class {
     }
 
     getIntro() {
-        return this.#intro;
+        const intro = this.#intro;
+        this.#intro = "";
+        return intro;
     }
 
     getName() {

@@ -181,23 +181,24 @@
             "states": [
                 {
                     "id": 1,
+                    "chars": [{"id": 1, "name": "georgeFirstName"}, {"id": 2, "name": "andreFirstName"}],
                     "left": [
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre1" },
+                        { "char": 1, "text": "paris1DialogAndre1" },
                         { "type": "Sound", "text": "paris1DialogAndre2" },
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre3" },
-                        { "char": "andreFirstName", "text": "paris1DialogAndre4" },
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre5" },
-                        { "char": "andreFirstName", "text": "paris1DialogAndre6" },
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre7" },
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre8" },
-                        { "char": "andreFirstName", "text": "paris1DialogAndre9" },
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre10" },
-                        { "char": "andreFirstName", "text": "paris1DialogAndre11", "cmd": ["CafeKnown true", "door2 2:cafeExit SHOW"] },
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre12" },
+                        { "char": "1", "text": "paris1DialogAndre3" },
+                        { "char": 2, "text": "paris1DialogAndre4" },
+                        { "char": "1", "text": "paris1DialogAndre5" },
+                        { "char": 2, "text": "paris1DialogAndre6" },
+                        { "char": "1", "text": "paris1DialogAndre7" },
+                        { "char": "1", "text": "paris1DialogAndre8" },
+                        { "char": 2, "text": "paris1DialogAndre9" },
+                        { "char": "1", "text": "paris1DialogAndre10" },
+                        { "char": 2, "text": "paris1DialogAndre11", "cmd": ["CafeKnown true", "door2 2:cafeExit SHOW"] },
+                        { "char": "1", "text": "paris1DialogAndre12" },
                         { "type": "Sound", "text": "paris1DialogAndre13" },
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre14" },
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre15" },
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre16" }
+                        { "char": "1", "text": "paris1DialogAndre14" },
+                        { "char": "1", "text": "paris1DialogAndre15" },
+                        { "char": "1", "text": "paris1DialogAndre16" }
                     ]
                 }
             ]

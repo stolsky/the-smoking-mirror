@@ -42,8 +42,8 @@ const DialogState = class extends State {
             this.pushQueueData("dialog", { nameID: char, textID: text, type, position });
             if (cmd) {
                 // TODO process command results if they are not empty -> show new topics, hide discussed ones
+                // HOWTO manipulate things in the scene
                 const commands = processCommands(cmd);
-                // console.log(...commands);
             }
 
             this.getUI().hideTopics();

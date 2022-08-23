@@ -192,7 +192,7 @@
                         { "char": "georgeFirstName", "text": "paris1DialogAndre8" },
                         { "char": "andreFirstName", "text": "paris1DialogAndre9" },
                         { "char": "georgeFirstName", "text": "paris1DialogAndre10" },
-                        { "char": "andreFirstName", "text": "paris1DialogAndre11", "cmd": ["CafeKnown true"] },
+                        { "char": "andreFirstName", "text": "paris1DialogAndre11", "cmd": ["CafeKnown true", "door2 2:cafeExit SHOW"] },
                         { "char": "georgeFirstName", "text": "paris1DialogAndre12" },
                         { "type": "Sound", "text": "paris1DialogAndre13" },
                         { "char": "georgeFirstName", "text": "paris1DialogAndre14" },

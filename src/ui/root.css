@@ -8,7 +8,18 @@
     --HIGHLIGHT: rgba(255, 0, 0, 0.5);
 }
 
-html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat center center fixed; background-size: cover;}
+html {
+    /* background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat center center fixed;
+    background-size: cover; */
+
+    /* TEST */
+    /* create backgrounds for all of the locations in that abstract manner */
+    background-image: url(../../res/test_bg_paris.jpg); /* source: https://cdna.artstation.com/p/assets/images/images/015/707/386/large/crystal-scott-level1.jpg */ 
+    background-size: 100%;
+    background-repeat: repeat-x;
+    background-position: -250px 350px;
+    background-color: #ffebea;
+}
 
 .Application {
 
@@ -21,4 +32,7 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
     border-radius: 10px;
 
     scrollbar-color: #888 #fff;
+
+    /* TEST */
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
 }

@@ -170,8 +170,8 @@
                     "visible": false,
                     "back": "38,83,83",
                     "left": [
-                        {"text": "paris1Photograph2"},
-                        {"text": "paris1Photograph3"}
+                        {"text": "paris1Photograph2+paris1Photograph3"},
+                        {"text": "paris1Photograph4"}
                     ],
                     "right": [
                         {"text": "paris1Photograph2"}

@@ -72,7 +72,7 @@ const Flag = class {
      *
      * @returns {boolean}
      */
-    compareTo(value) {
+    isEqualTo(value) {
         return this.#value === this.#convert(`${value}`);
     }
 

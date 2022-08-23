@@ -3,6 +3,7 @@ import { isNotEmptyString, isNumber } from "../../lib/JST/native/typeCheck.js";
 
 import GameCache, { getActiveHero } from "../am/GameCache.js";
 import Flag from "../am/Flag.js";
+import BaseObject from "../am/BaseObject.js";
 
 import Combination from "./combination.js";
 
@@ -13,12 +14,21 @@ let clickedObject = null;
 let activeHero = null;
 
 const evaluate = (condition) => {
+    // console.log("condition", condition);
+    let result = false;
+
     if (isNotEmptyString(condition)) {
         const [id, value] = condition.split(" ");
-        const flag = GameCache.getItem(id);
-        return (flag instanceof Flag) ? flag.compareTo(value) : true;
+        // console.log("value", typeof value);
+        const element = GameCache.getItem(id);
+        if (element instanceof Flag) {
+            result = element.isEqualTo(value);
+        } else if (element instanceof BaseObject) {
+            result = element.getCurrentState().id === Number.parseInt(value, 10);
+        }
     }
-    return false;
+    // console.log("result", result);
+    return result;
 };
 
 /**

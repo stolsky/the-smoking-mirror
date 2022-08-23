@@ -11,8 +11,8 @@ describe("Testing Flag class", () => {
         const flag = new Flag();
         expect(flag.getId()).to.be.undefined;
         expect(flag.getValue()).to.be.false;
-        expect(flag.compareTo(true)).to.be.false;
-        expect(flag.compareTo(false)).to.be.true;
+        expect(flag.isEqualTo(true)).to.be.false;
+        expect(flag.isEqualTo(false)).to.be.true;
     });
 
     it("Create instance without type and value, expect to be boolean and false", () => {
@@ -31,33 +31,33 @@ describe("Testing Flag class", () => {
         const flag = new Flag({ id: "myFlag", type: "string", value: "test" });
         expect(flag.getId()).to.equal("myFlag");
         expect(flag.getValue()).to.equal("test");
-        expect(flag.compareTo("test")).to.be.true;
+        expect(flag.isEqualTo("test")).to.be.true;
     });
 
     it("Create instance with all properties using number", () => {
         const flag2 = new Flag({ id: "myFlag", type: "number", value: "3" });
         expect(flag2.getId()).to.equal("myFlag");
         expect(flag2.getValue()).to.equal(3);
-        expect(flag2.compareTo("3")).to.be.true;
+        expect(flag2.isEqualTo("3")).to.be.true;
 
         flag2.setValue("4");
         expect(flag2.getValue()).to.equal(4);
-        expect(flag2.compareTo("4")).to.be.true;
+        expect(flag2.isEqualTo("4")).to.be.true;
     });
 
     it("Create instance with all properties using boolean", () => {
         const flag3 = new Flag({ id: "myFlag", type: "boolean", value: "true" });
         expect(flag3.getId()).to.equal("myFlag");
         expect(flag3.getValue()).to.be.true;
-        expect(flag3.compareTo("true")).to.be.true;
-        expect(flag3.compareTo("false")).to.be.false;
+        expect(flag3.isEqualTo("true")).to.be.true;
+        expect(flag3.isEqualTo("false")).to.be.false;
     });
 
     it("Create instance with false type, expecting default type to be boolean and default value to be false", () => {
         const flag = new Flag({ type: "object" });
         expect(flag.getValue()).to.be.false;
-        expect(flag.compareTo("true")).to.be.false;
-        expect(flag.compareTo("false")).to.be.true;
+        expect(flag.isEqualTo("true")).to.be.false;
+        expect(flag.isEqualTo("false")).to.be.true;
     });
 
     it("Create instance with type string and false values", () => {
@@ -70,16 +70,16 @@ describe("Testing Flag class", () => {
     it("Create instance with type number and false values", () => {
         const flag = new Flag({ type: "number", value: "test" });
         expect(flag.getValue()).to.be.null;
-        expect(flag.compareTo("test")).to.be.false;
-        expect(flag.compareTo(null)).to.be.false;
-        expect(flag.compareTo(undefined)).to.be.false;
+        expect(flag.isEqualTo("test")).to.be.false;
+        expect(flag.isEqualTo(null)).to.be.false;
+        expect(flag.isEqualTo(undefined)).to.be.false;
     });
 
     it("Create instance with type boolean and false values", () => {
         const flag = new Flag({ type: "boolean", value: [] });
         expect(flag.getValue()).to.be.false;
-        expect(flag.compareTo("true")).to.be.false;
-        expect(flag.compareTo("false")).to.be.true;
+        expect(flag.isEqualTo("true")).to.be.false;
+        expect(flag.isEqualTo("false")).to.be.true;
     });
 
     it("Test the setValue method regarding the type of string", () => {
@@ -110,22 +110,22 @@ describe("Testing Flag class", () => {
         const flag = new Flag({ id: "myFlag", type: "string" });
         flag.setValue("test");
         expect(flag.getValue()).to.equal("test");
-        expect(flag.compareTo("test")).to.be.true;
-        expect(flag.compareTo("testo")).to.be.false;
-        expect(flag.compareTo(1)).to.be.false;
-        expect(flag.compareTo(true)).to.be.false;
+        expect(flag.isEqualTo("test")).to.be.true;
+        expect(flag.isEqualTo("testo")).to.be.false;
+        expect(flag.isEqualTo(1)).to.be.false;
+        expect(flag.isEqualTo(true)).to.be.false;
     });
 
     it("Test the toCompare method with numbers", () => {
         const flag = new Flag({ id: "myFlag", type: "number" });
         flag.setValue(5);
         expect(flag.getValue()).to.equal(5);
-        expect(flag.compareTo(5)).to.be.true;
-        expect(flag.compareTo(6)).to.be.false;
-        expect(flag.compareTo("5")).to.be.true;
-        expect(flag.compareTo("6")).to.be.false;
-        expect(flag.compareTo("testo")).to.be.false;
-        expect(flag.compareTo(true)).to.be.false;
+        expect(flag.isEqualTo(5)).to.be.true;
+        expect(flag.isEqualTo(6)).to.be.false;
+        expect(flag.isEqualTo("5")).to.be.true;
+        expect(flag.isEqualTo("6")).to.be.false;
+        expect(flag.isEqualTo("testo")).to.be.false;
+        expect(flag.isEqualTo(true)).to.be.false;
     });
 
 });

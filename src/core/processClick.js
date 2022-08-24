@@ -7,6 +7,23 @@ import BaseObject from "../am/BaseObject.js";
 
 import Combination from "./combination.js";
 
+
+const Commands = {
+    CHAR: { size: 1, method: (characterID) => {} },
+    DIALOG: { size: 1, method: (dialogID) => {} },
+    ENTER: { size: 1, method: (sceneID) => {} },
+    HIDE: { size: 1, method: (objectID) => {} },
+    INCLEFT: { size: 1, method: (objectID) => {} },
+    INCRIGHT: { size: 1, method: (objectID) => {} },
+    INFO: { size: 2, method: (objectID, dictionaryID) => {} },
+    LOST: { size: 1, method: (dictionaryID) => {} },
+    SHOW: { size: 1, method: (objectID) => {} },
+    STYLE: { size: 1, method: (styleID) => {} },
+    TAKE: { size: 2, method: (characterID, itemID) => {} },
+    TEXT: { size: 1, method: (dictionaryID) => {} },
+    USE: { size: 1, method: (objectID) => {} }
+};
+
 /** @type {Element | Item} */
 let clickedObject = null;
 

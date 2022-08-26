@@ -1,0 +1,110 @@
+
+.Application .Dialog {
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 2.5%;
+    align-items: center;
+    opacity: 0;
+}
+.Application .Dialog.Show {
+    animation: opacityIn 0.5s linear 0s forwards;
+}
+.Application .Dialog.Hide {
+    animation: opacityOut 0.5s linear 0s forwards;
+}
+.Application .Dialog .Wrapper {
+    height: 80%;
+    flex-flow: column;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    margin-top: 2.5%;
+}
+.Application .Dialog .Wrapper,
+.Application .Dialog .Topics {
+    background-color: rgba(255, 255, 255, 1);
+    width: 90%;
+    border-radius: 10px;
+    display: flex;
+}
+.Application .Dialog .Conversation {
+    height: 90%;
+    padding: 2.5%;
+    width: 95%;
+    font-family: serif;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+.Application .Dialog .Conversation .Speech,
+.Application .Dialog .Conversation .Sound,
+.Application .Dialog .Conversation .Though {
+    display: inline-block;
+    border-radius: 10px;
+    padding: 1%;
+    margin-bottom: 1%;
+    max-width: 75%;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    z-index: 1;
+}
+.Application .Dialog .Conversation .Speech {
+    border: 2px solid rgb(0, 0, 0);
+}
+.Application .Dialog .Conversation .Speech.AlignLeft::after,
+.Application .Dialog .Conversation .Speech.AlignRight::after,
+.Application .Dialog .Conversation .Speech.AlignLeft::before,
+.Application .Dialog .Conversation .Speech.AlignRight::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.Application .Dialog .Conversation .Speech.AlignLeft::before,
+.Application .Dialog .Conversation .Speech.AlignRight::before {
+    border: var(--SIZE) solid transparent;
+    --SIZE: 12px;
+}
+.Application .Dialog .Conversation .Speech.AlignLeft::before {
+    border-right-color: rgb(0, 0, 0);
+    left: calc(var(--SIZE) * -2);
+}
+.Application .Dialog .Conversation .Speech.AlignRight::before {
+    border-left-color: rgb(0, 0, 0);
+    right: calc(var(--SIZE) * -2);
+}
+.Application .Dialog .Conversation .Speech.AlignLeft::after,
+.Application .Dialog .Conversation .Speech.AlignRight::after {
+    border: var(--SIZE) solid transparent;
+    --SIZE: 10px;
+}
+.Application .Dialog .Conversation .Speech.AlignLeft::after {
+    border-right-color: #fff;
+    left: calc(var(--SIZE) * -2);
+}
+.Application .Dialog .Conversation .Speech.AlignRight::after {
+    border-left-color: #fff;
+    right: calc(var(--SIZE) * -2);
+}
+.Application .Dialog .Conversation .Person {
+    display: block;
+    font-weight: bold;
+}
+.Application .Dialog .Conversation .AlignLeft {
+    align-self: flex-start;
+}
+.Application .Dialog .Conversation .AlignCenter {
+    align-self: center;
+}
+.Application .Dialog .Conversation .AlignRight {
+    align-self: flex-end;
+}
+.Application .Dialog .Hint {
+    color:rgba(0, 0, 0, 0.5);
+}
+.Application .Dialog .Topics {
+    height: 10%;
+}

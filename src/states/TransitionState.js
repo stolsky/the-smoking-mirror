@@ -1,21 +1,17 @@
 
-import { EventType, isFunction, isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
+import { isFunction, isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
+
 import Transition from "../ui/Transition.js";
+
 import GameStatesManager from "./GameStatesManager.js";
+import State from "./State.js";
 
 
-const TransitionState = class {
-
-    #isAnimating;
+const TransitionState = class extends State {
 
     #nextTask;
 
     #fifo;
-
-    #toRender;
-
-    /** @type {Transition} */
-    #wrapper;
 
     #getNextTask() {
         // get next transition/animation id / function
@@ -24,12 +20,12 @@ const TransitionState = class {
 
             // clear previous transition/animation by id
             if (isNotEmptyString(this.#nextTask)) {
-                this.#wrapper.removeClass(this.#nextTask);
+                this.getUI().removeClass(this.#nextTask);
             }
 
             if (isNotEmptyString(next)) {
                 // init transition/animation by id (css class name)
-                this.#wrapper.addClass(next);
+                this.getUI().addClass(next);
             }
 
         }
@@ -42,8 +38,8 @@ const TransitionState = class {
         const next = this.#nextTask;
         if (isNotEmptyString(next)) {
             // play transition/animation
-            this.#wrapper.setStyle("animation-play-state", "running");
-            this.#isAnimating = true;
+            this.getUI().setStyle("animation-play-state", "running");
+            this.startAnimation();
         } else if (isFunction(next)) {
             next();
             this.#getNextTask();
@@ -53,41 +49,32 @@ const TransitionState = class {
     /** @param {Array<string | Function} fifoQueue */
     constructor(fifoQueue) {
 
-        this.#wrapper = new Transition()
-            .addEventListener(EventType.animationend, () => {
-                this.#isAnimating = false;
-                this.#getNextTask();
-            });
+        super();
+
+        this.setUI(
+            new Transition()
+                .addAnimationEndListener(() => {
+                    this.stopAnimation();
+                    this.#getNextTask();
+                })
+        );
 
         this.#fifo = (fifoQueue instanceof Array) ? fifoQueue : [];
-
-        this.#isAnimating = false;
-        this.#toRender = true;
 
         this.#getNextTask();
     }
 
-    enter() {
-        return this;
-    }
-
+    /** @override */
     exit() {
-        this.#wrapper.remove();
-        this.#wrapper = null;
+        super.exit();
         this.#nextTask = null;
         this.#fifo = null;
     }
 
-    render(ctx) {
-        if (this.#toRender) {
-            this.#wrapper.render(ctx);
-            this.#toRender = false;
-        }
-    }
-
+    /** @override */
     update() {
         if (this.#nextTask) {
-            if (!this.#isAnimating) {
+            if (!this.isAnimationRunning()) {
                 this.#processTask();
             }
         } else {

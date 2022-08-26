@@ -1,5 +1,4 @@
 
-import { isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
 import Cache from "../../lib/JST/resource/Cache.js";
 
 import { loadActScript, loadItems, loadScenes } from "../core/resource_loader.js";
@@ -12,10 +11,10 @@ const createNewGame = () => {
     loadActScript("paris1").then(({ active, flags, heroes, intro, name, scenes, start }) => {
 
         const elements = new Cache();
-        if (isNotEmptyString(flags)) {
-            elements.append(importFlags(flags.split(",")));
-        }
+        elements.append(importFlags(flags));
         elements.append(importHeroes(heroes));
+
+        // TODO refactor
         Promise.all([loadItems(), loadScenes(scenes.split(","))]).then((result) => {
 
             elements.append(importItems(result[0]));
@@ -23,8 +22,11 @@ const createNewGame = () => {
 
             GameStatesManager.notify("runGame", { name, start, hero: active, elements });
 
-            if (intro) {
-                GameStatesManager.notify("textPage", { name: "Intro", ...intro });
+            const { title, text } = intro;
+            if (text instanceof Array) {
+                text.reverse().forEach((part, index, arr) => {
+                    GameStatesManager.notify("textPage", { name: "Intro", title: (index === arr.length - 1) ? title : "", text: part });
+                });
             }
         });
     });

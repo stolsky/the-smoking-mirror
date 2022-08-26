@@ -1,10 +1,28 @@
 
 import { isNotEmptyString, isNumber } from "../../lib/JST/native/typeCheck.js";
 
-import GameCache from "../am/GameCache.js";
+import GameCache, { getActiveHero } from "../am/GameCache.js";
 import Flag from "../am/Flag.js";
+import BaseObject from "../am/BaseObject.js";
 
 import Combination from "./combination.js";
+
+
+const Commands = {
+    CHAR: { size: 1, method: (characterID) => {} },
+    DIALOG: { size: 1, method: (dialogID) => {} },
+    ENTER: { size: 1, method: (sceneID) => {} },
+    HIDE: { size: 1, method: (objectID) => {} },
+    INCLEFT: { size: 1, method: (objectID) => {} },
+    INCRIGHT: { size: 1, method: (objectID) => {} },
+    INFO: { size: 2, method: (objectID, dictionaryID) => {} },
+    LOST: { size: 1, method: (dictionaryID) => {} },
+    SHOW: { size: 1, method: (objectID) => {} },
+    STYLE: { size: 1, method: (styleID) => {} },
+    TAKE: { size: 2, method: (characterID, itemID) => {} },
+    TEXT: { size: 1, method: (dictionaryID) => {} },
+    USE: { size: 1, method: (objectID) => {} }
+};
 
 /** @type {Element | Item} */
 let clickedObject = null;
@@ -13,12 +31,21 @@ let clickedObject = null;
 let activeHero = null;
 
 const evaluate = (condition) => {
+    // console.log("condition", condition);
+    let result = false;
+
     if (isNotEmptyString(condition)) {
         const [id, value] = condition.split(" ");
-        const flag = GameCache.getItem(id);
-        return (flag instanceof Flag) ? flag.compareTo(value) : true;
+        // console.log("value", typeof value);
+        const element = GameCache.getItem(id);
+        if (element instanceof Flag) {
+            result = element.isEqualTo(value);
+        } else if (element instanceof BaseObject) {
+            result = element.getCurrentState().id === Number.parseInt(value, 10);
+        }
     }
-    return false;
+    // console.log("result", result);
+    return result;
 };
 
 /**
@@ -38,7 +65,7 @@ const applyMethod = (target, methodName, value = null) => {
     if (isNumber(stateID)) {
         target.updateState(stateID);
         if (targetID !== activeHero.getId()) {
-            result = { id: targetID };
+            result = { element: targetID };
             if (stateID === 0) {
                 result.remove = true;
             }
@@ -46,24 +73,24 @@ const applyMethod = (target, methodName, value = null) => {
 
     } else if (methodName === "SHOW" || methodName === "HIDE") {
         target.setVisibility(methodName === "SHOW");
-        result = { id: targetID };
+        result = { element: targetID };
 
     } else if (methodName === "INFO") {
         target.setInformation(value);
-        result = { id: targetID };
+        result = { element: targetID };
 
     } else if (methodName === "USE") {
         result = Combination.check(target);
 
     } else if (methodName === "TAKE" && GameCache.hasItem(value)) {
         activeHero.getInventory().add(value);
-        result = { id: value };
+        result = { element: value };
 
     } else if (methodName === "INCLEFT") {
-        target.getLeftAction();
+        target.getAction({ left: true });
 
     } else if (methodName === "INCRIGHT") {
-        target.getRightAction();
+        target.getAction({ right: true });
     }
 
     return result;
@@ -114,57 +141,74 @@ const parseAction = (action) => {
     return {};
 };
 
-const evaluateStatement = (statement) => {
-    const parts = statement.split(":");
+const evaluateCommand = (command) => {
+    const parts = command.split(":");
     return (parts.length === 1) ? [null, parts.pop()] : parts;
 };
 
-const processStatement = (statement) => {
-    const [condition, action] = evaluateStatement(statement);
+const processCommand = (command) => {
+    const [condition, action] = evaluateCommand(command);
     if (condition && !evaluate(condition)) {
         return {};
     }
     return parseAction(action);
 };
 
-const processClick = ({ hero, element = null, left, right }) => {
+const processCommands = (commands) => {
+    const updates = [];
+    if (commands instanceof Array) {
+        commands.forEach((statement) => updates.push(processCommand(statement)));
+    }
+    return updates;
+};
+
+/** @param {{hero: string, element: string, buttons { left: boolean, middle: boolean, right: boolean} }} */
+const processClick = ({ element, buttons }) => {
+
+    // console.log(hero, element, buttons);
+    // console.log("click", element, buttons);
 
     const updates = {};
 
-    if (element) {
+    const loadedElement = GameCache.getItem(element);
+    if (loadedElement) {
 
         updates.elements = [];
 
-        activeHero = hero;
-        clickedObject = element;
+        activeHero = getActiveHero();
+        clickedObject = loadedElement;
 
         let action = null;
 
         if (Combination.isActive()) {
-            action = Combination.check(element);
+            action = Combination.check(loadedElement);
             updates.elements = Combination.cancel();
-        } else if (left) {
-            action = element.getLeftAction();
-        } else if (right) {
-            action = element.getRightAction();
+        } else if (buttons) {
+            action = loadedElement.getAction(buttons);
         }
 
-        const { text, stmt } = action;
+        const { text, cmd } = action;
+
+        // console.log("action", text, cmd);
 
         if (isNotEmptyString(text)) {
             updates.text = text;
         }
 
-        if (stmt instanceof Array) {
-            stmt.forEach((statement) => updates.elements.push(processStatement(statement)));
-        }
+        // TODO check if object is explored and act accordingly
+        // console.log(clickedObject.isExplored());
+
+        updates.elements = [...updates.elements, ...processCommands(cmd)];
 
     } else if (Combination.isActive()) {
         updates.elements = Combination.cancel();
     }
+
+    // console.log("updates", updates);
 
     return updates;
 };
 
 
 export default processClick;
+export { processCommands };

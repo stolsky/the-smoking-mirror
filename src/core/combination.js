@@ -1,4 +1,5 @@
 
+import { hasProperty } from "../../lib/JST/native/typeCheck.js";
 import { getNext } from "../../lib/JST/random/random.js";
 
 
@@ -23,7 +24,7 @@ const Combination = class {
             this.#key = element;
         }
 
-        return { id: element.getId(), highlight: true };
+        return { element: element.getId(), highlight: true };
     }
 
     #init() {
@@ -53,10 +54,10 @@ const Combination = class {
 
         this.#init();
 
-        return deselect.map((element) => ({ id: element.getId(), highlight: false }));
+        return deselect.map((element) => ({ element: element.getId(), highlight: false }));
     }
 
-    /** @returns {{text?: string, stmt?: Array<string>}} */
+    /** @returns {{text?: string, cmd?: Array<string>}} */
     check(element) {
 
         let result = this.#add(element);
@@ -65,16 +66,16 @@ const Combination = class {
             const combinations = this.#lock.getCombinations();
             if (combinations instanceof Array) {
                 for (let i = 0; i < combinations.length; i = i + 1) {
-                    const { id, text, stmt } = combinations[`${i}`];
+                    const { id, text, cmd } = combinations[`${i}`];
                     if (this.#key.getId() === id) {
                         this.#success = true;
-                        result = { text, stmt };
+                        result = { text, cmd };
                         break;
                     }
                 }
             }
 
-            if (!result.text && !result.stmt) {
+            if (!hasProperty(result, "text") && !hasProperty(result, "cmd")) {
                 result = { text: `georgeWrong${Math.floor(getNext() * 12)}` };
             }
 

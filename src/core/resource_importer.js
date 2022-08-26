@@ -2,7 +2,6 @@
 import { isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
 import Cache from "../../lib/JST/resource/Cache.js";
 
-import Dialog from "../am/Dialog.js";
 import Element from "../am/Element.js";
 import Flag from "../am/Flag.js";
 import Hero from "../am/Hero.js";
@@ -27,17 +26,16 @@ const importResource = (source, method) => {
     return cache;
 };
 
-const importDialogs = (source) => importResource(source, ({ id, states }) => ({ key: id, value: new Dialog(id, states) }));
-
-const importFlags = (source) => importResource(source, (flag) => {
+/** @param {string} source */
+const importFlags = (source = null) => importResource(source?.split(","), (flag) => {
     const [id, type, value] = flag.split(":");
-    return { key: id, value: new Flag(id, type, value) };
+    return { key: id, value: new Flag({ id, type, value }) };
 });
 
+const importHeroes = (source) => importResource(source, ({ id, ...properties }) => ({ key: id, value: new Hero(id, properties) }));
 // TODO remove duplicate code
-const importHeroes = (source) => importResource(source, ({ id, name, states }) => ({ key: id, value: new Hero(id, name, states) }));
-const importItems = (source) => importResource(source, ({ id, name, states }) => ({ key: id, value: new Item(id, name, states) }));
-const importElements = (source) => importResource(source, ({ id, name, states }) => ({ key: id, value: new Element(id, name, states) }));
+const importItems = (source) => importResource(source, ({ id, ...properties }) => ({ key: id, value: new Item(id, properties) }));
+const importElements = (source) => importResource(source, ({ id, ...properties }) => ({ key: id, value: new Element(id, properties) }));
 
 const importScenes = (source) => {
 
@@ -55,7 +53,7 @@ const importScenes = (source) => {
         }
 
         if (dialogs) {
-            temporyCache.append(importDialogs(dialogs));
+            temporyCache.append(importItems(dialogs));
         }
 
         if (id && name) {
@@ -70,7 +68,6 @@ const importScenes = (source) => {
 
 
 export {
-    importDialogs,
     importElements,
     importFlags,
     importHeroes,

@@ -3,14 +3,14 @@
     "id": "paris1",
     "name": "paris1Name",
 
-    "intro": {"title": "paris1Name", "text": "paris1Prolog"},
+    "intro": {"title": "paris1Name", "text": ["paris1Prolog1+paris1Prolog2+paris1Prolog3+paris1Prolog4", "paris1Prolog5+paris1Prolog6+paris1Prolog7"]},
     
     "flags": "CafeKnown:boolean,GalleryKnown:boolean",
 
     "active": "georg",
     "heroes": [{
         "id": "georg",
-        "name": "charGeorgeName",
+        "name": "georgeFirstName+georgeLastName",
         "states": [
             {
                 "id": 1,

@@ -1,0 +1,140 @@
+oubier2
+TITLE paris1Scene2
+
+OBJECTS
+    door2
+    NAME paris1Door13
+    STATES
+        1
+        TYPE Use
+        BACKGROUND 144,65,5
+        LEFT
+            TEXT paris1Door9+paris1Door12 COMMANDS SELF INFO statLocked
+            TEXT paris1Door9
+        RIGHT
+            TEXT paris1Door8
+        COMBINATIONS
+            blowDart TEXT paris1Door15
+            houseKey TEXT paris1Door17 COMMANDS door2 2, CafeKnown true:cafe SHOW, GalleryKnown true:gallery SHOW
+
+        2
+        INFORMATION statOpen
+        LEFT
+            TEXT paris1Door19
+            TEXT paris1Door20
+        RIGHT
+            TEXT paris1Door8
+        COMBINATIONS
+            blowDart TEXT paris1Door15
+            houseKey TEXT paris1Door18 COMMANDS door2 1, door2 INFO statLocked, cafe HIDE, gallery HIDE
+
+    door3
+    NAME paris1Door1
+    STATES
+        1
+        TYPE Use
+        BACKGROUND 62,18,7
+        LEFT
+            TEXT paris1Door11 COMMANDS SELF INFO statLocked, SELF 2
+        RIGHT
+            TEXT paris1Door10
+        COMBINATIONS
+            blowDart TEXT paris1Door15
+            houseKey TEXT paris1Door16
+        
+        2
+        LEFT
+            TEXT paris1Door11
+        RIGHT
+            TEXT paris1Door14
+        COMBINATIONS
+            blowDart TEXT paris1Door15
+            houseKey TEXT paris1Door16
+
+
+    telephone
+    NAME paris1Telephone1
+    STATES
+        1
+        TYPE Take
+        BACKGROUND 187,34,23
+        LEFT
+            TEXT paris1Telephone2+paris1Telephone3
+            TEXT paris1Telephone2
+        RIGHT
+            TEXT paris1Telephone4
+        
+        2
+        LEFT
+            TEXT paris1Telephone5 COMMANDS DIALOG telephone1, SELF 3
+        RIGHT
+            TEXT paris1Telephone4
+        
+        3
+        LEFT
+            TEXT paris1Telephone6
+        RIGHT
+            TEXT paris1Telephone4
+    
+    newspaper2
+    NAME paris1Newspaper1
+    STATES
+        1
+        TYPE Take
+        BACKGROUND 171,171,171
+        LEFT
+            TEXT paris1Newspaper3 COMMANDS HERO TAKE newspaper, SELF 0
+        RIGHT
+            TEXT paris1Newspaper2
+    
+    stairs
+    NAME paris1Stairs1
+    STATES
+        1
+        TYPE Exit
+        BACKGROUND 144,18,15
+        LEFT
+            COMMANDS ENTER oubier1
+        RIGHT
+            TEXT paris1Stairs2 COMMANDS SELF INFO paris1Stairs3
+            TEXT paris1Stairs2
+    
+    cafe
+    NAME paris1Exit1
+    STATES
+        1
+        TYPE Exit
+        BACKGROUND 223,178,147
+        VISIBLE false
+        LEFT
+            TEXT paris1Door21 COMMANDS ENTER cafe
+            COMMANDS ENTER cafe
+
+    gallery
+    NAME paris1Exit2
+    STATES
+        1
+        TYPE Exit
+        BACKGROUND 212,212,212
+        VISIBLE false
+        LEFT
+            COMMANDS ENTER gallery
+                
+DIALOGUE
+    telephone1
+    STATES
+        1
+        LEFT
+            CHAR georgeFirstName TEXT paris1DialogAndre1
+            TYPE Sound TEXT paris1DialogAndre2
+            CHAR georgeFirstName TEXT paris1DialogAndre3
+            CHAR andreFirstName TEXT paris1DialogAndre4
+            CHAR georgeFirstName TEXT paris1DialogAndre5
+            CHAR andreFirstName TEXT paris1DialogAndre6
+            CHAR georgeFirstName TEXT paris1DialogAndre7+paris1DialogAndre8
+            CHAR andreFirstName TEXT paris1DialogAndre9
+            CHAR georgeFirstName TEXT paris1DialogAndre10
+            CHAR andreFirstName TEXT paris1DialogAndre11 COMMANDS CafeKnown true
+            CHAR georgeFirstName TEXT paris1DialogAndre12
+            TYPE Sound TEXT paris1DialogAndre13
+            CHAR georgeFirstName TEXT paris1DialogAndre14+paris1DialogAndre15+paris1DialogAndre16

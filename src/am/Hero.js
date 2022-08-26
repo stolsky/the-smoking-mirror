@@ -1,17 +1,18 @@
 
 import Element from "./Element.js";
-import StringList from "./StringList.js";
+import Inventory from "./Inventory.js";
 
 
 const Hero = class extends Element {
 
+    /** @type {Inventory} */
     #inventory;
 
-    constructor(id, name, states = {}, items = []) {
+    constructor(id, { name, states = {}, items = [] } = {}) {
 
-        super(id, name, states);
+        super(id, { name, states });
 
-        this.#inventory = new StringList(items);
+        this.#inventory = new Inventory().addAll(items);
     }
 
     /** @returns {Inventory} */

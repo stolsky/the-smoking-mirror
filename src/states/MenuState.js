@@ -5,18 +5,16 @@ import Menu from "../ui/Menu.js";
 
 import createNewGame from "./createNewGame.js";
 import GameStatesManager from "./GameStatesManager.js";
+import State from "./State.js";
 
 
-const MenuState = class {
-
-    #toRender;
-
-    /** @type {Menu} */
-    #wrapper;
+const MenuState = class extends State {
 
     constructor() {
 
-        this.#wrapper = new Menu()
+        super();
+
+        const menu = new Menu()
             .setTitle("GameTitle")
             .setSubTitle("GameSubTitle")
             .setDisclaimer("menuDisclaimer")
@@ -26,34 +24,13 @@ const MenuState = class {
             });
 
         if (hasSaveGame()) {
-            this.#wrapper.addButton("menuLoadGame", () => {
+            menu.addButton("menuLoadGame", () => {
                 GameStatesManager.notify("loadGame");
             });
         }
 
-        this.#toRender = true;
-    }
+        this.setUI(menu);
 
-    enter() {
-        return this;
-    }
-
-    exit() {
-        this.#wrapper.clear().remove();
-        this.#wrapper = null;
-        this.#toRender = false;
-    }
-
-    render(ctx) {
-        if (this.#toRender) {
-            this.#wrapper.render(ctx);
-            this.#toRender = false;
-        }
-    }
-
-    update() {
-        // calculate animations
-        return this;
     }
 
 };

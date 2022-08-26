@@ -1,7 +1,12 @@
+import State from "./State.js";
 
-const LoadGameState = class {
+
+const LoadGameState = class extends State {
 
     constructor() {
+
+        super();
+
         // create load game menu
         // load all save game information
         // add listeners
@@ -13,25 +18,6 @@ const LoadGameState = class {
         //         GameStates.push(InGameState); // start game
         //     })
         //     .catch((error) => console.error(error));
-    }
-
-    enter() {
-        return this;
-    }
-
-    exit() {
-        // remove menu
-        return this;
-    }
-
-    render() {
-        // add menu to screen
-        return this;
-    }
-
-    update() {
-        // animations
-        return this;
     }
 
 };

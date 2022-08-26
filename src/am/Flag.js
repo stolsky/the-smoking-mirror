@@ -2,6 +2,10 @@
 import { isBoolean, isNumber, isString } from "../../lib/JST/native/typeCheck.js";
 
 
+// TODO refactor to a BooleanFlag class, StringFlag and NumberFlag, respectively
+// use a Factory method to create all classes from Flag class
+// the tests might not fail
+
 const Flag = class {
 
     /** @type {string} */
@@ -19,24 +23,32 @@ const Flag = class {
      *
      * @returns {boolean | number | string}
      */
-    #convert = (value) => {
+    #convert = (value = false) => {
 
         if (isBoolean(this.#type)) {
             return value === "true";
         }
 
         if (isNumber(this.#type)) {
-            return Number.parseInt(value, 10);
+            const number = Number.parseInt(value, 10);
+            if (Number.isFinite(number)) {
+                return number;
+            }
         }
 
         if (isString(this.#type)) {
             return value;
         }
 
-        return null;
+        return undefined;
     };
 
-    constructor(id, type, value) {
+    /** Creates a flag instance with `boolean` as default type if not specified.
+     * All method parameters are expected to be strings containing the values with the corresponding data type specified at instantiation.
+     *
+     * @param {{ id: string, type: string, value?: string | number | boolean }}
+     */
+    constructor({ id, type, value } = {}) {
 
         this.#id = id;
 
@@ -50,6 +62,8 @@ const Flag = class {
             this.#type = true;
         }
 
+        this.#value = null;
+
         this.setValue(value);
     }
 
@@ -58,8 +72,8 @@ const Flag = class {
      *
      * @returns {boolean}
      */
-    compareTo(value) {
-        return this.#value === this.#convert(value);
+    isEqualTo(value) {
+        return this.#value === this.#convert(`${value}`);
     }
 
     getId() {
@@ -71,9 +85,12 @@ const Flag = class {
         return this.#value;
     }
 
-    /**  @param {string} value */
+    /** Before testing, every prameter is treated as string
+     *
+     * @param {string} value
+     */
     setValue(value) {
-        const convertedValue = this.#convert(value);
+        const convertedValue = this.#convert(`${value}`);
         if (typeof convertedValue === typeof this.#type) {
             this.#value = convertedValue;
         }

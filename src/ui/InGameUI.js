@@ -1,13 +1,7 @@
 
-import { EventType } from "../../lib/JST/native/typeCheck.js";
-
-import EventManager from "../core/InputEventManager.js";
-import getWord from "../core/translate.js";
-
 import Wrapper from "./Wrapper.js";
 import SceneTitle from "./SceneTitle.js";
 import Log from "./Log.js";
-import Dialog from "./Dialog.js";
 import CollectionManager from "./CollectionManager.js";
 
 
@@ -25,9 +19,6 @@ const InGameUI = class extends Wrapper {
     /** @type {CollectionManager} */
     #inventory;
 
-    /** @type {Wrapper} */
-    #dialog;
-
     constructor() {
 
         super("InGameUI");
@@ -36,29 +27,30 @@ const InGameUI = class extends Wrapper {
         this.#sceneTitle = new SceneTitle();
         this.#log = new Log();
         this.#inventory = new CollectionManager("Inventory");
-        this.#dialog = new Dialog();
 
         this.append(
             this.#scene,
             this.#sceneTitle,
             this.#log,
-            this.#inventory,
-            this.#dialog.hide()
+            this.#inventory
         );
 
-        this.addEventListener(EventType.mouseup, (event) => EventManager.setInputEvent(event));
+        this.addPointerListener();
     }
 
     clearInventory() {
         this.#inventory.clear();
+        return this;
     }
 
     clearLog() {
         this.#log.clear();
+        return this;
     }
 
     clearScene() {
         this.#scene.clear();
+        return this;
     }
 
     updateInventoryElements(elements) {
@@ -77,7 +69,7 @@ const InGameUI = class extends Wrapper {
     }
 
     setSceneTitle(title) {
-        this.#sceneTitle.setTitle(getWord(title));
+        this.#sceneTitle.setTitle(title);
         return this;
     }
 

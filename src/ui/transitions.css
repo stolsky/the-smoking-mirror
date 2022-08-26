@@ -9,19 +9,24 @@
 .Application .TextPage .Content .Title {
     font-size: 2em;
     margin-bottom: 2em;
+    width: 100%;
+    text-align: center;
+    border-bottom: 2px solid #000;
+    padding-bottom: 0.25em;
 }
 
 .Application .TextPage .Content .Text {
     display: flex;
     flex-direction: column;
     gap: 1em;
+    font-size: 1.3em;
 }
 
 .Application .TextPage .Content .Text span {
     text-align: justify;
 }
 
-.Application .TextPage .Hint {
+.Application .Hint {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -35,7 +40,7 @@
     color: #000000;
     background-color: #ffffff;
 }
-.Application .TextPage.Intro .Hint {
+.Application .Intro .Hint {
     color: rgba(0, 0, 0, 0.5);
 }
 
@@ -43,7 +48,10 @@
     color: #ffffff;
     background-color: #000000;
 }
-.Application .TextPage.GameOver .Hint {
+.Application .TextPage.GameOver .Title {
+    border-bottom-color: #ffffff;
+}
+.Application .GameOver .Hint {
     color: rgba(255, 255, 255, 0.5);
 }
 
@@ -51,11 +59,11 @@
     background-color: #ffffff;
 }
 
-.Application .Transition.In {
-    animation: 0.5s ease-out paused forwards opacityIn;
+.Application .ShowAnimation {
+    animation: 0.5s linear paused forwards opacityIn;
 }
-.Application .Transition.Out {
-    animation: 0.5s ease-out paused forwards opacityOut;
+.Application .HideAnimation {
+    animation: 0.5s linear paused forwards opacityOut;
 }
 
 @keyframes opacityIn {

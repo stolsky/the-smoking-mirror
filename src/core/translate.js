@@ -9,7 +9,7 @@ let current_script_id = "";
  *
  * @param {string} word_id
  *
- * @returns {string}
+ * @returns {string} empty string if no word was found in the dictionary
  */
 const getWord = (word_id) => {
     if (isNotEmptyString(word_id)) {
@@ -19,8 +19,22 @@ const getWord = (word_id) => {
         }
         return Lang.getWord(word_id, pack);
     }
-    return null;
+    return "";
 };
+
+/**
+ * @param {string} id
+ *
+ * @returns {Array<string>}
+ */
+const getTextAsArray = (id) => ((isNotEmptyString(id)) ? id.split("+").map((part) => getWord(part)) : []);
+
+/**
+ * @param {string} id
+ *
+ * @returns {string}
+ */
+const getText = (id) => getTextAsArray(id)?.join(" ");
 
 const setDictionary = (id, dictionary) => {
 
@@ -39,4 +53,4 @@ const setDictionary = (id, dictionary) => {
 
 
 export default getWord;
-export { setDictionary };
+export { getText, getTextAsArray, setDictionary };

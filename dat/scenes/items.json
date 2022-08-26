@@ -1,146 +1,134 @@
 [
     {
         "id": "worm",
-        "name": "itemWorm01",
+        "name": "itemWorm1",
         "states": [
             {
                 "id": 1,
                 "back": "187,185,173",
-                "left": [{ "stmt": ["SELF USE"] }],
-                "right": [
-                    {"text": "itemWorm02"}
-                ]
+                "left": ["USE SELF"],
+                "right": ["TEXT itemWorm2"]
             }
         ]
     },
     {
         "id": "pot",
-        "name": "itemPot01",
+        "name": "itemPot1",
         "states": [
             {
                 "id": 1,
                 "back": "181,77,17",
-                "left": [{ "stmt": ["SELF USE"] }],
+                "left": ["USE SELF"],
                 "right": [
-                    {"text": "itemPot02", "stmt": ["HERO TAKE houseKey"]},
-                    {"text": "itemPot03+itemPot04"},
-                    {"text": "itemPot03"}
+                    "TEXT itemPot2 GIVE HERO houseKey",
+                    "TEXT itemPot03+itemPot4",
+                    "TEXT itemPot3"
                 ]
             }
         ]
     },
     {
         "id": "houseKey",
-        "name": "itemKey01",
+        "name": "itemKey1",
         "states": [
             {
                 "id": 1,
                 "back": "75,81,108",
-                "left": [{ "stmt": ["SELF USE"] }],
-                "right": [
-                    {"text": "itemKey02"}
-                ]
+                "left": ["USE SELF"],
+                "right": ["TEXT itemKey2"]
             }
         ]
     },
     {
         "id": "blowDart",
-        "name": "itemDart01",
+        "name": "itemDart1",
         "states": [
             {
                 "id": 1,
                 "back": "39,71,58",
-                "left": [{ "stmt": ["SELF USE"] }],
+                "left": ["USE SELF"],
                 "right": [
-                    {"text": "itemDart02+itemDart03"},
-                    {"text": "itemDart02"}
+                    "TEXT itemDart02+itemDart3",
+                    "TEXT itemDart2"
                 ]
             }
         ]
     },
     {
         "id": "panties",
-        "name": "itemPanties01",
+        "name": "itemPanties1",
         "states": [
             {
                 "id": 1,
                 "back": "196,32,4",
-                "left": [{ "stmt": ["SELF USE"] }],
-                "right": [
-                    {"text": "itemPanties02"}
-                ]
+                "left": ["USE SELF"],
+                "right": ["TEXT itemPanties2"]
             }
         ]
     },
     {
         "id": "letter",
-        "name": "itemNote01",
+        "name": "itemNote1",
         "states": [
             {
                 "id": 1,
                 "back": "239,239,239",
-                "left": [{ "stmt": ["SELF USE"] }],
+                "left": ["USE SELF"],
                 "right": [
-                    {"text": "itemNote02", "stmt": ["telephone 2"]},
-                    {"text": "itemNote03"}
+                    "TEXT itemNote2+itemNote3+itemNote4+itemNote5 telephone 2",
+                    "TEXT itemNote6"
                 ]
             }
         ]
     },
     {
         "id": "lipstick",
-        "name": "itemLipstick01",
+        "name": "itemLipstick1",
         "states": [
             {
                 "id": 1,
                 "back": "120,16,0",
-                "left": [{ "stmt": ["SELF USE"] }],
+                "left": ["USE SELF"],
                 "right": [
-                    {"text": "itemLipstick02+itemLipstick03"},
-                    {"text": "itemLipstick02"}
+                    "TEXT itemLipstick2+itemLipstick3",
+                    "TEXT itemLipstick2"
                 ]
             }
         ]
     },
     {
         "id": "cylinder",
-        "name": "itemCylinder01",
+        "name": "itemCylinder1",
         "states": [
             {
                 "id": 1,
                 "back": "88,145,32",
-                "left": [{ "stmt": ["SELF USE"] }],
-                "right": [
-                    {"text": "itemCylinder02"}
-                ]
+                "left": ["USE SELF"],
+                "right": ["TEXT itemCylinder2"]
             }
         ]
     },
     {
         "id": "newspaper",
-        "name": "itemNewspaper01",
+        "name": "itemNewspaper1",
         "states": [
             {
                 "id": 1,
                 "back": "171,171,171",
-                "left": [{ "stmt": ["SELF USE"] }],
-                "right": [
-                    {"text": "itemNewspaper02", "stmt": ["HERO TAKE bankStatement"]}
-                ]
+                "left": ["USE SELF"],
+                "right": ["TEXT itemNewspaper2 GIVE HERO bankStatement"]
             }
         ]
     },
     {
         "id": "bankStatement",
-        "name": "itemBankStatement01",
+        "name": "itemBankStatement1",
         "states": [
             {
                 "id": 1,
                 "back": "39,239,239",
-                "left": [{ "stmt": ["SELF USE"] }],
-                "right": [
-                    {"text": "itemBankStatement02"}
-                ]
+                "left": ["USE SELF"],
+                "right": ["TEXT itemBankStatement2"]
             }
         ]
     }

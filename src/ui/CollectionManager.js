@@ -4,7 +4,7 @@ import Cache from "../../lib/JST/resource/Cache.js";
 import Container from "../../lib/JST/dom/Container.js";
 import TextComponent from "../../lib/JST/dom/TextComponent.js";
 
-import EventManager from "../core/InputEventManager.js";
+import InputEventManager from "../core/InputEventManager.js";
 import getWord from "../core/translate.js";
 
 import Wrapper from "./Wrapper.js";
@@ -12,29 +12,31 @@ import Wrapper from "./Wrapper.js";
 
 const HIGHLIGHT = "Highlight";
 
-// TODO improve update methods -> only update if something has changed
+// TODO improve update methods -> only update if something has changed -> how to check if is the right class -> somehow store!!
 
 const updateClassName = (element, className) => {
     element.addClass(className);
 };
 
-const updateText = (element, text) => {
-    element.setText(text);
+const updateText = (element, id) => {
+    element.setText(getWord(id));
 };
 
 const updateName = (parent, id) => {
-    updateText(parent.getChildren()[0], getWord(id));
+    updateText(parent.getChildren()[0], id);
 };
 
 const updateInformation = (parent, id) => {
-    updateText(parent.getChildren()[1], getWord(id));
+    updateText(parent.getChildren()[1], id);
 };
 
-const updateHighlight = (element, highlight) => {
-    if (highlight && !element.hasClass(HIGHLIGHT)) {
-        element.addClass(HIGHLIGHT);
-    } else if (!highlight && element.hasClass(HIGHLIGHT)) {
-        element.removeClass(HIGHLIGHT);
+/**
+ * @param {TextComponent} element
+ * @param {boolean} highlight
+ */
+const updateHighlight = (element, highlight = true) => {
+    if (isBoolean(highlight)) {
+        element.toggleClass(HIGHLIGHT, highlight);
     }
 };
 
@@ -85,7 +87,7 @@ const CollectionManager = class extends Wrapper {
                 element = new Container("Element")
                     .append(new TextComponent("", "Name"), new TextComponent("", "Information"))
                     // MouseEvent.click applies only to the left mouse button
-                    .addEventListener(EventType.mouseup, (event) => EventManager.setInputEvent(event, id));
+                    .addEventListener(EventType.pointerup, (event) => InputEventManager.setInputEvent(event, id));
 
                 this.#elements.setItem(id, element);
                 this.addComponent(element);

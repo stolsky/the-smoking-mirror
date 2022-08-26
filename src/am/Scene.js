@@ -1,5 +1,5 @@
 
-import { isString } from "../../lib/JST/native/typeCheck.js";
+import { isNotEmptyString } from "../../lib/JST/native/typeCheck.js";
 
 
 const Scene = class {
@@ -13,15 +13,32 @@ const Scene = class {
     /** @type {Array<string>} */
     #elements;
 
-    /** @param {{id: string, name: string, intro: string, elements: Array<string>}} */
-    constructor({ id, name, intro = null, elements = null }) {
+    #addAllElements(list) {
+        if (list instanceof Array) {
+            list.forEach((id) => this.#addElement(id));
+        }
+    }
 
-        this.#id = (isString(id)) ? id : "scene";
-        this.#name = (isString(name)) ? name : "Scene";
-        this.#intro = intro;
+    #addElement(id) {
+        if (isNotEmptyString(id) && !this.hasElement(id)) {
+            this.#elements.push(id);
+        }
+    }
+
+    /** @param {{id: string, name: string, intro: string, elements: Array<string>}} */
+    constructor({ id, name, intro, elements = [] } = {}) {
+
+        this.#id = (isNotEmptyString(id)) ? `${id}` : "";
+        this.#name = (isNotEmptyString(name)) ? `${name}` : "";
+        this.#intro = (isNotEmptyString(intro)) ? `${intro}` : "";
 
         this.#elements = [];
-        this.addAllElements(elements);
+        this.#addAllElements(elements);
+    }
+
+    /** @returns {Array<string>} */
+    getAllElements() {
+        return this.#elements;
     }
 
     getId() {
@@ -29,7 +46,9 @@ const Scene = class {
     }
 
     getIntro() {
-        return this.#intro;
+        const intro = this.#intro;
+        this.#intro = "";
+        return intro;
     }
 
     getName() {
@@ -37,24 +56,15 @@ const Scene = class {
     }
 
     hasElement(id) {
-        return isString(id) && this.#elements.includes(id);
+        return this.#elements.includes(`${id}`);
     }
 
-    addElement(id = "elem") {
-        if (!this.hasElement(id)) {
-            this.#elements.push(id);
+    removeElement(id) {
+        const index = this.#elements.indexOf(`${id}`);
+        if (index !== -1) {
+            this.#elements.splice(index, 1);
         }
-    }
-
-    addAllElements(list) {
-        if (list instanceof Array) {
-            list.forEach((id) => this.addElement(id));
-        }
-    }
-
-    /** @returns {Array<string>} */
-    getAllElements() {
-        return this.#elements;
+        return this;
     }
 
 };

@@ -1,36 +1,4 @@
 
-@import "../../lib/JST/dom/gui.css";
-
-@import "./cursors.css";
-
-@import "./transitions.css";
-@import "./menu.css";
-@import "./log.css";
-
-:root {
-    --APPWIDTH: 1000px;
-    --APPHEIGHT: 700px;
-
-    --INTRO_BLUR: 100px;
-
-    /* COLORS */
-    --HIGHLIGHT: rgba(255, 0, 0, 0.5);
-}
-
-html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat center center fixed; background-size: cover;}
-
-.Application {
-
-    width: var(--APPWIDTH);
-    height: var(--APPHEIGHT);
-
-    cursor: url(../../res/cursor/default.png) 4 4, default;
-    font-family: sans-serif;
-    background: #ffffff;
-    border-radius: 10px;
-
-}
-
 .Application .InGameUI {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -132,13 +100,4 @@ html {background: linear-gradient(to top, #403b4a, #e7e9bb, #403b4a) no-repeat c
 .Application .InGameUI > .Inventory .Element.Highlight {
     outline: 3px solid #ff0000;
     box-shadow: none;
-}
-
-.Application .InGameUI > .Dialog {
-
-    grid-column-start: 1;
-    grid-row-start: 2;
-    grid-column-end: 3;
-
-    background-color: rgba(255, 255, 255, 0.5);
 }

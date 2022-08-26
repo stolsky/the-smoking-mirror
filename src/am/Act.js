@@ -1,13 +1,13 @@
 
 import GameCache from "./GameCache.js";
+import Element from "./Element.js";
+import Item from "./Item.js";
 
 
 const Act = class {
 
+    /** @type {string} */
     #name;
-
-    /** @type {Hero} */
-    #activeHero;
 
     /** @type {Scene} */
     #currentScene;
@@ -15,29 +15,15 @@ const Act = class {
     /** @param {{ name?: string, elements?: Cache }} */
     constructor({ name, elements }) {
         this.#name = name;
-        this.#activeHero = null;
         this.#currentScene = null;
         GameCache.append(elements);
     }
 
-    static getElement(id) {
-        return GameCache.getItem(id);
-    }
-
-    static removeElement(id) {
-        GameCache.deleteItem(id);
-    }
-
     clear() {
         this.#name = null;
-        this.#activeHero = null;
         this.#currentScene = null;
         GameCache.clear();
         return this;
-    }
-
-    getActiveHero() {
-        return this.#activeHero;
     }
 
     /** @returns {Array<{id: string, name: string, type?: string, foreground: string, background: string, information: string, moveable?: boolean, visible?: boolean}>} */
@@ -56,6 +42,20 @@ const Act = class {
         return this.#currentScene;
     }
 
+    /** Returns the element to the specified id if it belongs to the current scene.
+     *
+     * @param {string} id
+     *
+     * @returns {Element | Item}
+     */
+    getElement(id) {
+        const object = GameCache.getItem(id);
+        if ((object instanceof Element && this.#currentScene.hasElement(id)) || object instanceof Item) {
+            return object;
+        }
+        return null;
+    }
+
     getName() {
         return this.#name;
     }
@@ -67,11 +67,9 @@ const Act = class {
         return this;
     }
 
-    setActiveHero(id) {
-        if (GameCache.hasItem(id)) {
-            this.#activeHero = GameCache.getItem(id);
-        }
-        return this;
+    removeElement(id) {
+        this.#currentScene.removeElement(id);
+        GameCache.deleteItem(id);
     }
 
 };

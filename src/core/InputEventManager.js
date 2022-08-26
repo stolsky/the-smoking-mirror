@@ -13,17 +13,19 @@ const InputEventManager = class {
     }
 
     setInputEvent(event, targetID = null) {
+        // console.log(event);
         if (event instanceof Event) {
             const store = {};
             store.id = targetID;
-            if (event instanceof MouseEvent) {
-                store.mouseEvent = true;
+            if (event instanceof PointerEvent) {
+                store.pointerEvent = true;
+                store.buttons = {};
                 if (event.button === 0) {
-                    store.left = true;
+                    store.buttons.left = true;
                 } else if (event.button === 1) {
-                    store.middle = true;
+                    store.buttons.middle = true;
                 } else if (event.button === 2) {
-                    store.right = true;
+                    store.buttons.right = true;
                 }
             }
             this.#events[0] = store;

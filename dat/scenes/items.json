@@ -6,10 +6,8 @@
             {
                 "id": 1,
                 "back": "187,185,173",
-                "left": [{ "cmd": ["SELF USE"] }],
-                "right": [
-                    {"text": "itemWorm2"}
-                ]
+                "left": ["USE SELF"],
+                "right": ["TEXT itemWorm2"]
             }
         ]
     },
@@ -20,11 +18,11 @@
             {
                 "id": 1,
                 "back": "181,77,17",
-                "left": [{ "cmd": ["SELF USE"] }],
+                "left": ["USE SELF"],
                 "right": [
-                    {"text": "itemPot2", "cmd": ["HERO TAKE houseKey"]},
-                    {"text": "itemPot03+itemPot4"},
-                    {"text": "itemPot3"}
+                    "TEXT itemPot2 GIVE HERO houseKey",
+                    "TEXT itemPot03+itemPot4",
+                    "TEXT itemPot3"
                 ]
             }
         ]
@@ -36,10 +34,8 @@
             {
                 "id": 1,
                 "back": "75,81,108",
-                "left": [{ "cmd": ["SELF USE"] }],
-                "right": [
-                    {"text": "itemKey2"}
-                ]
+                "left": ["USE SELF"],
+                "right": ["TEXT itemKey2"]
             }
         ]
     },
@@ -50,10 +46,10 @@
             {
                 "id": 1,
                 "back": "39,71,58",
-                "left": [{ "cmd": ["SELF USE"] }],
+                "left": ["USE SELF"],
                 "right": [
-                    {"text": "itemDart02+itemDart3"},
-                    {"text": "itemDart2"}
+                    "TEXT itemDart02+itemDart3",
+                    "TEXT itemDart2"
                 ]
             }
         ]
@@ -65,10 +61,8 @@
             {
                 "id": 1,
                 "back": "196,32,4",
-                "left": [{ "cmd": ["SELF USE"] }],
-                "right": [
-                    {"text": "itemPanties2"}
-                ]
+                "left": ["USE SELF"],
+                "right": ["TEXT itemPanties2"]
             }
         ]
     },
@@ -79,10 +73,10 @@
             {
                 "id": 1,
                 "back": "239,239,239",
-                "left": [{ "cmd": ["SELF USE"] }],
+                "left": ["USE SELF"],
                 "right": [
-                    {"text": "itemNote2+itemNote3+itemNote4+itemNote5", "cmd": ["telephone 2"]},
-                    {"text": "itemNote6"}
+                    "TEXT itemNote2+itemNote3+itemNote4+itemNote5 telephone 2",
+                    "TEXT itemNote6"
                 ]
             }
         ]
@@ -94,10 +88,10 @@
             {
                 "id": 1,
                 "back": "120,16,0",
-                "left": [{ "cmd": ["SELF USE"] }],
+                "left": ["USE SELF"],
                 "right": [
-                    {"text": "itemLipstick2+itemLipstick3"},
-                    {"text": "itemLipstick2"}
+                    "TEXT itemLipstick2+itemLipstick3",
+                    "TEXT itemLipstick2"
                 ]
             }
         ]
@@ -109,10 +103,8 @@
             {
                 "id": 1,
                 "back": "88,145,32",
-                "left": [{ "cmd": ["SELF USE"] }],
-                "right": [
-                    {"text": "itemCylinder2"}
-                ]
+                "left": ["USE SELF"],
+                "right": ["TEXT itemCylinder2"]
             }
         ]
     },
@@ -123,10 +115,8 @@
             {
                 "id": 1,
                 "back": "171,171,171",
-                "left": [{ "cmd": ["SELF USE"] }],
-                "right": [
-                    {"text": "itemNewspaper2", "cmd": ["HERO TAKE bankStatement"]}
-                ]
+                "left": ["USE SELF"],
+                "right": ["TEXT itemNewspaper2 GIVE HERO bankStatement"]
             }
         ]
     },
@@ -137,10 +127,8 @@
             {
                 "id": 1,
                 "back": "39,239,239",
-                "left": [{ "cmd": ["SELF USE"] }],
-                "right": [
-                    {"text": "itemBankStatement2"}
-                ]
+                "left": ["USE SELF"],
+                "right": ["TEXT itemBankStatement2"]
             }
         ]
     }

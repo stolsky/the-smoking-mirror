@@ -11,30 +11,26 @@
                     "type": "Use",
                     "back": "144,65,5",
                     "left": [
-                        {"text": "paris1Door9+paris1Door12", "cmd": ["SELF INFO statLocked"]},
-                        {"text": "paris1Door9"}
+                        "TEXT paris1Door9+paris1Door12 INFO SELF statLocked",
+                        "TEXT paris1Door9"
                     ],
-                    "right": [
-                        {"text": "paris1Door8"}
-                    ],
+                    "right": ["TEXT paris1Door8"],
                     "combos": [
-                        {"id": "blowDart", "text": "paris1Door15"},
-                        {"id": "houseKey", "text": "paris1Door17", "cmd": ["door2 2", "CafeKnown true:cafeExit SHOW", "GalleryKnown true:galleryExit SHOW"]}
+                        "blowDart:TEXT paris1Door15",
+                        "houseKey:TEXT paris1Door17 door2 2 (CafeKnown true)?SHOW cafeExit (GalleryKnown true)?SHOW galleryExit"
                     ]
                 },
                 {
                     "id": 2,
                     "info": "statOpen",
                     "left": [
-                        {"text": "paris1Door19"},
-                        {"text": "paris1Door20"}
+                        "TEXT paris1Door19",
+                        "TEXT paris1Door20"
                     ],
-                    "right": [
-                        {"text": "paris1Door8"}
-                    ],
+                    "right": ["TEXT paris1Door8"],
                     "combos": [
-                        {"id": "blowDart", "text": "paris1Door15"},
-                        {"id": "houseKey", "text": "paris1Door18", "cmd": ["door2 1", "door2 INFO statLocked", "cafeExit HIDE", "galleryExit HIDE"]}
+                        "blowDart:TEXT paris1Door15",
+                        "houseKey:TEXT paris1Door18 door2 1 door2 INFO statLocked HIDE cafeExit HIDE galleryExit"
                     ]
                 }
             ]
@@ -47,27 +43,20 @@
                     "id": 1,
                     "type": "Use",
                     "back": "62,18,7",
-                    "left": [
-                        {"text": "paris1Door11", "cmd": ["SELF INFO statLocked", "SELF 2"]}
-                    ],
-                    "right": [
-                        {"text": "paris1Door10"}
-                    ],
+                    "left": ["TEXT paris1Door11 INFO SELF statLocked SELF 2"],
+                    "right": ["TEXT paris1Door10"],
                     "combos": [
-                        {"id": "blowDart", "text": "paris1Door15"},
-                        {"id": "houseKey", "text": "paris1Door16"}
+                        "blowDart:TEXT paris1Door15",
+                        "houseKey:TEXT paris1Door16"
                     ]
                 },
                 {
                     "id": 2,
-                    "left": [
-                        {"text": "paris1Door11"}
-                    ], "right": [
-                        {"text": "paris1Door14"}
-                    ],
+                    "left": ["TEXT paris1Door11"],
+                    "right": ["TEXT paris1Door14"],
                     "combos": [
-                        {"id": "blowDart", "text": "paris1Door15"},
-                        {"id": "houseKey", "text": "paris1Door16"}
+                        "blowDart:TEXT paris1Door15",
+                        "houseKey:TEXT paris1Door16"
                     ]
                 }
             ]
@@ -81,30 +70,20 @@
                     "type": "Take",
                     "back": "187,34,23",
                     "left": [
-                        {"text": "paris1Telephone2+paris1Telephone3"},
-                        {"text": "paris1Telephone2"}
+                        "TEXT paris1Telephone2+paris1Telephone3",
+                        "TEXT paris1Telephone2"
                     ],
-                    "right": [
-                        {"text": "paris1Telephone4"}
-                    ]
+                    "right": ["TEXT paris1Telephone4"]
                 },
                 {
                     "id": 2,
-                    "left": [
-                        {"cmd": ["DIALOG telephone1", "SELF 3"]}
-                    ],
-                    "right": [
-                        {"text": "paris1Telephone4"}
-                    ]
+                    "left": ["DIALOG telephone1 SELF 3"],
+                    "right": ["TEXT paris1Telephone4"]
                 },
                 {
                     "id": 3,
-                    "left": [
-                        {"text": "paris1Telephone5"}
-                    ],
-                    "right": [
-                        {"text": "paris1Telephone4"}
-                    ]
+                    "left": ["TEXT paris1Telephone5"],
+                    "right": ["TEXT paris1Telephone4"]
                 }
             ]
         },
@@ -116,12 +95,8 @@
                     "id": 1,
                     "type": "Take",
                     "back": "171,171,171",
-                    "left": [
-                        {"text": "paris1Newspaper3", "cmd": ["HERO TAKE newspaper", "SELF 0"]}
-                    ],
-                    "right": [
-                        {"text": "paris1Newspaper2"}
-                    ]
+                    "left": ["TEXT paris1Newspaper3 GIVE HERO newspaper SELF 0"],
+                    "right": ["TEXT paris1Newspaper2"]
                 }
             ]
         },
@@ -133,12 +108,10 @@
                     "id": 1,
                     "type": "Exit",
                     "back": "144,18,15",
-                    "left": [
-                        {"cmd": ["ENTER oubier1"]}
-                    ],
+                    "left": ["ENTER oubier1"],
                     "right": [
-                        {"text": "paris1Stairs2", "cmd": ["SELF INFO paris1Stairs3"]},
-                        {"text": "paris1Stairs2"}
+                        "TEXT paris1Stairs2 INFO SELF paris1Stairs3",
+                        "TEXT paris1Stairs2"
                     ]
                 }
             ]
@@ -153,8 +126,8 @@
                     "back": "223,178,147",
                     "visible": false,
                     "left": [
-                        {"text": "paris1Door21", "cmd": ["ENTER cafe"]},
-                        {"cmd": ["ENTER cafe"]}
+                        "TEXT paris1Door21 ENTER cafe",
+                        "ENTER cafe"
                     ]
                 }
             ]
@@ -168,9 +141,7 @@
                     "type": "Exit",
                     "back": "212,212,212",
                     "visible": false,
-                    "left": [
-                        {"cmd": ["ENTER gallery"]}
-                    ]
+                    "left": ["ENTER gallery"]
                 }
             ]
         }
@@ -181,23 +152,24 @@
             "states": [
                 {
                     "id": 1,
+                    "abbr": { "george": "georgeFirstName", "andre": "andreFirstName", "prefix": "paris1DialogAndre" },
                     "left": [
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre1" },
-                        { "type": "Sound", "text": "paris1DialogAndre2" },
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre3" },
-                        { "char": "andreFirstName", "text": "paris1DialogAndre4" },
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre5" },
-                        { "char": "andreFirstName", "text": "paris1DialogAndre6" },
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre7" },
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre8" },
-                        { "char": "andreFirstName", "text": "paris1DialogAndre9" },
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre10" },
-                        { "char": "andreFirstName", "text": "paris1DialogAndre11", "cmd": ["CafeKnown true", "door2 2:cafeExit SHOW"] },
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre12" },
-                        { "type": "Sound", "text": "paris1DialogAndre13" },
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre14" },
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre15" },
-                        { "char": "georgeFirstName", "text": "paris1DialogAndre16" }
+                        "TEXT paris1DialogAndre1 CHAR georgeFirstName",
+                        "TEXT paris1DialogAndre2 STYLE Sound",
+                        "TEXT paris1DialogAndre3 CHAR georgeFirstName",
+                        "TEXT paris1DialogAndre4 CHAR andreFirstName",
+                        "TEXT paris1DialogAndre5 CHAR georgeFirstName",
+                        "TEXT paris1DialogAndre6 CHAR andreFirstName",
+                        "TEXT paris1DialogAndre7 CHAR georgeFirstName",
+                        "TEXT paris1DialogAndre8 CHAR georgeFirstName",
+                        "TEXT paris1DialogAndre9 CHAR andreFirstName",
+                        "TEXT paris1DialogAndre10 CHAR georgeFirstName",
+                        "TEXT paris1DialogAndre11 CHAR andreFirstName CafeKnown true (door2 2)?SHOW cafeExit",
+                        "TEXT paris1DialogAndre12 CHAR georgeFirstName",
+                        "TEXT paris1DialogAndre13 STYLE Sound",
+                        "TEXT paris1DialogAndre14 CHAR georgeFirstName",
+                        "TEXT paris1DialogAndre15 CHAR georgeFirstName",
+                        "TEXT paris1DialogAndre16 CHAR georgeFirstName"
                     ]
                 }
             ]

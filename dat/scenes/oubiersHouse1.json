@@ -12,26 +12,22 @@
                     "type": "Use",
                     "back": "186,61,41",
                     "left": [
-                        {"text": "paris1Spider2", "cmd": ["SELF INFO statFurious1"]},
-                        {"text": "paris1Spider2", "cmd": ["SELF INFO statFurious2"]},
-                        {"text": "paris1Spider2", "cmd": ["SELF INFO statFurious3"]},
-                        {"cmd": ["LOST paris1Spider7"]}
+                        "TEXT paris1Spider2 INFO SELF statFurious1",
+                        "TEXT paris1Spider2 INFO SELF statFurious2",
+                        "TEXT paris1Spider2 INFO SELF statFurious3",
+                        "LOST paris1Spider7"
                     ],
                     "right": [
-                        {"text": "paris1Spider3"},
-                        {"text": "paris1Spider4"}
+                        "TEXT paris1Spider3",
+                        "TEXT paris1Spider4"
                     ]
                 },
                 {
                     "id": 2,
                     "back": "67,19,11",
                     "info": "statSquashed",
-                    "left": [
-                        {"text": "paris1Spider6"}
-                    ],
-                    "right": [
-                        {"text": "paris1Spider5"}
-                    ]
+                    "left": ["TEXT paris1Spider6"],
+                    "right": ["TEXT paris1Spider5"]
                 }
             ]
         },
@@ -44,35 +40,29 @@
                     "type": "Use",
                     "back": "93,48,26",
                     "left": [
-                        {"text": "paris1Bookcase2", "cmd": ["block SHOW", "SELF INCRIGHT"]},
-                        {"text": "paris1Bookcase3"}
+                        "TEXT paris1Bookcase2 SHOW block INCRIGHT SELF",
+                        "TEXT paris1Bookcase3"
                     ],
                     "right": [
-                        {"text": "paris1Bookcase2", "cmd": ["block SHOW", "SELF INCLEFT"]},
-                        {"text": "paris1Bookcase4"},
-                        {"text": "paris1Bookcase5"},
-                        {"text": "paris1Bookcase6"}
+                        "TEXT paris1Bookcase2 SHOW block INCLEFT SELF",
+                        "TEXT paris1Bookcase4",
+                        "TEXT paris1Bookcase5",
+                        "TEXT paris1Bookcase6"
                     ]
                 },
                 {
                     "id": 2,
                     "info": "statFallen",
-                    "left": [
-                        {"text": "paris1Bookcase7"}
-                    ],
-                    "right": [
-                        {"text": "paris1Bookcase7"}
-                    ]
+                    "left": ["TEXT paris1Bookcase7"],
+                    "right": ["TEXT paris1Bookcase7"]
                 },
                 {
                     "id": 3,
                     "left": [
-                        {"text": "paris1Bookcase9"},
-                        {"text": "paris1Bookcase10"}
+                        "TEXT paris1Bookcase9",
+                        "TEXT paris1Bookcase10"
                     ],
-                    "right": [
-                        {"text": "paris1Bookcase8"}
-                    ]
+                    "right": ["TEXT paris1Bookcase8"]
                 }
             ]
         },
@@ -85,12 +75,8 @@
                     "type": "Use",
                     "visible": false,
                     "back": "93,48,26",
-                    "left": [
-                        {"text": "paris1Block3", "cmd": ["SELF 0", "bracket SHOW", "bookcase 2", "spider 2"]}
-                    ],
-                    "right": [
-                        {"text": "paris1Block2"}
-                    ]
+                    "left": ["TEXT paris1Block3 SELF 0 SHOW bracket bookcase 2 spider 2"],
+                    "right": ["TEXT paris1Block2"]
                 }
             ]
         },
@@ -103,22 +89,16 @@
                     "type": "Use",
                     "visible": false,
                     "back": "119,134,133",
-                    "left": [
-                        {"text": "paris1Bracket4", "cmd": ["SELF 2", "HERO 2", "bookcase 3", "chair SHOW", "rope SHOW", "photograph SHOW", "candle SHOW", "bureau 2", "drawer 2", "window SHOW", "window2 SHOW", "bag 2", "blowDart2 2", "box SHOW", "syphon SHOW", "cabinet SHOW", "flames SHOW", "door SHOW"]}
-                    ],
+                    "left": ["TEXT paris1Bracket4 SELF 2 HERO 2 bookcase 3 SHOW chair SHOW rope SHOW photograph SHOW candle bureau 2 drawer SHOW window SHOW window2 bag 2 blowDart2 2 SHOW box SHOW syphon SHOW cabinet SHOW flames SHOW door"],
                     "right": [
-                        {"text": "paris1Bracket2"},
-                        {"text": "paris1Bracket3"}
+                        "TEXT paris1Bracket2",
+                        "TEXT paris1Bracket3"
                     ]
                 },
                 {
                     "id": 2,
-                    "left": [
-                        {"text": "paris1Bracket6"}
-                    ],
-                    "right": [
-                        {"text": "paris1Bracket5"}
-                    ]
+                    "left": ["TEXT paris1Bracket6"],
+                    "right": ["TEXT paris1Bracket5"]
                 }
             ]
         },
@@ -131,12 +111,8 @@
                     "type": "Use",
                     "visible": false,
                     "back": "49,25,10",
-                    "left": [
-                        {"text": "paris1Chair2"}
-                    ],
-                    "right": [
-                        {"text": "paris1Chair3"}
-                    ]
+                    "left": ["TEXT paris1Chair2"],
+                    "right": ["TEXT paris1Chair3"]
                 }
             ]
         },
@@ -150,12 +126,12 @@
                     "visible": false,
                     "back": "84,46,23",
                     "left": [
-                        {"text": "paris1Rope2", "cmd": ["SELF INFO statShredded", "SELF INCRIGHT"]},
-                        {"text": "paris1Rope2"}
+                        "TEXT paris1Rope2 INFO SELF statShredded INCRIGHT SELF",
+                        "TEXT paris1Rope2"
                     ],
                     "right": [
-                        {"text": "paris1Rope2", "cmd": ["SELF INFO statShredded", "SELF INCLEFT"]},
-                        {"text": "paris1Rope2"}
+                        "TEXT paris1Rope2 INFO SELF statShredded INCLEFT SELF",
+                        "TEXT paris1Rope2"
                     ]
                 }
             ]
@@ -170,12 +146,10 @@
                     "visible": false,
                     "back": "38,83,83",
                     "left": [
-                        {"text": "paris1Photograph2+paris1Photograph3"},
-                        {"text": "paris1Photograph4"}
+                        "TEXT paris1Photograph2+paris1Photograph3",
+                        "TEXT paris1Photograph4"
                     ],
-                    "right": [
-                        {"text": "paris1Photograph2"}
-                    ]
+                    "right": ["TEXT paris1Photograph2"]
                 }
             ]
         },
@@ -188,12 +162,8 @@
                     "type": "Take",
                     "visible": false,
                     "back": "64,93,97",
-                    "left": [
-                        {"text": "paris1Candle3"}
-                    ],
-                    "right": [
-                        {"text": "paris1Candle2"}
-                    ]
+                    "left": ["TEXT paris1Candle3"],
+                    "right": ["TEXT paris1Candle2"]
                 }
             ]
         },
@@ -206,31 +176,19 @@
                     "type": "Use",
                     "info": "statClosed",
                     "back": "152,80,52",
-                    "left": [
-                        {"text": "paris1Bureau6"}
-                    ],
-                    "right": [
-                        {"text": "paris1Bureau6"}
-                    ]
+                    "left": ["TEXT paris1Bureau6"],
+                    "right": ["TEXT paris1Bureau6"]
                 },
                 {
                     "id": 2,
-                    "left": [
-                        {"text": "paris1Bureau3", "cmd": ["SELF 3", "tequila SHOW"]}
-                    ],
-                    "right": [
-                        {"text": "paris1Bureau2"}
-                    ]
+                    "left": ["TEXT paris1Bureau3 SELF 3 SHOW tequila"],
+                    "right": ["TEXT paris1Bureau2"]
                 },
                 {
                     "id": 3,
                     "info": "statOpen",
-                    "left": [
-                        {"text": "paris1Bureau5", "cmd": ["SELF 2", "SELF INFO statClosed", "tequila HIDE"]}
-                    ],
-                    "right": [
-                        {"text": "paris1Bureau4"}
-                    ]
+                    "left": ["TEXT paris1Bureau5 SELF 2 INFO SELF statClosed HIDE tequila"],
+                    "right": ["TEXT paris1Bureau4"]
                 }
             ]
         },
@@ -243,22 +201,16 @@
                     "type": "Take",
                     "visible": false,
                     "back": "242,182,94",
-                    "left": [
-                        {"text": "paris1Tequila4", "cmd": ["SELF 2", "worm2 SHOW"]}
-                    ],
+                    "left": ["TEXT paris1Tequila4 SELF 2 SHOW worm2"],
                     "right": [
-                        {"text": "paris1Tequila2"},
-                        {"text": "paris1Tequila3"}
+                        "TEXT paris1Tequila2",
+                        "TEXT paris1Tequila3"
                     ]
                 },
                 {
                     "id": 2,
-                    "left": [
-                        {"text": "paris1Tequila5"}
-                    ],
-                    "right": [
-                        {"text": "paris1Tequila3"}
-                    ]
+                    "left": ["TEXT paris1Tequila5"],
+                    "right": ["TEXT paris1Tequila3"]
                 }
             ]
         },
@@ -271,21 +223,13 @@
                     "type": "Take",
                     "visible": false,
                     "back": "187,185,173",
-                    "left": [
-                        {"text": "paris1Worm4", "cmd": ["HERO TAKE worm", "SELF 0"]}
-                    ],
-                    "right": [
-                        {"text": "paris1Worm2", "cmd": ["SELF 2"]}
-                    ]
+                    "left": ["TEXT paris1Worm4 GIVE HERO worm SELF 0"],
+                    "right": ["TEXT paris1Worm2 SELF 2"]
                 },
                 {
                     "id": 2,
-                    "left": [
-                        {"text": "paris1Worm3", "cmd": ["HERO TAKE worm", "SELF 0"]}
-                    ],
-                    "right": [
-                        {"text": "paris1Worm2"}
-                    ]
+                    "left": ["TEXT paris1Worm3 GIVE HERO worm SELF 0"],
+                    "right": ["TEXT paris1Worm2"]
                 }
             ]
         },
@@ -297,30 +241,18 @@
                     "id": 1,
                     "type": "Use",
                     "back": "152,80,52",
-                    "left": [
-                        {"text": "paris1Drawer5"}
-                    ],
-                    "right": [
-                        {"text": "paris1Drawer5"}
-                    ]
+                    "left": ["TEXT paris1Drawer5"],
+                    "right": ["TEXT paris1Drawer5"]
                 }, 
                 {
                     "id": 2,
-                    "left": [
-                        {"text": "paris1Drawer3", "cmd": ["SELF 3", "HERO TAKE pot"]}
-                    ],
-                    "right": [
-                        {"text": "paris1Drawer2"}
-                    ]
+                    "left": ["TEXT paris1Drawer3 SELF 3 GIVE HERO pot"],
+                    "right": ["TEXT paris1Drawer2"]
                 },
                 {
                     "id": 3,
-                    "left": [
-                        {"text": "paris1Drawer4"}
-                    ],
-                    "right": [
-                        {"text": "paris1Drawer2"}
-                    ]
+                    "left": ["TEXT paris1Drawer4"],
+                    "right": ["TEXT paris1Drawer2"]
                 }
             ]
         },
@@ -333,35 +265,25 @@
                     "type": "Use",
                     "visible": false,
                     "back": "149,202,255",
-                    "left": [
-                        {"text": "paris1Window5"}
-                    ],
-                    "right": [
-                        {"text": "paris1Window2", "cmd": ["SELF 2", "window2 3"]}
-                    ]
+                    "left": ["TEXT paris1Window5"],
+                    "right": ["TEXT paris1Window2 SELF 2 window2 3"]
                 },
                 {
                     "id": 2,
-                    "left": [
-                        {"text": "paris1Window5"}
-                    ],
+                    "left": ["TEXT paris1Window5"],
+                    "right": ["TEXT paris1Window3"]
+                },
+                {
+                    "id": 3,
+                    "left": ["TEXT paris1Window5"],
+                    "right": ["TEXT paris1Window4 SELF 4 window2 4"]
+                },
+                {
+                    "id": 4,
+                    "left": ["TEXT paris1Window5"],
                     "right": [
-                        {"text": "paris1Window3"}
-                    ]
-                },
-                {
-                    "id": 3, "left": [
-                        {"text": "paris1Window5"}
-                    ], "right": [
-                        {"text": "paris1Window4", "cmd": ["SELF 4", "window2 4"]}
-                    ]
-                },
-                {
-                    "id": 4, "left": [
-                        {"text": "paris1Window5"}
-                    ], "right": [
-                        {"text": "paris1Window6"},
-                        {"text": "paris1Window7"}
+                        "TEXT paris1Window6",
+                        "TEXT paris1Window7"
                     ]
                 }
             ]
@@ -375,35 +297,25 @@
                     "type": "Use",
                     "visible": false,
                     "back": "149,202,255",
-                    "left": [
-                        {"text": "paris1Window5"}
-                    ],
-                    "right": [
-                        {"text": "paris1Window2", "cmd": ["SELF 2", "window 3"]}
-                    ]
+                    "left": ["TEXT paris1Window5"],
+                    "right": ["TEXT paris1Window2 SELF 2 window 3"]
                 },
                 {
                     "id": 2,
-                    "left": [
-                        {"text": "paris1Window5"}
-                    ],
+                    "left": ["TEXT paris1Window5"],
+                    "right": ["TEXT paris1Window3"]
+                },
+                {
+                    "id": 3,
+                    "left": ["TEXT paris1Window5"],
+                    "right": ["TEXT paris1Window4 SELF 4 window 4"]
+                },
+                {
+                    "id": 4,
+                    "left": ["TEXT paris1Window5"],
                     "right": [
-                        {"text": "paris1Window3"}
-                    ]
-                },
-                {
-                    "id": 3, "left": [
-                        {"text": "paris1Window5"}
-                    ], "right": [
-                        {"text": "paris1Window4", "cmd": ["SELF 4", "window 4"]}
-                    ]
-                },
-                {
-                    "id": 4, "left": [
-                        {"text": "paris1Window5"}
-                    ], "right": [
-                        {"text": "paris1Window6"},
-                        {"text": "paris1Window7"}
+                        "TEXT paris1Window6",
+                        "TEXT paris1Window7"
                     ]
                 }
             ]
@@ -416,30 +328,18 @@
                     "id": 1,
                     "type": "Take",
                     "back": "146,0,0",
-                    "left": [
-                        {"text": "paris1Bag5"}
-                    ],
-                    "right": [
-                        {"text": "paris1Bag5"}
-                    ]
+                    "left": ["TEXT paris1Bag5"],
+                    "right": ["TEXT paris1Bag5"]
                 },
                 {
                     "id": 2,
-                    "left": [
-                        {"text": "paris1Bag3", "cmd": ["SELF 3", "HERO TAKE lipstick", "HERO TAKE letter", "HERO TAKE panties"]}
-                    ],
-                    "right": [
-                        {"text": "paris1Bag2"}
-                    ]
+                    "left": ["TEXT paris1Bag3 SELF 3", "GIVE HERO lipstick", "GIVE HERO letter", "GIVE HERO panties"],
+                    "right": ["TEXT paris1Bag2"]
                 },
                 {
                     "id": 3,
-                    "left": [
-                        {"text": "paris1Bag4"}
-                    ],
-                    "right": [
-                        {"text": "paris1Bag2"}
-                    ]
+                    "left": ["TEXT paris1Bag4"],
+                    "right": ["TEXT paris1Bag2"]
                 }
             ]
         },
@@ -451,21 +351,13 @@
                     "id": 1,
                     "type": "Take",
                     "back": "39,71,58",
-                    "left": [
-                        {"text": "paris1Dart4"}
-                    ],
-                    "right": [
-                        {"text": "paris1Dart4"}
-                    ]
+                    "left": ["TEXT paris1Dart4"],
+                    "right": ["TEXT paris1Dart4"]
                 },
                 {
                     "id": 2,
-                    "left": [
-                        {"text": "paris1Dart3", "cmd": ["HERO TAKE blowDart", "SELF 0"]}
-                    ],
-                    "right": [
-                        {"text": "paris1Dart2"}
-                    ]
+                    "left": ["TEXT paris1Dart3 GIVE HERO blowDart SELF 0"],
+                    "right": ["TEXT paris1Dart2"]
                 }
             ]
         },
@@ -478,12 +370,8 @@
                     "type": "Take",
                     "visible": false,
                     "back": "201,98,27",
-                    "left": [
-                        {"text": "paris1Box3"}
-                    ],
-                    "right": [
-                        {"text": "paris1Box2"}
-                    ]
+                    "left": ["TEXT paris1Box3"],
+                    "right": ["TEXT paris1Box2"]
                 }
             ]
         },
@@ -497,22 +385,16 @@
                     "visible": false,
                     "back": "210,210,210",
                     "left": [
-                        {"text": "paris1Syphon3", "cmd": ["SELF INFO paris1Syphon5"]},
-                        {"text": "paris1Syphon3"}
+                        "TEXT paris1Syphon3 INFO SELF paris1Syphon5",
+                        "TEXT paris1Syphon3"
                     ],
-                    "right": [
-                        {"text": "paris1Syphon2"}
-                    ],
-                    "combos": [
-                        {"id": "cylinder", "text": "paris1Syphon4", "cmd": ["cylinder 0", "syphon 2", "syphon INFO statReadyForUse"]}
-                    ]
+                    "right": ["TEXT paris1Syphon2"],
+                    "combos": ["cylinder:TEXT paris1Syphon4 cylinder 0 syphon 2 INFO syphon statReadyForUse"]
                 },
                 {
-                    "id": 2, "left": [
-                        {"cmd": ["SELF USE"]}
-                    ], "right": [
-                        {"text": "paris1Syphon2"}
-                    ]
+                    "id": 2,
+                    "left": ["USE SELF"],
+                    "right": ["TEXT paris1Syphon2"]
                 }
             ]
         },
@@ -526,34 +408,25 @@
                     "visible": false,
                     "back": "82,43,28",
                     "left": [
-                        {"text": "paris1Cabinet3", "cmd": ["SELF INFO statLocked"]},
-                        {"text": "paris1Cabinet3"}
+                        "TEXT paris1Cabinet3 INFO SELF statLocked",
+                        "TEXT paris1Cabinet3"
                     ],
-                    "right": [
-                        {"text": "paris1Cabinet2"}
-                    ],
+                    "right": ["TEXT paris1Cabinet2"],
                     "combos": [
-                        {"id": "houseKey", "text": "paris1Cabinet7"},
-                        {"id": "blowDart", "text": "paris1Cabinet8", "cmd": ["cabinet 2", "cylinder2 SHOW", "cylinder3 SHOW"]}
+                        "houseKey:TEXT paris1Cabinet7",
+                        "blowDart:TEXT paris1Cabinet8 cabinet 2 SHOW cylinder2 SHOW cylinder3"
                     ]
                 },
                 {
                     "id": 2,
                     "info": "statOpen",
-                    "left": [
-                        {"text": "paris1Cabinet4"}
-                    ], "right": [
-                        {"text": "paris1Cabinet5"}
-                    ]
+                    "left": ["TEXT paris1Cabinet4"],
+                    "right": ["TEXT paris1Cabinet5"]
                 },
                 {
                     "id": 3,
-                    "left": [
-                        {"text": "paris1Cabinet4"}
-                    ],
-                    "right": [
-                        {"text": "paris1Cabinet6"}
-                    ]
+                    "left": ["TEXT paris1Cabinet4"],
+                    "right": ["TEXT paris1Cabinet6"]
                 }
             ]
         },
@@ -567,15 +440,11 @@
                     "visible": false,
                     "back": "88,145,32",
                     "left": [
-                        {"text": "paris1Cylinder3", "cmd": ["SELF INFO statVeryHot"]},
-                        {"text": "paris1Cylinder3"}
+                        "TEXT paris1Cylinder3 INFO SELF statVeryHot",
+                        "TEXT paris1Cylinder3"
                     ],
-                    "right": [
-                        {"text": "paris1Cylinder2"}
-                    ],
-                    "combos": [
-                        {"id": "panties", "text": "paris1Cylinder4", "cmd": ["cylinder2 0", "HERO TAKE cylinder", "cabinet 3"]}
-                    ]
+                    "right": ["TEXT paris1Cylinder2"],
+                    "combos": ["panties:TEXT paris1Cylinder4 cylinder2 0 GIVE HERO cylinder cabinet 3"]
                 }
             ]
         },
@@ -588,12 +457,8 @@
                     "type": "Take",
                     "visible": false,
                     "back": "79,82,79",
-                    "left": [
-                        {"text": "paris1Cylinder6"}
-                    ],
-                    "right": [
-                        {"text": "paris1Cylinder7"}
-                    ]
+                    "left": ["TEXT paris1Cylinder6"],
+                    "right": ["TEXT paris1Cylinder7"]
                 }
             ]
         },
@@ -607,15 +472,11 @@
                     "visible": false,
                     "back": "255,100,0",
                     "left": [
-                        {"text": "paris1Flames3"},
-                        {"text": "paris1Flames4"}
+                        "TEXT paris1Flames3",
+                        "TEXT paris1Flames4"
                     ],
-                    "right": [
-                        {"text": "paris1Flames2"}
-                    ],
-                    "combos": [
-                        {"id": "syphon", "text": "paris1Flames5", "cmd": ["flames 0", "door 2"]}
-                    ]
+                    "right": ["TEXT paris1Flames2"],
+                    "combos": ["syphon:TEXT paris1Flames5 flames 0 door 2"]
                 }
             ]
         },
@@ -629,25 +490,17 @@
                     "visible": false,
                     "back": "107,43,23",
                     "left": [
-                        {"text": "paris1Door3"},
-                        {"text": "paris1Door7"},
-                        {"text": "paris1Door3"}
+                        "TEXT paris1Door3",
+                        "TEXT paris1Door7",
+                        "TEXT paris1Door3"
                     ],
-                    "right": [
-                        {"text": "paris1Door2"}
-                    ]
+                    "right": ["TEXT paris1Door2"]
                 },
                 {
                     "id": 2,
-                    "left": [
-                        {"text": "paris1Door4", "cmd": ["SELF 0", "doorway SHOW"]}
-                    ],
-                    "right": [
-                        {"text": "paris1Door2"}
-                    ],
-                    "combos": [
-                        {"id": "houseKey", "text": "paris1Door6"}
-                    ]
+                    "left": ["TEXT paris1Door4 SELF 0 SHOW doorway"],
+                    "right": ["TEXT paris1Door2"],
+                    "combos": ["houseKey:TEXT paris1Door6"]
                 }
             ]
         },
@@ -660,11 +513,10 @@
                     "type": "Exit",
                     "visible": false,
                     "back": "221,194,125",
-                    "left": [
-                        {"cmd": ["ENTER oubier2"]}
-                    ], "right": [
-                        {"text": "paris1Doorway3", "cmd": ["SELF INFO paris1Doorway2"]},
-                        {"text": "paris1Doorway3"}
+                    "left": ["ENTER oubier2"],
+                    "right": [
+                        "TEXT paris1Doorway3 INFO SELF paris1Doorway2",
+                        "TEXT paris1Doorway3"
                     ]
                 }
             ]
